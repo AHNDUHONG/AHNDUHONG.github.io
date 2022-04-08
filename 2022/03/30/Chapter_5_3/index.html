@@ -1,0 +1,732 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Winters Blog">
+    <title>마켓과 머신러닝(Chapter_5_3) - Winters Blog</title>
+    <meta name="author" content="John Doe">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"트리의 앙상블\nLightGBM 기억!\nGBM –&gt; XGBoost –&gt; LightBGM\n참고 1. 모델 개발 속도가 빨라졌는지?\n참고 2. 모델의 성능이 좋아졌는지?\n\n\nTabNet (2019)\n딥러닝 컨셉 이해\n\n\n\n랜덤 포레스트(Forest)\n결정 트리 나무를 500개 심기\n최종적인 결정은 투표 방식\n나무-1 : 양성\n나무-2 : 음성\n나무-3 : 양성…\n나무-500 : 양성\n\n\n\n12345678910111213import numpy as npimport pandas as pdfrom sklearn.model_selection import train_test_splitwine = pd.read_csv(&#x27;https://bit.ly/wine_csv_data&#x27;)data = wine[[&#x27;alcohol&#x27;, &#x27;sugar&#x27;, &#x27;pH&#x27;]].to_numpy()target = wine[&#x27;class&#x27;].to_numpy()train_input, test_input, train_target, test_target = train_test_split(data,                                                                       target,                                                                       test_size=0.2,                                                                       random_state=42)\n\n\np.267\ncross_validate() 교차 검증 수행\n\n\n\n123456from sklearn.model_selection import cross_validatefrom sklearn.ensemble import RandomForestClassifierrf = RandomForestClassifier(n_jobs = -1, random_state = 42) # 모든 CPU 코어를 사용scores = cross_validate(rf, train_input, train_target,                        return_train_score = True, n_jobs = -1)print(np.mean(scores[&#x27;train_score&#x27;]), np.mean(scores[&#x27;test_score&#x27;]))\n\n0.9973541965122431 0.8905151032797809\n\n12rf.fit(train_input, train_target)print(rf.feature_importances_)\n\n[0.23167441 0.50039841 0.26792718]\n\n123rf = RandomForestClassifier(oob_score = True, n_jobs = -1, random_state = 42) # oob(out of bag) 부트스트랩 샘플에 포함되지 않고 남는 샘플rf.fit(train_input, train_target)print(rf.oob_score_)\n\n0.8934000384837406\n\n그레이디언트 부스팅\n이전 트리(깊이가 얕은 결정 트리)의 오차를 보완하는 방식으로 사용\n학습률 매개변수로 속도를 조절\n장점 : 과대적합을 잘 억제시킴\n단점 : 속도가 느림\n\n123456from sklearn.ensemble import GradientBoostingClassifiergb = GradientBoostingClassifier(random_state = 42)scores = cross_validate(gb, train_input, train_target,                        return_train_score = True, n_jobs = -1) # return_train_score 훈련 점수 포함 여부print(np.mean(scores[&#x27;train_score&#x27;]), np.mean(scores[&#x27;test_score&#x27;]))\n\n0.8881086892152563 0.8720430147331015\n\n12345gb = GradientBoostingClassifier(n_estimators = 500, learning_rate = 0.2, random_state = 42)scores = cross_validate(gb, train_input, train_target,                        return_train_score = True, n_jobs = -1)print(np.mean(scores[&#x27;train_score&#x27;]), np.mean(scores[&#x27;test_score&#x27;]))\n\n0.9464595437171814 0.8780082549788999\n\n\n흐름\n\n데이터 전처리 &#x2F; 시각화\n\n\n\n기본 모형으로 전체 흐름을 설계\n\n\n\n여러 모형을 비교 대조\n\n\n\n교차검증. 하이퍼파라미터 성능 비교\n\n\n…\n\n\n\n","dateCreated":"2022-03-30T09:00:00+09:00","dateModified":"2022-03-30T19:24:49+09:00","datePublished":"2022-03-30T09:00:00+09:00","description":"","headline":"마켓과 머신러닝(Chapter_5_3)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"},"publisher":{"@type":"Organization","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"}</script>
+    <meta name="description" content="트리의 앙상블 LightGBM 기억! GBM –&gt; XGBoost –&gt; LightBGM 참고 1. 모델 개발 속도가 빨라졌는지? 참고 2. 모델의 성능이 좋아졌는지?   TabNet (2019) 딥러닝 컨셉 이해    랜덤 포레스트(Forest) 결정 트리 나무를 500개 심기 최종적인 결정은 투표 방식 나무-1 : 양성 나무-2 : 음성 나무-3">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="마켓과 머신러닝(Chapter_5_3)">
+<meta property="og:url" content="https://ahnduhong.github.io/2022/03/30/Chapter_5_3/index.html">
+<meta property="og:site_name" content="Winters Blog">
+<meta property="og:description" content="트리의 앙상블 LightGBM 기억! GBM –&gt; XGBoost –&gt; LightBGM 참고 1. 모델 개발 속도가 빨라졌는지? 참고 2. 모델의 성능이 좋아졌는지?   TabNet (2019) 딥러닝 컨셉 이해    랜덤 포레스트(Forest) 결정 트리 나무를 500개 심기 최종적인 결정은 투표 방식 나무-1 : 양성 나무-2 : 음성 나무-3">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-30T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-30T10:24:49.137Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-nweealnwexi63lhm1agu2ku3rw8tqhtfz0od0lsqiw3kbrdmk45anokos3uj.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            Winters Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://twitter.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Twitter"
+                        >
+                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Twitter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://plus.google.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Google +"
+                        >
+                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Google +</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            마켓과 머신러닝(Chapter_5_3)
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2022-03-30T09:00:00+09:00">
+	
+		    Mar 30, 2022
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h1 id="트리의-앙상블"><a href="#트리의-앙상블" class="headerlink" title="트리의 앙상블"></a>트리의 앙상블</h1><ul>
+<li>LightGBM 기억!<ul>
+<li>GBM –&gt; XGBoost –&gt; LightBGM</li>
+<li>참고 1. 모델 개발 속도가 빨라졌는지?</li>
+<li>참고 2. 모델의 성능이 좋아졌는지?</li>
+</ul>
+</li>
+<li>TabNet (2019)<ul>
+<li>딥러닝 컨셉 이해</li>
+</ul>
+</li>
+</ul>
+<h2 id="랜덤-포레스트-Forest"><a href="#랜덤-포레스트-Forest" class="headerlink" title="랜덤 포레스트(Forest)"></a>랜덤 포레스트(Forest)</h2><ul>
+<li>결정 트리 나무를 500개 심기</li>
+<li>최종적인 결정은 투표 방식<ul>
+<li>나무-1 : 양성</li>
+<li>나무-2 : 음성</li>
+<li>나무-3 : 양성<br>…</li>
+<li>나무-500 : 양성</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">wine = pd.read_csv(<span class="string">&#x27;https://bit.ly/wine_csv_data&#x27;</span>)</span><br><span class="line"></span><br><span class="line">data = wine[[<span class="string">&#x27;alcohol&#x27;</span>, <span class="string">&#x27;sugar&#x27;</span>, <span class="string">&#x27;pH&#x27;</span>]].to_numpy()</span><br><span class="line">target = wine[<span class="string">&#x27;class&#x27;</span>].to_numpy()</span><br><span class="line"></span><br><span class="line">train_input, test_input, train_target, test_target = train_test_split(data, </span><br><span class="line">                                                                      target, </span><br><span class="line">                                                                      test_size=<span class="number">0.2</span>, </span><br><span class="line">                                                                      random_state=<span class="number">42</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>p.267<ul>
+<li>cross_validate() 교차 검증 수행</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_validate</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line">rf = RandomForestClassifier(n_jobs = -<span class="number">1</span>, random_state = <span class="number">42</span>) <span class="comment"># 모든 CPU 코어를 사용</span></span><br><span class="line">scores = cross_validate(rf, train_input, train_target,</span><br><span class="line">                        return_train_score = <span class="literal">True</span>, n_jobs = -<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(np.mean(scores[<span class="string">&#x27;train_score&#x27;</span>]), np.mean(scores[<span class="string">&#x27;test_score&#x27;</span>]))</span><br></pre></td></tr></table></figure>
+
+<pre><code>0.9973541965122431 0.8905151032797809
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rf.fit(train_input, train_target)</span><br><span class="line"><span class="built_in">print</span>(rf.feature_importances_)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[0.23167441 0.50039841 0.26792718]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rf = RandomForestClassifier(oob_score = <span class="literal">True</span>, n_jobs = -<span class="number">1</span>, random_state = <span class="number">42</span>) <span class="comment"># oob(out of bag) 부트스트랩 샘플에 포함되지 않고 남는 샘플</span></span><br><span class="line">rf.fit(train_input, train_target)</span><br><span class="line"><span class="built_in">print</span>(rf.oob_score_)</span><br></pre></td></tr></table></figure>
+
+<pre><code>0.8934000384837406
+</code></pre>
+<h1 id="그레이디언트-부스팅"><a href="#그레이디언트-부스팅" class="headerlink" title="그레이디언트 부스팅"></a>그레이디언트 부스팅</h1><ul>
+<li>이전 트리(깊이가 얕은 결정 트리)의 오차를 보완하는 방식으로 사용</li>
+<li>학습률 매개변수로 속도를 조절</li>
+<li>장점 : 과대적합을 잘 억제시킴</li>
+<li>단점 : 속도가 느림</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> GradientBoostingClassifier</span><br><span class="line">gb = GradientBoostingClassifier(random_state = <span class="number">42</span>)</span><br><span class="line">scores = cross_validate(gb, train_input, train_target,</span><br><span class="line">                        return_train_score = <span class="literal">True</span>, n_jobs = -<span class="number">1</span>) <span class="comment"># return_train_score 훈련 점수 포함 여부</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(np.mean(scores[<span class="string">&#x27;train_score&#x27;</span>]), np.mean(scores[<span class="string">&#x27;test_score&#x27;</span>]))</span><br></pre></td></tr></table></figure>
+
+<pre><code>0.8881086892152563 0.8720430147331015
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gb = GradientBoostingClassifier(n_estimators = <span class="number">500</span>, learning_rate = <span class="number">0.2</span>, random_state = <span class="number">42</span>)</span><br><span class="line">scores = cross_validate(gb, train_input, train_target,</span><br><span class="line">                        return_train_score = <span class="literal">True</span>, n_jobs = -<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(np.mean(scores[<span class="string">&#x27;train_score&#x27;</span>]), np.mean(scores[<span class="string">&#x27;test_score&#x27;</span>]))</span><br></pre></td></tr></table></figure>
+
+<pre><code>0.9464595437171814 0.8780082549788999
+</code></pre>
+<ul>
+<li>흐름<ul>
+<li><ol start="0">
+<li>데이터 전처리 &#x2F; 시각화</li>
+</ol>
+</li>
+<li><ol>
+<li>기본 모형으로 전체 흐름을 설계</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>여러 모형을 비교 대조</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>교차검증. 하이퍼파라미터 성능 비교</li>
+</ol>
+</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/31/Chapter_6_2/"
+                    data-tooltip="마켓과 머신러닝(Chapter_6_2)"
+                    aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_6_2)"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/30/Chapter_5_1/"
+                    data-tooltip="마켓과 머신러닝(Chapter_5_1)"
+                    aria-label="NEXT: 마켓과 머신러닝(Chapter_5_1)"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2022 John Doe. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/31/Chapter_6_2/"
+                    data-tooltip="마켓과 머신러닝(Chapter_6_2)"
+                    aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_6_2)"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/30/Chapter_5_1/"
+                    data-tooltip="마켓과 머신러닝(Chapter_5_1)"
+                    aria-label="NEXT: 마켓과 머신러닝(Chapter_5_1)"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">John Doe</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-dvu41dvy5202v52bwzsnpck9devc8hugsy17mbuqp6i4ms8q6rt7zrc4avbe.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

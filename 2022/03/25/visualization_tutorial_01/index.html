@@ -1,0 +1,815 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Winters Blog">
+    <title>visualization 튜토리얼 1 - Winters Blog</title>
+    <meta name="author" content="John Doe">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"라이브 러리 불러오기1234import matplotlibimport seaborn as snsprint(matplotlib.__version__)print(sns.__version__)\n\n3.2.2\n0.11.2\n\n시각화 그려보기123456789101112131415161718import matplotlib.pyplot as pltdates = [    &#x27;2021-01-01&#x27;, &#x27;2021-01-02&#x27;, &#x27;2021-01-03&#x27;, &#x27;2021-01-04&#x27;, &#x27;2021-01-05&#x27;,    &#x27;2021-01-06&#x27;, &#x27;2021-01-07&#x27;, &#x27;2021-01-08&#x27;, &#x27;2021-01-09&#x27;, &#x27;2021-01-10&#x27;]min_temperature = [20.7, 17.9, 18.8, 14.6, 15.8, 15.8, 15.8, 17.4, 21.8, 20.0]max_temperature = [34.7, 28.9, 31.8, 25.6, 28.8, 21.8, 22.8, 28.4, 30.8, 32.0]# 앞으로 여러분들이 아래와 같이 코드를 작성해주시면 됩니다.flg, ax = plt.subplots(nrows = 1, ncols = 1, figsize = (10, 6)) # 시각화 기초 해심ax.plot(dates, min_temperature, label = &quot;Min Temp.&quot;)ax.plot(dates, max_temperature, label = &quot;Max Temp.&quot;)ax.legend()plt.show()\n\n\n\n1!pip install yfinance --upgrade --no-cache-dir\n\nCollecting yfinance\n  Downloading yfinance-0.1.70-py2.py3-none-any.whl (26 kB)\nRequirement already satisfied: numpy&gt;=1.15 in /usr/local/lib/python3.7/dist-packages (from yfinance) (1.21.5)\nCollecting lxml&gt;=4.5.1\n  Downloading lxml-4.8.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl (6.4 MB)\n\u001b[K     |████████████████████████████████| 6.4 MB 16.4 MB/s \n\u001b[?25hCollecting requests&gt;=2.26\n  Downloading requests-2.27.1-py2.py3-none-any.whl (63 kB)\n\u001b[K     |████████████████████████████████| 63 kB 5.9 MB/s \n\u001b[?25hRequirement already satisfied: pandas&gt;=0.24.0 in /usr/local/lib/python3.7/dist-packages (from yfinance) (1.3.5)\nRequirement already satisfied: multitasking&gt;=0.0.7 in /usr/local/lib/python3.7/dist-packages (from yfinance) (0.0.10)\nRequirement already satisfied: pytz&gt;=2017.3 in /usr/local/lib/python3.7/dist-packages (from pandas&gt;=0.24.0-&gt;yfinance) (2018.9)\nRequirement already satisfied: python-dateutil&gt;=2.7.3 in /usr/local/lib/python3.7/dist-packages (from pandas&gt;=0.24.0-&gt;yfinance) (2.8.2)\nRequirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.7/dist-packages (from python-dateutil&gt;=2.7.3-&gt;pandas&gt;=0.24.0-&gt;yfinance) (1.15.0)\nRequirement already satisfied: charset-normalizer~=2.0.0 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.26-&gt;yfinance) (2.0.12)\nRequirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.26-&gt;yfinance) (1.24.3)\nRequirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.26-&gt;yfinance) (2021.10.8)\nRequirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.26-&gt;yfinance) (2.10)\nInstalling collected packages: requests, lxml, yfinance\n  Attempting uninstall: requests\n    Found existing installation: requests 2.23.0\n    Uninstalling requests-2.23.0:\n      Successfully uninstalled requests-2.23.0\n  Attempting uninstall: lxml\n    Found existing installation: lxml 4.2.6\n    Uninstalling lxml-4.2.6:\n      Successfully uninstalled lxml-4.2.6\n\u001b[31mERROR: pip&#39;s dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\ngoogle-colab 1.0.0 requires requests~=2.23.0, but you have requests 2.27.1 which is incompatible.\ndatascience 0.10.6 requires folium==0.2.1, but you have folium 0.8.3 which is incompatible.\u001b[0m\nSuccessfully installed lxml-4.8.0 requests-2.27.1 yfinance-0.1.70\n\n12345import yfinance as yfdata = yf.download(&quot;AAPL&quot;, start = &quot;2019-08-01&quot;, end = &quot;2022-03-23&quot;)ts = data[&#x27;Open&#x27;]print(ts.head())print(type(ts))\n\n[*********************100%***********************]  1 of 1 completed\nDate\n2019-08-01    53.474998\n2019-08-02    51.382500\n2019-08-05    49.497501\n2019-08-06    49.077499\n2019-08-07    48.852501\nName: Open, dtype: float64\n&lt;class &#39;pandas.core.series.Series&#39;&gt;\n\npyplot 형태123456import matplotlib.pyplot as pltplt.plot(ts)plt.title(&quot;Stock Market of AAPL&quot;) # 구글 코랩에서 한글 타이틀은 인식을 못하여 나중에 세팅해야함plt.xlabel(&quot;Date&quot;)plt.ylabel(&quot;Open Price&quot;)plt.show()\n\n\n\n12345678import matplotlib.pyplot as pltfig, ax = plt.subplots() #fig 는 겉 테두리ax.plot(ts)ax.set_title(&quot;Stock Market of AAPL&quot;)ax.set_xlabel(&quot;Date&quot;)ax.set_ylabel(&quot;Open Price&quot;)plt.show()\n\n\n\n막대 그래프1calendar.month_name[1:13]\n\n\n\n\n[&#39;January&#39;,\n &#39;February&#39;,\n &#39;March&#39;,\n &#39;April&#39;,\n &#39;May&#39;,\n &#39;June&#39;,\n &#39;July&#39;,\n &#39;August&#39;,\n &#39;September&#39;,\n &#39;October&#39;,\n &#39;November&#39;,\n &#39;December&#39;]\n\n1234567891011121314151617181920212223import matplotlib.pyplot as pltimport numpy as npimport calendar # 날짜를 관장하는 라이브러리month_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]sold_list = [300, 400, 550, 900, 600, 960, 900, 910, 800, 700, 550, 450]fig, ax = plt.subplots(figsize = (10, 6))barplots = ax.bar(month_list, sold_list)print(&quot;barplots :&quot;, barplots)for plot in barplots:  print(plot)  # print(plot.get_height())  # print(plot.get_x())  # print(plot.get_y())  # print(plot.get_width())  height = plot.get_height()  ax.text(plot.get_x() + plot.get_width()/2., height, height, ha = &#x27;center&#x27;, va = &#x27;bottom&#x27;)plt.xticks(month_list, calendar.month_name[1:13], rotation = 90)plt.show()\n\nbarplots : &lt;BarContainer object of 12 artists&gt;\nRectangle(xy=(0.6, 0), width=0.8, height=300, angle=0)\nRectangle(xy=(1.6, 0), width=0.8, height=400, angle=0)\nRectangle(xy=(2.6, 0), width=0.8, height=550, angle=0)\nRectangle(xy=(3.6, 0), width=0.8, height=900, angle=0)\nRectangle(xy=(4.6, 0), width=0.8, height=600, angle=0)\nRectangle(xy=(5.6, 0), width=0.8, height=960, angle=0)\nRectangle(xy=(6.6, 0), width=0.8, height=900, angle=0)\nRectangle(xy=(7.6, 0), width=0.8, height=910, angle=0)\nRectangle(xy=(8.6, 0), width=0.8, height=800, angle=0)\nRectangle(xy=(9.6, 0), width=0.8, height=700, angle=0)\nRectangle(xy=(10.6, 0), width=0.8, height=550, angle=0)\nRectangle(xy=(11.6, 0), width=0.8, height=450, angle=0)\n\n\n12345678910111213import seaborn as snstips = sns.load_dataset(&quot;tips&quot;)print(tips.info())x = tips[&#x27;total_bill&#x27;]y = tips[&#x27;tip&#x27;]# 산점도fig, ax = plt.subplots(figsize = (10,6))ax.scatter(x, y)ax.set_xlabel(&#x27;Total Bill&#x27;)ax.set_ylabel(&#x27;Tip&#x27;)plt.show()\n\n&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;\nRangeIndex: 244 entries, 0 to 243\nData columns (total 7 columns):\n #   Column      Non-Null Count  Dtype   \n---  ------      --------------  -----   \n 0   total_bill  244 non-null    float64 \n 1   tip         244 non-null    float64 \n 2   sex         244 non-null    category\n 3   smoker      244 non-null    category\n 4   day         244 non-null    category\n 5   time        244 non-null    category\n 6   size        244 non-null    int64   \ndtypes: category(4), float64(2), int64(1)\nmemory usage: 7.4 KB\nNone\n\n\n123456789101112131415label, data = tips.groupby(&#x27;sex&#x27;)# print(label)# print(data)tips[&#x27;sex_color&#x27;] = tips[&#x27;sex&#x27;].map(&#123;&#x27;Male&#x27;: &#x27;#2521F6&#x27;, &#x27;Female&#x27;: &#x27;#EB4036&#x27;&#125;)# print(tips.head())fig, ax = plt.subplots(figsize = (10, 6))for label, data in tips.groupby(&#x27;sex&#x27;):  ax.scatter(data[&#x27;total_bill&#x27;], data[&#x27;tip&#x27;], label = label, color = data[&#x27;sex_color&#x27;], alpha = 0.5)  ax.set_xlabel(&#x27;Total Bill&#x27;)  ax.set_ylabel(&#x27;Tip&#x27;)ax.legend() # 범례plt.show()\n\n\n\nSeaborn12345678910from IPython.core.pylabtools import figsizeimport matplotlib.pyplot as pltimport seaborn as snstips = sns.load_dataset(&quot;tips&quot;)# print(tips.info())fig, ax = plt.subplots(figsize=(10, 6))sns.scatterplot(x = &#x27;total_bill&#x27;, y = &#x27;tip&#x27;, hue = &#x27;sex&#x27;, data = tips)plt.show()\n\n\n\n12345678# 두개의 그래프를 동시에 표현fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(15, 5))sns.regplot(x = &quot;total_bill&quot;, y = &quot;tip&quot;, data = tips , ax = ax[1], fit_reg = True)ax[1].set_title(&quot;with linear regression line&quot;)sns.regplot(x = &quot;total_bill&quot;, y = &quot;tip&quot;, data = tips , ax = ax[0], fit_reg = False)ax[0].set_title(&quot;without linear regression line&quot;)plt.show()\n\n\n\n\n막대 그래프 그리기 seaborn 방신\n\n12sns.countplot(x = &quot;day&quot;, data = tips)plt.show()\n\n\n\n123print(tips[&#x27;day&#x27;].value_counts().index)print(tips[&#x27;day&#x27;].value_counts().values)print(tips[&#x27;day&#x27;].value_counts(ascending=True)) # 오름차순\n\nCategoricalIndex([&#39;Sat&#39;, &#39;Sun&#39;, &#39;Thur&#39;, &#39;Fri&#39;], categories=[&#39;Thur&#39;, &#39;Fri&#39;, &#39;Sat&#39;, &#39;Sun&#39;], ordered=False, dtype=&#39;category&#39;)\n[87 76 62 19]\nFri     19\nThur    62\nSun     76\nSat     87\nName: day, dtype: int64\n\n12345678910fig, ax = plt.subplots()ax = sns.countplot(x = &quot;day&quot;, data = tips, order = tips[&#x27;day&#x27;].value_counts().index)for plot in ax.patches:  # print(plot)  height = plot.get_height()  ax.text(plot.get_x() + plot.get_width()/2., height, height, ha = &#x27;center&#x27;, va = &#x27;bottom&#x27;)ax.set_ylim(-5, 100) # y축 값 변경plt.show()\n\n\n\n","dateCreated":"2022-03-25T09:00:00+09:00","dateModified":"2022-03-25T12:47:04+09:00","datePublished":"2022-03-25T09:00:00+09:00","description":"","headline":"visualization 튜토리얼 1","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/25/visualization_tutorial_01/"},"publisher":{"@type":"Organization","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"https://ahnduhong.github.io/2022/03/25/visualization_tutorial_01/"}</script>
+    <meta name="description" content="라이브 러리 불러오기1234import matplotlibimport seaborn as snsprint(matplotlib.__version__)print(sns.__version__)  3.2.2 0.11.2  시각화 그려보기123456789101112131415161718import matplotlib.pyplot as pltdates &#x3D; [    &amp;">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="visualization 튜토리얼 1">
+<meta property="og:url" content="https://ahnduhong.github.io/2022/03/25/visualization_tutorial_01/index.html">
+<meta property="og:site_name" content="Winters Blog">
+<meta property="og:description" content="라이브 러리 불러오기1234import matplotlibimport seaborn as snsprint(matplotlib.__version__)print(sns.__version__)  3.2.2 0.11.2  시각화 그려보기123456789101112131415161718import matplotlib.pyplot as pltdates &#x3D; [    &amp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ahnduhong.github.io/images/visulization_tutorial_01/output_4_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/visulization_tutorial_01/output_8_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/visulization_tutorial_01/output_9_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/visulization_tutorial_01/output_12_1.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/visulization_tutorial_01/output_13_1.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/visulization_tutorial_01/output_14_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/visulization_tutorial_01/output_16_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/visulization_tutorial_01/output_17_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/visulization_tutorial_01/output_19_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/visulization_tutorial_01/output_21_0.png">
+<meta property="article:published_time" content="2022-03-25T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-25T03:47:04.847Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ahnduhong.github.io/images/visulization_tutorial_01/output_4_0.png">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-nweealnwexi63lhm1agu2ku3rw8tqhtfz0od0lsqiw3kbrdmk45anokos3uj.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            Winters Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://twitter.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Twitter"
+                        >
+                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Twitter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://plus.google.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Google +"
+                        >
+                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Google +</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            visualization 튜토리얼 1
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2022-03-25T09:00:00+09:00">
+	
+		    Mar 25, 2022
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h1 id="라이브-러리-불러오기"><a href="#라이브-러리-불러오기" class="headerlink" title="라이브 러리 불러오기"></a>라이브 러리 불러오기</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="built_in">print</span>(matplotlib.__version__)</span><br><span class="line"><span class="built_in">print</span>(sns.__version__)</span><br></pre></td></tr></table></figure>
+
+<pre><code>3.2.2
+0.11.2
+</code></pre>
+<h1 id="시각화-그려보기"><a href="#시각화-그려보기" class="headerlink" title="시각화 그려보기"></a>시각화 그려보기</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">dates = [</span><br><span class="line">    <span class="string">&#x27;2021-01-01&#x27;</span>, <span class="string">&#x27;2021-01-02&#x27;</span>, <span class="string">&#x27;2021-01-03&#x27;</span>, <span class="string">&#x27;2021-01-04&#x27;</span>, <span class="string">&#x27;2021-01-05&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;2021-01-06&#x27;</span>, <span class="string">&#x27;2021-01-07&#x27;</span>, <span class="string">&#x27;2021-01-08&#x27;</span>, <span class="string">&#x27;2021-01-09&#x27;</span>, <span class="string">&#x27;2021-01-10&#x27;</span></span><br><span class="line">]</span><br><span class="line">min_temperature = [<span class="number">20.7</span>, <span class="number">17.9</span>, <span class="number">18.8</span>, <span class="number">14.6</span>, <span class="number">15.8</span>, <span class="number">15.8</span>, <span class="number">15.8</span>, <span class="number">17.4</span>, <span class="number">21.8</span>, <span class="number">20.0</span>]</span><br><span class="line">max_temperature = [<span class="number">34.7</span>, <span class="number">28.9</span>, <span class="number">31.8</span>, <span class="number">25.6</span>, <span class="number">28.8</span>, <span class="number">21.8</span>, <span class="number">22.8</span>, <span class="number">28.4</span>, <span class="number">30.8</span>, <span class="number">32.0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 앞으로 여러분들이 아래와 같이 코드를 작성해주시면 됩니다.</span></span><br><span class="line">flg, ax = plt.subplots(nrows = <span class="number">1</span>, ncols = <span class="number">1</span>, figsize = (<span class="number">10</span>, <span class="number">6</span>)) <span class="comment"># 시각화 기초 해심</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ax.plot(dates, min_temperature, label = <span class="string">&quot;Min Temp.&quot;</span>)</span><br><span class="line">ax.plot(dates, max_temperature, label = <span class="string">&quot;Max Temp.&quot;</span>)</span><br><span class="line">ax.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/visulization_tutorial_01/output_4_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!pip install yfinance --upgrade --no-cache-<span class="built_in">dir</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>Collecting yfinance
+  Downloading yfinance-0.1.70-py2.py3-none-any.whl (26 kB)
+Requirement already satisfied: numpy&gt;=1.15 in /usr/local/lib/python3.7/dist-packages (from yfinance) (1.21.5)
+Collecting lxml&gt;=4.5.1
+  Downloading lxml-4.8.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl (6.4 MB)
+[K     |████████████████████████████████| 6.4 MB 16.4 MB/s 
+[?25hCollecting requests&gt;=2.26
+  Downloading requests-2.27.1-py2.py3-none-any.whl (63 kB)
+[K     |████████████████████████████████| 63 kB 5.9 MB/s 
+[?25hRequirement already satisfied: pandas&gt;=0.24.0 in /usr/local/lib/python3.7/dist-packages (from yfinance) (1.3.5)
+Requirement already satisfied: multitasking&gt;=0.0.7 in /usr/local/lib/python3.7/dist-packages (from yfinance) (0.0.10)
+Requirement already satisfied: pytz&gt;=2017.3 in /usr/local/lib/python3.7/dist-packages (from pandas&gt;=0.24.0-&gt;yfinance) (2018.9)
+Requirement already satisfied: python-dateutil&gt;=2.7.3 in /usr/local/lib/python3.7/dist-packages (from pandas&gt;=0.24.0-&gt;yfinance) (2.8.2)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.7/dist-packages (from python-dateutil&gt;=2.7.3-&gt;pandas&gt;=0.24.0-&gt;yfinance) (1.15.0)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.26-&gt;yfinance) (2.0.12)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.26-&gt;yfinance) (1.24.3)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.26-&gt;yfinance) (2021.10.8)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.26-&gt;yfinance) (2.10)
+Installing collected packages: requests, lxml, yfinance
+  Attempting uninstall: requests
+    Found existing installation: requests 2.23.0
+    Uninstalling requests-2.23.0:
+      Successfully uninstalled requests-2.23.0
+  Attempting uninstall: lxml
+    Found existing installation: lxml 4.2.6
+    Uninstalling lxml-4.2.6:
+      Successfully uninstalled lxml-4.2.6
+[31mERROR: pip&#39;s dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+google-colab 1.0.0 requires requests~=2.23.0, but you have requests 2.27.1 which is incompatible.
+datascience 0.10.6 requires folium==0.2.1, but you have folium 0.8.3 which is incompatible.[0m
+Successfully installed lxml-4.8.0 requests-2.27.1 yfinance-0.1.70
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yfinance <span class="keyword">as</span> yf</span><br><span class="line">data = yf.download(<span class="string">&quot;AAPL&quot;</span>, start = <span class="string">&quot;2019-08-01&quot;</span>, end = <span class="string">&quot;2022-03-23&quot;</span>)</span><br><span class="line">ts = data[<span class="string">&#x27;Open&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>(ts.head())</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(ts))</span><br></pre></td></tr></table></figure>
+
+<pre><code>[*********************100%***********************]  1 of 1 completed
+Date
+2019-08-01    53.474998
+2019-08-02    51.382500
+2019-08-05    49.497501
+2019-08-06    49.077499
+2019-08-07    48.852501
+Name: Open, dtype: float64
+&lt;class &#39;pandas.core.series.Series&#39;&gt;
+</code></pre>
+<h2 id="pyplot-형태"><a href="#pyplot-형태" class="headerlink" title="pyplot 형태"></a>pyplot 형태</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.plot(ts)</span><br><span class="line">plt.title(<span class="string">&quot;Stock Market of AAPL&quot;</span>) <span class="comment"># 구글 코랩에서 한글 타이틀은 인식을 못하여 나중에 세팅해야함</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;Date&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;Open Price&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/visulization_tutorial_01/output_8_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots() <span class="comment">#fig 는 겉 테두리</span></span><br><span class="line">ax.plot(ts)</span><br><span class="line">ax.set_title(<span class="string">&quot;Stock Market of AAPL&quot;</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;Date&quot;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;Open Price&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/visulization_tutorial_01/output_9_0.png" alt="png"></p>
+<h2 id="막대-그래프"><a href="#막대-그래프" class="headerlink" title="막대 그래프"></a>막대 그래프</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">calendar.month_name[<span class="number">1</span>:<span class="number">13</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>[&#39;January&#39;,
+ &#39;February&#39;,
+ &#39;March&#39;,
+ &#39;April&#39;,
+ &#39;May&#39;,
+ &#39;June&#39;,
+ &#39;July&#39;,
+ &#39;August&#39;,
+ &#39;September&#39;,
+ &#39;October&#39;,
+ &#39;November&#39;,
+ &#39;December&#39;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> calendar <span class="comment"># 날짜를 관장하는 라이브러리</span></span><br><span class="line"></span><br><span class="line">month_list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>]</span><br><span class="line">sold_list = [<span class="number">300</span>, <span class="number">400</span>, <span class="number">550</span>, <span class="number">900</span>, <span class="number">600</span>, <span class="number">960</span>, <span class="number">900</span>, <span class="number">910</span>, <span class="number">800</span>, <span class="number">700</span>, <span class="number">550</span>, <span class="number">450</span>]</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize = (<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">barplots = ax.bar(month_list, sold_list)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;barplots :&quot;</span>, barplots)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> plot <span class="keyword">in</span> barplots:</span><br><span class="line">  <span class="built_in">print</span>(plot)</span><br><span class="line">  <span class="comment"># print(plot.get_height())</span></span><br><span class="line">  <span class="comment"># print(plot.get_x())</span></span><br><span class="line">  <span class="comment"># print(plot.get_y())</span></span><br><span class="line">  <span class="comment"># print(plot.get_width())</span></span><br><span class="line">  height = plot.get_height()</span><br><span class="line">  ax.text(plot.get_x() + plot.get_width()/<span class="number">2.</span>, height, height, ha = <span class="string">&#x27;center&#x27;</span>, va = <span class="string">&#x27;bottom&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.xticks(month_list, calendar.month_name[<span class="number">1</span>:<span class="number">13</span>], rotation = <span class="number">90</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<pre><code>barplots : &lt;BarContainer object of 12 artists&gt;
+Rectangle(xy=(0.6, 0), width=0.8, height=300, angle=0)
+Rectangle(xy=(1.6, 0), width=0.8, height=400, angle=0)
+Rectangle(xy=(2.6, 0), width=0.8, height=550, angle=0)
+Rectangle(xy=(3.6, 0), width=0.8, height=900, angle=0)
+Rectangle(xy=(4.6, 0), width=0.8, height=600, angle=0)
+Rectangle(xy=(5.6, 0), width=0.8, height=960, angle=0)
+Rectangle(xy=(6.6, 0), width=0.8, height=900, angle=0)
+Rectangle(xy=(7.6, 0), width=0.8, height=910, angle=0)
+Rectangle(xy=(8.6, 0), width=0.8, height=800, angle=0)
+Rectangle(xy=(9.6, 0), width=0.8, height=700, angle=0)
+Rectangle(xy=(10.6, 0), width=0.8, height=550, angle=0)
+Rectangle(xy=(11.6, 0), width=0.8, height=450, angle=0)
+</code></pre>
+<p><img src="/images/visulization_tutorial_01/output_12_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(tips.info())</span><br><span class="line">x = tips[<span class="string">&#x27;total_bill&#x27;</span>]</span><br><span class="line">y = tips[<span class="string">&#x27;tip&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 산점도</span></span><br><span class="line">fig, ax = plt.subplots(figsize = (<span class="number">10</span>,<span class="number">6</span>))</span><br><span class="line">ax.scatter(x, y)</span><br><span class="line">ax.set_xlabel(<span class="string">&#x27;Total Bill&#x27;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&#x27;Tip&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 244 entries, 0 to 243
+Data columns (total 7 columns):
+ #   Column      Non-Null Count  Dtype   
+---  ------      --------------  -----   
+ 0   total_bill  244 non-null    float64 
+ 1   tip         244 non-null    float64 
+ 2   sex         244 non-null    category
+ 3   smoker      244 non-null    category
+ 4   day         244 non-null    category
+ 5   time        244 non-null    category
+ 6   size        244 non-null    int64   
+dtypes: category(4), float64(2), int64(1)
+memory usage: 7.4 KB
+None
+</code></pre>
+<p><img src="/images/visulization_tutorial_01/output_13_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">label, data = tips.groupby(<span class="string">&#x27;sex&#x27;</span>)</span><br><span class="line"><span class="comment"># print(label)</span></span><br><span class="line"><span class="comment"># print(data)</span></span><br><span class="line"></span><br><span class="line">tips[<span class="string">&#x27;sex_color&#x27;</span>] = tips[<span class="string">&#x27;sex&#x27;</span>].<span class="built_in">map</span>(&#123;<span class="string">&#x27;Male&#x27;</span>: <span class="string">&#x27;#2521F6&#x27;</span>, <span class="string">&#x27;Female&#x27;</span>: <span class="string">&#x27;#EB4036&#x27;</span>&#125;)</span><br><span class="line"><span class="comment"># print(tips.head())</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize = (<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"><span class="keyword">for</span> label, data <span class="keyword">in</span> tips.groupby(<span class="string">&#x27;sex&#x27;</span>):</span><br><span class="line">  ax.scatter(data[<span class="string">&#x27;total_bill&#x27;</span>], data[<span class="string">&#x27;tip&#x27;</span>], label = label, color = data[<span class="string">&#x27;sex_color&#x27;</span>], alpha = <span class="number">0.5</span>)</span><br><span class="line">  ax.set_xlabel(<span class="string">&#x27;Total Bill&#x27;</span>)</span><br><span class="line">  ax.set_ylabel(<span class="string">&#x27;Tip&#x27;</span>)</span><br><span class="line"></span><br><span class="line">ax.legend() <span class="comment"># 범례</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/visulization_tutorial_01/output_14_0.png" alt="png"></p>
+<h2 id="Seaborn"><a href="#Seaborn" class="headerlink" title="Seaborn"></a>Seaborn</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.pylabtools <span class="keyword">import</span> figsize</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>)</span><br><span class="line"><span class="comment"># print(tips.info())</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.scatterplot(x = <span class="string">&#x27;total_bill&#x27;</span>, y = <span class="string">&#x27;tip&#x27;</span>, hue = <span class="string">&#x27;sex&#x27;</span>, data = tips)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/visulization_tutorial_01/output_16_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 두개의 그래프를 동시에 표현</span></span><br><span class="line">fig, ax = plt.subplots(nrows=<span class="number">1</span>, ncols=<span class="number">2</span>, figsize=(<span class="number">15</span>, <span class="number">5</span>))</span><br><span class="line">sns.regplot(x = <span class="string">&quot;total_bill&quot;</span>, y = <span class="string">&quot;tip&quot;</span>, data = tips , ax = ax[<span class="number">1</span>], fit_reg = <span class="literal">True</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_title(<span class="string">&quot;with linear regression line&quot;</span>)</span><br><span class="line"></span><br><span class="line">sns.regplot(x = <span class="string">&quot;total_bill&quot;</span>, y = <span class="string">&quot;tip&quot;</span>, data = tips , ax = ax[<span class="number">0</span>], fit_reg = <span class="literal">False</span>)</span><br><span class="line">ax[<span class="number">0</span>].set_title(<span class="string">&quot;without linear regression line&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/visulization_tutorial_01/output_17_0.png" alt="png"></p>
+<ul>
+<li>막대 그래프 그리기 seaborn 방신</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sns.countplot(x = <span class="string">&quot;day&quot;</span>, data = tips)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/visulization_tutorial_01/output_19_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(tips[<span class="string">&#x27;day&#x27;</span>].value_counts().index)</span><br><span class="line"><span class="built_in">print</span>(tips[<span class="string">&#x27;day&#x27;</span>].value_counts().values)</span><br><span class="line"><span class="built_in">print</span>(tips[<span class="string">&#x27;day&#x27;</span>].value_counts(ascending=<span class="literal">True</span>)) <span class="comment"># 오름차순</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>CategoricalIndex([&#39;Sat&#39;, &#39;Sun&#39;, &#39;Thur&#39;, &#39;Fri&#39;], categories=[&#39;Thur&#39;, &#39;Fri&#39;, &#39;Sat&#39;, &#39;Sun&#39;], ordered=False, dtype=&#39;category&#39;)
+[87 76 62 19]
+Fri     19
+Thur    62
+Sun     76
+Sat     87
+Name: day, dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = sns.countplot(x = <span class="string">&quot;day&quot;</span>, data = tips, order = tips[<span class="string">&#x27;day&#x27;</span>].value_counts().index)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> plot <span class="keyword">in</span> ax.patches:</span><br><span class="line">  <span class="comment"># print(plot)</span></span><br><span class="line">  height = plot.get_height()</span><br><span class="line">  ax.text(plot.get_x() + plot.get_width()/<span class="number">2.</span>, height, height, ha = <span class="string">&#x27;center&#x27;</span>, va = <span class="string">&#x27;bottom&#x27;</span>)</span><br><span class="line"></span><br><span class="line">ax.set_ylim(-<span class="number">5</span>, <span class="number">100</span>) <span class="comment"># y축 값 변경</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/visulization_tutorial_01/output_21_0.png" alt="png"></p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/25/pandas_tutorial_02/"
+                    data-tooltip="판다스 튜토리얼 2"
+                    aria-label="PREVIOUS: 판다스 튜토리얼 2"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/23/pandas_tutorial_01/"
+                    data-tooltip="판다스 튜토리얼 1"
+                    aria-label="NEXT: 판다스 튜토리얼 1"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/25/visualization_tutorial_01/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/25/visualization_tutorial_01/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/25/visualization_tutorial_01/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2022 John Doe. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/25/pandas_tutorial_02/"
+                    data-tooltip="판다스 튜토리얼 2"
+                    aria-label="PREVIOUS: 판다스 튜토리얼 2"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/23/pandas_tutorial_01/"
+                    data-tooltip="판다스 튜토리얼 1"
+                    aria-label="NEXT: 판다스 튜토리얼 1"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/25/visualization_tutorial_01/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/25/visualization_tutorial_01/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/25/visualization_tutorial_01/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/25/visualization_tutorial_01/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/25/visualization_tutorial_01/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/25/visualization_tutorial_01/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">John Doe</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-dvu41dvy5202v52bwzsnpck9devc8hugsy17mbuqp6i4ms8q6rt7zrc4avbe.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,788 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Winters Blog">
+    <title>마켓과 머신러닝(Chapter_6_2) - Winters Blog</title>
+    <meta name="author" content="John Doe">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"K-평균\n각각의 픽셀값(3차원 -&gt; 1차원 배열) 평균 구함\n\n픽셀의 평균값을 활용해서 사과, 파앤애플, 바나나의 근사한 이미지를 추출하는 것\n\n\n어떻게 평균값을 구할 수 있을까?\n\nK-평균 알고리즘 (K-Means) 알고리즘\n평균값 &#x3D; Cluster Center &#x3D; Centroid\n\n\n\n1!wget https://bit.ly/fruits_300_data -O fruits_300.npy\n\n--2022-03-31 02:16:44--  https://bit.ly/fruits_300_data\nResolving bit.ly (bit.ly)... 67.199.248.10, 67.199.248.11\nConnecting to bit.ly (bit.ly)|67.199.248.10|:443... connected.\nHTTP request sent, awaiting response... 301 Moved Permanently\nLocation: https://github.com/rickiepark/hg-mldl/raw/master/fruits_300.npy [following]\n--2022-03-31 02:16:44--  https://github.com/rickiepark/hg-mldl/raw/master/fruits_300.npy\nResolving github.com (github.com)... 192.30.255.113\nConnecting to github.com (github.com)|192.30.255.113|:443... connected.\nHTTP request sent, awaiting response... 302 Found\nLocation: https://raw.githubusercontent.com/rickiepark/hg-mldl/master/fruits_300.npy [following]\n--2022-03-31 02:16:44--  https://raw.githubusercontent.com/rickiepark/hg-mldl/master/fruits_300.npy\nResolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.110.133, 185.199.111.133, 185.199.108.133, ...\nConnecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.110.133|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 3000128 (2.9M) [application/octet-stream]\nSaving to: ‘fruits_300.npy’\n\nfruits_300.npy      100%[===================&gt;]   2.86M  --.-KB/s    in 0.05s   \n\n2022-03-31 02:16:44 (62.6 MB/s) - ‘fruits_300.npy’ saved [3000128/3000128]\n\n1234import numpy as npfruits = np.load(&#x27;/content/fruits_300.npy&#x27;)print(fruits.shape)print(fruits.ndim)\n\n(300, 100, 100)\n3\n\n\n3차원(샘플개수, 너비, 높이)\n2차원(샘플개수, 너비 x 높이)\n\n12fruits_2d = fruits.reshape(-1, 100 * 100)fruits_2d.shape\n\n\n\n\n(300, 10000)\n\n\nK-평균 알고리즘 활용\n\n123from sklearn.cluster import KMeanskm = KMeans(n_clusters = 3, random_state = 42)km.fit(fruits_2d)\n\n\n\n\nKMeans(n_clusters=3, random_state=42)\n\n\n모형 학습 후, labels\n\n1print(km.labels_)\n\n[2 2 2 2 2 0 2 2 2 2 2 2 2 2 2 2 2 2 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2\n 2 2 2 2 2 0 2 0 2 2 2 2 2 2 2 0 2 2 2 2 2 2 2 2 2 0 0 2 2 2 2 2 2 2 2 0 2\n 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2 2 2 2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0\n 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1\n 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1\n 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1\n 1 1 1 1]\n\n\n직접 샘플의 개수 확인\n\n1print(np.unique(km.labels_, return_counts = True))\n\n(array([0, 1, 2], dtype=int32), array([111,  98,  91]))\n\n\n그래프를 직접 그려본다\n\n12345678910111213141516import matplotlib.pyplot as pltdef draw_fruits(arr, ratio=1):    n = len(arr)    # n은 샘플 개수입니다    # 한 줄에 10개씩 이미지를 그립니다. 샘플 개수를 10으로 나누어 전체 행 개수를 계산합니다.     rows = int(np.ceil(n/10))    # 행이 1개 이면 열 개수는 샘플 개수입니다. 그렇지 않으면 10개입니다.    cols = n if rows &lt; 2 else 10    fig, axs = plt.subplots(rows, cols,                             figsize=(cols*ratio, rows*ratio), squeeze=False)    for i in range(rows):        for j in range(cols):            if i*10 + j &lt; n:    # n 개까지만 그립니다.                axs[i, j].imshow(arr[i*10 + j], cmap=&#x27;gray_r&#x27;)            axs[i, j].axis(&#x27;off&#x27;)    plt.show()\n\n\n1draw_fruits(fruits[km.labels_ == 0])\n\n\n\n클러스터 중심1draw_fruits(km.cluster_centers_.reshape(-1, 100, 100), ratio = 3) # fruits_2d 샘플의 클러스터 중심이기 때문에 이미지로 출력하려면 100 X 100 크기로 변환\n\n\n\n1print(km.transform(fruits_2d[100:101])) # transform 메서드는 훈련데이터 샘플에서 클러스터 중심까지 거리로 변환해준다.\n\n[[3393.8136117  8837.37750892 5267.70439881]]\n\n1print(km.predict(fruits_2d[100:101]))\n\n[0]\n\n1draw_fruits(fruits[100:101])\n\n\n\n최적의 K-평균 찾기\ninertia \n목적함수 값이 최소화될 때까지 군집의 중심위치와 각 데이터가 소속될 군집를 반복해서 찾는다. 이 값을 관성(inertia)이라고 함\n클러스터에 속한 샘플이 얼마나 가깝게 모여있는지를 나타내는 값\n\n\n엘보우 방법 \n클러스터의 개수가 늘어나면 클러스터 개개의 크기는 줄어들기 때문에 이너셔도 같이 줄어듬, 그렇기 때문에 클러스터 개수를 늘려가면서 이너셔의 변화를 관찰하여 최적의 클러스터 개수를 찾는다.\n\n\n\n1234567inertia = []for k in range(2, 7):  km = KMeans(n_clusters = k, random_state = 42)  km.fit(fruits_2d)  inertia.append(km.inertia_)plt.plot(range(2, 7), inertia)plt.show\n\n\n\n\n&lt;function matplotlib.pyplot.show&gt;\n\n\n","dateCreated":"2022-03-31T09:00:00+09:00","dateModified":"2022-03-31T17:29:06+09:00","datePublished":"2022-03-31T09:00:00+09:00","description":"","headline":"마켓과 머신러닝(Chapter_6_2)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/31/Chapter_6_2/"},"publisher":{"@type":"Organization","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"https://ahnduhong.github.io/2022/03/31/Chapter_6_2/"}</script>
+    <meta name="description" content="K-평균 각각의 픽셀값(3차원 -&gt; 1차원 배열) 평균 구함  픽셀의 평균값을 활용해서 사과, 파앤애플, 바나나의 근사한 이미지를 추출하는 것   어떻게 평균값을 구할 수 있을까?  K-평균 알고리즘 (K-Means) 알고리즘 평균값 &#x3D; Cluster Center &#x3D; Centroid    1!wget https:&#x2F;&#x2F;bit.ly&#x2F;fru">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="마켓과 머신러닝(Chapter_6_2)">
+<meta property="og:url" content="https://ahnduhong.github.io/2022/03/31/Chapter_6_2/index.html">
+<meta property="og:site_name" content="Winters Blog">
+<meta property="og:description" content="K-평균 각각의 픽셀값(3차원 -&gt; 1차원 배열) 평균 구함  픽셀의 평균값을 활용해서 사과, 파앤애플, 바나나의 근사한 이미지를 추출하는 것   어떻게 평균값을 구할 수 있을까?  K-평균 알고리즘 (K-Means) 알고리즘 평균값 &#x3D; Cluster Center &#x3D; Centroid    1!wget https:&#x2F;&#x2F;bit.ly&#x2F;fru">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_6_2/output_14_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_6_2/output_16_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_6_2/output_19_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_6_2/output_21_1.png">
+<meta property="article:published_time" content="2022-03-31T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-31T08:29:06.330Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ahnduhong.github.io/images/Chapter_6_2/output_14_0.png">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-nweealnwexi63lhm1agu2ku3rw8tqhtfz0od0lsqiw3kbrdmk45anokos3uj.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            Winters Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://twitter.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Twitter"
+                        >
+                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Twitter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://plus.google.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Google +"
+                        >
+                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Google +</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            마켓과 머신러닝(Chapter_6_2)
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2022-03-31T09:00:00+09:00">
+	
+		    Mar 31, 2022
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h1 id="K-평균"><a href="#K-평균" class="headerlink" title="K-평균"></a>K-평균</h1><ul>
+<li><p>각각의 픽셀값(3차원 -&gt; 1차원 배열) 평균 구함</p>
+<ul>
+<li>픽셀의 평균값을 활용해서 사과, 파앤애플, 바나나의 근사한 이미지를 추출하는 것</li>
+</ul>
+</li>
+<li><p>어떻게 평균값을 구할 수 있을까?</p>
+<ul>
+<li>K-평균 알고리즘 (K-Means) 알고리즘</li>
+<li>평균값 &#x3D; Cluster Center &#x3D; Centroid</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!wget https://bit.ly/fruits_300_data -O fruits_300.npy</span><br></pre></td></tr></table></figure>
+
+<pre><code>--2022-03-31 02:16:44--  https://bit.ly/fruits_300_data
+Resolving bit.ly (bit.ly)... 67.199.248.10, 67.199.248.11
+Connecting to bit.ly (bit.ly)|67.199.248.10|:443... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://github.com/rickiepark/hg-mldl/raw/master/fruits_300.npy [following]
+--2022-03-31 02:16:44--  https://github.com/rickiepark/hg-mldl/raw/master/fruits_300.npy
+Resolving github.com (github.com)... 192.30.255.113
+Connecting to github.com (github.com)|192.30.255.113|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://raw.githubusercontent.com/rickiepark/hg-mldl/master/fruits_300.npy [following]
+--2022-03-31 02:16:44--  https://raw.githubusercontent.com/rickiepark/hg-mldl/master/fruits_300.npy
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.110.133, 185.199.111.133, 185.199.108.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.110.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3000128 (2.9M) [application/octet-stream]
+Saving to: ‘fruits_300.npy’
+
+fruits_300.npy      100%[===================&gt;]   2.86M  --.-KB/s    in 0.05s   
+
+2022-03-31 02:16:44 (62.6 MB/s) - ‘fruits_300.npy’ saved [3000128/3000128]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">fruits = np.load(<span class="string">&#x27;/content/fruits_300.npy&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(fruits.shape)</span><br><span class="line"><span class="built_in">print</span>(fruits.ndim)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(300, 100, 100)
+3
+</code></pre>
+<ul>
+<li>3차원(샘플개수, 너비, 높이)</li>
+<li>2차원(샘플개수, 너비 x 높이)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fruits_2d = fruits.reshape(-<span class="number">1</span>, <span class="number">100</span> * <span class="number">100</span>)</span><br><span class="line">fruits_2d.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(300, 10000)
+</code></pre>
+<ul>
+<li>K-평균 알고리즘 활용</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br><span class="line">km = KMeans(n_clusters = <span class="number">3</span>, random_state = <span class="number">42</span>)</span><br><span class="line">km.fit(fruits_2d)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>KMeans(n_clusters=3, random_state=42)
+</code></pre>
+<ul>
+<li>모형 학습 후, labels</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(km.labels_)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[2 2 2 2 2 0 2 2 2 2 2 2 2 2 2 2 2 2 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+ 2 2 2 2 2 0 2 0 2 2 2 2 2 2 2 0 2 2 2 2 2 2 2 2 2 0 0 2 2 2 2 2 2 2 2 0 2
+ 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2 2 2 2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1]
+</code></pre>
+<ul>
+<li>직접 샘플의 개수 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(np.unique(km.labels_, return_counts = <span class="literal">True</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>(array([0, 1, 2], dtype=int32), array([111,  98,  91]))
+</code></pre>
+<ul>
+<li>그래프를 직접 그려본다</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">draw_fruits</span>(<span class="params">arr, ratio=<span class="number">1</span></span>):</span><br><span class="line">    n = <span class="built_in">len</span>(arr)    <span class="comment"># n은 샘플 개수입니다</span></span><br><span class="line">    <span class="comment"># 한 줄에 10개씩 이미지를 그립니다. 샘플 개수를 10으로 나누어 전체 행 개수를 계산합니다. </span></span><br><span class="line">    rows = <span class="built_in">int</span>(np.ceil(n/<span class="number">10</span>))</span><br><span class="line">    <span class="comment"># 행이 1개 이면 열 개수는 샘플 개수입니다. 그렇지 않으면 10개입니다.</span></span><br><span class="line">    cols = n <span class="keyword">if</span> rows &lt; <span class="number">2</span> <span class="keyword">else</span> <span class="number">10</span></span><br><span class="line">    fig, axs = plt.subplots(rows, cols, </span><br><span class="line">                            figsize=(cols*ratio, rows*ratio), squeeze=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(rows):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(cols):</span><br><span class="line">            <span class="keyword">if</span> i*<span class="number">10</span> + j &lt; n:    <span class="comment"># n 개까지만 그립니다.</span></span><br><span class="line">                axs[i, j].imshow(arr[i*<span class="number">10</span> + j], cmap=<span class="string">&#x27;gray_r&#x27;</span>)</span><br><span class="line">            axs[i, j].axis(<span class="string">&#x27;off&#x27;</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">draw_fruits(fruits[km.labels_ == <span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_6_2/output_14_0.png" alt="png"></p>
+<h1 id="클러스터-중심"><a href="#클러스터-중심" class="headerlink" title="클러스터 중심"></a>클러스터 중심</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">draw_fruits(km.cluster_centers_.reshape(-<span class="number">1</span>, <span class="number">100</span>, <span class="number">100</span>), ratio = <span class="number">3</span>) <span class="comment"># fruits_2d 샘플의 클러스터 중심이기 때문에 이미지로 출력하려면 100 X 100 크기로 변환</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_6_2/output_16_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(km.transform(fruits_2d[<span class="number">100</span>:<span class="number">101</span>])) <span class="comment"># transform 메서드는 훈련데이터 샘플에서 클러스터 중심까지 거리로 변환해준다.</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>[[3393.8136117  8837.37750892 5267.70439881]]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(km.predict(fruits_2d[<span class="number">100</span>:<span class="number">101</span>]))</span><br></pre></td></tr></table></figure>
+
+<pre><code>[0]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">draw_fruits(fruits[<span class="number">100</span>:<span class="number">101</span>])</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_6_2/output_19_0.png" alt="png"></p>
+<h1 id="최적의-K-평균-찾기"><a href="#최적의-K-평균-찾기" class="headerlink" title="최적의 K-평균 찾기"></a>최적의 K-평균 찾기</h1><ul>
+<li>inertia <ul>
+<li>목적함수 값이 최소화될 때까지 군집의 중심위치와 각 데이터가 소속될 군집를 반복해서 찾는다. 이 값을 관성(inertia)이라고 함</li>
+<li>클러스터에 속한 샘플이 얼마나 가깝게 모여있는지를 나타내는 값</li>
+</ul>
+</li>
+<li>엘보우 방법 <ul>
+<li>클러스터의 개수가 늘어나면 클러스터 개개의 크기는 줄어들기 때문에 이너셔도 같이 줄어듬, 그렇기 때문에 클러스터 개수를 늘려가면서 이너셔의 변화를 관찰하여 최적의 클러스터 개수를 찾는다.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">inertia = []</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">7</span>):</span><br><span class="line">  km = KMeans(n_clusters = k, random_state = <span class="number">42</span>)</span><br><span class="line">  km.fit(fruits_2d)</span><br><span class="line">  inertia.append(km.inertia_)</span><br><span class="line">plt.plot(<span class="built_in">range</span>(<span class="number">2</span>, <span class="number">7</span>), inertia)</span><br><span class="line">plt.show</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&lt;function matplotlib.pyplot.show&gt;
+</code></pre>
+<p><img src="/images/Chapter_6_2/output_21_1.png" alt="png"></p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/31/Chapter_6_1/"
+                    data-tooltip="마켓과 머신러닝(Chapter_6_1)"
+                    aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_6_1)"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/30/Chapter_5_3/"
+                    data-tooltip="마켓과 머신러닝(Chapter_5_3)"
+                    aria-label="NEXT: 마켓과 머신러닝(Chapter_5_3)"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/31/Chapter_6_2/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/31/Chapter_6_2/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/31/Chapter_6_2/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2022 John Doe. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/31/Chapter_6_1/"
+                    data-tooltip="마켓과 머신러닝(Chapter_6_1)"
+                    aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_6_1)"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/30/Chapter_5_3/"
+                    data-tooltip="마켓과 머신러닝(Chapter_5_3)"
+                    aria-label="NEXT: 마켓과 머신러닝(Chapter_5_3)"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/31/Chapter_6_2/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/31/Chapter_6_2/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/31/Chapter_6_2/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/31/Chapter_6_2/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/31/Chapter_6_2/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/31/Chapter_6_2/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">John Doe</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-dvu41dvy5202v52bwzsnpck9devc8hugsy17mbuqp6i4ms8q6rt7zrc4avbe.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,794 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Winters Blog">
+    <title>마켓과 머신러닝(Chapter_6_1) - Winters Blog</title>
+    <meta name="author" content="John Doe">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"비지도 학습\nvs 지도학습\n종속변수 &#x3D; 타깃\n\n\n비지도학습은 종속변수 및 타겟이 없음\n분류\n다중분류\n전체조건이 (다양한 유형) 데이터가 많아야함\n딥러닝과 연관 (자연어처리, 이미지)\n\n\n\n데이터 불러오기1!wget https://bit.ly/fruits_300_data -O fruits_300.npy\n\n--2022-03-31 01:37:42--  https://bit.ly/fruits_300_data\nResolving bit.ly (bit.ly)... 67.199.248.10, 67.199.248.11\nConnecting to bit.ly (bit.ly)|67.199.248.10|:443... connected.\nHTTP request sent, awaiting response... 301 Moved Permanently\nLocation: https://github.com/rickiepark/hg-mldl/raw/master/fruits_300.npy [following]\n--2022-03-31 01:37:42--  https://github.com/rickiepark/hg-mldl/raw/master/fruits_300.npy\nResolving github.com (github.com)... 140.82.114.3\nConnecting to github.com (github.com)|140.82.114.3|:443... connected.\nHTTP request sent, awaiting response... 302 Found\nLocation: https://raw.githubusercontent.com/rickiepark/hg-mldl/master/fruits_300.npy [following]\n--2022-03-31 01:37:42--  https://raw.githubusercontent.com/rickiepark/hg-mldl/master/fruits_300.npy\nResolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.110.133, 185.199.111.133, ...\nConnecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 3000128 (2.9M) [application/octet-stream]\nSaving to: ‘fruits_300.npy’\n\nfruits_300.npy      100%[===================&gt;]   2.86M  --.-KB/s    in 0.07s   \n\n2022-03-31 01:37:43 (41.4 MB/s) - ‘fruits_300.npy’ saved [3000128/3000128]\n\n123456import numpy as npimport matplotlib.pyplot as pltfruits = np.load(&#x27;/content/fruits_300.npy&#x27;)print(fruits.shape)print(fruits.ndim)\n\n(300, 100, 100)\n3\n\n\n첫번째 차원(300) &#x3D; 샘플의 개수\n두번째 차원(100) &#x3D; 이미지 높이\n세번째 차원(100) &#x3D; 이미지 너비\n이미지 크기 100 x 100\n\n1fruits[0, :, 0]\n\n\n\n\narray([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,\n       1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 6, 1, 2, 3, 1, 2, 3,\n       1, 1, 1, 2, 2, 2, 5, 2, 2, 5, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1,\n       1, 2, 2, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,\n       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], dtype=uint8)\n\n\n이미지 시각화\n흑백 사진을 담고 있다.\n0 ~ 255까지의 정숫값을 가진다\n\n\n\n12plt.imshow(fruits[0], cmap = &#x27;gray&#x27;)plt.show()\n\n\n\n12plt.imshow(fruits[0], cmap = &#x27;gray_r&#x27;)plt.show()\n\n\n\n\n여러 이미지 시각화\n\n12345fig, axs = plt.subplots(1, 2)axs[0].imshow(fruits[100], cmap = &#x27;gray_r&#x27;)axs[1].imshow(fruits[200], cmap = &#x27;gray_r&#x27;)plt.show()\n\n\n\n픽셀값 분석\n배열을 계산할 때 1차원 배열로 펼쳐서 계산하면 편리하기 때문에 100 x 100 이미지를 펼쳐서 10,000인 1차원 배열로 만든다.\n\n1234567apple = fruits[0:100].reshape(-1, 100 * 100)pineapple = fruits[100:200].reshape(-1, 100 * 100)banana = fruits[200:300].reshape(-1, 100*100)print(apple.shape)print(pineapple.shape)print(banana.shape)\n\n(100, 10000)\n(100, 10000)\n(100, 10000)\n\n\n100 x 100 이미지를 펼친 10,000인 1차원 배열로 만들었으니 열을 사용해 샘플의 픽셀 평균값을 계산\naxis &#x3D; 0 vs axis &#x3D; 1 차이 확인(p.293)\n\n12# axis = 1 열print(apple.mean(axis = 1))\n\n[ 88.3346  97.9249  87.3709  98.3703  92.8705  82.6439  94.4244  95.5999\n  90.681   81.6226  87.0578  95.0745  93.8416  87.017   97.5078  87.2019\n  88.9827 100.9158  92.7823 100.9184 104.9854  88.674   99.5643  97.2495\n  94.1179  92.1935  95.1671  93.3322 102.8967  94.6695  90.5285  89.0744\n  97.7641  97.2938 100.7564  90.5236 100.2542  85.8452  96.4615  97.1492\n  90.711  102.3193  87.1629  89.8751  86.7327  86.3991  95.2865  89.1709\n  96.8163  91.6604  96.1065  99.6829  94.9718  87.4812  89.2596  89.5268\n  93.799   97.3983  87.151   97.825  103.22    94.4239  83.6657  83.5159\n 102.8453  87.0379  91.2742 100.4848  93.8388  90.8568  97.4616  97.5022\n  82.446   87.1789  96.9206  90.3135  90.565   97.6538  98.0919  93.6252\n  87.3867  84.7073  89.1135  86.7646  88.7301  86.643   96.7323  97.2604\n  81.9424  87.1687  97.2066  83.4712  95.9781  91.8096  98.4086 100.7823\n 101.556  100.7027  91.6098  88.8976]\n\n\n각 과일에 대한 히스토그램 작성\n\n12345plt.hist(np.mean(apple, axis = 1), alpha = 0.8) # alpha 는 그래프의 색상 농도plt.hist(np.mean(pineapple, axis = 1), alpha = 0.8)plt.hist(np.mean(banana, axis = 1), alpha = 0.8)plt.legend([&#x27;apple&#x27;, &#x27;pineapple&#x27;, &#x27;banana&#x27;]) # legend() 과일 분류 상자plt.show()\n\n\n\n12345fig, axs = plt.subplots(1, 3, figsize=(20, 5))axs[0].bar(range(10000), np.mean(apple, axis = 0))axs[1].bar(range(10000), np.mean(pineapple, axis = 0))axs[2].bar(range(10000), np.mean(banana, axis = 0))plt.show()\n\n\n\n12345678apple_mean = np.mean(apple, axis = 0).reshape(100, 100)pineapple_mean = np.mean(pineapple, axis = 0).reshape(100, 100)banana_mean = np.mean(banana, axis = 0).reshape(100, 100)fig, axs = plt.subplots(1, 3, figsize=(20,5))axs[0].imshow(apple_mean, cmap = &#x27;gray_r&#x27;)axs[1].imshow(pineapple_mean, cmap = &#x27;gray_r&#x27;)axs[2].imshow(banana_mean, cmap = &#x27;gray_r&#x27;)plt.show()\n\n\n\n평균값과 가까운 사진 고르기123abs_diff = np.abs(fruits - apple_mean)abs_mean = np.mean(abs_diff, axis =(1,2))print(abs_mean.shape)\n\n(300,)\n\n1234567apple_index = np.argsort(abs_mean)[:100]fig, axs = plt.subplots(10, 10, figsize = (10, 10))for i in range(10):  for j in range(10):    axs[i, j].imshow(fruits[apple_index[i*10 + j]], cmap = &#x27;gray_r&#x27;)    axs[i, j].axis(&#x27;off&#x27;)plt.show()\n\n\n\n","dateCreated":"2022-03-31T09:00:00+09:00","dateModified":"2022-03-31T13:49:55+09:00","datePublished":"2022-03-31T09:00:00+09:00","description":"","headline":"마켓과 머신러닝(Chapter_6_1)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/31/Chapter_6_1/"},"publisher":{"@type":"Organization","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"https://ahnduhong.github.io/2022/03/31/Chapter_6_1/"}</script>
+    <meta name="description" content="비지도 학습 vs 지도학습 종속변수 &#x3D; 타깃   비지도학습은 종속변수 및 타겟이 없음 분류 다중분류 전체조건이 (다양한 유형) 데이터가 많아야함 딥러닝과 연관 (자연어처리, 이미지)    데이터 불러오기1!wget https:&#x2F;&#x2F;bit.ly&#x2F;fruits_300_data -O fruits_300.npy  --2022-03-31 01:37:42--">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="마켓과 머신러닝(Chapter_6_1)">
+<meta property="og:url" content="https://ahnduhong.github.io/2022/03/31/Chapter_6_1/index.html">
+<meta property="og:site_name" content="Winters Blog">
+<meta property="og:description" content="비지도 학습 vs 지도학습 종속변수 &#x3D; 타깃   비지도학습은 종속변수 및 타겟이 없음 분류 다중분류 전체조건이 (다양한 유형) 데이터가 많아야함 딥러닝과 연관 (자연어처리, 이미지)    데이터 불러오기1!wget https:&#x2F;&#x2F;bit.ly&#x2F;fruits_300_data -O fruits_300.npy  --2022-03-31 01:37:42--">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_6_1/output_7_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_6_1/output_8_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_6_1/output_10_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_6_1/output_16_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_6_1/output_17_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_6_1/output_18_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_6_1/output_21_0.png">
+<meta property="article:published_time" content="2022-03-31T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-31T04:49:55.401Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ahnduhong.github.io/images/Chapter_6_1/output_7_0.png">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-nweealnwexi63lhm1agu2ku3rw8tqhtfz0od0lsqiw3kbrdmk45anokos3uj.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            Winters Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://twitter.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Twitter"
+                        >
+                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Twitter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://plus.google.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Google +"
+                        >
+                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Google +</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            마켓과 머신러닝(Chapter_6_1)
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2022-03-31T09:00:00+09:00">
+	
+		    Mar 31, 2022
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h1 id="비지도-학습"><a href="#비지도-학습" class="headerlink" title="비지도 학습"></a>비지도 학습</h1><ul>
+<li>vs 지도학습<ul>
+<li>종속변수 &#x3D; 타깃</li>
+</ul>
+</li>
+<li>비지도학습은 종속변수 및 타겟이 없음</li>
+<li>분류<ul>
+<li>다중분류</li>
+<li>전체조건이 (다양한 유형) 데이터가 많아야함</li>
+<li>딥러닝과 연관 (자연어처리, 이미지)</li>
+</ul>
+</li>
+</ul>
+<h1 id="데이터-불러오기"><a href="#데이터-불러오기" class="headerlink" title="데이터 불러오기"></a>데이터 불러오기</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!wget https://bit.ly/fruits_300_data -O fruits_300.npy</span><br></pre></td></tr></table></figure>
+
+<pre><code>--2022-03-31 01:37:42--  https://bit.ly/fruits_300_data
+Resolving bit.ly (bit.ly)... 67.199.248.10, 67.199.248.11
+Connecting to bit.ly (bit.ly)|67.199.248.10|:443... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://github.com/rickiepark/hg-mldl/raw/master/fruits_300.npy [following]
+--2022-03-31 01:37:42--  https://github.com/rickiepark/hg-mldl/raw/master/fruits_300.npy
+Resolving github.com (github.com)... 140.82.114.3
+Connecting to github.com (github.com)|140.82.114.3|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://raw.githubusercontent.com/rickiepark/hg-mldl/master/fruits_300.npy [following]
+--2022-03-31 01:37:42--  https://raw.githubusercontent.com/rickiepark/hg-mldl/master/fruits_300.npy
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.110.133, 185.199.111.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3000128 (2.9M) [application/octet-stream]
+Saving to: ‘fruits_300.npy’
+
+fruits_300.npy      100%[===================&gt;]   2.86M  --.-KB/s    in 0.07s   
+
+2022-03-31 01:37:43 (41.4 MB/s) - ‘fruits_300.npy’ saved [3000128/3000128]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">fruits = np.load(<span class="string">&#x27;/content/fruits_300.npy&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(fruits.shape)</span><br><span class="line"><span class="built_in">print</span>(fruits.ndim)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(300, 100, 100)
+3
+</code></pre>
+<ul>
+<li>첫번째 차원(300) &#x3D; 샘플의 개수</li>
+<li>두번째 차원(100) &#x3D; 이미지 높이</li>
+<li>세번째 차원(100) &#x3D; 이미지 너비</li>
+<li>이미지 크기 100 x 100</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fruits[<span class="number">0</span>, :, <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 6, 1, 2, 3, 1, 2, 3,
+       1, 1, 1, 2, 2, 2, 5, 2, 2, 5, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1,
+       1, 2, 2, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], dtype=uint8)
+</code></pre>
+<ul>
+<li>이미지 시각화<ul>
+<li>흑백 사진을 담고 있다.</li>
+<li>0 ~ 255까지의 정숫값을 가진다</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(fruits[<span class="number">0</span>], cmap = <span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_6_1/output_7_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(fruits[<span class="number">0</span>], cmap = <span class="string">&#x27;gray_r&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_6_1/output_8_0.png" alt="png"></p>
+<ul>
+<li>여러 이미지 시각화</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">axs[<span class="number">0</span>].imshow(fruits[<span class="number">100</span>], cmap = <span class="string">&#x27;gray_r&#x27;</span>)</span><br><span class="line">axs[<span class="number">1</span>].imshow(fruits[<span class="number">200</span>], cmap = <span class="string">&#x27;gray_r&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_6_1/output_10_0.png" alt="png"></p>
+<h1 id="픽셀값-분석"><a href="#픽셀값-분석" class="headerlink" title="픽셀값 분석"></a>픽셀값 분석</h1><ul>
+<li>배열을 계산할 때 1차원 배열로 펼쳐서 계산하면 편리하기 때문에 100 x 100 이미지를 펼쳐서 10,000인 1차원 배열로 만든다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">apple = fruits[<span class="number">0</span>:<span class="number">100</span>].reshape(-<span class="number">1</span>, <span class="number">100</span> * <span class="number">100</span>)</span><br><span class="line">pineapple = fruits[<span class="number">100</span>:<span class="number">200</span>].reshape(-<span class="number">1</span>, <span class="number">100</span> * <span class="number">100</span>)</span><br><span class="line">banana = fruits[<span class="number">200</span>:<span class="number">300</span>].reshape(-<span class="number">1</span>, <span class="number">100</span>*<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(apple.shape)</span><br><span class="line"><span class="built_in">print</span>(pineapple.shape)</span><br><span class="line"><span class="built_in">print</span>(banana.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(100, 10000)
+(100, 10000)
+(100, 10000)
+</code></pre>
+<ul>
+<li>100 x 100 이미지를 펼친 10,000인 1차원 배열로 만들었으니 열을 사용해 샘플의 픽셀 평균값을 계산</li>
+<li>axis &#x3D; 0 vs axis &#x3D; 1 차이 확인(p.293)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># axis = 1 열</span></span><br><span class="line"><span class="built_in">print</span>(apple.mean(axis = <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>[ 88.3346  97.9249  87.3709  98.3703  92.8705  82.6439  94.4244  95.5999
+  90.681   81.6226  87.0578  95.0745  93.8416  87.017   97.5078  87.2019
+  88.9827 100.9158  92.7823 100.9184 104.9854  88.674   99.5643  97.2495
+  94.1179  92.1935  95.1671  93.3322 102.8967  94.6695  90.5285  89.0744
+  97.7641  97.2938 100.7564  90.5236 100.2542  85.8452  96.4615  97.1492
+  90.711  102.3193  87.1629  89.8751  86.7327  86.3991  95.2865  89.1709
+  96.8163  91.6604  96.1065  99.6829  94.9718  87.4812  89.2596  89.5268
+  93.799   97.3983  87.151   97.825  103.22    94.4239  83.6657  83.5159
+ 102.8453  87.0379  91.2742 100.4848  93.8388  90.8568  97.4616  97.5022
+  82.446   87.1789  96.9206  90.3135  90.565   97.6538  98.0919  93.6252
+  87.3867  84.7073  89.1135  86.7646  88.7301  86.643   96.7323  97.2604
+  81.9424  87.1687  97.2066  83.4712  95.9781  91.8096  98.4086 100.7823
+ 101.556  100.7027  91.6098  88.8976]
+</code></pre>
+<ul>
+<li>각 과일에 대한 히스토그램 작성</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.hist(np.mean(apple, axis = <span class="number">1</span>), alpha = <span class="number">0.8</span>) <span class="comment"># alpha 는 그래프의 색상 농도</span></span><br><span class="line">plt.hist(np.mean(pineapple, axis = <span class="number">1</span>), alpha = <span class="number">0.8</span>)</span><br><span class="line">plt.hist(np.mean(banana, axis = <span class="number">1</span>), alpha = <span class="number">0.8</span>)</span><br><span class="line">plt.legend([<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;pineapple&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>]) <span class="comment"># legend() 과일 분류 상자</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_6_1/output_16_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(<span class="number">1</span>, <span class="number">3</span>, figsize=(<span class="number">20</span>, <span class="number">5</span>))</span><br><span class="line">axs[<span class="number">0</span>].bar(<span class="built_in">range</span>(<span class="number">10000</span>), np.mean(apple, axis = <span class="number">0</span>))</span><br><span class="line">axs[<span class="number">1</span>].bar(<span class="built_in">range</span>(<span class="number">10000</span>), np.mean(pineapple, axis = <span class="number">0</span>))</span><br><span class="line">axs[<span class="number">2</span>].bar(<span class="built_in">range</span>(<span class="number">10000</span>), np.mean(banana, axis = <span class="number">0</span>))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_6_1/output_17_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">apple_mean = np.mean(apple, axis = <span class="number">0</span>).reshape(<span class="number">100</span>, <span class="number">100</span>)</span><br><span class="line">pineapple_mean = np.mean(pineapple, axis = <span class="number">0</span>).reshape(<span class="number">100</span>, <span class="number">100</span>)</span><br><span class="line">banana_mean = np.mean(banana, axis = <span class="number">0</span>).reshape(<span class="number">100</span>, <span class="number">100</span>)</span><br><span class="line">fig, axs = plt.subplots(<span class="number">1</span>, <span class="number">3</span>, figsize=(<span class="number">20</span>,<span class="number">5</span>))</span><br><span class="line">axs[<span class="number">0</span>].imshow(apple_mean, cmap = <span class="string">&#x27;gray_r&#x27;</span>)</span><br><span class="line">axs[<span class="number">1</span>].imshow(pineapple_mean, cmap = <span class="string">&#x27;gray_r&#x27;</span>)</span><br><span class="line">axs[<span class="number">2</span>].imshow(banana_mean, cmap = <span class="string">&#x27;gray_r&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_6_1/output_18_0.png" alt="png"></p>
+<h1 id="평균값과-가까운-사진-고르기"><a href="#평균값과-가까운-사진-고르기" class="headerlink" title="평균값과 가까운 사진 고르기"></a>평균값과 가까운 사진 고르기</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">abs_diff = np.<span class="built_in">abs</span>(fruits - apple_mean)</span><br><span class="line">abs_mean = np.mean(abs_diff, axis =(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(abs_mean.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(300,)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">apple_index = np.argsort(abs_mean)[:<span class="number">100</span>]</span><br><span class="line">fig, axs = plt.subplots(<span class="number">10</span>, <span class="number">10</span>, figsize = (<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    axs[i, j].imshow(fruits[apple_index[i*<span class="number">10</span> + j]], cmap = <span class="string">&#x27;gray_r&#x27;</span>)</span><br><span class="line">    axs[i, j].axis(<span class="string">&#x27;off&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_6_1/output_21_0.png" alt="png"></p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/04/06/AI_Project_Spaceship_Titanic/"
+                    data-tooltip="AI_Project_SpaceShip_Titanic"
+                    aria-label="PREVIOUS: AI_Project_SpaceShip_Titanic"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/31/Chapter_6_2/"
+                    data-tooltip="마켓과 머신러닝(Chapter_6_2)"
+                    aria-label="NEXT: 마켓과 머신러닝(Chapter_6_2)"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/31/Chapter_6_1/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/31/Chapter_6_1/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/31/Chapter_6_1/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2022 John Doe. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/04/06/AI_Project_Spaceship_Titanic/"
+                    data-tooltip="AI_Project_SpaceShip_Titanic"
+                    aria-label="PREVIOUS: AI_Project_SpaceShip_Titanic"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/31/Chapter_6_2/"
+                    data-tooltip="마켓과 머신러닝(Chapter_6_2)"
+                    aria-label="NEXT: 마켓과 머신러닝(Chapter_6_2)"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/31/Chapter_6_1/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/31/Chapter_6_1/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/31/Chapter_6_1/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/31/Chapter_6_1/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/31/Chapter_6_1/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/31/Chapter_6_1/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">John Doe</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-dvu41dvy5202v52bwzsnpck9devc8hugsy17mbuqp6i4ms8q6rt7zrc4avbe.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

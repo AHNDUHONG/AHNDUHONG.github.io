@@ -1,0 +1,1092 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Winters Blog">
+    <title>마켓과 머신러닝(Chapter_5_1) - Winters Blog</title>
+    <meta name="author" content="John Doe">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"데이터 불러오기\n와인 데이터\nalcohol(알코올 도수), sugar(당도), pH(산도)\nclass 0 &#x3D; 레드 와인\nclass 1 &#x3D; 화이트 와인\n\n\n\n123import pandas as pdwine = pd.read_csv(&#x27;https://bit.ly/wine_csv_data&#x27;)wine.head()\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      alcohol\n      sugar\n      pH\n      class\n    \n  \n  \n    \n      0\n      9.4\n      1.9\n      3.51\n      0.0\n    \n    \n      1\n      9.8\n      2.6\n      3.20\n      0.0\n    \n    \n      2\n      9.8\n      2.3\n      3.26\n      0.0\n    \n    \n      3\n      9.8\n      1.9\n      3.16\n      0.0\n    \n    \n      4\n      9.4\n      1.9\n      3.51\n      0.0\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-32f88054-395d-476e-b732-de1fe6fb312f button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-32f88054-395d-476e-b732-de1fe6fb312f&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\ninfo()\n결측치 확인 &#x2F; 변수 타입\n\n\n\n1wine.info()\n\n&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;\nRangeIndex: 6497 entries, 0 to 6496\nData columns (total 4 columns):\n #   Column   Non-Null Count  Dtype  \n---  ------   --------------  -----  \n 0   alcohol  6497 non-null   float64\n 1   sugar    6497 non-null   float64\n 2   pH       6497 non-null   float64\n 3   class    6497 non-null   float64\ndtypes: float64(4)\nmemory usage: 203.2 KB\n\n1wine.describe()\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      alcohol\n      sugar\n      pH\n      class\n    \n  \n  \n    \n      count\n      6497.000000\n      6497.000000\n      6497.000000\n      6497.000000\n    \n    \n      mean\n      10.491801\n      5.443235\n      3.218501\n      0.753886\n    \n    \n      std\n      1.192712\n      4.757804\n      0.160787\n      0.430779\n    \n    \n      min\n      8.000000\n      0.600000\n      2.720000\n      0.000000\n    \n    \n      25%\n      9.500000\n      1.800000\n      3.110000\n      1.000000\n    \n    \n      50%\n      10.300000\n      3.000000\n      3.210000\n      1.000000\n    \n    \n      75%\n      11.300000\n      8.100000\n      3.320000\n      1.000000\n    \n    \n      max\n      14.900000\n      65.800000\n      4.010000\n      1.000000\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-b999d81a-0559-4b92-8e93-747feee74f33 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-b999d81a-0559-4b92-8e93-747feee74f33&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n표준화 작업12data = wine[[&#x27;alcohol&#x27;,&#x27;sugar&#x27;, &#x27;pH&#x27;]].to_numpy()target = wine[&#x27;class&#x27;].to_numpy()\n\n훈련데이터와 테스트데이터로 분리12345from sklearn.model_selection import train_test_splittrain_input, test_input, train_target, test_target = train_test_split(    data, target, test_size = 0.2, random_state = 42)print(train_input.shape, test_input.shape)\n\n(5197, 3) (1300, 3)\n\n\n표준화 진행\n\n12345from sklearn.preprocessing import StandardScalerss = StandardScaler()ss.fit(train_input)train_scaled = ss.transform(train_input)test_scaled = ss.transform(test_input)\n\n모델 만들기로지스틱회귀123456from sklearn.linear_model import LogisticRegressionlr = LogisticRegression()lr.fit(train_scaled, train_target)print(lr.score(train_scaled, train_target))print(lr.score(test_scaled, test_target))print(lr.coef_, lr.intercept_)\n\n0.7808350971714451\n0.7776923076923077\n[[ 0.51270274  1.6733911  -0.68767781]] [1.81777902]\n\n로지스틱 회귀\n\n수식\n\n의사결정트리의 기본 알고리즘을 활용해서, MS, 구글 등 이런 회사들이 신규 알고리즘을 만듬\n\nXGBoost, LightGBM, CatBoost\n캐글 정형데이터\nLightGBM (지금 현재 실무에서 많이 쓰임)\n4월 말 까지는 코드에 집중 대회 나감\nPPT (알고리즘 소개)\n\n\n\n123456from sklearn.tree import DecisionTreeClassifierdt = DecisionTreeClassifier(random_state=42)dt.fit(train_scaled, train_target)print(dt.score(train_scaled, train_target)) # 훈련 세트print(dt.score(test_scaled, test_target)) # 테스트 세트\n\n0.996921300750433\n0.8592307692307692\n\n12345import matplotlib.pyplot as pltfrom sklearn.tree import plot_treeplt.figure(figsize = (10, 7))plot_tree(dt)plt.show()\n\n\n\n\nfilled &#x3D; True\n클래스 마다 색깔을 부여하고, 어떤 클래스의 비율이 높아지면 점점 진한 색으로 표시\n\n\n\n123plt.figure(figsize = (10, 7))plot_tree(dt, max_depth = 1, filled = True, feature_names = [&#x27;alcohol&#x27;,&#x27;sugar&#x27;, &#x27;pH&#x27;])plt.show()\n\n\n\n가지치기\n과대적합을 방지하기 위한 것\n\nmax_depth\n\n트리의 최대 깊이\ndefault &#x3D; None\n완벽하게 클래스 값이 결정될 때 까지 분할 또는 데이터 개수가 min_samples_split보다 작아질 때까지 분할\n깊이가 깊어지면 과적합될 수 있으므로 적절히 제어 필요\n\n\n\n1234dt = DecisionTreeClassifier(max_depth = 3, random_state=42)dt.fit(train_input, train_target)print(dt.score(train_input, train_target))print(dt.score(test_input, test_target))\n\n0.8454877814123533\n0.8415384615384616\n\n\n지니 계수(불순도) 참고 링크\n\n123plt.figure(figsize = (20, 15))plot_tree(dt, filled = True, feature_names = [&#x27;alcohol&#x27;, &#x27;sugar&#x27;, &#x27;pH&#x27;])plt.show() # 지니계수(불순도) 및 value 값 판단\n\n\n\n1234567891011import graphvizfrom sklearn import tree# DOT datadot_data = tree.export_graphviz(dt, out_file=None,                                 feature_names = [&#x27;alcohol&#x27;, &#x27;sugar&#x27;, &#x27;pH&#x27;],                                  filled=True)# Draw graphgraph = graphviz.Source(dot_data, format=&quot;png&quot;) graph\n\n\n\n\n\n1graph.render(&quot;decision_tree_graphivz&quot;)\n\n\n\n\n&#39;decision_tree_graphivz.png&#39;\n\n123456789101112131415from matplotlib.colors import ListedColormap, to_rgbimport numpy as npplt.figure(figsize=(20, 15))artists = plot_tree(dt, filled = True,           feature_names = [&#x27;alcohol&#x27;, &#x27;sugar&#x27;, &#x27;pH&#x27;])colors = [&#x27;blue&#x27;, &#x27;red&#x27;]for artist, impurity, value in zip(artists, dt.tree_.impurity, dt.tree_.value):    r, g, b = to_rgb(colors[np.argmax(value)])    f = impurity * 2    artist.get_bbox_patch().set_facecolor((f + (1-f)*r, f + (1-f)*g, f + (1-f)*b))    artist.get_bbox_patch().set_edgecolor(&#x27;black&#x27;)plt.show()\n\n\n\n","dateCreated":"2022-03-30T09:00:00+09:00","dateModified":"2022-03-30T19:24:49+09:00","datePublished":"2022-03-30T09:00:00+09:00","description":"","headline":"마켓과 머신러닝(Chapter_5_1)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/30/Chapter_5_1/"},"publisher":{"@type":"Organization","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"https://ahnduhong.github.io/2022/03/30/Chapter_5_1/"}</script>
+    <meta name="description" content="데이터 불러오기 와인 데이터 alcohol(알코올 도수), sugar(당도), pH(산도) class 0 &#x3D; 레드 와인 class 1 &#x3D; 화이트 와인    123import pandas as pdwine &#x3D; pd.read_csv(&amp;#x27;https:&#x2F;&#x2F;bit.ly&#x2F;wine_csv_data&amp;#x27;)wine.head()">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="마켓과 머신러닝(Chapter_5_1)">
+<meta property="og:url" content="https://ahnduhong.github.io/2022/03/30/Chapter_5_1/index.html">
+<meta property="og:site_name" content="Winters Blog">
+<meta property="og:description" content="데이터 불러오기 와인 데이터 alcohol(알코올 도수), sugar(당도), pH(산도) class 0 &#x3D; 레드 와인 class 1 &#x3D; 화이트 와인    123import pandas as pdwine &#x3D; pd.read_csv(&amp;#x27;https:&#x2F;&#x2F;bit.ly&#x2F;wine_csv_data&amp;#x27;)wine.head()">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_5_1/output_16_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_5_1/output_18_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_5_1/output_23_0.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_5_1/output_24_0.svg">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_5_1/output_26_0.png">
+<meta property="article:published_time" content="2022-03-30T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-30T10:24:49.146Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ahnduhong.github.io/images/Chapter_5_1/output_16_0.png">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-nweealnwexi63lhm1agu2ku3rw8tqhtfz0od0lsqiw3kbrdmk45anokos3uj.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            Winters Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://twitter.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Twitter"
+                        >
+                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Twitter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://plus.google.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Google +"
+                        >
+                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Google +</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            마켓과 머신러닝(Chapter_5_1)
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2022-03-30T09:00:00+09:00">
+	
+		    Mar 30, 2022
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h1 id="데이터-불러오기"><a href="#데이터-불러오기" class="headerlink" title="데이터 불러오기"></a>데이터 불러오기</h1><ul>
+<li>와인 데이터<ul>
+<li>alcohol(알코올 도수), sugar(당도), pH(산도)</li>
+<li>class 0 &#x3D; 레드 와인</li>
+<li>class 1 &#x3D; 화이트 와인</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">wine = pd.read_csv(<span class="string">&#x27;https://bit.ly/wine_csv_data&#x27;</span>)</span><br><span class="line">wine.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+  <div id="df-32f88054-395d-476e-b732-de1fe6fb312f">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alcohol</th>
+      <th>sugar</th>
+      <th>pH</th>
+      <th>class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9.4</td>
+      <td>1.9</td>
+      <td>3.51</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>9.8</td>
+      <td>2.6</td>
+      <td>3.20</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9.8</td>
+      <td>2.3</td>
+      <td>3.26</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9.8</td>
+      <td>1.9</td>
+      <td>3.16</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9.4</td>
+      <td>1.9</td>
+      <td>3.51</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-32f88054-395d-476e-b732-de1fe6fb312f')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+<pre><code>  &lt;script&gt;
+    const buttonEl =
+      document.querySelector(&#39;#df-32f88054-395d-476e-b732-de1fe6fb312f button.colab-df-convert&#39;);
+    buttonEl.style.display =
+      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;
+
+    async function convertToInteractive(key) &#123;
+      const element = document.querySelector(&#39;#df-32f88054-395d-476e-b732-de1fe6fb312f&#39;);
+      const dataTable =
+        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,
+                                                 [key], &#123;&#125;);
+      if (!dataTable) return;
+
+      const docLinkHtml = &#39;Like what you see? Visit the &#39; +
+        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;
+        + &#39; to learn more about interactive tables.&#39;;
+      element.innerHTML = &#39;&#39;;
+      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;
+      await google.colab.output.renderOutput(dataTable, element);
+      const docLink = document.createElement(&#39;div&#39;);
+      docLink.innerHTML = docLinkHtml;
+      element.appendChild(docLink);
+    &#125;
+  &lt;/script&gt;
+&lt;/div&gt;
+</code></pre>
+  </div>
+
+
+
+
+<ul>
+<li>info()<ul>
+<li>결측치 확인 &#x2F; 변수 타입</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wine.info()</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 6497 entries, 0 to 6496
+Data columns (total 4 columns):
+ #   Column   Non-Null Count  Dtype  
+---  ------   --------------  -----  
+ 0   alcohol  6497 non-null   float64
+ 1   sugar    6497 non-null   float64
+ 2   pH       6497 non-null   float64
+ 3   class    6497 non-null   float64
+dtypes: float64(4)
+memory usage: 203.2 KB
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wine.describe()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+  <div id="df-b999d81a-0559-4b92-8e93-747feee74f33">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alcohol</th>
+      <th>sugar</th>
+      <th>pH</th>
+      <th>class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>6497.000000</td>
+      <td>6497.000000</td>
+      <td>6497.000000</td>
+      <td>6497.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>10.491801</td>
+      <td>5.443235</td>
+      <td>3.218501</td>
+      <td>0.753886</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.192712</td>
+      <td>4.757804</td>
+      <td>0.160787</td>
+      <td>0.430779</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>8.000000</td>
+      <td>0.600000</td>
+      <td>2.720000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>9.500000</td>
+      <td>1.800000</td>
+      <td>3.110000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>10.300000</td>
+      <td>3.000000</td>
+      <td>3.210000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>11.300000</td>
+      <td>8.100000</td>
+      <td>3.320000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>14.900000</td>
+      <td>65.800000</td>
+      <td>4.010000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-b999d81a-0559-4b92-8e93-747feee74f33')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+<pre><code>  &lt;script&gt;
+    const buttonEl =
+      document.querySelector(&#39;#df-b999d81a-0559-4b92-8e93-747feee74f33 button.colab-df-convert&#39;);
+    buttonEl.style.display =
+      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;
+
+    async function convertToInteractive(key) &#123;
+      const element = document.querySelector(&#39;#df-b999d81a-0559-4b92-8e93-747feee74f33&#39;);
+      const dataTable =
+        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,
+                                                 [key], &#123;&#125;);
+      if (!dataTable) return;
+
+      const docLinkHtml = &#39;Like what you see? Visit the &#39; +
+        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;
+        + &#39; to learn more about interactive tables.&#39;;
+      element.innerHTML = &#39;&#39;;
+      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;
+      await google.colab.output.renderOutput(dataTable, element);
+      const docLink = document.createElement(&#39;div&#39;);
+      docLink.innerHTML = docLinkHtml;
+      element.appendChild(docLink);
+    &#125;
+  &lt;/script&gt;
+&lt;/div&gt;
+</code></pre>
+  </div>
+
+
+
+
+<h1 id="표준화-작업"><a href="#표준화-작업" class="headerlink" title="표준화 작업"></a>표준화 작업</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = wine[[<span class="string">&#x27;alcohol&#x27;</span>,<span class="string">&#x27;sugar&#x27;</span>, <span class="string">&#x27;pH&#x27;</span>]].to_numpy()</span><br><span class="line">target = wine[<span class="string">&#x27;class&#x27;</span>].to_numpy()</span><br></pre></td></tr></table></figure>
+
+<h1 id="훈련데이터와-테스트데이터로-분리"><a href="#훈련데이터와-테스트데이터로-분리" class="headerlink" title="훈련데이터와 테스트데이터로 분리"></a>훈련데이터와 테스트데이터로 분리</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_input, test_input, train_target, test_target = train_test_split(</span><br><span class="line">    data, target, test_size = <span class="number">0.2</span>, random_state = <span class="number">42</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(train_input.shape, test_input.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(5197, 3) (1300, 3)
+</code></pre>
+<ul>
+<li>표준화 진행</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">ss = StandardScaler()</span><br><span class="line">ss.fit(train_input)</span><br><span class="line">train_scaled = ss.transform(train_input)</span><br><span class="line">test_scaled = ss.transform(test_input)</span><br></pre></td></tr></table></figure>
+
+<h1 id="모델-만들기"><a href="#모델-만들기" class="headerlink" title="모델 만들기"></a>모델 만들기</h1><h2 id="로지스틱회귀"><a href="#로지스틱회귀" class="headerlink" title="로지스틱회귀"></a>로지스틱회귀</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line">lr = LogisticRegression()</span><br><span class="line">lr.fit(train_scaled, train_target)</span><br><span class="line"><span class="built_in">print</span>(lr.score(train_scaled, train_target))</span><br><span class="line"><span class="built_in">print</span>(lr.score(test_scaled, test_target))</span><br><span class="line"><span class="built_in">print</span>(lr.coef_, lr.intercept_)</span><br></pre></td></tr></table></figure>
+
+<pre><code>0.7808350971714451
+0.7776923076923077
+[[ 0.51270274  1.6733911  -0.68767781]] [1.81777902]
+</code></pre>
+<p>로지스틱 회귀</p>
+<ul>
+<li>수식</li>
+</ul>
+<p>의사결정트리의 기본 알고리즘을 활용해서, MS, 구글 등 이런 회사들이 신규 알고리즘을 만듬</p>
+<ul>
+<li>XGBoost, LightGBM, CatBoost</li>
+<li>캐글 정형데이터</li>
+<li>LightGBM (지금 현재 실무에서 많이 쓰임)<ul>
+<li>4월 말 까지는 코드에 집중 대회 나감</li>
+<li>PPT (알고리즘 소개)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line">dt = DecisionTreeClassifier(random_state=<span class="number">42</span>)</span><br><span class="line">dt.fit(train_scaled, train_target)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(dt.score(train_scaled, train_target)) <span class="comment"># 훈련 세트</span></span><br><span class="line"><span class="built_in">print</span>(dt.score(test_scaled, test_target)) <span class="comment"># 테스트 세트</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>0.996921300750433
+0.8592307692307692
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> plot_tree</span><br><span class="line">plt.figure(figsize = (<span class="number">10</span>, <span class="number">7</span>))</span><br><span class="line">plot_tree(dt)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_5_1/output_16_0.png" alt="png"></p>
+<ul>
+<li>filled &#x3D; True<ul>
+<li>클래스 마다 색깔을 부여하고, 어떤 클래스의 비율이 높아지면 점점 진한 색으로 표시</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize = (<span class="number">10</span>, <span class="number">7</span>))</span><br><span class="line">plot_tree(dt, max_depth = <span class="number">1</span>, filled = <span class="literal">True</span>, feature_names = [<span class="string">&#x27;alcohol&#x27;</span>,<span class="string">&#x27;sugar&#x27;</span>, <span class="string">&#x27;pH&#x27;</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_5_1/output_18_0.png" alt="png"></p>
+<h1 id="가지치기"><a href="#가지치기" class="headerlink" title="가지치기"></a>가지치기</h1><ul>
+<li><p>과대적합을 방지하기 위한 것</p>
+</li>
+<li><p>max_depth</p>
+<ul>
+<li>트리의 최대 깊이</li>
+<li>default &#x3D; None</li>
+<li>완벽하게 클래스 값이 결정될 때 까지 분할 또는 데이터 개수가 min_samples_split보다 작아질 때까지 분할</li>
+<li>깊이가 깊어지면 과적합될 수 있으므로 적절히 제어 필요</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dt = DecisionTreeClassifier(max_depth = <span class="number">3</span>, random_state=<span class="number">42</span>)</span><br><span class="line">dt.fit(train_input, train_target)</span><br><span class="line"><span class="built_in">print</span>(dt.score(train_input, train_target))</span><br><span class="line"><span class="built_in">print</span>(dt.score(test_input, test_target))</span><br></pre></td></tr></table></figure>
+
+<pre><code>0.8454877814123533
+0.8415384615384616
+</code></pre>
+<ul>
+<li>지니 계수(불순도) <a target="_blank" rel="noopener" href="https://data-science-hi.tistory.com/59">참고 링크</a></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize = (<span class="number">20</span>, <span class="number">15</span>))</span><br><span class="line">plot_tree(dt, filled = <span class="literal">True</span>, feature_names = [<span class="string">&#x27;alcohol&#x27;</span>, <span class="string">&#x27;sugar&#x27;</span>, <span class="string">&#x27;pH&#x27;</span>])</span><br><span class="line">plt.show() <span class="comment"># 지니계수(불순도) 및 value 값 판단</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_5_1/output_23_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> graphviz</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br><span class="line"></span><br><span class="line"><span class="comment"># DOT data</span></span><br><span class="line">dot_data = tree.export_graphviz(dt, out_file=<span class="literal">None</span>, </span><br><span class="line">                                feature_names = [<span class="string">&#x27;alcohol&#x27;</span>, <span class="string">&#x27;sugar&#x27;</span>, <span class="string">&#x27;pH&#x27;</span>],  </span><br><span class="line">                                filled=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Draw graph</span></span><br><span class="line">graph = graphviz.Source(dot_data, <span class="built_in">format</span>=<span class="string">&quot;png&quot;</span>) </span><br><span class="line">graph</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><img src="/images/Chapter_5_1/output_24_0.svg" alt="svg"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">graph.render(<span class="string">&quot;decision_tree_graphivz&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&#39;decision_tree_graphivz.png&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> ListedColormap, to_rgb</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>, <span class="number">15</span>))</span><br><span class="line">artists = plot_tree(dt, filled = <span class="literal">True</span>, </span><br><span class="line">          feature_names = [<span class="string">&#x27;alcohol&#x27;</span>, <span class="string">&#x27;sugar&#x27;</span>, <span class="string">&#x27;pH&#x27;</span>])</span><br><span class="line"></span><br><span class="line">colors = [<span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;red&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> artist, impurity, value <span class="keyword">in</span> <span class="built_in">zip</span>(artists, dt.tree_.impurity, dt.tree_.value):</span><br><span class="line">    r, g, b = to_rgb(colors[np.argmax(value)])</span><br><span class="line">    f = impurity * <span class="number">2</span></span><br><span class="line">    artist.get_bbox_patch().set_facecolor((f + (<span class="number">1</span>-f)*r, f + (<span class="number">1</span>-f)*g, f + (<span class="number">1</span>-f)*b))</span><br><span class="line">    artist.get_bbox_patch().set_edgecolor(<span class="string">&#x27;black&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_5_1/output_26_0.png" alt="png"></p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/30/Chapter_5_3/"
+                    data-tooltip="마켓과 머신러닝(Chapter_5_3)"
+                    aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_5_3)"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/30/Chpater_5_2/"
+                    data-tooltip="마켓과 머신러닝(Chapter_5_2)"
+                    aria-label="NEXT: 마켓과 머신러닝(Chapter_5_2)"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/30/Chapter_5_1/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/30/Chapter_5_1/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/30/Chapter_5_1/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2022 John Doe. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/30/Chapter_5_3/"
+                    data-tooltip="마켓과 머신러닝(Chapter_5_3)"
+                    aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_5_3)"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/30/Chpater_5_2/"
+                    data-tooltip="마켓과 머신러닝(Chapter_5_2)"
+                    aria-label="NEXT: 마켓과 머신러닝(Chapter_5_2)"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/30/Chapter_5_1/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/30/Chapter_5_1/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/30/Chapter_5_1/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/30/Chapter_5_1/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/30/Chapter_5_1/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/30/Chapter_5_1/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">John Doe</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-dvu41dvy5202v52bwzsnpck9devc8hugsy17mbuqp6i4ms8q6rt7zrc4avbe.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

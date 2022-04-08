@@ -1,0 +1,998 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Winters Blog">
+    <title>파이썬 기초 문법 1 - Winters Blog</title>
+    <meta name="author" content="John Doe">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"1print(&#x27;hello world!&#x27;)\n\nhello world!\n\n주석처리\n코드 작업 시, 특정 코드에 대해 설명\n사용자 정의 함수 작성 시, 클래스 작성 시.. (도움말 작성..)\n\n변수 (Scalar)\n객체 (Object)로 구현이 됨\n하나의 자료형 (Type)을 가진다.\n클래스로 정의가 됨.\n다양한 함수들이 존재 함.\n\n\n\n\n\nint\nint 정수를 표한하는데 사용함.\n\n123num_int = 1print(num_int)print(type(num_int))\n\n1\n&lt;class &#39;int&#39;&gt;\n\nfloat\n실수를 표현하는데 사용한다.\n\n123num_float = 0.2print(num_float)print(type(num_float))\n\n0.2\n&lt;class &#39;float&#39;&gt;\n\nbool\nTrue와 False로 나타내는 Boolean 값을 표현하는데 사용한다.\n\n123bool_true = Trueprint(bool_true)print(type(bool_true))\n\nTrue\n&lt;class &#39;bool&#39;&gt;\n\nNone\nNull을 나타내는 자료형으로 Nonen이라는 한 가지 값만 가집니다.\n\n123none_x = Noneprint(none_x)print(type(none_x))\n\nNone\n&lt;class &#39;NoneType&#39;&gt;\n\n사칙연산\n정수형 사칙 연산\n\n12345a = 2b = 4print(&#x27;a + b = &#x27;, a + b)print(&#x27;a % b = &#x27;, a % b)print(&#x27;a / b = &#x27;, a / b) # 나누기를 했을때 type이 실수형(float)으로 바뀜.\n\na + b =  6\na % b =  2\na / b =  0.5\n\n논리형 연산자\nBool 형은 True와 False 값으로 정의\nAND &#x2F; OR\n\n1234567891011x = 5 &gt; 4y = 3 &gt; 4print(x and x)print(x and y)print(y and x)print(y and y)print(&quot;-----&quot;)print(x or x)print(x or y)print(y or x)print(y or y)\n\nTrue\nFalse\nFalse\nFalse\n-----\nTrue\nTrue\nTrue\nFalse\n\n비교 연산자\n부등호를 의미합니다.\n비교 연산자를 True와 False값을 도출\n\n논리 &amp; 비교 연산자 응용12var = input(&quot;입력하여 주세요....&quot;)print(type(var))\n\n입력하여 주세요....5\n&lt;class &#39;str&#39;&gt;\n\n\n형변환을 해준다.\n문자열, 정수, 실수 등등\n\n12var = int(&quot;1&quot;)print(type(var))\n\n&lt;class &#39;int&#39;&gt;\n\n12var = int(input(&quot;숫자를 입력하여 주세요&quot;))print(type(var))\n\n숫자를 입력하여 주세요3\n&lt;class &#39;int&#39;&gt;\n\n1234num1 = int(input(&quot;숫자를 입력하여 주세요&quot;))num2 = int(input(&quot;숫자를 입력하여 주세요&quot;))print(num1 &gt; num2)\n\n숫자를 입력하여 주세요10\n숫자를 입력하여 주세요5\nTrue\n\n123456789num1 = int(input(&quot;숫자를 입력하여 주세요&quot;))num2 = int(input(&quot;숫자를 입력하여 주세요&quot;))num3 = int(input(&quot;숫자를 입력하여 주세요&quot;))num4 = int(input(&quot;숫자를 입력하여 주세요&quot;))var1 = num11 &gt;= num2 #Truevar2 = num3 &lt; num4 #Trueprint(var1 and var2)print(var1 or var2)\n\n숫자를 입력하여 주세요20\n숫자를 입력하여 주세요15\n숫자를 입력하여 주세요3\n숫자를 입력하여 주세요5\nTrue\nTrue\n\n변수 (Non Scalar)\n문자열을 입력\n\n12print(&quot;&#x27;Hello, World&#x27;&quot;)print(&#x27;&quot;Hello, World&quot;&#x27;)\n\n&#39;Hello, World&#39;\n&quot;Hello, World&quot;\n\nString 연산자\n덧셈 연산자를 써보자.\n\n123str1 = &quot;Hello &quot;str2 = &quot;World!&quot;print(str1 + str2)\n\nHello World!\n\nIndexing\n문자열 인덱싱은 각각의 문자열 안에서 범위를 지정하여 특정 문자를 추린다\n\n12greeting = &quot;Hello Kaggle!&quot;print(greeting[6])\n\nK\n\n리스트\n시퀀스 데이터 타입\n데이터에 순서가 존재하는지, 슬라이싱이 가능하는지\n대괄호 (‘[값]’)\n\n123456789101112a = [] # 빈 리스트a_func = list() # 빈 리스트 생성b = [1] # 숫자가 요소가 될 수 있다.c = [&#x27;apple&#x27;] # 문자열도 요소가 될 수 있다.d = [1, 2, [&#x27;apple&#x27;]] # 리스트 안에 또 다른 리스트를 요소로 넣을 수 있다.print(a)print(a_func)print(b)print(c)print(d)print(type(d))\n\n[]\n[]\n[1]\n[&#39;apple&#39;]\n[1, 2, [&#39;apple&#39;]]\n&lt;class &#39;list&#39;&gt;\n\n리스트 슬라이싱12a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]print(a[0])\n\n1\n\n12a =[ [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;], 1]print(a[0][2][2])\n\ne\n\n123a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]print(a[::-1]) # 역순print(a[::2])\n\n[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]\n[1, 3, 5, 7, 9]\n\n리스트 연산자12345a = [&quot;john&quot;, &quot;evan&quot;]b = [&quot;alice&quot;, &quot;eva&quot;]c = a + bprint(c)\n\n[&#39;john&#39;, &#39;evan&#39;, &#39;alice&#39;, &#39;eva&#39;]\n\n1234c = a * 3d = b * 0print(&quot;a * 3 = &quot;, c)print(&quot;b * 0 = &quot;, d)\n\na * 3 =  [&#39;john&#39;, &#39;evan&#39;, &#39;john&#39;, &#39;evan&#39;, &#39;john&#39;, &#39;evan&#39;]\nb * 0 =  []\n\n리스트 수정 및 삭제123a = [0, 1, 2]a[1] = &quot;b&quot;print(a)\n\n[0, &#39;b&#39;, 2]\n\n리스트 값 추가하기123456789a = [100, 200, 300]a.append(400)print(a)# a.append([500, 600])# print(a)a.extend([500, 600])print(a)\n\n[100, 200, 300, 400]\n[100, 200, 300, 400, 500, 600]\n\n1234a = [0, 1, 2]# a.insert(인덱스번호, 넣고자하는 값)a.insert(1, 100)print(a)\n\n[0, 100, 1, 2]\n\n리스트 값 삭제하기12345a = [1, 2, 3, 4, &quot;A&quot;]a.remove(1)print(a)a.remove(&quot;A&quot;)print(a)\n\n[2, 3, 4, &#39;A&#39;]\n[2, 3, 4]\n\n1234567a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]del a[1] # 인덱스 번호print(a)del a[1:5]print(a)\n\n[1, 3, 4, 5, 6, 7, 8, 9, 10]\n[1, 7, 8, 9, 10]\n\n1234b = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]x = b.pop()print(x)print(b)\n\nd\n[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]\n\n그 외 메서드12345a = [0, 1, 2, 3]print(a)a.clear()print(a)\n\n[0, 1, 2, 3]\n[]\n\n12a = [&quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;b&quot;]print(a.index(&quot;b&quot;)) #  반복 되는 문구가 있을때 index를 쓰면 첫번째 문자의 위치가 출력.\n\n2\n\n123456789a = [1, 4, 5, 2, 3]b = [1, 4, 5, 2, 3]a.sort()print(&quot;a.sort():&quot;, a)# 내림차순, sort()b.sort(reverse = True)print(&quot;sort(reverse = True): &quot;, b)\n\na.sort(): [1, 2, 3, 4, 5]\nNone\nsort(reverse = True):  [5, 4, 3, 2, 1]\n\n12c = [4, 3, 2, &#x27;a&#x27;]# c.srot() 숫자와 문자는 정렬 불가.\n\n튜플\nList와 비슷하다.\n슬라이싱, 인덱싱 등등\n(vs 리스트) : 튜플은 수정 삭제가 안된다.\n\n123456tuple1 = (0) # 끝에 콤마(,)를 붙이지 않을 때tuple2 = (0,) # 끝에 콤마(,)를 붙일때tuple3 = 0, 1, 2print(tuple1) # intprint(tuple2) # tupleprint(tuple3) # tuple\n\n0\n(0,)\n(0, 1, 2)\n\n12345a = (0, 1, 2, 3, &#x27;a&#x27;)print(type(a))# del a[4] TypeError: &#x27;tuple&#x27; object doesn&#x27;t support item deletion# a[1] = &quot;b&quot;\n\n&lt;class &#39;tuple&#39;&gt;\n\n튜플 인덱싱 및 슬라이싱 하기1234a = (0, 1, 2, 3, &quot;a&quot;)print(a[1])print(a[3])print(a[4])\n\n1\n3\na\n\n더하기 곱셈 연산자 사용1234t1 = (0, 1, 2)t2 = (&#x27;a&#x27;,&#x27;b&#x27;)print(t1 + t2)print(t1 * 3)\n\n(0, 1, 2, &#39;a&#39;, &#39;b&#39;)\n(0, 1, 2, 0, 1, 2, 0, 1, 2)\n\n딕셔너리\nkey-value 값으로 나뉨.\n\n12345678dict_01 = &#123;&#x27;teacher&#x27; : &#x27;evan&#x27;,           &#x27;class&#x27; : 601,           &#x27;student&#x27; : 24,           &#x27;학생이름&#x27; : [&#x27;A&#x27;,&#x27;Z&#x27;]&#125;# print(dict_01)print(dict_01[&#x27;teacher&#x27;])print(dict_01[&#x27;class&#x27;])print(dict_01[&#x27;학생이름&#x27;])\n\nevan\n601\n[&#39;A&#39;, &#39;Z&#39;]\n\n123print(type(dict_01.keys()))print(dict_01.keys())print(list(dict_01.keys()))\n\n&lt;class &#39;dict_keys&#39;&gt;\ndict_keys([&#39;teacher&#39;, &#39;class&#39;, &#39;student&#39;, &#39;학생이름&#39;])\n[&#39;teacher&#39;, &#39;class&#39;, &#39;student&#39;, &#39;학생이름&#39;]\n\n123print(type(dict_01.values()))print(dict_01.values())print(list(dict_01.values()))\n\n&lt;class &#39;dict_values&#39;&gt;\ndict_values([&#39;evan&#39;, 601, 24, [&#39;A&#39;, &#39;Z&#39;]])\n[&#39;evan&#39;, 601, 24, [&#39;A&#39;, &#39;Z&#39;]]\n\n1dict_01.items()\n\n\n\n\ndict_items([(&#39;teacher&#39;, &#39;evan&#39;), (&#39;class&#39;, 601), (&#39;student&#39;, 24), (&#39;학생이름&#39;, [&#39;A&#39;, &#39;Z&#39;])])\n\n123print(dict_01.get(&quot;teacher&quot;, &quot;값 없음&quot;))print(dict_01.get(&quot;선생님&quot;, &quot;값 없음&quot;))print(dict_01.get(&quot;class&quot;))\n\nevan\n값 없음\n601\n\n조건문 &amp; 반복문12345weather = &quot;맑음&quot;if weather == &quot;비&quot;:  print(&quot;우산을 가져간다.&quot;)else:  print(&quot;우산을 가져가지 않는다.&quot;)\n\n우산을 가져가지 않는다.\n\n\n등급표 만들기\n60점 이상 합격&#x2F;불합격\n숫자는 아무거나 써도 상관없음\n\n123456score =int(input(&quot;점수를 입력해주세요.&quot;))if score &gt;= 60:  print(&quot;합격&quot;)else:  print(&quot;불합격&quot;)\n\n점수를 입력해주세요.60\n합격\n\n123456789101112# 90점 이상은 A등급# 80점 이상은 B등급# 나머지는 F등급score = int(input(&quot;점수를 입력해주세요&quot;))if score &gt;= 90:  print(&quot;A등급&quot;)elif score &gt;= 80:  print(&quot;B등급&quot;)else:  print(&quot;F등급&quot;)\n\n점수를 입력해주세요56\nF등급\n\n반복문\nfor 문\n\n12for i in range(3):  print(i + 1, &quot;안녕하세요!&quot;)\n\n1 안녕하세요!\n2 안녕하세요!\n3 안녕하세요!\n\n123456789count = range(50)print(count)for n in count:  print(str(n + 1) + &quot;번째&quot;)  if (n + 1) == 5:    print(&quot;그만합시다!!&quot;)    break  print(&quot;축구 슈팅&quot;)\n\nrange(0, 50)\n1번째\n축구 슈팅\n2번째\n축구 슈팅\n3번째\n축구 슈팅\n4번째\n축구 슈팅\n5번째\n그만합시다!!\n\n123456a = &quot;hello&quot;for x in a:  if x == &quot;l&quot;:    break  print(x)\n\nh\ne\n\n123alphabets = [&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;]for index, value in enumerate(alphabets):  print(index, value)\n\n0 A\n1 B\n2 C\n\n\nwhile문\n\n1234n = 0while n &lt;10:  n += 1  print(&quot;%d번째 인사입니다.&quot; % n)\n\n1번째 인사입니다.\n2번째 인사입니다.\n3번째 인사입니다.\n4번째 인사입니다.\n5번째 인사입니다.\n6번째 인사입니다.\n7번째 인사입니다.\n8번째 인사입니다.\n9번째 인사입니다.\n10번째 인사입니다.\n\n","dateCreated":"2022-03-21T09:00:00+09:00","dateModified":"2022-03-21T17:23:42+09:00","datePublished":"2022-03-21T09:00:00+09:00","description":"","headline":"파이썬 기초 문법 1","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/21/Python_grammer01/"},"publisher":{"@type":"Organization","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"https://ahnduhong.github.io/2022/03/21/Python_grammer01/"}</script>
+    <meta name="description" content="1print(&amp;#x27;hello world!&amp;#x27;)  hello world!  주석처리 코드 작업 시, 특정 코드에 대해 설명 사용자 정의 함수 작성 시, 클래스 작성 시.. (도움말 작성..)  변수 (Scalar) 객체 (Object)로 구현이 됨 하나의 자료형 (Type)을 가진다. 클래스로 정의가 됨. 다양한 함수들이 존재 함.      in">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="파이썬 기초 문법 1">
+<meta property="og:url" content="https://ahnduhong.github.io/2022/03/21/Python_grammer01/index.html">
+<meta property="og:site_name" content="Winters Blog">
+<meta property="og:description" content="1print(&amp;#x27;hello world!&amp;#x27;)  hello world!  주석처리 코드 작업 시, 특정 코드에 대해 설명 사용자 정의 함수 작성 시, 클래스 작성 시.. (도움말 작성..)  변수 (Scalar) 객체 (Object)로 구현이 됨 하나의 자료형 (Type)을 가진다. 클래스로 정의가 됨. 다양한 함수들이 존재 함.      in">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-21T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-21T08:23:42.581Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-nweealnwexi63lhm1agu2ku3rw8tqhtfz0od0lsqiw3kbrdmk45anokos3uj.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            Winters Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://twitter.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Twitter"
+                        >
+                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Twitter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://plus.google.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Google +"
+                        >
+                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Google +</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            파이썬 기초 문법 1
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2022-03-21T09:00:00+09:00">
+	
+		    Mar 21, 2022
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello world!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>hello world!
+</code></pre>
+<h1 id="주석처리"><a href="#주석처리" class="headerlink" title="주석처리"></a>주석처리</h1><ul>
+<li>코드 작업 시, 특정 코드에 대해 설명</li>
+<li>사용자 정의 함수 작성 시, 클래스 작성 시.. (도움말 작성..)</li>
+</ul>
+<h1 id="변수-Scalar"><a href="#변수-Scalar" class="headerlink" title="변수 (Scalar)"></a>변수 (Scalar)</h1><ul>
+<li>객체 (Object)로 구현이 됨<ul>
+<li>하나의 자료형 (Type)을 가진다.</li>
+<li>클래스로 정의가 됨.<ul>
+<li>다양한 함수들이 존재 함.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="int"><a href="#int" class="headerlink" title="int"></a>int</h2><ul>
+<li>int 정수를 표한하는데 사용함.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num_int = <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(num_int)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(num_int))</span><br></pre></td></tr></table></figure>
+
+<pre><code>1
+&lt;class &#39;int&#39;&gt;
+</code></pre>
+<h2 id="float"><a href="#float" class="headerlink" title="float"></a>float</h2><ul>
+<li>실수를 표현하는데 사용한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num_float = <span class="number">0.2</span></span><br><span class="line"><span class="built_in">print</span>(num_float)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(num_float))</span><br></pre></td></tr></table></figure>
+
+<pre><code>0.2
+&lt;class &#39;float&#39;&gt;
+</code></pre>
+<h2 id="bool"><a href="#bool" class="headerlink" title="bool"></a>bool</h2><ul>
+<li>True와 False로 나타내는 Boolean 값을 표현하는데 사용한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bool_true = <span class="literal">True</span></span><br><span class="line"><span class="built_in">print</span>(bool_true)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(bool_true))</span><br></pre></td></tr></table></figure>
+
+<pre><code>True
+&lt;class &#39;bool&#39;&gt;
+</code></pre>
+<h2 id="None"><a href="#None" class="headerlink" title="None"></a>None</h2><ul>
+<li>Null을 나타내는 자료형으로 Nonen이라는 한 가지 값만 가집니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">none_x = <span class="literal">None</span></span><br><span class="line"><span class="built_in">print</span>(none_x)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(none_x))</span><br></pre></td></tr></table></figure>
+
+<pre><code>None
+&lt;class &#39;NoneType&#39;&gt;
+</code></pre>
+<h1 id="사칙연산"><a href="#사칙연산" class="headerlink" title="사칙연산"></a>사칙연산</h1><ul>
+<li>정수형 사칙 연산</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">2</span></span><br><span class="line">b = <span class="number">4</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;a + b = &#x27;</span>, a + b)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;a % b = &#x27;</span>, a % b)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;a / b = &#x27;</span>, a / b) <span class="comment"># 나누기를 했을때 type이 실수형(float)으로 바뀜.</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>a + b =  6
+a % b =  2
+a / b =  0.5
+</code></pre>
+<h1 id="논리형-연산자"><a href="#논리형-연산자" class="headerlink" title="논리형 연산자"></a>논리형 연산자</h1><ul>
+<li>Bool 형은 True와 False 값으로 정의</li>
+<li>AND &#x2F; OR</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">5</span> &gt; <span class="number">4</span></span><br><span class="line">y = <span class="number">3</span> &gt; <span class="number">4</span></span><br><span class="line"><span class="built_in">print</span>(x <span class="keyword">and</span> x)</span><br><span class="line"><span class="built_in">print</span>(x <span class="keyword">and</span> y)</span><br><span class="line"><span class="built_in">print</span>(y <span class="keyword">and</span> x)</span><br><span class="line"><span class="built_in">print</span>(y <span class="keyword">and</span> y)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;-----&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(x <span class="keyword">or</span> x)</span><br><span class="line"><span class="built_in">print</span>(x <span class="keyword">or</span> y)</span><br><span class="line"><span class="built_in">print</span>(y <span class="keyword">or</span> x)</span><br><span class="line"><span class="built_in">print</span>(y <span class="keyword">or</span> y)</span><br></pre></td></tr></table></figure>
+
+<pre><code>True
+False
+False
+False
+-----
+True
+True
+True
+False
+</code></pre>
+<h1 id="비교-연산자"><a href="#비교-연산자" class="headerlink" title="비교 연산자"></a>비교 연산자</h1><ul>
+<li>부등호를 의미합니다.</li>
+<li>비교 연산자를 True와 False값을 도출</li>
+</ul>
+<h2 id="논리-amp-비교-연산자-응용"><a href="#논리-amp-비교-연산자-응용" class="headerlink" title="논리 &amp; 비교 연산자 응용"></a>논리 &amp; 비교 연산자 응용</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var = <span class="built_in">input</span>(<span class="string">&quot;입력하여 주세요....&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(var))</span><br></pre></td></tr></table></figure>
+
+<pre><code>입력하여 주세요....5
+&lt;class &#39;str&#39;&gt;
+</code></pre>
+<ul>
+<li>형변환을 해준다.</li>
+<li>문자열, 정수, 실수 등등</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var = <span class="built_in">int</span>(<span class="string">&quot;1&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(var))</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;int&#39;&gt;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;숫자를 입력하여 주세요&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(var))</span><br></pre></td></tr></table></figure>
+
+<pre><code>숫자를 입력하여 주세요3
+&lt;class &#39;int&#39;&gt;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num1 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;숫자를 입력하여 주세요&quot;</span>))</span><br><span class="line">num2 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;숫자를 입력하여 주세요&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(num1 &gt; num2)</span><br></pre></td></tr></table></figure>
+
+<pre><code>숫자를 입력하여 주세요10
+숫자를 입력하여 주세요5
+True
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">num1 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;숫자를 입력하여 주세요&quot;</span>))</span><br><span class="line">num2 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;숫자를 입력하여 주세요&quot;</span>))</span><br><span class="line">num3 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;숫자를 입력하여 주세요&quot;</span>))</span><br><span class="line">num4 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;숫자를 입력하여 주세요&quot;</span>))</span><br><span class="line"></span><br><span class="line">var1 = num11 &gt;= num2 <span class="comment">#True</span></span><br><span class="line">var2 = num3 &lt; num4 <span class="comment">#True</span></span><br><span class="line"><span class="built_in">print</span>(var1 <span class="keyword">and</span> var2)</span><br><span class="line"><span class="built_in">print</span>(var1 <span class="keyword">or</span> var2)</span><br></pre></td></tr></table></figure>
+
+<pre><code>숫자를 입력하여 주세요20
+숫자를 입력하여 주세요15
+숫자를 입력하여 주세요3
+숫자를 입력하여 주세요5
+True
+True
+</code></pre>
+<h1 id="변수-Non-Scalar"><a href="#변수-Non-Scalar" class="headerlink" title="변수 (Non Scalar)"></a>변수 (Non Scalar)</h1><ul>
+<li>문자열을 입력</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&#x27;Hello, World&#x27;&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&quot;Hello, World&quot;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>&#39;Hello, World&#39;
+&quot;Hello, World&quot;
+</code></pre>
+<h2 id="String-연산자"><a href="#String-연산자" class="headerlink" title="String 연산자"></a>String 연산자</h2><ul>
+<li>덧셈 연산자를 써보자.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&quot;Hello &quot;</span></span><br><span class="line">str2 = <span class="string">&quot;World!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1 + str2)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hello World!
+</code></pre>
+<h2 id="Indexing"><a href="#Indexing" class="headerlink" title="Indexing"></a>Indexing</h2><ul>
+<li>문자열 인덱싱은 각각의 문자열 안에서 범위를 지정하여 특정 문자를 추린다</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">greeting = <span class="string">&quot;Hello Kaggle!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(greeting[<span class="number">6</span>])</span><br></pre></td></tr></table></figure>
+
+<pre><code>K
+</code></pre>
+<h2 id="리스트"><a href="#리스트" class="headerlink" title="리스트"></a>리스트</h2><ul>
+<li>시퀀스 데이터 타입</li>
+<li>데이터에 순서가 존재하는지, 슬라이싱이 가능하는지</li>
+<li>대괄호 (‘[값]’)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">a = [] <span class="comment"># 빈 리스트</span></span><br><span class="line">a_func = <span class="built_in">list</span>() <span class="comment"># 빈 리스트 생성</span></span><br><span class="line">b = [<span class="number">1</span>] <span class="comment"># 숫자가 요소가 될 수 있다.</span></span><br><span class="line">c = [<span class="string">&#x27;apple&#x27;</span>] <span class="comment"># 문자열도 요소가 될 수 있다.</span></span><br><span class="line">d = [<span class="number">1</span>, <span class="number">2</span>, [<span class="string">&#x27;apple&#x27;</span>]] <span class="comment"># 리스트 안에 또 다른 리스트를 요소로 넣을 수 있다.</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="built_in">print</span>(a_func)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"><span class="built_in">print</span>(d)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(d))</span><br></pre></td></tr></table></figure>
+
+<pre><code>[]
+[]
+[1]
+[&#39;apple&#39;]
+[1, 2, [&#39;apple&#39;]]
+&lt;class &#39;list&#39;&gt;
+</code></pre>
+<h2 id="리스트-슬라이싱"><a href="#리스트-슬라이싱" class="headerlink" title="리스트 슬라이싱"></a>리스트 슬라이싱</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<pre><code>1
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a =[ [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;cherry&quot;</span>], <span class="number">1</span>]</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>][<span class="number">2</span>][<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<pre><code>e
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line"><span class="built_in">print</span>(a[::-<span class="number">1</span>]) <span class="comment"># 역순</span></span><br><span class="line"><span class="built_in">print</span>(a[::<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<pre><code>[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+[1, 3, 5, 7, 9]
+</code></pre>
+<h2 id="리스트-연산자"><a href="#리스트-연산자" class="headerlink" title="리스트 연산자"></a>리스트 연산자</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="string">&quot;john&quot;</span>, <span class="string">&quot;evan&quot;</span>]</span><br><span class="line">b = [<span class="string">&quot;alice&quot;</span>, <span class="string">&quot;eva&quot;</span>]</span><br><span class="line"></span><br><span class="line">c = a + b</span><br><span class="line"><span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[&#39;john&#39;, &#39;evan&#39;, &#39;alice&#39;, &#39;eva&#39;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c = a * <span class="number">3</span></span><br><span class="line">d = b * <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;a * 3 = &quot;</span>, c)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;b * 0 = &quot;</span>, d)</span><br></pre></td></tr></table></figure>
+
+<pre><code>a * 3 =  [&#39;john&#39;, &#39;evan&#39;, &#39;john&#39;, &#39;evan&#39;, &#39;john&#39;, &#39;evan&#39;]
+b * 0 =  []
+</code></pre>
+<h2 id="리스트-수정-및-삭제"><a href="#리스트-수정-및-삭제" class="headerlink" title="리스트 수정 및 삭제"></a>리스트 수정 및 삭제</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">a[<span class="number">1</span>] = <span class="string">&quot;b&quot;</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[0, &#39;b&#39;, 2]
+</code></pre>
+<h2 id="리스트-값-추가하기"><a href="#리스트-값-추가하기" class="headerlink" title="리스트 값 추가하기"></a>리스트 값 추가하기</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">100</span>, <span class="number">200</span>, <span class="number">300</span>]</span><br><span class="line">a.append(<span class="number">400</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># a.append([500, 600])</span></span><br><span class="line"><span class="comment"># print(a)</span></span><br><span class="line"></span><br><span class="line">a.extend([<span class="number">500</span>, <span class="number">600</span>])</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[100, 200, 300, 400]
+[100, 200, 300, 400, 500, 600]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="comment"># a.insert(인덱스번호, 넣고자하는 값)</span></span><br><span class="line">a.insert(<span class="number">1</span>, <span class="number">100</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[0, 100, 1, 2]
+</code></pre>
+<h2 id="리스트-값-삭제하기"><a href="#리스트-값-삭제하기" class="headerlink" title="리스트 값 삭제하기"></a>리스트 값 삭제하기</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="string">&quot;A&quot;</span>]</span><br><span class="line">a.remove(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">a.remove(<span class="string">&quot;A&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[2, 3, 4, &#39;A&#39;]
+[2, 3, 4]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> a[<span class="number">1</span>] <span class="comment"># 인덱스 번호</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> a[<span class="number">1</span>:<span class="number">5</span>]</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[1, 3, 4, 5, 6, 7, 8, 9, 10]
+[1, 7, 8, 9, 10]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>]</span><br><span class="line">x = b.pop()</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br></pre></td></tr></table></figure>
+
+<pre><code>d
+[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+</code></pre>
+<h3 id="그-외-메서드"><a href="#그-외-메서드" class="headerlink" title="그 외 메서드"></a>그 외 메서드</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line">a.clear()</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[0, 1, 2, 3]
+[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;b&quot;</span>]</span><br><span class="line"><span class="built_in">print</span>(a.index(<span class="string">&quot;b&quot;</span>)) <span class="comment">#  반복 되는 문구가 있을때 index를 쓰면 첫번째 문자의 위치가 출력.</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>2
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">b = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">a.sort()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;a.sort():&quot;</span>, a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 내림차순, sort()</span></span><br><span class="line">b.sort(reverse = <span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;sort(reverse = True): &quot;</span>, b)</span><br></pre></td></tr></table></figure>
+
+<pre><code>a.sort(): [1, 2, 3, 4, 5]
+None
+sort(reverse = True):  [5, 4, 3, 2, 1]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c = [<span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="string">&#x27;a&#x27;</span>]</span><br><span class="line"><span class="comment"># c.srot() 숫자와 문자는 정렬 불가.</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="튜플"><a href="#튜플" class="headerlink" title="튜플"></a>튜플</h2><ul>
+<li>List와 비슷하다.</li>
+<li>슬라이싱, 인덱싱 등등</li>
+<li>(vs 리스트) : 튜플은 수정 삭제가 안된다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tuple1 = (<span class="number">0</span>) <span class="comment"># 끝에 콤마(,)를 붙이지 않을 때</span></span><br><span class="line">tuple2 = (<span class="number">0</span>,) <span class="comment"># 끝에 콤마(,)를 붙일때</span></span><br><span class="line">tuple3 = <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(tuple1) <span class="comment"># int</span></span><br><span class="line"><span class="built_in">print</span>(tuple2) <span class="comment"># tuple</span></span><br><span class="line"><span class="built_in">print</span>(tuple3) <span class="comment"># tuple</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>0
+(0,)
+(0, 1, 2)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a))</span><br><span class="line"></span><br><span class="line"><span class="comment"># del a[4] TypeError: &#x27;tuple&#x27; object doesn&#x27;t support item deletion</span></span><br><span class="line"><span class="comment"># a[1] = &quot;b&quot;</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;tuple&#39;&gt;
+</code></pre>
+<h2 id="튜플-인덱싱-및-슬라이싱-하기"><a href="#튜플-인덱싱-및-슬라이싱-하기" class="headerlink" title="튜플 인덱싱 및 슬라이싱 하기"></a>튜플 인덱싱 및 슬라이싱 하기</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&quot;a&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">3</span>])</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">4</span>])</span><br></pre></td></tr></table></figure>
+
+<pre><code>1
+3
+a
+</code></pre>
+<h2 id="더하기-곱셈-연산자-사용"><a href="#더하기-곱셈-연산자-사용" class="headerlink" title="더하기 곱셈 연산자 사용"></a>더하기 곱셈 연산자 사용</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t1 = (<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">t2 = (<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(t1 + t2)</span><br><span class="line"><span class="built_in">print</span>(t1 * <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(0, 1, 2, &#39;a&#39;, &#39;b&#39;)
+(0, 1, 2, 0, 1, 2, 0, 1, 2)
+</code></pre>
+<h2 id="딕셔너리"><a href="#딕셔너리" class="headerlink" title="딕셔너리"></a>딕셔너리</h2><ul>
+<li>key-value 값으로 나뉨.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dict_01 = &#123;<span class="string">&#x27;teacher&#x27;</span> : <span class="string">&#x27;evan&#x27;</span>,</span><br><span class="line">           <span class="string">&#x27;class&#x27;</span> : <span class="number">601</span>,</span><br><span class="line">           <span class="string">&#x27;student&#x27;</span> : <span class="number">24</span>,</span><br><span class="line">           <span class="string">&#x27;학생이름&#x27;</span> : [<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;Z&#x27;</span>]&#125;</span><br><span class="line"><span class="comment"># print(dict_01)</span></span><br><span class="line"><span class="built_in">print</span>(dict_01[<span class="string">&#x27;teacher&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(dict_01[<span class="string">&#x27;class&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(dict_01[<span class="string">&#x27;학생이름&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<pre><code>evan
+601
+[&#39;A&#39;, &#39;Z&#39;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(dict_01.keys()))</span><br><span class="line"><span class="built_in">print</span>(dict_01.keys())</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(dict_01.keys()))</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;dict_keys&#39;&gt;
+dict_keys([&#39;teacher&#39;, &#39;class&#39;, &#39;student&#39;, &#39;학생이름&#39;])
+[&#39;teacher&#39;, &#39;class&#39;, &#39;student&#39;, &#39;학생이름&#39;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(dict_01.values()))</span><br><span class="line"><span class="built_in">print</span>(dict_01.values())</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(dict_01.values()))</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;dict_values&#39;&gt;
+dict_values([&#39;evan&#39;, 601, 24, [&#39;A&#39;, &#39;Z&#39;]])
+[&#39;evan&#39;, 601, 24, [&#39;A&#39;, &#39;Z&#39;]]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict_01.items()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>dict_items([(&#39;teacher&#39;, &#39;evan&#39;), (&#39;class&#39;, 601), (&#39;student&#39;, 24), (&#39;학생이름&#39;, [&#39;A&#39;, &#39;Z&#39;])])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(dict_01.get(<span class="string">&quot;teacher&quot;</span>, <span class="string">&quot;값 없음&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(dict_01.get(<span class="string">&quot;선생님&quot;</span>, <span class="string">&quot;값 없음&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(dict_01.get(<span class="string">&quot;class&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>evan
+값 없음
+601
+</code></pre>
+<h2 id="조건문-amp-반복문"><a href="#조건문-amp-반복문" class="headerlink" title="조건문 &amp; 반복문"></a>조건문 &amp; 반복문</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">weather = <span class="string">&quot;맑음&quot;</span></span><br><span class="line"><span class="keyword">if</span> weather == <span class="string">&quot;비&quot;</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;우산을 가져간다.&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;우산을 가져가지 않는다.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>우산을 가져가지 않는다.
+</code></pre>
+<ul>
+<li>등급표 만들기</li>
+<li>60점 이상 합격&#x2F;불합격</li>
+<li>숫자는 아무거나 써도 상관없음</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">score =<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;점수를 입력해주세요.&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> score &gt;= <span class="number">60</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;합격&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;불합격&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>점수를 입력해주세요.60
+합격
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 90점 이상은 A등급</span></span><br><span class="line"><span class="comment"># 80점 이상은 B등급</span></span><br><span class="line"><span class="comment"># 나머지는 F등급</span></span><br><span class="line"></span><br><span class="line">score = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;점수를 입력해주세요&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> score &gt;= <span class="number">90</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;A등급&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> score &gt;= <span class="number">80</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;B등급&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;F등급&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>점수를 입력해주세요56
+F등급
+</code></pre>
+<h2 id="반복문"><a href="#반복문" class="headerlink" title="반복문"></a>반복문</h2><ul>
+<li>for 문</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">  <span class="built_in">print</span>(i + <span class="number">1</span>, <span class="string">&quot;안녕하세요!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>1 안녕하세요!
+2 안녕하세요!
+3 안녕하세요!
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">count = <span class="built_in">range</span>(<span class="number">50</span>)</span><br><span class="line"><span class="built_in">print</span>(count)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> count:</span><br><span class="line">  <span class="built_in">print</span>(<span class="built_in">str</span>(n + <span class="number">1</span>) + <span class="string">&quot;번째&quot;</span>)</span><br><span class="line">  <span class="keyword">if</span> (n + <span class="number">1</span>) == <span class="number">5</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;그만합시다!!&quot;</span>)</span><br><span class="line">    <span class="keyword">break</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;축구 슈팅&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>range(0, 50)
+1번째
+축구 슈팅
+2번째
+축구 슈팅
+3번째
+축구 슈팅
+4번째
+축구 슈팅
+5번째
+그만합시다!!
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;hello&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> a:</span><br><span class="line">  <span class="keyword">if</span> x == <span class="string">&quot;l&quot;</span>:</span><br><span class="line">    <span class="keyword">break</span></span><br><span class="line">  <span class="built_in">print</span>(x)</span><br></pre></td></tr></table></figure>
+
+<pre><code>h
+e
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alphabets = [<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> index, value <span class="keyword">in</span> <span class="built_in">enumerate</span>(alphabets):</span><br><span class="line">  <span class="built_in">print</span>(index, value)</span><br></pre></td></tr></table></figure>
+
+<pre><code>0 A
+1 B
+2 C
+</code></pre>
+<ul>
+<li>while문</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> n &lt;<span class="number">10</span>:</span><br><span class="line">  n += <span class="number">1</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;%d번째 인사입니다.&quot;</span> % n)</span><br></pre></td></tr></table></figure>
+
+<pre><code>1번째 인사입니다.
+2번째 인사입니다.
+3번째 인사입니다.
+4번째 인사입니다.
+5번째 인사입니다.
+6번째 인사입니다.
+7번째 인사입니다.
+8번째 인사입니다.
+9번째 인사입니다.
+10번째 인사입니다.
+</code></pre>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/22/python_grammer02/"
+                    data-tooltip="파이썬 기초 문법 2"
+                    aria-label="PREVIOUS: 파이썬 기초 문법 2"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/17/colab_intro/"
+                    data-tooltip="코랩 인트로"
+                    aria-label="NEXT: 코랩 인트로"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/21/Python_grammer01/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/21/Python_grammer01/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/21/Python_grammer01/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2022 John Doe. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/22/python_grammer02/"
+                    data-tooltip="파이썬 기초 문법 2"
+                    aria-label="PREVIOUS: 파이썬 기초 문법 2"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/03/17/colab_intro/"
+                    data-tooltip="코랩 인트로"
+                    aria-label="NEXT: 코랩 인트로"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/21/Python_grammer01/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/21/Python_grammer01/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/21/Python_grammer01/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/21/Python_grammer01/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/21/Python_grammer01/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/21/Python_grammer01/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">John Doe</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-dvu41dvy5202v52bwzsnpck9devc8hugsy17mbuqp6i4ms8q6rt7zrc4avbe.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
