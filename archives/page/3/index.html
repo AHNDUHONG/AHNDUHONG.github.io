@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Winters Blog">
-    <title>Archives: 2022/4 - Winters Blog</title>
+    <title>Archives - Winters Blog</title>
     <meta name="author" content="Winters">
     
     
@@ -20,7 +20,7 @@
     <script type="application/ld+json">{}</script>
     <meta property="og:type" content="blog">
 <meta property="og:title" content="Winters Blog">
-<meta property="og:url" content="https://ahnduhong.github.io/archives/2022/04/index.html">
+<meta property="og:url" content="https://ahnduhong.github.io/archives/page/3/index.html">
 <meta property="og:site_name" content="Winters Blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Winters">
@@ -239,15 +239,15 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
-                        <a class="link-unstyled" href="/2022/04/10/Github(hexo)/" aria-label=": 깃허브(헥소) 블로그 환경설정 변경(미완성)">
-                            깃허브(헥소) 블로그 환경설정 변경(미완성)
+                        <a class="link-unstyled" href="/2022/03/17/install_anaconda/" aria-label=": 아나콘다 설치">
+                            아나콘다 설치
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2022-04-10T09:00:00+09:00">
+    <time datetime="2022-03-17T09:00:00+09:00">
 	
-		    Apr 10, 2022
+		    Mar 17, 2022
     	
     </time>
     
@@ -256,41 +256,15 @@
             </div>
             
                 <div class="postShorten-content">
-                    <h1 id="Github-blog-hexo"><a href="#Github-blog-hexo" class="headerlink" title="Github_blog (hexo)"></a>Github_blog (hexo)</h1><ul>
-<li><p>이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.</p>
-<hr>
-</li>
-<li><p>평소 Github 블로그에 대해 그 날 들은 강의들만 올리다가 강사님의 따끔하신 일침으로 제대로 된 관리를 해보자 라는 생각이 들어 실행에 옮겨보았다. Github 블로그에 글을 올리는 것은 가능했으나 글을 분류하기 위한 카테고리, 태그 등 깔끔하게 블로그 관리를 못하는 상황이라 블로그를 새롭게 개편해보기로 마음 먹었다.</p>
-</li>
+                    <h1 id="웹사이트"><a href="#웹사이트" class="headerlink" title="웹사이트"></a>웹사이트</h1><ul>
+<li>주소 :  <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.anaconda.com/products/individual">https://www.anaconda.com/products/individual</a></li>
+<li>깃허브에서 R_edu 프로젝트를 다운로드 받는다.</li>
 </ul>
-<h3 id="테마"><a href="#테마" class="headerlink" title="테마"></a>테마</h3><ul>
-<li><p>처음 눈에 뜨인 것은 “블로그 테마” 어떻게 하면 블로그를 조금 더 깔끔하게 보일수 있으면 어떨까란 생각에 다른 사용자의 글을 보며 결국 테마를 “<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/kakawait/hugo-tranquilpeak-theme">tranquilpeak</a>“ 으로 변경하기로 했다.</p>
-<p>  <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/kakawait/hugo-tranquilpeak-theme">GitHub - kakawait&#x2F;hugo-tranquilpeak-theme: A gorgeous responsive theme for Hugo blog framework</a></p>
-</li>
-<li><p>위 링크를 참고하며 tranquilpeak 테마를 변경하는 중 수많은 에러들이 발생하였고 해결하며 테마 변경을 하였다. (해결 당시 글을 쓰고 있지 않아 뒤죽박죽 섞여서 과정 설명은 참고 사이트로 대체 합니다.)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> 주소</span><br></pre></td></tr></table></figure>
 <ul>
-<li>Remote origin already exists : 기존에 연결되어 있는 레파지토리가 다시 새로운 레파지토리에 소스코드를 올리려고 하면 발생되는 에러.<ul>
-<li>참고 사이트 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://coding-factory.tistory.com/619">https://coding-factory.tistory.com/619</a></li>
+<li>다운로드 받는다.</li>
 </ul>
-</li>
-<li>Fatal : refusing to merge unrelated histories :  이 오류는 명령어 git push 또는 git pull을 진행할때 발견할 수 있는 오류, 로컬 저장소와 원격지의 저장소 기록을 비교했을 때 소스코드의 차이가 심한 저장소의 경우, 병합 오류가 날 것을 대비하여 오류 메시지를 띄우는 것 입니다.<ul>
-<li>참고 사이트 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://ndb796.tistory.com/275">https://ndb796.tistory.com/275</a></li>
-</ul>
-</li>
-<li>[rejected] master → master (non-fast-forward) : gitignore 파일 또는 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://readme.md/">README.md</a> 파일의 문제로 인해 발생<ul>
-<li>참고 사이트 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://somjang.tistory.com/entry/Git-rejected-master-master-non-fast-forward-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95">https://somjang.tistory.com/entry/Git-rejected-master-master-non-fast-forward-해결-방법</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>테마 변경 후 블로그 환경 설정을 위해 사이드바 메뉴 설정 및 RSS feed 등 변경 중 일부 환경 설정들의 변경이 안되어 확인을 위해 작업한 terminal 을 체크하니 특이점 발생</p>
-<ul>
-<li>tranquilpeak 환경 설정 변경 참고 사이트 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://wonderbout.tistory.com/127">https://wonderbout.tistory.com/127</a></li>
-<li>On branch master<br>  nothing to commit, working tree clean<br>  Everything up-to-date<br>  branch ‘master’ set up to track</li>
-</ul>
-<p>  <img src="/images/Github(hexo)/Github_capture_01.png" alt="png"></p>
-</li>
-</ul>
+<p><img src="/images/install_anaconda/Untitled.png" alt="Untitled"></p>
 
                     
                         
@@ -299,59 +273,7 @@
                     
                     
                         <p>
-                            <a href="/2022/04/10/Github(hexo)/#post-footer" class="postShorten-excerpt_link link" aria-label>
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/2022/04/06/AI_Project_Spaceship_Titanic/" aria-label=": AI_Project_SpaceShip_Titanic">
-                            AI_Project_SpaceShip_Titanic
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2022-04-06T09:00:00+09:00">
-	
-		    Apr 06, 2022
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h1 id="프로젝트-개요"><a href="#프로젝트-개요" class="headerlink" title="프로젝트 개요"></a>프로젝트 개요</h1><ul>
-<li>강의명 : 2022년 K-디지털 직업훈련(Training) 사업 - AI데이터플랫폼을 활용한 빅데이터 분석전문가 과정</li>
-<li>교과목명 : 빅데이터 분석 및 시각화, AI개발 기초, 인공지능 프로그래밍</li>
-<li>프로젝트 주제 : Spaceship Titanic 데이터를 활용한 탑승유무 분류모형 개발</li>
-<li>프로젝트 마감일 : 2022년 4월 12일 화요일</li>
-<li>강사명 : Evan</li>
-<li>수강생명 : 안두홍</li>
-<li>프로젝트 링크 : <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kaggle.com/code/wintersadh/spaceshiptitanic-test-02">https://www.kaggle.com/code/wintersadh/spaceshiptitanic-test-02</a></li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a href="/2022/04/06/AI_Project_Spaceship_Titanic/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                            <a href="/2022/03/17/install_anaconda/#post-footer" class="postShorten-excerpt_link link" aria-label>
                                 Comment and share
                             </a>
                         </p>
@@ -365,8 +287,15 @@
     <div class="pagination-bar">
     <ul class="pagination">
         
+          <li class="pagination-prev">
+            <a class="btn btn--default btn--small" href="/archives/page/2/" aria-label="NEWER POSTS">
+              <i class="fa fa-angle-left text-base icon-mr"></i>
+              <span>NEWER POSTS</span>
+            </a>
+          </li>
         
-        <li class="pagination-number">page 1 of 1</li>
+        
+        <li class="pagination-number">page 3 of 3</li>
     </ul>
 </div>
 
