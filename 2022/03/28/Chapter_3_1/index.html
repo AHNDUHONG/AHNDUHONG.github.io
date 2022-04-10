@@ -7,11 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Winters Blog">
     <title>마켓과 머신러닝(Chapter_3_1) - Winters Blog</title>
-    <meta name="author" content="John Doe">
+    <meta name="author" content="Winters">
     
     
+        <link rel="icon" href="https://AHNDUHONG.github.io/assets/images/ADH_Favicon.ico">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"데이터 준비12345678910111213141516171819import numpy as npperch_length = np.array(    [8.4, 13.7, 15.0, 16.2, 17.4, 18.0, 18.7, 19.0, 19.6, 20.0,      21.0, 21.0, 21.0, 21.3, 22.0, 22.0, 22.0, 22.0, 22.0, 22.5,      22.5, 22.7, 23.0, 23.5, 24.0, 24.0, 24.6, 25.0, 25.6, 26.5,      27.3, 27.5, 27.5, 27.5, 28.0, 28.7, 30.0, 32.8, 34.5, 35.0,      36.5, 36.0, 37.0, 37.0, 39.0, 39.0, 39.0, 40.0, 40.0, 40.0,      40.0, 42.0, 43.0, 43.0, 43.5, 44.0]     )perch_weight = np.array(    [5.9, 32.0, 40.0, 51.5, 70.0, 100.0, 78.0, 80.0, 85.0, 85.0,      110.0, 115.0, 125.0, 130.0, 120.0, 120.0, 130.0, 135.0, 110.0,      130.0, 150.0, 145.0, 150.0, 170.0, 225.0, 145.0, 188.0, 180.0,      197.0, 218.0, 300.0, 260.0, 265.0, 250.0, 250.0, 300.0, 320.0,      514.0, 556.0, 840.0, 685.0, 700.0, 700.0, 690.0, 900.0, 650.0,      820.0, 850.0, 900.0, 1015.0, 820.0, 1100.0, 1000.0, 1100.0,      1000.0, 1000.0]     )\n\nK - 최근접 이웃 회귀(Regression)\n중요도 : 下 (이런 알고리즘이 있다 정도)\n\n12345678import matplotlib.pyplot as plt# 객체 지향으로 변경fig, ax = plt.subplots()plt.scatter(perch_length, perch_weight)ax.set_xlabel(&quot;length&quot;)ax.set_ylabel(&quot;weight&quot;)plt.show()\n\n\n\n훈련데이터 테스트데이터셋 분리12345from sklearn.model_selection import train_test_splittrain_input, test_input, train_target, test_target = train_test_split(    perch_length, perch_weight, random_state = 42)train_input.shape, test_input.shape, train_target.shape, test_target.shape\n\n\n\n\n((42,), (14,), (42,), (14,))\n\n\nreshape() 사용하여 2차원 배열로 바꿈\n\n1234train_input = train_input.reshape(-1, 1)test_input = test_input.reshape(-1, 1)print(train_input.shape, test_input.shape)\n\n(42, 1) (14, 1)\n\n결정계수\n모델이 얼마만큼 정확한지?\n절대값은 아님 &#x2F; 상대적인 값\n\n12345678910from sklearn.neighbors import KNeighborsRegressor# knr 클래스 부러오기knr = KNeighborsRegressor()# 모형 학습knr.fit(train_input, train_target)# 테스트 점수 확인knr.score(test_input, test_target)\n\n\n\n\n0.992809406101064\n\nMAE\n타깃과 예측의 절댓값 오치를 평균하여 반환\n\n123456# sklearn.metrics는 패키지 아래 여러 가지 측정 도구를 제공from sklearn.metrics import mean_absolute_error # 예측 데이터 만들기test_prediction = knr.predict(test_input)test_prediction\n\n\n\n\narray([  60. ,   79.6,  248. ,  122. ,  136. ,  847. ,  311.4,  183.4,\n        847. ,  113. , 1010. ,   60. ,  248. ,  248. ])\n\n\nmae를 구한다\n\n123# mean_absolute_error는 타깃과 예측의 절댓값 오차를 평균하여 반환mae = mean_absolute_error(test_target, test_prediction)print(mae)\n\n19.157142857142862\n\n\n평균적으로 19g정도 다르다.\n\n과대적합 vs 과소적합\n공통점은 머신러닝 모형이 실제 테스트 시 잘 예측을 못함\n과대 적합: 훈련데이터에는 예측 잘함 &#x2F; 테스트데이터에서는 예측을 잘 못함\n처리하기 곤란\n\n\n과소 적합: 훈련데이터에는 예측 못함 &#x2F; 테스트데이터에서는 예측을 잘 함 or 둘 다 예측을 잘 못함\n\n\n\n0.97 정도나옴\n\n12# 훈련 데이터 점수 확인knr.score(train_input, train_target)\n\n\n\n\n0.9698823289099254\n\n\n훈련데이터로 검증 0.98\n\n1234567# Default 5를 3으로 변경# 머신러닝 모형을 살짝 변경knr.n_neighbors = 3# 모델을 다시 훈련knr.fit(train_input, train_target)print(knr.score(train_input, train_target))\n\n0.9804899950518966\n\n1print(knr.score(test_input, test_target))\n\n0.9746459963987609\n\n\nMAE 구하기\n\n평균적으로 35.4g 다름\n\n\n1234# 예측 데이터 만들기test_prediction = knr.predict(test_input)mae = mean_absolute_error(test_target, test_prediction)print(mae)\n\n35.42380952380951\n\n결론\nk 그룹을 5로 했을 때, R2 점수는 0.98, MAE는 19 였음\nk 그룹을 3으로 했을 때, R2 점수는 0.97, MAE는 35 였음\nk 그룹을 7로 했을 때, R2 점수는 0.97, MAE는 32였음\n\n","dateCreated":"2022-03-28T09:00:00+09:00","dateModified":"2022-03-28T21:39:46+09:00","datePublished":"2022-03-28T09:00:00+09:00","description":"","headline":"마켓과 머신러닝(Chapter_3_1)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"},"publisher":{"@type":"Organization","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"}</script>
+    
+        
+            <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+        
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"],"image":"ADH.jpg"},"articleBody":"데이터 준비12345678910111213141516171819import numpy as npperch_length = np.array(    [8.4, 13.7, 15.0, 16.2, 17.4, 18.0, 18.7, 19.0, 19.6, 20.0,      21.0, 21.0, 21.0, 21.3, 22.0, 22.0, 22.0, 22.0, 22.0, 22.5,      22.5, 22.7, 23.0, 23.5, 24.0, 24.0, 24.6, 25.0, 25.6, 26.5,      27.3, 27.5, 27.5, 27.5, 28.0, 28.7, 30.0, 32.8, 34.5, 35.0,      36.5, 36.0, 37.0, 37.0, 39.0, 39.0, 39.0, 40.0, 40.0, 40.0,      40.0, 42.0, 43.0, 43.0, 43.5, 44.0]     )perch_weight = np.array(    [5.9, 32.0, 40.0, 51.5, 70.0, 100.0, 78.0, 80.0, 85.0, 85.0,      110.0, 115.0, 125.0, 130.0, 120.0, 120.0, 130.0, 135.0, 110.0,      130.0, 150.0, 145.0, 150.0, 170.0, 225.0, 145.0, 188.0, 180.0,      197.0, 218.0, 300.0, 260.0, 265.0, 250.0, 250.0, 300.0, 320.0,      514.0, 556.0, 840.0, 685.0, 700.0, 700.0, 690.0, 900.0, 650.0,      820.0, 850.0, 900.0, 1015.0, 820.0, 1100.0, 1000.0, 1100.0,      1000.0, 1000.0]     )\n\nK - 최근접 이웃 회귀(Regression)\n중요도 : 下 (이런 알고리즘이 있다 정도)\n\n12345678import matplotlib.pyplot as plt# 객체 지향으로 변경fig, ax = plt.subplots()plt.scatter(perch_length, perch_weight)ax.set_xlabel(&quot;length&quot;)ax.set_ylabel(&quot;weight&quot;)plt.show()\n\n\n\n훈련데이터 테스트데이터셋 분리12345from sklearn.model_selection import train_test_splittrain_input, test_input, train_target, test_target = train_test_split(    perch_length, perch_weight, random_state = 42)train_input.shape, test_input.shape, train_target.shape, test_target.shape\n\n\n\n\n((42,), (14,), (42,), (14,))\n\n\nreshape() 사용하여 2차원 배열로 바꿈\n\n1234train_input = train_input.reshape(-1, 1)test_input = test_input.reshape(-1, 1)print(train_input.shape, test_input.shape)\n\n(42, 1) (14, 1)\n\n결정계수\n모델이 얼마만큼 정확한지?\n절대값은 아님 &#x2F; 상대적인 값\n\n12345678910from sklearn.neighbors import KNeighborsRegressor# knr 클래스 부러오기knr = KNeighborsRegressor()# 모형 학습knr.fit(train_input, train_target)# 테스트 점수 확인knr.score(test_input, test_target)\n\n\n\n\n0.992809406101064\n\nMAE\n타깃과 예측의 절댓값 오치를 평균하여 반환\n\n123456# sklearn.metrics는 패키지 아래 여러 가지 측정 도구를 제공from sklearn.metrics import mean_absolute_error # 예측 데이터 만들기test_prediction = knr.predict(test_input)test_prediction\n\n\n\n\narray([  60. ,   79.6,  248. ,  122. ,  136. ,  847. ,  311.4,  183.4,\n        847. ,  113. , 1010. ,   60. ,  248. ,  248. ])\n\n\nmae를 구한다\n\n123# mean_absolute_error는 타깃과 예측의 절댓값 오차를 평균하여 반환mae = mean_absolute_error(test_target, test_prediction)print(mae)\n\n19.157142857142862\n\n\n평균적으로 19g정도 다르다.\n\n과대적합 vs 과소적합\n공통점은 머신러닝 모형이 실제 테스트 시 잘 예측을 못함\n과대 적합: 훈련데이터에는 예측 잘함 &#x2F; 테스트데이터에서는 예측을 잘 못함\n처리하기 곤란\n\n\n과소 적합: 훈련데이터에는 예측 못함 &#x2F; 테스트데이터에서는 예측을 잘 함 or 둘 다 예측을 잘 못함\n\n\n\n0.97 정도나옴\n\n12# 훈련 데이터 점수 확인knr.score(train_input, train_target)\n\n\n\n\n0.9698823289099254\n\n\n훈련데이터로 검증 0.98\n\n1234567# Default 5를 3으로 변경# 머신러닝 모형을 살짝 변경knr.n_neighbors = 3# 모델을 다시 훈련knr.fit(train_input, train_target)print(knr.score(train_input, train_target))\n\n0.9804899950518966\n\n1print(knr.score(test_input, test_target))\n\n0.9746459963987609\n\n\nMAE 구하기\n\n평균적으로 35.4g 다름\n\n\n1234# 예측 데이터 만들기test_prediction = knr.predict(test_input)mae = mean_absolute_error(test_target, test_prediction)print(mae)\n\n35.42380952380951\n\n결론\nk 그룹을 5로 했을 때, R2 점수는 0.98, MAE는 19 였음\nk 그룹을 3으로 했을 때, R2 점수는 0.97, MAE는 35 였음\nk 그룹을 7로 했을 때, R2 점수는 0.97, MAE는 32였음\n\n","dateCreated":"2022-03-28T09:00:00+09:00","dateModified":"2022-03-28T21:39:46+09:00","datePublished":"2022-03-28T09:00:00+09:00","description":"","headline":"마켓과 머신러닝(Chapter_3_1)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"],"image":"ADH.jpg","logo":{"@type":"ImageObject","url":"ADH.jpg"}},"url":"https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"}</script>
     <meta name="description" content="데이터 준비12345678910111213141516171819import numpy as npperch_length &#x3D; np.array(    [8.4, 13.7, 15.0, 16.2, 17.4, 18.0, 18.7, 19.0, 19.6, 20.0,      21.0, 21.0, 21.0, 21.3, 22.0, 22.0, 22.0, 22.0, 22.0,">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="마켓과 머신러닝(Chapter_3_1)">
@@ -22,13 +28,15 @@
 <meta property="og:image" content="https://ahnduhong.github.io/images/Chapter_3_1/output_3_0.png">
 <meta property="article:published_time" content="2022-03-28T00:00:00.000Z">
 <meta property="article:modified_time" content="2022-03-28T12:39:46.887Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Winters">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://ahnduhong.github.io/images/Chapter_3_1/output_3_0.png">
     
     
         
     
+    
+        <meta property="og:image" content="https://AHNDUHONG.github.io/assets/images/ADH.jpg">
     
     
     
@@ -53,26 +61,24 @@
 
 
     
+        
+            
+        
+    
 
 <header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
-        <a
-            class="header-title-link"
-            href="/"
-            aria-label=""
-        >
+        <a class="header-title-link" href="/" aria-label>
             Winters Blog
         </a>
     </div>
     
         
-            <a
-                class="header-right-picture "
-                href="#about"
-                aria-label="Open the link: /#about"
-            >
+            <a class="header-right-picture " href="#about" aria-label="Open the link: /#about">
         
+        
+            <img class="header-picture" src="/assets/images/ADH.jpg" alt="Author&#39;s picture">
         
         </a>
     
@@ -81,21 +87,30 @@
             <!-- Define author's picture -->
 
 
+
+        
+    
+
 <nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about" aria-label="Read more about the author">
+                    <img class="sidebar-profile-picture" src="/assets/images/ADH.jpg" alt="Author&#39;s picture">
+                </a>
+                <h4 class="sidebar-profile-name">Winters</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
+</h5>
+                
+            </div>
         
         
             <ul class="sidebar-buttons">
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
+                        <a class="sidebar-button-link " href="/" rel="noopener" title="Home">
                         <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Home</span>
                     </a>
@@ -103,13 +118,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-categories"
-                            
-                            rel="noopener"
-                            title="Categories"
-                        >
+                        <a class="sidebar-button-link " href="/all-categories" rel="noopener" title="Categories">
                         <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Categories</span>
                     </a>
@@ -117,13 +126,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
+                        <a class="sidebar-button-link " href="/all-tags" rel="noopener" title="Tags">
                         <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Tags</span>
                     </a>
@@ -131,13 +134,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-archives"
-                            
-                            rel="noopener"
-                            title="Archives"
-                        >
+                        <a class="sidebar-button-link " href="/all-archives" rel="noopener" title="Archives">
                         <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Archives</span>
                     </a>
@@ -145,13 +142,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link open-algolia-search"
-                            href="#search"
-                            
-                            rel="noopener"
-                            title="Search"
-                        >
+                        <a class="sidebar-button-link open-algolia-search" href="#search" rel="noopener" title="Search">
                         <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Search</span>
                     </a>
@@ -159,13 +150,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="#about"
-                            
-                            rel="noopener"
-                            title="About"
-                        >
+                        <a class="sidebar-button-link " href="#about" rel="noopener" title="About">
                         <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">About</span>
                     </a>
@@ -177,15 +162,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="https://github.com/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="GitHub"
-                        >
+                        <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="external nofollow noopener noreferrer" title="GitHub">
                         <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">GitHub</span>
                     </a>
@@ -193,15 +170,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="http://stackoverflow.com/users"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Stack Overflow"
-                        >
+                        <a class="sidebar-button-link " href="http://stackoverflow.com/users" target="_blank" rel="external nofollow noopener noreferrer" title="Stack Overflow">
                         <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Stack Overflow</span>
                     </a>
@@ -209,15 +178,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="https://twitter.com/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Twitter"
-                        >
+                        <a class="sidebar-button-link " href="https://twitter.com/" target="_blank" rel="external nofollow noopener noreferrer" title="Twitter">
                         <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Twitter</span>
                     </a>
@@ -225,15 +186,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="https://facebook.com/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Facebook"
-                        >
+                        <a class="sidebar-button-link " href="https://facebook.com/" target="_blank" rel="external nofollow noopener noreferrer" title="Facebook">
                         <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Facebook</span>
                     </a>
@@ -241,15 +194,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="https://plus.google.com/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Google +"
-                        >
+                        <a class="sidebar-button-link " href="https://plus.google.com/" target="_blank" rel="external nofollow noopener noreferrer" title="Google +">
                         <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Google +</span>
                     </a>
@@ -257,15 +202,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="https://www.linkedin.com/profile/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="LinkedIn"
-                        >
+                        <a class="sidebar-button-link " href="https://www.linkedin.com/profile/" target="_blank" rel="external nofollow noopener noreferrer" title="LinkedIn">
                         <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">LinkedIn</span>
                     </a>
@@ -273,13 +210,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="/mailto"
-                            
-                            rel="noopener"
-                            title="Mail"
-                        >
+                        <a class="sidebar-button-link " href="/mailto" rel="noopener" title="Mail">
                         <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Mail</span>
                     </a>
@@ -291,13 +222,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="/atom.xml"
-                            
-                            rel="noopener"
-                            title="RSS"
-                        >
+                        <a class="sidebar-button-link " href="/atom.xml" rel="noopener" title="RSS">
                         <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">RSS</span>
                     </a>
@@ -309,8 +234,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="4"
-                 class="
+            <div id="main" data-behavior="4" class="
                         hasCoverMetaIn
                         ">
                 
@@ -454,12 +378,7 @@
             <li class="post-action">
                 
                     
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/03/29/Chapter_4_1/"
-                    data-tooltip="마켓과 머신러닝(Chapter_4_1)"
-                    aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_4_1)"
-                >
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/03/29/Chapter_4_1/" data-tooltip="마켓과 머신러닝(Chapter_4_1)" aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_4_1)">
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -468,12 +387,7 @@
             <li class="post-action">
                 
                     
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/03/28/Chapter_3_2/"
-                    data-tooltip="마켓과 머신러닝(Chapter_3_2)"
-                    aria-label="NEXT: 마켓과 머신러닝(Chapter_3_2)"
-                >
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/03/28/Chapter_3_2/" data-tooltip="마켓과 머신러닝(Chapter_3_2)" aria-label="NEXT: 마켓과 머신러닝(Chapter_3_2)">
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -483,11 +397,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
         </li>
@@ -495,12 +405,7 @@
             
             
             <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -508,12 +413,7 @@
             
             
             <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -521,12 +421,7 @@
             
             
             <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -556,7 +451,7 @@
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
-        Copyrights &copy; 2022 John Doe. All Rights Reserved.
+        Copyrights &copy; 2022 Winters. All Rights Reserved.
     </span>
 </footer>
 
@@ -569,12 +464,7 @@
             <li class="post-action">
                 
                     
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/03/29/Chapter_4_1/"
-                    data-tooltip="마켓과 머신러닝(Chapter_4_1)"
-                    aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_4_1)"
-                >
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/03/29/Chapter_4_1/" data-tooltip="마켓과 머신러닝(Chapter_4_1)" aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_4_1)">
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -583,12 +473,7 @@
             <li class="post-action">
                 
                     
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/03/28/Chapter_3_2/"
-                    data-tooltip="마켓과 머신러닝(Chapter_3_2)"
-                    aria-label="NEXT: 마켓과 머신러닝(Chapter_3_2)"
-                >
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/03/28/Chapter_3_2/" data-tooltip="마켓과 머신러닝(Chapter_3_2)" aria-label="NEXT: 마켓과 머신러닝(Chapter_3_2)">
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -598,11 +483,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
         </li>
@@ -610,12 +491,7 @@
             
             
             <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -623,12 +499,7 @@
             
             
             <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -636,12 +507,7 @@
             
             
             <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -669,12 +535,7 @@
                 
                 
                 <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"
-                        aria-label="Share on Facebook"
-                    >
+                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
                     </a>
                 </li>
@@ -682,12 +543,7 @@
                 
                 
                 <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"
-                        aria-label="Share on Twitter"
-                    >
+                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
                     </a>
                 </li>
@@ -695,12 +551,7 @@
                 
                 
                 <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/"
-                        aria-label="Share on Google+"
-                    >
+                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/28/Chapter_3_1/" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
                     </a>
                 </li>
@@ -714,13 +565,19 @@
         
 
 
+    
+        
+    
+
 <div id="about">
     <div id="about-card">
         <div id="about-btn-close">
             <i class="fa fa-times"></i>
         </div>
         
-            <h4 id="about-card-name">John Doe</h4>
+            <img id="about-card-picture" src="/assets/images/ADH.jpg" alt="Author&#39;s picture">
+        
+            <h4 id="about-card-name">Winters</h4>
         
             <div id="about-card-bio"><p>author.bio</p>
 </div>
@@ -728,18 +585,24 @@
         
             <div id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
+                <br>
                 <p>author.job</p>
 
             </div>
         
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                대한민국/서울
+            </div>
         
     </div>
 </div>
 
         
         
-<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+<div id="cover" style="background-image:url('/assets/images/ADH_Cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/assets/js/script-dvu41dvy5202v52bwzsnpck9devc8hugsy17mbuqp6i4ms8q6rt7zrc4avbe.min.js"></script>

@@ -7,11 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Winters Blog">
     <title>판다스 튜토리얼 2 - Winters Blog</title>
-    <meta name="author" content="John Doe">
+    <meta name="author" content="Winters">
     
     
+        <link rel="icon" href="https://AHNDUHONG.github.io/assets/images/ADH_Favicon.ico">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"라이브러리 불러오기\npandas 라이브러리 불러오기, supermarket_sales.csv 파일 불러오기\n\n123import pandas as pd from google.colab import drivedrive.mount(&quot;/content/drive&quot;)\n\nMounted at /content/drive\n\n123DATA_PATH = &quot;/content/drive/MyDrive/Colab Notebooks/data/supermarket_sales.csv&quot;sales = pd.read_csv(DATA_PATH)sales\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Invoice ID\n      Branch\n      City\n      Customer type\n      Gender\n      Product line\n      Unit price\n      Quantity\n      Date\n      Time\n      Payment\n    \n  \n  \n    \n      0\n      750-67-8428\n      A\n      Yangon\n      Member\n      Female\n      Health and beauty\n      74.69\n      7\n      1/5/2019\n      13:08\n      Ewallet\n    \n    \n      1\n      226-31-3081\n      C\n      Naypyitaw\n      Normal\n      Female\n      Electronic accessories\n      15.28\n      5\n      3/8/2019\n      10:29\n      Cash\n    \n    \n      2\n      631-41-3108\n      A\n      Yangon\n      Normal\n      Male\n      Home and lifestyle\n      46.33\n      7\n      3/3/2019\n      13:23\n      Credit card\n    \n    \n      3\n      123-19-1176\n      A\n      Yangon\n      Member\n      Male\n      Health and beauty\n      58.22\n      8\n      1/27/2019\n      20:33\n      Ewallet\n    \n    \n      4\n      373-73-7910\n      A\n      Yangon\n      Normal\n      Male\n      Sports and travel\n      86.31\n      7\n      2/8/2019\n      10:37\n      Ewallet\n    \n    \n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n    \n    \n      995\n      233-67-5758\n      C\n      Naypyitaw\n      Normal\n      Male\n      Health and beauty\n      40.35\n      1\n      1/29/2019\n      13:46\n      Ewallet\n    \n    \n      996\n      303-96-2227\n      B\n      Mandalay\n      Normal\n      Female\n      Home and lifestyle\n      97.38\n      10\n      3/2/2019\n      17:16\n      Ewallet\n    \n    \n      997\n      727-02-1313\n      A\n      Yangon\n      Member\n      Male\n      Food and beverages\n      31.84\n      1\n      2/9/2019\n      13:22\n      Cash\n    \n    \n      998\n      347-56-2442\n      A\n      Yangon\n      Normal\n      Male\n      Home and lifestyle\n      65.82\n      1\n      2/22/2019\n      15:33\n      Cash\n    \n    \n      999\n      849-09-3807\n      A\n      Yangon\n      Member\n      Female\n      Fashion accessories\n      88.34\n      7\n      2/18/2019\n      13:28\n      Cash\n    \n  \n\n1000 rows × 11 columns\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-5de646d0-967f-4dc5-a51f-d7ef279760fb button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-5de646d0-967f-4dc5-a51f-d7ef279760fb&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1sales.info()\n\n&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;\nRangeIndex: 1000 entries, 0 to 999\nData columns (total 11 columns):\n #   Column         Non-Null Count  Dtype  \n---  ------         --------------  -----  \n 0   Invoice ID     1000 non-null   object \n 1   Branch         1000 non-null   object \n 2   City           1000 non-null   object \n 3   Customer type  1000 non-null   object \n 4   Gender         1000 non-null   object \n 5   Product line   1000 non-null   object \n 6   Unit price     1000 non-null   float64\n 7   Quantity       1000 non-null   int64  \n 8   Date           1000 non-null   object \n 9   Time           1000 non-null   object \n 10  Payment        1000 non-null   object \ndtypes: float64(1), int64(1), object(9)\nmemory usage: 86.1+ KB\n\nGroupy by\n(동의어) 집계함수를 배운다.\n\n1sales[&#x27;Invoice ID&#x27;].value_counts()\n\n\n\n\n750-67-8428    1\n642-61-4706    1\n816-72-8853    1\n491-38-3499    1\n322-02-2271    1\n              ..\n633-09-3463    1\n374-17-3652    1\n378-07-7001    1\n433-75-6987    1\n849-09-3807    1\nName: Invoice ID, Length: 1000, dtype: int64\n\n1sales.groupby(&#x27;Customer type&#x27;)[&#x27;Quantity&#x27;].sum()\n\n\n\n\nCustomer type\nMember    2785\nNormal    2725\nName: Quantity, dtype: int64\n\n1sales.groupby([&#x27;Customer type&#x27;, &#x27;Branch&#x27;, &#x27;Payment&#x27;])[&#x27;Quantity&#x27;].sum()\n\n\n\n\nCustomer type  Branch  Payment    \nMember         A       Cash           308\n                       Credit card    282\n                       Ewallet        374\n               B       Cash           284\n                       Credit card    371\n                       Ewallet        269\n               C       Cash           293\n                       Credit card    349\n                       Ewallet        255\nNormal         A       Cash           264\n                       Credit card    298\n                       Ewallet        333\n               B       Cash           344\n                       Credit card    228\n                       Ewallet        324\n               C       Cash           403\n                       Credit card    194\n                       Ewallet        337\nName: Quantity, dtype: int64\n\n- \n1print(type(sales.groupby([&#x27;Customer type&#x27;, &#x27;Branch&#x27;, &#x27;Payment&#x27;])[&#x27;Quantity&#x27;].sum()))\n\n&lt;class &#39;pandas.core.series.Series&#39;&gt;\n\n1sales.groupby([&#x27;Customer type&#x27;, &#x27;Branch&#x27;, &#x27;Payment&#x27;], as_index=False)[&#x27;Quantity&#x27;].agg([&#x27;sum&#x27;, &#x27;mean&#x27;]).reset_index()\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Customer type\n      Branch\n      Payment\n      sum\n      mean\n    \n  \n  \n    \n      0\n      Member\n      A\n      Cash\n      308\n      5.500000\n    \n    \n      1\n      Member\n      A\n      Credit card\n      282\n      5.755102\n    \n    \n      2\n      Member\n      A\n      Ewallet\n      374\n      6.032258\n    \n    \n      3\n      Member\n      B\n      Cash\n      284\n      5.358491\n    \n    \n      4\n      Member\n      B\n      Credit card\n      371\n      5.888889\n    \n    \n      5\n      Member\n      B\n      Ewallet\n      269\n      5.489796\n    \n    \n      6\n      Member\n      C\n      Cash\n      293\n      4.966102\n    \n    \n      7\n      Member\n      C\n      Credit card\n      349\n      5.816667\n    \n    \n      8\n      Member\n      C\n      Ewallet\n      255\n      5.100000\n    \n    \n      9\n      Normal\n      A\n      Cash\n      264\n      4.888889\n    \n    \n      10\n      Normal\n      A\n      Credit card\n      298\n      5.418182\n    \n    \n      11\n      Normal\n      A\n      Ewallet\n      333\n      5.203125\n    \n    \n      12\n      Normal\n      B\n      Cash\n      344\n      6.035088\n    \n    \n      13\n      Normal\n      B\n      Credit card\n      228\n      4.956522\n    \n    \n      14\n      Normal\n      B\n      Ewallet\n      324\n      5.062500\n    \n    \n      15\n      Normal\n      C\n      Cash\n      403\n      6.200000\n    \n    \n      16\n      Normal\n      C\n      Credit card\n      194\n      5.105263\n    \n    \n      17\n      Normal\n      C\n      Ewallet\n      337\n      6.017857\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-06183b9d-9668-4956-b5b7-bf3ab9256622 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-06183b9d-9668-4956-b5b7-bf3ab9256622&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1print(type(sales.groupby([&#x27;Customer type&#x27;, &#x27;Branch&#x27;, &#x27;Payment&#x27;])[&#x27;Quantity&#x27;].agg([&#x27;sum&#x27;, &#x27;mean&#x27;])))\n\n&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;\n\n결측치 다루기결측치 데이터 생성1234567891011import pandas as pd import numpy as np dict_01 = &#123;    &#x27;Score_A&#x27; : [80, 90, np.nan, 80],     &#x27;Score_B&#x27; : [30, 45, np.nan, np.nan],     &#x27;Score_C&#x27; : [np.nan, 50, 80, 90]&#125;df = pd.DataFrame(dict_01)df\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Score_A\n      Score_B\n      Score_C\n    \n  \n  \n    \n      0\n      80.0\n      30.0\n      NaN\n    \n    \n      1\n      90.0\n      45.0\n      50.0\n    \n    \n      2\n      NaN\n      NaN\n      80.0\n    \n    \n      3\n      80.0\n      NaN\n      90.0\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-19e2d3df-d166-4556-96a3-7e87c689f899 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-19e2d3df-d166-4556-96a3-7e87c689f899&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1df.isnull().sum()\n\n\n\n\nScore_A    1\nScore_B    2\nScore_C    1\ndtype: int64\n\n1df.fillna(&quot;0&quot;)\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Score_A\n      Score_B\n      Score_C\n    \n  \n  \n    \n      0\n      80.0\n      30.0\n      0\n    \n    \n      1\n      90.0\n      45.0\n      50.0\n    \n    \n      2\n      0\n      0\n      80.0\n    \n    \n      3\n      80.0\n      0\n      90.0\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-8fdcaeb0-1a6d-42b3-a659-2ed1ac98f3c4 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-8fdcaeb0-1a6d-42b3-a659-2ed1ac98f3c4&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1df.fillna(method=&quot;pad&quot;)\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Score_A\n      Score_B\n      Score_C\n    \n  \n  \n    \n      0\n      80.0\n      30.0\n      NaN\n    \n    \n      1\n      90.0\n      45.0\n      50.0\n    \n    \n      2\n      90.0\n      45.0\n      80.0\n    \n    \n      3\n      80.0\n      45.0\n      90.0\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-0beb1959-e8a4-4550-b78e-1da677eaf1f7 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-0beb1959-e8a4-4550-b78e-1da677eaf1f7&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1234567dict_01 = &#123;    &quot;성별&quot; : [&quot;남자&quot;, &quot;여자&quot;, np.nan, &quot;남자&quot;],     &quot;Salary&quot; : [30, 45, 90, 70]&#125;df = pd.DataFrame(dict_01)df\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      성별\n      Salary\n    \n  \n  \n    \n      0\n      남자\n      30\n    \n    \n      1\n      여자\n      45\n    \n    \n      2\n      NaN\n      90\n    \n    \n      3\n      남자\n      70\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-cd4f0fa9-4594-42f6-b011-ec8d9c313a45 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-cd4f0fa9-4594-42f6-b011-ec8d9c313a45&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1df[&#x27;성별&#x27;].fillna(&quot;성별 없음&quot;)\n\n\n\n\n0       남자\n1       여자\n2    성별 없음\n3       남자\nName: 성별, dtype: object\n\n\n결측치\n\n–&gt; 문자열 타입이랑 &#x2F; 숫자 타입이랑 접근 방법이 다름–&gt; 문자열 (빈도 –&gt; 가장 많이 나타나는 문자열 넣어주기!, 최빈값)–&gt; 숫자열 (평균, 최대, 최소, 중간, 기타 등등..)\n123456789101112import pandas as pd import numpy as np dict_01 = &#123;    &#x27;Score_A&#x27; : [80, 90, np.nan, 80],     &#x27;Score_B&#x27; : [30, 45, np.nan, 60],     &#x27;Score_C&#x27; : [np.nan, 50, 80, 90],     &#x27;Score_D&#x27; : [50, 30, 80, 60]&#125;df = pd.DataFrame(dict_01)df\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Score_A\n      Score_B\n      Score_C\n      Score_D\n    \n  \n  \n    \n      0\n      80.0\n      30.0\n      NaN\n      50\n    \n    \n      1\n      90.0\n      45.0\n      50.0\n      30\n    \n    \n      2\n      NaN\n      NaN\n      80.0\n      80\n    \n    \n      3\n      80.0\n      60.0\n      90.0\n      60\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-4285262a-db62-49be-9c8d-273186ab08c4 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-4285262a-db62-49be-9c8d-273186ab08c4&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1df.dropna(axis = 1)\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Score_D\n    \n  \n  \n    \n      0\n      50\n    \n    \n      1\n      30\n    \n    \n      2\n      80\n    \n    \n      3\n      60\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-0e190d15-cdf3-464b-bcfb-9ef6867cfba1 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-0e190d15-cdf3-464b-bcfb-9ef6867cfba1&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1df.dropna(axis = 0)\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Score_A\n      Score_B\n      Score_C\n      Score_D\n    \n  \n  \n    \n      1\n      90.0\n      45.0\n      50.0\n      30\n    \n    \n      3\n      80.0\n      60.0\n      90.0\n      60\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-c4cae1e4-71a0-446b-8e51-6af06230d2ee button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-c4cae1e4-71a0-446b-8e51-6af06230d2ee&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n이상치1sales\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Invoice ID\n      Branch\n      City\n      Customer type\n      Gender\n      Product line\n      Unit price\n      Quantity\n      Date\n      Time\n      Payment\n    \n  \n  \n    \n      0\n      750-67-8428\n      A\n      Yangon\n      Member\n      Female\n      Health and beauty\n      74.69\n      7\n      1/5/2019\n      13:08\n      Ewallet\n    \n    \n      1\n      226-31-3081\n      C\n      Naypyitaw\n      Normal\n      Female\n      Electronic accessories\n      15.28\n      5\n      3/8/2019\n      10:29\n      Cash\n    \n    \n      2\n      631-41-3108\n      A\n      Yangon\n      Normal\n      Male\n      Home and lifestyle\n      46.33\n      7\n      3/3/2019\n      13:23\n      Credit card\n    \n    \n      3\n      123-19-1176\n      A\n      Yangon\n      Member\n      Male\n      Health and beauty\n      58.22\n      8\n      1/27/2019\n      20:33\n      Ewallet\n    \n    \n      4\n      373-73-7910\n      A\n      Yangon\n      Normal\n      Male\n      Sports and travel\n      86.31\n      7\n      2/8/2019\n      10:37\n      Ewallet\n    \n    \n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n    \n    \n      995\n      233-67-5758\n      C\n      Naypyitaw\n      Normal\n      Male\n      Health and beauty\n      40.35\n      1\n      1/29/2019\n      13:46\n      Ewallet\n    \n    \n      996\n      303-96-2227\n      B\n      Mandalay\n      Normal\n      Female\n      Home and lifestyle\n      97.38\n      10\n      3/2/2019\n      17:16\n      Ewallet\n    \n    \n      997\n      727-02-1313\n      A\n      Yangon\n      Member\n      Male\n      Food and beverages\n      31.84\n      1\n      2/9/2019\n      13:22\n      Cash\n    \n    \n      998\n      347-56-2442\n      A\n      Yangon\n      Normal\n      Male\n      Home and lifestyle\n      65.82\n      1\n      2/22/2019\n      15:33\n      Cash\n    \n    \n      999\n      849-09-3807\n      A\n      Yangon\n      Member\n      Female\n      Fashion accessories\n      88.34\n      7\n      2/18/2019\n      13:28\n      Cash\n    \n  \n\n1000 rows × 11 columns\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-6f6e6109-861d-4be9-ba85-95e41759ab5e button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-6f6e6109-861d-4be9-ba85-95e41759ab5e&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n일반적인 통계적인 공식\n\nIQR - 박스플롯 - 사분위수\n\nQ0(0), Q1(25%), Q2(50%), Q3(75%), Q4(100%)\n\n이상치의 하한 경계값 : Q1 - (1.5 * (Q3-Q1)) \n\n이상치의 상한 경계값 : Q3 + (1.5 * (Q3-Q1))\n\n도메인(각 비즈니스 영역, 미래 일자리)에서 바라보는 이상치 기준(관습)\n\n\n1sales[[&#x27;Unit price&#x27;]].describe()\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Unit price\n    \n  \n  \n    \n      count\n      1000.000000\n    \n    \n      mean\n      55.672130\n    \n    \n      std\n      26.494628\n    \n    \n      min\n      10.080000\n    \n    \n      25%\n      32.875000\n    \n    \n      50%\n      55.230000\n    \n    \n      75%\n      77.935000\n    \n    \n      max\n      99.960000\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-9b6fc1ab-b0b3-47ba-b180-b37f4ec43d85 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-9b6fc1ab-b0b3-47ba-b180-b37f4ec43d85&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n12345678Q1 = sales[&#x27;Unit price&#x27;].quantile(0.25)Q3 = sales[&#x27;Unit price&#x27;].quantile(0.75)# Q1보다 낮은 값을 이상치로 간주 outliers_q1 = (sales[&#x27;Unit price&#x27;] &lt; Q1)# Q3보다 높은 값을 이상치로 간주outliers_q3 = (sales[&#x27;Unit price&#x27;] &gt; Q3)\n\n\n1print(sales[&#x27;Unit price&#x27;][~(outliers_q1 | outliers_q3)])\n\n0      74.69\n2      46.33\n3      58.22\n6      68.84\n7      73.56\n       ...  \n991    76.60\n992    58.03\n994    60.95\n995    40.35\n998    65.82\nName: Unit price, Length: 500, dtype: float64\n\n","dateCreated":"2022-03-25T09:00:00+09:00","dateModified":"2022-03-25T12:40:18+09:00","datePublished":"2022-03-25T09:00:00+09:00","description":"","headline":"판다스 튜토리얼 2","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"},"publisher":{"@type":"Organization","name":"John Doe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"}</script>
+    
+        
+            <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+        
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"],"image":"ADH.jpg"},"articleBody":"라이브러리 불러오기\npandas 라이브러리 불러오기, supermarket_sales.csv 파일 불러오기\n\n123import pandas as pd from google.colab import drivedrive.mount(&quot;/content/drive&quot;)\n\nMounted at /content/drive\n\n123DATA_PATH = &quot;/content/drive/MyDrive/Colab Notebooks/data/supermarket_sales.csv&quot;sales = pd.read_csv(DATA_PATH)sales\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Invoice ID\n      Branch\n      City\n      Customer type\n      Gender\n      Product line\n      Unit price\n      Quantity\n      Date\n      Time\n      Payment\n    \n  \n  \n    \n      0\n      750-67-8428\n      A\n      Yangon\n      Member\n      Female\n      Health and beauty\n      74.69\n      7\n      1/5/2019\n      13:08\n      Ewallet\n    \n    \n      1\n      226-31-3081\n      C\n      Naypyitaw\n      Normal\n      Female\n      Electronic accessories\n      15.28\n      5\n      3/8/2019\n      10:29\n      Cash\n    \n    \n      2\n      631-41-3108\n      A\n      Yangon\n      Normal\n      Male\n      Home and lifestyle\n      46.33\n      7\n      3/3/2019\n      13:23\n      Credit card\n    \n    \n      3\n      123-19-1176\n      A\n      Yangon\n      Member\n      Male\n      Health and beauty\n      58.22\n      8\n      1/27/2019\n      20:33\n      Ewallet\n    \n    \n      4\n      373-73-7910\n      A\n      Yangon\n      Normal\n      Male\n      Sports and travel\n      86.31\n      7\n      2/8/2019\n      10:37\n      Ewallet\n    \n    \n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n    \n    \n      995\n      233-67-5758\n      C\n      Naypyitaw\n      Normal\n      Male\n      Health and beauty\n      40.35\n      1\n      1/29/2019\n      13:46\n      Ewallet\n    \n    \n      996\n      303-96-2227\n      B\n      Mandalay\n      Normal\n      Female\n      Home and lifestyle\n      97.38\n      10\n      3/2/2019\n      17:16\n      Ewallet\n    \n    \n      997\n      727-02-1313\n      A\n      Yangon\n      Member\n      Male\n      Food and beverages\n      31.84\n      1\n      2/9/2019\n      13:22\n      Cash\n    \n    \n      998\n      347-56-2442\n      A\n      Yangon\n      Normal\n      Male\n      Home and lifestyle\n      65.82\n      1\n      2/22/2019\n      15:33\n      Cash\n    \n    \n      999\n      849-09-3807\n      A\n      Yangon\n      Member\n      Female\n      Fashion accessories\n      88.34\n      7\n      2/18/2019\n      13:28\n      Cash\n    \n  \n\n1000 rows × 11 columns\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-5de646d0-967f-4dc5-a51f-d7ef279760fb button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-5de646d0-967f-4dc5-a51f-d7ef279760fb&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1sales.info()\n\n&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;\nRangeIndex: 1000 entries, 0 to 999\nData columns (total 11 columns):\n #   Column         Non-Null Count  Dtype  \n---  ------         --------------  -----  \n 0   Invoice ID     1000 non-null   object \n 1   Branch         1000 non-null   object \n 2   City           1000 non-null   object \n 3   Customer type  1000 non-null   object \n 4   Gender         1000 non-null   object \n 5   Product line   1000 non-null   object \n 6   Unit price     1000 non-null   float64\n 7   Quantity       1000 non-null   int64  \n 8   Date           1000 non-null   object \n 9   Time           1000 non-null   object \n 10  Payment        1000 non-null   object \ndtypes: float64(1), int64(1), object(9)\nmemory usage: 86.1+ KB\n\nGroupy by\n(동의어) 집계함수를 배운다.\n\n1sales[&#x27;Invoice ID&#x27;].value_counts()\n\n\n\n\n750-67-8428    1\n642-61-4706    1\n816-72-8853    1\n491-38-3499    1\n322-02-2271    1\n              ..\n633-09-3463    1\n374-17-3652    1\n378-07-7001    1\n433-75-6987    1\n849-09-3807    1\nName: Invoice ID, Length: 1000, dtype: int64\n\n1sales.groupby(&#x27;Customer type&#x27;)[&#x27;Quantity&#x27;].sum()\n\n\n\n\nCustomer type\nMember    2785\nNormal    2725\nName: Quantity, dtype: int64\n\n1sales.groupby([&#x27;Customer type&#x27;, &#x27;Branch&#x27;, &#x27;Payment&#x27;])[&#x27;Quantity&#x27;].sum()\n\n\n\n\nCustomer type  Branch  Payment    \nMember         A       Cash           308\n                       Credit card    282\n                       Ewallet        374\n               B       Cash           284\n                       Credit card    371\n                       Ewallet        269\n               C       Cash           293\n                       Credit card    349\n                       Ewallet        255\nNormal         A       Cash           264\n                       Credit card    298\n                       Ewallet        333\n               B       Cash           344\n                       Credit card    228\n                       Ewallet        324\n               C       Cash           403\n                       Credit card    194\n                       Ewallet        337\nName: Quantity, dtype: int64\n\n- \n1print(type(sales.groupby([&#x27;Customer type&#x27;, &#x27;Branch&#x27;, &#x27;Payment&#x27;])[&#x27;Quantity&#x27;].sum()))\n\n&lt;class &#39;pandas.core.series.Series&#39;&gt;\n\n1sales.groupby([&#x27;Customer type&#x27;, &#x27;Branch&#x27;, &#x27;Payment&#x27;], as_index=False)[&#x27;Quantity&#x27;].agg([&#x27;sum&#x27;, &#x27;mean&#x27;]).reset_index()\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Customer type\n      Branch\n      Payment\n      sum\n      mean\n    \n  \n  \n    \n      0\n      Member\n      A\n      Cash\n      308\n      5.500000\n    \n    \n      1\n      Member\n      A\n      Credit card\n      282\n      5.755102\n    \n    \n      2\n      Member\n      A\n      Ewallet\n      374\n      6.032258\n    \n    \n      3\n      Member\n      B\n      Cash\n      284\n      5.358491\n    \n    \n      4\n      Member\n      B\n      Credit card\n      371\n      5.888889\n    \n    \n      5\n      Member\n      B\n      Ewallet\n      269\n      5.489796\n    \n    \n      6\n      Member\n      C\n      Cash\n      293\n      4.966102\n    \n    \n      7\n      Member\n      C\n      Credit card\n      349\n      5.816667\n    \n    \n      8\n      Member\n      C\n      Ewallet\n      255\n      5.100000\n    \n    \n      9\n      Normal\n      A\n      Cash\n      264\n      4.888889\n    \n    \n      10\n      Normal\n      A\n      Credit card\n      298\n      5.418182\n    \n    \n      11\n      Normal\n      A\n      Ewallet\n      333\n      5.203125\n    \n    \n      12\n      Normal\n      B\n      Cash\n      344\n      6.035088\n    \n    \n      13\n      Normal\n      B\n      Credit card\n      228\n      4.956522\n    \n    \n      14\n      Normal\n      B\n      Ewallet\n      324\n      5.062500\n    \n    \n      15\n      Normal\n      C\n      Cash\n      403\n      6.200000\n    \n    \n      16\n      Normal\n      C\n      Credit card\n      194\n      5.105263\n    \n    \n      17\n      Normal\n      C\n      Ewallet\n      337\n      6.017857\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-06183b9d-9668-4956-b5b7-bf3ab9256622 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-06183b9d-9668-4956-b5b7-bf3ab9256622&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1print(type(sales.groupby([&#x27;Customer type&#x27;, &#x27;Branch&#x27;, &#x27;Payment&#x27;])[&#x27;Quantity&#x27;].agg([&#x27;sum&#x27;, &#x27;mean&#x27;])))\n\n&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;\n\n결측치 다루기결측치 데이터 생성1234567891011import pandas as pd import numpy as np dict_01 = &#123;    &#x27;Score_A&#x27; : [80, 90, np.nan, 80],     &#x27;Score_B&#x27; : [30, 45, np.nan, np.nan],     &#x27;Score_C&#x27; : [np.nan, 50, 80, 90]&#125;df = pd.DataFrame(dict_01)df\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Score_A\n      Score_B\n      Score_C\n    \n  \n  \n    \n      0\n      80.0\n      30.0\n      NaN\n    \n    \n      1\n      90.0\n      45.0\n      50.0\n    \n    \n      2\n      NaN\n      NaN\n      80.0\n    \n    \n      3\n      80.0\n      NaN\n      90.0\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-19e2d3df-d166-4556-96a3-7e87c689f899 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-19e2d3df-d166-4556-96a3-7e87c689f899&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1df.isnull().sum()\n\n\n\n\nScore_A    1\nScore_B    2\nScore_C    1\ndtype: int64\n\n1df.fillna(&quot;0&quot;)\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Score_A\n      Score_B\n      Score_C\n    \n  \n  \n    \n      0\n      80.0\n      30.0\n      0\n    \n    \n      1\n      90.0\n      45.0\n      50.0\n    \n    \n      2\n      0\n      0\n      80.0\n    \n    \n      3\n      80.0\n      0\n      90.0\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-8fdcaeb0-1a6d-42b3-a659-2ed1ac98f3c4 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-8fdcaeb0-1a6d-42b3-a659-2ed1ac98f3c4&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1df.fillna(method=&quot;pad&quot;)\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Score_A\n      Score_B\n      Score_C\n    \n  \n  \n    \n      0\n      80.0\n      30.0\n      NaN\n    \n    \n      1\n      90.0\n      45.0\n      50.0\n    \n    \n      2\n      90.0\n      45.0\n      80.0\n    \n    \n      3\n      80.0\n      45.0\n      90.0\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-0beb1959-e8a4-4550-b78e-1da677eaf1f7 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-0beb1959-e8a4-4550-b78e-1da677eaf1f7&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1234567dict_01 = &#123;    &quot;성별&quot; : [&quot;남자&quot;, &quot;여자&quot;, np.nan, &quot;남자&quot;],     &quot;Salary&quot; : [30, 45, 90, 70]&#125;df = pd.DataFrame(dict_01)df\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      성별\n      Salary\n    \n  \n  \n    \n      0\n      남자\n      30\n    \n    \n      1\n      여자\n      45\n    \n    \n      2\n      NaN\n      90\n    \n    \n      3\n      남자\n      70\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-cd4f0fa9-4594-42f6-b011-ec8d9c313a45 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-cd4f0fa9-4594-42f6-b011-ec8d9c313a45&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1df[&#x27;성별&#x27;].fillna(&quot;성별 없음&quot;)\n\n\n\n\n0       남자\n1       여자\n2    성별 없음\n3       남자\nName: 성별, dtype: object\n\n\n결측치\n\n–&gt; 문자열 타입이랑 &#x2F; 숫자 타입이랑 접근 방법이 다름–&gt; 문자열 (빈도 –&gt; 가장 많이 나타나는 문자열 넣어주기!, 최빈값)–&gt; 숫자열 (평균, 최대, 최소, 중간, 기타 등등..)\n123456789101112import pandas as pd import numpy as np dict_01 = &#123;    &#x27;Score_A&#x27; : [80, 90, np.nan, 80],     &#x27;Score_B&#x27; : [30, 45, np.nan, 60],     &#x27;Score_C&#x27; : [np.nan, 50, 80, 90],     &#x27;Score_D&#x27; : [50, 30, 80, 60]&#125;df = pd.DataFrame(dict_01)df\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Score_A\n      Score_B\n      Score_C\n      Score_D\n    \n  \n  \n    \n      0\n      80.0\n      30.0\n      NaN\n      50\n    \n    \n      1\n      90.0\n      45.0\n      50.0\n      30\n    \n    \n      2\n      NaN\n      NaN\n      80.0\n      80\n    \n    \n      3\n      80.0\n      60.0\n      90.0\n      60\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-4285262a-db62-49be-9c8d-273186ab08c4 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-4285262a-db62-49be-9c8d-273186ab08c4&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1df.dropna(axis = 1)\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Score_D\n    \n  \n  \n    \n      0\n      50\n    \n    \n      1\n      30\n    \n    \n      2\n      80\n    \n    \n      3\n      60\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-0e190d15-cdf3-464b-bcfb-9ef6867cfba1 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-0e190d15-cdf3-464b-bcfb-9ef6867cfba1&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n1df.dropna(axis = 0)\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Score_A\n      Score_B\n      Score_C\n      Score_D\n    \n  \n  \n    \n      1\n      90.0\n      45.0\n      50.0\n      30\n    \n    \n      3\n      80.0\n      60.0\n      90.0\n      60\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-c4cae1e4-71a0-446b-8e51-6af06230d2ee button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-c4cae1e4-71a0-446b-8e51-6af06230d2ee&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n이상치1sales\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Invoice ID\n      Branch\n      City\n      Customer type\n      Gender\n      Product line\n      Unit price\n      Quantity\n      Date\n      Time\n      Payment\n    \n  \n  \n    \n      0\n      750-67-8428\n      A\n      Yangon\n      Member\n      Female\n      Health and beauty\n      74.69\n      7\n      1/5/2019\n      13:08\n      Ewallet\n    \n    \n      1\n      226-31-3081\n      C\n      Naypyitaw\n      Normal\n      Female\n      Electronic accessories\n      15.28\n      5\n      3/8/2019\n      10:29\n      Cash\n    \n    \n      2\n      631-41-3108\n      A\n      Yangon\n      Normal\n      Male\n      Home and lifestyle\n      46.33\n      7\n      3/3/2019\n      13:23\n      Credit card\n    \n    \n      3\n      123-19-1176\n      A\n      Yangon\n      Member\n      Male\n      Health and beauty\n      58.22\n      8\n      1/27/2019\n      20:33\n      Ewallet\n    \n    \n      4\n      373-73-7910\n      A\n      Yangon\n      Normal\n      Male\n      Sports and travel\n      86.31\n      7\n      2/8/2019\n      10:37\n      Ewallet\n    \n    \n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n    \n    \n      995\n      233-67-5758\n      C\n      Naypyitaw\n      Normal\n      Male\n      Health and beauty\n      40.35\n      1\n      1/29/2019\n      13:46\n      Ewallet\n    \n    \n      996\n      303-96-2227\n      B\n      Mandalay\n      Normal\n      Female\n      Home and lifestyle\n      97.38\n      10\n      3/2/2019\n      17:16\n      Ewallet\n    \n    \n      997\n      727-02-1313\n      A\n      Yangon\n      Member\n      Male\n      Food and beverages\n      31.84\n      1\n      2/9/2019\n      13:22\n      Cash\n    \n    \n      998\n      347-56-2442\n      A\n      Yangon\n      Normal\n      Male\n      Home and lifestyle\n      65.82\n      1\n      2/22/2019\n      15:33\n      Cash\n    \n    \n      999\n      849-09-3807\n      A\n      Yangon\n      Member\n      Female\n      Fashion accessories\n      88.34\n      7\n      2/18/2019\n      13:28\n      Cash\n    \n  \n\n1000 rows × 11 columns\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-6f6e6109-861d-4be9-ba85-95e41759ab5e button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-6f6e6109-861d-4be9-ba85-95e41759ab5e&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n일반적인 통계적인 공식\n\nIQR - 박스플롯 - 사분위수\n\nQ0(0), Q1(25%), Q2(50%), Q3(75%), Q4(100%)\n\n이상치의 하한 경계값 : Q1 - (1.5 * (Q3-Q1)) \n\n이상치의 상한 경계값 : Q3 + (1.5 * (Q3-Q1))\n\n도메인(각 비즈니스 영역, 미래 일자리)에서 바라보는 이상치 기준(관습)\n\n\n1sales[[&#x27;Unit price&#x27;]].describe()\n\n\n\n\n\n  \n    \n      \n\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n.dataframe tbody tr th &#123;\n    vertical-align: top;\n&#125;\n\n.dataframe thead th &#123;\n    text-align: right;\n&#125;\n\n\n\n  \n    \n      \n      Unit price\n    \n  \n  \n    \n      count\n      1000.000000\n    \n    \n      mean\n      55.672130\n    \n    \n      std\n      26.494628\n    \n    \n      min\n      10.080000\n    \n    \n      25%\n      32.875000\n    \n    \n      50%\n      55.230000\n    \n    \n      75%\n      77.935000\n    \n    \n      max\n      99.960000\n    \n  \n\n\n      \n\n  &lt;svg xmlns&#x3D;”http://www.w3.org/2000/svg&quot; height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”       width&#x3D;”24px”&gt;                \n  \n    .colab-df-container {\n      display:flex;\n      flex-wrap:wrap;\n      gap: 12px;\n    }\n\n    .colab-df-convert {\n      background-color: #E8F0FE;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      display: none;\n      fill: #1967D2;\n      height: 32px;\n      padding: 0 0 0 0;\n      width: 32px;\n    }\n\n    .colab-df-convert:hover {\n      background-color: #E2EBFA;\n      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n      fill: #174EA6;\n    }\n\n    [theme=dark] .colab-df-convert {\n      background-color: #3B4455;\n      fill: #D2E3FC;\n    }\n\n    [theme=dark] .colab-df-convert:hover {\n      background-color: #434B5C;\n      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n      fill: #FFFFFF;\n    }\n  \n\n  &lt;script&gt;\n    const buttonEl =\n      document.querySelector(&#39;#df-9b6fc1ab-b0b3-47ba-b180-b37f4ec43d85 button.colab-df-convert&#39;);\n    buttonEl.style.display =\n      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;\n\n    async function convertToInteractive(key) &#123;\n      const element = document.querySelector(&#39;#df-9b6fc1ab-b0b3-47ba-b180-b37f4ec43d85&#39;);\n      const dataTable =\n        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,\n                                                 [key], &#123;&#125;);\n      if (!dataTable) return;\n\n      const docLinkHtml = &#39;Like what you see? Visit the &#39; +\n        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;\n        + &#39; to learn more about interactive tables.&#39;;\n      element.innerHTML = &#39;&#39;;\n      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;\n      await google.colab.output.renderOutput(dataTable, element);\n      const docLink = document.createElement(&#39;div&#39;);\n      docLink.innerHTML = docLinkHtml;\n      element.appendChild(docLink);\n    &#125;\n  &lt;/script&gt;\n&lt;/div&gt;\n\n  \n\n\n\n\n\n12345678Q1 = sales[&#x27;Unit price&#x27;].quantile(0.25)Q3 = sales[&#x27;Unit price&#x27;].quantile(0.75)# Q1보다 낮은 값을 이상치로 간주 outliers_q1 = (sales[&#x27;Unit price&#x27;] &lt; Q1)# Q3보다 높은 값을 이상치로 간주outliers_q3 = (sales[&#x27;Unit price&#x27;] &gt; Q3)\n\n\n1print(sales[&#x27;Unit price&#x27;][~(outliers_q1 | outliers_q3)])\n\n0      74.69\n2      46.33\n3      58.22\n6      68.84\n7      73.56\n       ...  \n991    76.60\n992    58.03\n994    60.95\n995    40.35\n998    65.82\nName: Unit price, Length: 500, dtype: float64\n\n","dateCreated":"2022-03-25T09:00:00+09:00","dateModified":"2022-03-25T12:40:18+09:00","datePublished":"2022-03-25T09:00:00+09:00","description":"","headline":"판다스 튜토리얼 2","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"],"image":"ADH.jpg","logo":{"@type":"ImageObject","url":"ADH.jpg"}},"url":"https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"}</script>
     <meta name="description" content="라이브러리 불러오기 pandas 라이브러리 불러오기, supermarket_sales.csv 파일 불러오기  123import pandas as pd from google.colab import drivedrive.mount(&quot;&#x2F;content&#x2F;drive&quot;)  Mounted at &#x2F;content&#x2F;drive  123DATA_PATH &#x3D; &amp;qu">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="판다스 튜토리얼 2">
@@ -21,12 +27,14 @@
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-25T00:00:00.000Z">
 <meta property="article:modified_time" content="2022-03-25T03:40:18.172Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Winters">
 <meta name="twitter:card" content="summary">
     
     
         
     
+    
+        <meta property="og:image" content="https://AHNDUHONG.github.io/assets/images/ADH.jpg">
     
     
     
@@ -51,26 +59,24 @@
 
 
     
+        
+            
+        
+    
 
 <header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
-        <a
-            class="header-title-link"
-            href="/"
-            aria-label=""
-        >
+        <a class="header-title-link" href="/" aria-label>
             Winters Blog
         </a>
     </div>
     
         
-            <a
-                class="header-right-picture "
-                href="#about"
-                aria-label="Open the link: /#about"
-            >
+            <a class="header-right-picture " href="#about" aria-label="Open the link: /#about">
         
+        
+            <img class="header-picture" src="/assets/images/ADH.jpg" alt="Author&#39;s picture">
         
         </a>
     
@@ -79,21 +85,30 @@
             <!-- Define author's picture -->
 
 
+
+        
+    
+
 <nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about" aria-label="Read more about the author">
+                    <img class="sidebar-profile-picture" src="/assets/images/ADH.jpg" alt="Author&#39;s picture">
+                </a>
+                <h4 class="sidebar-profile-name">Winters</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
+</h5>
+                
+            </div>
         
         
             <ul class="sidebar-buttons">
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
+                        <a class="sidebar-button-link " href="/" rel="noopener" title="Home">
                         <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Home</span>
                     </a>
@@ -101,13 +116,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-categories"
-                            
-                            rel="noopener"
-                            title="Categories"
-                        >
+                        <a class="sidebar-button-link " href="/all-categories" rel="noopener" title="Categories">
                         <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Categories</span>
                     </a>
@@ -115,13 +124,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
+                        <a class="sidebar-button-link " href="/all-tags" rel="noopener" title="Tags">
                         <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Tags</span>
                     </a>
@@ -129,13 +132,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="/all-archives"
-                            
-                            rel="noopener"
-                            title="Archives"
-                        >
+                        <a class="sidebar-button-link " href="/all-archives" rel="noopener" title="Archives">
                         <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Archives</span>
                     </a>
@@ -143,13 +140,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link open-algolia-search"
-                            href="#search"
-                            
-                            rel="noopener"
-                            title="Search"
-                        >
+                        <a class="sidebar-button-link open-algolia-search" href="#search" rel="noopener" title="Search">
                         <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Search</span>
                     </a>
@@ -157,13 +148,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="#about"
-                            
-                            rel="noopener"
-                            title="About"
-                        >
+                        <a class="sidebar-button-link " href="#about" rel="noopener" title="About">
                         <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">About</span>
                     </a>
@@ -175,15 +160,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="https://github.com/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="GitHub"
-                        >
+                        <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="external nofollow noopener noreferrer" title="GitHub">
                         <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">GitHub</span>
                     </a>
@@ -191,15 +168,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="http://stackoverflow.com/users"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Stack Overflow"
-                        >
+                        <a class="sidebar-button-link " href="http://stackoverflow.com/users" target="_blank" rel="external nofollow noopener noreferrer" title="Stack Overflow">
                         <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Stack Overflow</span>
                     </a>
@@ -207,15 +176,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="https://twitter.com/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Twitter"
-                        >
+                        <a class="sidebar-button-link " href="https://twitter.com/" target="_blank" rel="external nofollow noopener noreferrer" title="Twitter">
                         <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Twitter</span>
                     </a>
@@ -223,15 +184,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="https://facebook.com/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Facebook"
-                        >
+                        <a class="sidebar-button-link " href="https://facebook.com/" target="_blank" rel="external nofollow noopener noreferrer" title="Facebook">
                         <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Facebook</span>
                     </a>
@@ -239,15 +192,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="https://plus.google.com/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Google +"
-                        >
+                        <a class="sidebar-button-link " href="https://plus.google.com/" target="_blank" rel="external nofollow noopener noreferrer" title="Google +">
                         <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Google +</span>
                     </a>
@@ -255,15 +200,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="https://www.linkedin.com/profile/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="LinkedIn"
-                        >
+                        <a class="sidebar-button-link " href="https://www.linkedin.com/profile/" target="_blank" rel="external nofollow noopener noreferrer" title="LinkedIn">
                         <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">LinkedIn</span>
                     </a>
@@ -271,13 +208,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="/mailto"
-                            
-                            rel="noopener"
-                            title="Mail"
-                        >
+                        <a class="sidebar-button-link " href="/mailto" rel="noopener" title="Mail">
                         <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Mail</span>
                     </a>
@@ -289,13 +220,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a
-                            class="sidebar-button-link "
-                            href="/atom.xml"
-                            
-                            rel="noopener"
-                            title="RSS"
-                        >
+                        <a class="sidebar-button-link " href="/atom.xml" rel="noopener" title="RSS">
                         <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">RSS</span>
                     </a>
@@ -307,8 +232,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="4"
-                 class="
+            <div id="main" data-behavior="4" class="
                         hasCoverMetaIn
                         ">
                 
@@ -366,7 +290,7 @@
     text-align: right;
 &#125;
 </code></pre>
-<p></style></p>
+<p></style><p></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -543,11 +467,9 @@
 </table>
 <p>1000 rows × 11 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-5de646d0-967f-4dc5-a51f-d7ef279760fb')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+      <button class="colab-df-convert" onclick="convertToInteractive('df-5de646d0-967f-4dc5-a51f-d7ef279760fb')" title="Convert this dataframe to an interactive table." style="display:none;">
 
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
   <style>
     .colab-df-container {
       display:flex;
@@ -723,7 +645,7 @@ Name: Quantity, dtype: int64
     text-align: right;
 &#125;
 </code></pre>
-<p></style></p>
+<p></style><p></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -883,11 +805,9 @@ Name: Quantity, dtype: int64
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-06183b9d-9668-4956-b5b7-bf3ab9256622')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+      <button class="colab-df-convert" onclick="convertToInteractive('df-06183b9d-9668-4956-b5b7-bf3ab9256622')" title="Convert this dataframe to an interactive table." style="display:none;">
 
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
   <style>
     .colab-df-container {
       display:flex;
@@ -984,7 +904,7 @@ Name: Quantity, dtype: int64
     text-align: right;
 &#125;
 </code></pre>
-<p></style></p>
+<p></style><p></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1022,11 +942,9 @@ Name: Quantity, dtype: int64
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-19e2d3df-d166-4556-96a3-7e87c689f899')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+      <button class="colab-df-convert" onclick="convertToInteractive('df-19e2d3df-d166-4556-96a3-7e87c689f899')" title="Convert this dataframe to an interactive table." style="display:none;">
 
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
   <style>
     .colab-df-container {
       display:flex;
@@ -1129,7 +1047,7 @@ dtype: int64
     text-align: right;
 &#125;
 </code></pre>
-<p></style></p>
+<p></style><p></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1167,11 +1085,9 @@ dtype: int64
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-8fdcaeb0-1a6d-42b3-a659-2ed1ac98f3c4')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+      <button class="colab-df-convert" onclick="convertToInteractive('df-8fdcaeb0-1a6d-42b3-a659-2ed1ac98f3c4')" title="Convert this dataframe to an interactive table." style="display:none;">
 
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
   <style>
     .colab-df-container {
       display:flex;
@@ -1264,7 +1180,7 @@ dtype: int64
     text-align: right;
 &#125;
 </code></pre>
-<p></style></p>
+<p></style><p></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1302,11 +1218,9 @@ dtype: int64
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-0beb1959-e8a4-4550-b78e-1da677eaf1f7')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+      <button class="colab-df-convert" onclick="convertToInteractive('df-0beb1959-e8a4-4550-b78e-1da677eaf1f7')" title="Convert this dataframe to an interactive table." style="display:none;">
 
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
   <style>
     .colab-df-container {
       display:flex;
@@ -1399,7 +1313,7 @@ dtype: int64
     text-align: right;
 &#125;
 </code></pre>
-<p></style></p>
+<p></style><p></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1432,11 +1346,9 @@ dtype: int64
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-cd4f0fa9-4594-42f6-b011-ec8d9c313a45')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+      <button class="colab-df-convert" onclick="convertToInteractive('df-cd4f0fa9-4594-42f6-b011-ec8d9c313a45')" title="Convert this dataframe to an interactive table." style="display:none;">
 
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
   <style>
     .colab-df-container {
       display:flex;
@@ -1544,7 +1456,7 @@ Name: 성별, dtype: object
     text-align: right;
 &#125;
 </code></pre>
-<p></style></p>
+<p></style><p></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1587,11 +1499,9 @@ Name: 성별, dtype: object
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-4285262a-db62-49be-9c8d-273186ab08c4')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+      <button class="colab-df-convert" onclick="convertToInteractive('df-4285262a-db62-49be-9c8d-273186ab08c4')" title="Convert this dataframe to an interactive table." style="display:none;">
 
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
   <style>
     .colab-df-container {
       display:flex;
@@ -1684,7 +1594,7 @@ Name: 성별, dtype: object
     text-align: right;
 &#125;
 </code></pre>
-<p></style></p>
+<p></style><p></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1712,11 +1622,9 @@ Name: 성별, dtype: object
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-0e190d15-cdf3-464b-bcfb-9ef6867cfba1')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+      <button class="colab-df-convert" onclick="convertToInteractive('df-0e190d15-cdf3-464b-bcfb-9ef6867cfba1')" title="Convert this dataframe to an interactive table." style="display:none;">
 
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
   <style>
     .colab-df-container {
       display:flex;
@@ -1809,7 +1717,7 @@ Name: 성별, dtype: object
     text-align: right;
 &#125;
 </code></pre>
-<p></style></p>
+<p></style><p></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1838,11 +1746,9 @@ Name: 성별, dtype: object
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-c4cae1e4-71a0-446b-8e51-6af06230d2ee')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+      <button class="colab-df-convert" onclick="convertToInteractive('df-c4cae1e4-71a0-446b-8e51-6af06230d2ee')" title="Convert this dataframe to an interactive table." style="display:none;">
 
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
   <style>
     .colab-df-container {
       display:flex;
@@ -1934,7 +1840,7 @@ Name: 성별, dtype: object
     text-align: right;
 &#125;
 </code></pre>
-<p></style></p>
+<p></style><p></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2111,11 +2017,9 @@ Name: 성별, dtype: object
 </table>
 <p>1000 rows × 11 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-6f6e6109-861d-4be9-ba85-95e41759ab5e')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+      <button class="colab-df-convert" onclick="convertToInteractive('df-6f6e6109-861d-4be9-ba85-95e41759ab5e')" title="Convert this dataframe to an interactive table." style="display:none;">
 
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
   <style>
     .colab-df-container {
       display:flex;
@@ -2221,7 +2125,7 @@ Name: 성별, dtype: object
     text-align: right;
 &#125;
 </code></pre>
-<p></style></p>
+<p></style><p></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2265,11 +2169,9 @@ Name: 성별, dtype: object
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-9b6fc1ab-b0b3-47ba-b180-b37f4ec43d85')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+      <button class="colab-df-convert" onclick="convertToInteractive('df-9b6fc1ab-b0b3-47ba-b180-b37f4ec43d85')" title="Convert this dataframe to an interactive table." style="display:none;">
 
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"/><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/><br>  </svg><br>      </button></p>
+<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
   <style>
     .colab-df-container {
       display:flex;
@@ -2373,12 +2275,7 @@ Name: Unit price, Length: 500, dtype: float64
             <li class="post-action">
                 
                     
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/03/27/Bream_and_smelt/"
-                    data-tooltip="마켓과 머신러닝(Chapter_1_3)"
-                    aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_1_3)"
-                >
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/03/27/Bream_and_smelt/" data-tooltip="마켓과 머신러닝(Chapter_1_3)" aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_1_3)">
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -2387,12 +2284,7 @@ Name: Unit price, Length: 500, dtype: float64
             <li class="post-action">
                 
                     
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/03/25/visualization_tutorial_01/"
-                    data-tooltip="visualization 튜토리얼 1"
-                    aria-label="NEXT: visualization 튜토리얼 1"
-                >
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/03/25/visualization_tutorial_01/" data-tooltip="visualization 튜토리얼 1" aria-label="NEXT: visualization 튜토리얼 1">
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -2402,11 +2294,7 @@ Name: Unit price, Length: 500, dtype: float64
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
         </li>
@@ -2414,12 +2302,7 @@ Name: Unit price, Length: 500, dtype: float64
             
             
             <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -2427,12 +2310,7 @@ Name: Unit price, Length: 500, dtype: float64
             
             
             <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -2440,12 +2318,7 @@ Name: Unit price, Length: 500, dtype: float64
             
             
             <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -2469,13 +2342,13 @@ Name: Unit price, Length: 500, dtype: float64
             
         
     </div>
-</article>
+</div></div></div></div></div></div></div></div></div></div></div></article>
 
 
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
-        Copyrights &copy; 2022 John Doe. All Rights Reserved.
+        Copyrights &copy; 2022 Winters. All Rights Reserved.
     </span>
 </footer>
 
@@ -2488,12 +2361,7 @@ Name: Unit price, Length: 500, dtype: float64
             <li class="post-action">
                 
                     
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/03/27/Bream_and_smelt/"
-                    data-tooltip="마켓과 머신러닝(Chapter_1_3)"
-                    aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_1_3)"
-                >
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/03/27/Bream_and_smelt/" data-tooltip="마켓과 머신러닝(Chapter_1_3)" aria-label="PREVIOUS: 마켓과 머신러닝(Chapter_1_3)">
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -2502,12 +2370,7 @@ Name: Unit price, Length: 500, dtype: float64
             <li class="post-action">
                 
                     
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/03/25/visualization_tutorial_01/"
-                    data-tooltip="visualization 튜토리얼 1"
-                    aria-label="NEXT: visualization 튜토리얼 1"
-                >
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/03/25/visualization_tutorial_01/" data-tooltip="visualization 튜토리얼 1" aria-label="NEXT: visualization 튜토리얼 1">
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -2517,11 +2380,7 @@ Name: Unit price, Length: 500, dtype: float64
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
         </li>
@@ -2529,12 +2388,7 @@ Name: Unit price, Length: 500, dtype: float64
             
             
             <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"
-                    title="Share on Facebook"
-                    aria-label="Share on Facebook"
-                >
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -2542,12 +2396,7 @@ Name: Unit price, Length: 500, dtype: float64
             
             
             <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"
-                    title="Share on Twitter"
-                    aria-label="Share on Twitter"
-                >
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -2555,12 +2404,7 @@ Name: Unit price, Length: 500, dtype: float64
             
             
             <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"
-                    title="Share on Google+"
-                    aria-label="Share on Google+"
-                >
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -2588,12 +2432,7 @@ Name: Unit price, Length: 500, dtype: float64
                 
                 
                 <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"
-                        aria-label="Share on Facebook"
-                    >
+                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
                     </a>
                 </li>
@@ -2601,12 +2440,7 @@ Name: Unit price, Length: 500, dtype: float64
                 
                 
                 <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"
-                        aria-label="Share on Twitter"
-                    >
+                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
                     </a>
                 </li>
@@ -2614,12 +2448,7 @@ Name: Unit price, Length: 500, dtype: float64
                 
                 
                 <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/"
-                        aria-label="Share on Google+"
-                    >
+                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/03/25/pandas_tutorial_02/" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
                     </a>
                 </li>
@@ -2633,13 +2462,19 @@ Name: Unit price, Length: 500, dtype: float64
         
 
 
+    
+        
+    
+
 <div id="about">
     <div id="about-card">
         <div id="about-btn-close">
             <i class="fa fa-times"></i>
         </div>
         
-            <h4 id="about-card-name">John Doe</h4>
+            <img id="about-card-picture" src="/assets/images/ADH.jpg" alt="Author&#39;s picture">
+        
+            <h4 id="about-card-name">Winters</h4>
         
             <div id="about-card-bio"><p>author.bio</p>
 </div>
@@ -2647,18 +2482,24 @@ Name: Unit price, Length: 500, dtype: float64
         
             <div id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
+                <br>
                 <p>author.job</p>
 
             </div>
         
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                대한민국/서울
+            </div>
         
     </div>
 </div>
 
         
         
-<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+<div id="cover" style="background-image:url('/assets/images/ADH_Cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/assets/js/script-dvu41dvy5202v52bwzsnpck9devc8hugsy17mbuqp6i4ms8q6rt7zrc4avbe.min.js"></script>
