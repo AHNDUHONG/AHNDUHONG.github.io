@@ -17,7 +17,7 @@
             <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
         
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"],"image":"blog_profile_image_01.jpg"},"articleBody":"확률적 경사 하강법\n1차 가장 큰 차이(기존 ML모형)\n\n샘플링 방식이 달라짐\n샘플링을 더 세분화함\n\n\n2차 가장 큰 차이\n\n오차를 보정(기울기)\n\n\n오차 &#x3D; 손실 &#x3D; coast\n\n미분을 하여 오차가 가장 적을때까지 내려감.\n\n\n경사 하강법이 쓰인 여러 알고리즘\n\n(이미지, 텍스트) 딥러닝 기초 알고리즘\n트리 알고리즘 + 경사 하강법 융합 &#x3D; 부스트 계열\n대표 알고리즘 : LightGBM, Xgboost, Catboost\n\n\n\nSGDClassifier\n확률적 경사하강법 분류기\n\n123import pandas as pd fish = pd.read_csv(&quot;https://bit.ly/fish_csv_data&quot;)fish.info()\n\n&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;\nRangeIndex: 159 entries, 0 to 158\nData columns (total 6 columns):\n #   Column    Non-Null Count  Dtype  \n---  ------    --------------  -----  \n 0   Species   159 non-null    object \n 1   Weight    159 non-null    float64\n 2   Length    159 non-null    float64\n 3   Diagonal  159 non-null    float64\n 4   Height    159 non-null    float64\n 5   Width     159 non-null    float64\ndtypes: float64(5), object(1)\nmemory usage: 7.6+ KB\n\n\n배열로 변환하는 코드\n독립변수 &#x3D; fish_input\n종속변수 &#x3D; fish_target\n\n\n\n12fish_input = fish[[&#x27;Weight&#x27;, &#x27;Length&#x27;, &#x27;Diagonal&#x27;, &#x27;Height&#x27;, &#x27;Width&#x27;]]fish_target = fish[&#x27;Species&#x27;].to_numpy()\n\n\n훈련 세트와 테스트 세트로 분리\n\n1234from sklearn.model_selection import train_test_splittrain_input, test_input, train_target, test_target = train_test_split(fish_input, fish_target, random_state = 42)train_input.shape, test_input.shape, train_target.shape, test_target.shape\n\n\n\n\n((119, 5), (40, 5), (119,), (40,))\n\n\n표준화 처리\n다시 한번 강조하지만 꼭 훈련 세트에서 학습한 통계값으로 테스트 세트도 변환한다.\n키워드 : Data Leakage 방지\n데이터 분석 희망자 필수 공부!\n\n\n\n12345678from sklearn.preprocessing import StandardScalerss = StandardScaler()ss.fit(train_input)# ss 훈련 데이터만 활용해서 학습(?)이 끝난 상태# 표준화 처리를 훈련 데이터와 테스트 데이터에 동시 적용train_scaled = ss.transform(train_input)test_scaled = ss.transform(test_input)\n\n모델 학습\n2개의 매개 변수 지정\nloss &#x3D; “log” &#x3D; 로지스틱 손실 함수로 지정\nmax_iter &#x3D; 에포크 횟수 지정\n에포크란(epoch)_01 : 훈련 데이터셋에 포함된 모든 데이터들이 한 번씩 모델을 통과한 횟수로, 모든 학습 데이터셋을 학습하는 횟수\n에포크란_02 : 1 epoch는 전체 학습 데이터셋이 한 신경망에 적용되어 순전파와 역전파를 통해 신경망을 한 번 통과했다는 의미가 된다, 즉 epoch가 10회라면, 학습 데이터 셋 A를 10회 모델에 학습시켰다는 것\n에포크란_03 : epoch를 높일수록, 다양한 무작위 가중치로 학습을 해보므로, 적합한 파라미터를 찾을 확률이 올라간다.(즉, 손실 값이 내려가게 된다.) 하지만 지나치게 epoch를 높이게 되면, 그 학습 데이터셋에 과적합되어 다른데이터에 대해선 제대로 된 예측을 하지 못할 수 있다.\n\n\n\n1234567891011121314from sklearn.linear_model import SGDClassifier# 매개변수 지정# 하이퍼파라미터 설정## 매개변수 값을 dictionary 형태로 추가하는 코드 작성 가능 ## 강사는 입문자들에게는 비추천sc = SGDClassifier(loss = &quot;log&quot;, max_iter = 40, random_state = 42)# 모형 학습sc.fit(train_scaled, train_target)# 스코어 확인 (정확도)print(sc.score(train_scaled, train_target))print(sc.score(test_scaled, test_target)) # 샘플링의 차이로 값이 일정하지 않고 다를 수 있다.\n\n0.8571428571428571\n0.8\n\n\n적절한 에포크 숫자를 찾자.\n\n12345678910111213import numpy as npsc = SGDClassifier(loss = &quot;log&quot;, max_iter = 100, tol = None, random_state = 42)train_score = []test_score = []classes = np.unique(train_target)for _ in range(0, 300):  sc.partial_fit(train_scaled, train_target, classes = classes)  train_score.append(sc.score(train_scaled, train_target))  test_score.append(sc.score(test_scaled, test_target))# 정확도print(train_score[:5])print(test_score[:5])\n\n[0.5294117647058824, 0.6218487394957983, 0.6386554621848739, 0.7310924369747899, 0.7226890756302521]\n[0.65, 0.55, 0.575, 0.7, 0.7]\n\n\n모형 시각화\n\n12345678910import matplotlib.pyplot as pltfig, ax = plt.subplots()ax.plot(train_score)ax.plot(test_score)ax.set_xlabel(&quot;Epoch&quot;)ax.set_ylabel(&quot;Accuracy&quot;)plt.show()# 파란색 훈련, 노란색 테스트# 훈련데이터가 안정화되고 테스트데이터도 안정화되면서 가까운 곳은 epoch가 100일때의 지점이라고 알 수 있음.\n\n\n\n","dateCreated":"2022-03-29T09:00:00+09:00","dateModified":"2022-03-29T21:21:04+09:00","datePublished":"2022-03-29T09:00:00+09:00","description":"","headline":"마켓과 머신러닝(Chapter_4_2)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/29/Chapter_4_2/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"],"image":"blog_profile_image_01.jpg","logo":{"@type":"ImageObject","url":"blog_profile_image_01.jpg"}},"url":"https://ahnduhong.github.io/2022/03/29/Chapter_4_2/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto"],"image":"blog_profile_image_01.jpg"},"articleBody":"확률적 경사 하강법\n1차 가장 큰 차이(기존 ML모형)\n\n샘플링 방식이 달라짐\n샘플링을 더 세분화함\n\n\n2차 가장 큰 차이\n\n오차를 보정(기울기)\n\n\n오차 &#x3D; 손실 &#x3D; coast\n\n미분을 하여 오차가 가장 적을때까지 내려감.\n\n\n경사 하강법이 쓰인 여러 알고리즘\n\n(이미지, 텍스트) 딥러닝 기초 알고리즘\n트리 알고리즘 + 경사 하강법 융합 &#x3D; 부스트 계열\n대표 알고리즘 : LightGBM, Xgboost, Catboost\n\n\n\nSGDClassifier\n확률적 경사하강법 분류기\n\n123import pandas as pd fish = pd.read_csv(&quot;https://bit.ly/fish_csv_data&quot;)fish.info()\n\n&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;\nRangeIndex: 159 entries, 0 to 158\nData columns (total 6 columns):\n #   Column    Non-Null Count  Dtype  \n---  ------    --------------  -----  \n 0   Species   159 non-null    object \n 1   Weight    159 non-null    float64\n 2   Length    159 non-null    float64\n 3   Diagonal  159 non-null    float64\n 4   Height    159 non-null    float64\n 5   Width     159 non-null    float64\ndtypes: float64(5), object(1)\nmemory usage: 7.6+ KB\n\n\n배열로 변환하는 코드\n독립변수 &#x3D; fish_input\n종속변수 &#x3D; fish_target\n\n\n\n12fish_input = fish[[&#x27;Weight&#x27;, &#x27;Length&#x27;, &#x27;Diagonal&#x27;, &#x27;Height&#x27;, &#x27;Width&#x27;]]fish_target = fish[&#x27;Species&#x27;].to_numpy()\n\n\n훈련 세트와 테스트 세트로 분리\n\n1234from sklearn.model_selection import train_test_splittrain_input, test_input, train_target, test_target = train_test_split(fish_input, fish_target, random_state = 42)train_input.shape, test_input.shape, train_target.shape, test_target.shape\n\n\n\n\n((119, 5), (40, 5), (119,), (40,))\n\n\n표준화 처리\n다시 한번 강조하지만 꼭 훈련 세트에서 학습한 통계값으로 테스트 세트도 변환한다.\n키워드 : Data Leakage 방지\n데이터 분석 희망자 필수 공부!\n\n\n\n12345678from sklearn.preprocessing import StandardScalerss = StandardScaler()ss.fit(train_input)# ss 훈련 데이터만 활용해서 학습(?)이 끝난 상태# 표준화 처리를 훈련 데이터와 테스트 데이터에 동시 적용train_scaled = ss.transform(train_input)test_scaled = ss.transform(test_input)\n\n모델 학습\n2개의 매개 변수 지정\nloss &#x3D; “log” &#x3D; 로지스틱 손실 함수로 지정\nmax_iter &#x3D; 에포크 횟수 지정\n에포크란(epoch)_01 : 훈련 데이터셋에 포함된 모든 데이터들이 한 번씩 모델을 통과한 횟수로, 모든 학습 데이터셋을 학습하는 횟수\n에포크란_02 : 1 epoch는 전체 학습 데이터셋이 한 신경망에 적용되어 순전파와 역전파를 통해 신경망을 한 번 통과했다는 의미가 된다, 즉 epoch가 10회라면, 학습 데이터 셋 A를 10회 모델에 학습시켰다는 것\n에포크란_03 : epoch를 높일수록, 다양한 무작위 가중치로 학습을 해보므로, 적합한 파라미터를 찾을 확률이 올라간다.(즉, 손실 값이 내려가게 된다.) 하지만 지나치게 epoch를 높이게 되면, 그 학습 데이터셋에 과적합되어 다른데이터에 대해선 제대로 된 예측을 하지 못할 수 있다.\n\n\n\n1234567891011121314from sklearn.linear_model import SGDClassifier# 매개변수 지정# 하이퍼파라미터 설정## 매개변수 값을 dictionary 형태로 추가하는 코드 작성 가능 ## 강사는 입문자들에게는 비추천sc = SGDClassifier(loss = &quot;log&quot;, max_iter = 40, random_state = 42)# 모형 학습sc.fit(train_scaled, train_target)# 스코어 확인 (정확도)print(sc.score(train_scaled, train_target))print(sc.score(test_scaled, test_target)) # 샘플링의 차이로 값이 일정하지 않고 다를 수 있다.\n\n0.8571428571428571\n0.8\n\n\n적절한 에포크 숫자를 찾자.\n\n12345678910111213import numpy as npsc = SGDClassifier(loss = &quot;log&quot;, max_iter = 100, tol = None, random_state = 42)train_score = []test_score = []classes = np.unique(train_target)for _ in range(0, 300):  sc.partial_fit(train_scaled, train_target, classes = classes)  train_score.append(sc.score(train_scaled, train_target))  test_score.append(sc.score(test_scaled, test_target))# 정확도print(train_score[:5])print(test_score[:5])\n\n[0.5294117647058824, 0.6218487394957983, 0.6386554621848739, 0.7310924369747899, 0.7226890756302521]\n[0.65, 0.55, 0.575, 0.7, 0.7]\n\n\n모형 시각화\n\n12345678910import matplotlib.pyplot as pltfig, ax = plt.subplots()ax.plot(train_score)ax.plot(test_score)ax.set_xlabel(&quot;Epoch&quot;)ax.set_ylabel(&quot;Accuracy&quot;)plt.show()# 파란색 훈련, 노란색 테스트# 훈련데이터가 안정화되고 테스트데이터도 안정화되면서 가까운 곳은 epoch가 100일때의 지점이라고 알 수 있음.\n\n\n\n","dateCreated":"2022-03-29T09:00:00+09:00","dateModified":"2022-03-29T21:21:04+09:00","datePublished":"2022-03-29T09:00:00+09:00","description":"","headline":"마켓과 머신러닝(Chapter_4_2)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/29/Chapter_4_2/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto"],"image":"blog_profile_image_01.jpg","logo":{"@type":"ImageObject","url":"blog_profile_image_01.jpg"}},"url":"https://ahnduhong.github.io/2022/03/29/Chapter_4_2/"}</script>
     <meta name="description" content="확률적 경사 하강법 1차 가장 큰 차이(기존 ML모형)  샘플링 방식이 달라짐 샘플링을 더 세분화함   2차 가장 큰 차이  오차를 보정(기울기)   오차 &#x3D; 손실 &#x3D; coast  미분을 하여 오차가 가장 적을때까지 내려감.   경사 하강법이 쓰인 여러 알고리즘  (이미지, 텍스트) 딥러닝 기초 알고리즘 트리 알고리즘 + 경사 하강법 융합">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="마켓과 머신러닝(Chapter_4_2)">
@@ -162,49 +162,9 @@
             
                 <li class="sidebar-button">
                     
-                        <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="external nofollow noopener noreferrer" title="GitHub">
+                        <a class="sidebar-button-link " href="https://github.com/AHNDUHONG" target="_blank" rel="external nofollow noopener noreferrer" title="GitHub">
                         <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">GitHub</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="http://stackoverflow.com/users" target="_blank" rel="external nofollow noopener noreferrer" title="Stack Overflow">
-                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Stack Overflow</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://twitter.com/" target="_blank" rel="external nofollow noopener noreferrer" title="Twitter">
-                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Twitter</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://facebook.com/" target="_blank" rel="external nofollow noopener noreferrer" title="Facebook">
-                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Facebook</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://plus.google.com/" target="_blank" rel="external nofollow noopener noreferrer" title="Google +">
-                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Google +</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://www.linkedin.com/profile/" target="_blank" rel="external nofollow noopener noreferrer" title="LinkedIn">
-                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">LinkedIn</span>
                     </a>
             </li>
             
@@ -605,7 +565,7 @@ memory usage: 7.6+ KB
 
         
         
-<div id="cover" style="background-image:url('/assets/images/ADH_Cover.jpg');"></div>
+<div id="cover" style="background-image:url('/assets/images/blog_theme_image_03.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/assets/js/script-dvu41dvy5202v52bwzsnpck9devc8hugsy17mbuqp6i4ms8q6rt7zrc4avbe.min.js"></script>
