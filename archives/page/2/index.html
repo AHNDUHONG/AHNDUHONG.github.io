@@ -199,6 +199,158 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2022/03/29/Chapter_4_2/" aria-label=": 마켓과 머신러닝(Chapter_4_2)">
+                            마켓과 머신러닝(Chapter_4_2)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-03-29T09:00:00+09:00">
+	
+		    Mar 29, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h1 id="확률적-경사-하강법"><a href="#확률적-경사-하강법" class="headerlink" title="확률적 경사 하강법"></a>확률적 경사 하강법</h1><ul>
+<li><p>1차 가장 큰 차이(기존 ML모형)</p>
+<ul>
+<li>샘플링 방식이 달라짐</li>
+<li>샘플링을 더 세분화함</li>
+</ul>
+</li>
+<li><p>2차 가장 큰 차이</p>
+<ul>
+<li>오차를 보정(기울기)</li>
+</ul>
+</li>
+<li><p>오차 &#x3D; 손실 &#x3D; coast</p>
+<ul>
+<li>미분을 하여 오차가 가장 적을때까지 내려감.</li>
+</ul>
+</li>
+<li><p>경사 하강법이 쓰인 여러 알고리즘</p>
+<ul>
+<li>(이미지, 텍스트) 딥러닝 기초 알고리즘</li>
+<li>트리 알고리즘 + 경사 하강법 융합 &#x3D; 부스트 계열</li>
+<li>대표 알고리즘 : <strong>LightGBM</strong>, <strong>Xgboost</strong>, Catboost</li>
+</ul>
+</li>
+</ul>
+<h1 id="SGDClassifier"><a href="#SGDClassifier" class="headerlink" title="SGDClassifier"></a>SGDClassifier</h1><ul>
+<li>확률적 경사하강법 분류기</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd </span><br><span class="line">fish = pd.read_csv(<span class="string">&quot;https://bit.ly/fish_csv_data&quot;</span>)</span><br><span class="line">fish.info()</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 159 entries, 0 to 158
+Data columns (total 6 columns):
+ #   Column    Non-Null Count  Dtype  
+---  ------    --------------  -----  
+ 0   Species   159 non-null    object 
+ 1   Weight    159 non-null    float64
+ 2   Length    159 non-null    float64
+ 3   Diagonal  159 non-null    float64
+ 4   Height    159 non-null    float64
+ 5   Width     159 non-null    float64
+dtypes: float64(5), object(1)
+memory usage: 7.6+ KB
+</code></pre>
+<ul>
+<li>배열로 변환하는 코드<ul>
+<li>독립변수 &#x3D; fish_input</li>
+<li>종속변수 &#x3D; fish_target</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fish_input = fish[[<span class="string">&#x27;Weight&#x27;</span>, <span class="string">&#x27;Length&#x27;</span>, <span class="string">&#x27;Diagonal&#x27;</span>, <span class="string">&#x27;Height&#x27;</span>, <span class="string">&#x27;Width&#x27;</span>]]</span><br><span class="line">fish_target = fish[<span class="string">&#x27;Species&#x27;</span>].to_numpy()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>훈련 세트와 테스트 세트로 분리</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_input, test_input, train_target, test_target = train_test_split(fish_input, fish_target, random_state = <span class="number">42</span>)</span><br><span class="line"></span><br><span class="line">train_input.shape, test_input.shape, train_target.shape, test_target.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>((119, 5), (40, 5), (119,), (40,))
+</code></pre>
+<ul>
+<li>표준화 처리<ul>
+<li>다시 한번 강조하지만 꼭 훈련 세트에서 학습한 통계값으로 테스트 세트도 변환한다.</li>
+<li>키워드 : Data Leakage 방지</li>
+<li>데이터 분석 희망자 필수 공부!</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">ss = StandardScaler()</span><br><span class="line">ss.fit(train_input)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ss 훈련 데이터만 활용해서 학습(?)이 끝난 상태</span></span><br><span class="line"><span class="comment"># 표준화 처리를 훈련 데이터와 테스트 데이터에 동시 적용</span></span><br><span class="line">train_scaled = ss.transform(train_input)</span><br><span class="line">test_scaled = ss.transform(test_input)</span><br></pre></td></tr></table></figure>
+
+<h1 id="모델-학습"><a href="#모델-학습" class="headerlink" title="모델 학습"></a>모델 학습</h1><ul>
+<li>2개의 매개 변수 지정</li>
+<li>loss &#x3D; “log” &#x3D; 로지스틱 손실 함수로 지정</li>
+<li>max_iter &#x3D; 에포크 횟수 지정<ul>
+<li>에포크란(epoch)_01 : 훈련 데이터셋에 포함된 모든 데이터들이 한 번씩 모델을 통과한 횟수로, 모든 학습 데이터셋을 학습하는 횟수</li>
+<li>에포크란_02 : 1 epoch는 전체 학습 데이터셋이 한 신경망에 적용되어 순전파와 역전파를 통해 신경망을 한 번 통과했다는 의미가 된다, 즉 epoch가 10회라면, 학습 데이터 셋 A를 10회 모델에 학습시켰다는 것</li>
+<li>에포크란_03 : epoch를 높일수록, 다양한 무작위 가중치로 학습을 해보므로, 적합한 파라미터를 찾을 확률이 올라간다.(즉, 손실 값이 내려가게 된다.) <strong>하지만 지나치게 epoch를 높이게 되면, 그 학습 데이터셋에 과적합되어 다른데이터에 대해선 제대로 된 예측을 하지 못할 수 있다.</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> SGDClassifier</span><br><span class="line"></span><br><span class="line"><span class="comment"># 매개변수 지정</span></span><br><span class="line"><span class="comment"># 하이퍼파라미터 설정</span></span><br><span class="line"><span class="comment">## 매개변수 값을 dictionary 형태로 추가하는 코드 작성 가능 </span></span><br><span class="line"><span class="comment">## 강사는 입문자들에게는 비추천</span></span><br><span class="line">sc = SGDClassifier(loss = <span class="string">&quot;log&quot;</span>, max_iter = <span class="number">40</span>, random_state = <span class="number">42</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 모형 학습</span></span><br><span class="line">sc.fit(train_scaled, train_target)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 스코어 확인 (정확도)</span></span><br><span class="line"><span class="built_in">print</span>(sc.score(train_scaled, train_target))</span><br><span class="line"><span class="built_in">print</span>(sc.score(test_scaled, test_target)) <span class="comment"># 샘플링의 차이로 값이 일정하지 않고 다를 수 있다.</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>0.8571428571428571
+0.8
+</code></pre>
+<ul>
+<li>적절한 에포크 숫자를 찾자.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">sc = SGDClassifier(loss = <span class="string">&quot;log&quot;</span>, max_iter = <span class="number">100</span>, tol = <span class="literal">None</span>, random_state = <span class="number">42</span>)</span><br><span class="line">train_score = []</span><br><span class="line">test_score = []</span><br><span class="line">classes = np.unique(train_target)</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">300</span>):</span><br><span class="line">  sc.partial_fit(train_scaled, train_target, classes = classes)</span><br><span class="line">  train_score.append(sc.score(train_scaled, train_target))</span><br><span class="line">  test_score.append(sc.score(test_scaled, test_target))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 정확도</span></span><br><span class="line"><span class="built_in">print</span>(train_score[:<span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(test_score[:<span class="number">5</span>])</span><br></pre></td></tr></table></figure>
+
+<pre><code>[0.5294117647058824, 0.6218487394957983, 0.6386554621848739, 0.7310924369747899, 0.7226890756302521]
+[0.65, 0.55, 0.575, 0.7, 0.7]
+</code></pre>
+<ul>
+<li>모형 시각화</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax.plot(train_score)</span><br><span class="line">ax.plot(test_score)</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;Epoch&quot;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;Accuracy&quot;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># 파란색 훈련, 노란색 테스트</span></span><br><span class="line"><span class="comment"># 훈련데이터가 안정화되고 테스트데이터도 안정화되면서 가까운 곳은 epoch가 100일때의 지점이라고 알 수 있음.</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_4_2/output_16_0.png" alt="png"></p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/03/29/Chapter_4_2/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2022/03/29/Chapter_4_1/" aria-label=": 마켓과 머신러닝(Chapter_4_1)">
                             마켓과 머신러닝(Chapter_4_1)
                         </a>
@@ -8427,203 +8579,6 @@ class Person(builtins.object)
                     
                         <p>
                             <a href="/2022/03/22/python_grammer03/#post-footer" class="postShorten-excerpt_link link" aria-label>
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/2022/03/22/python_grammer02/" aria-label=": 파이썬 기초 문법 2">
-                            파이썬 기초 문법 2
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2022-03-22T09:00:00+09:00">
-	
-		    Mar 22, 2022
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Education/">Education</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="기초-문법-리뷰"><a href="#기초-문법-리뷰" class="headerlink" title="기초 문법 리뷰"></a>기초 문법 리뷰</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 리스트</span></span><br><span class="line">book_list = [<span class="string">&quot;A&quot;</span>,<span class="string">&quot;B&quot;</span>,<span class="string">&quot;C&quot;</span>]</span><br><span class="line"><span class="comment"># append, extend, insert, remove, pop, etc</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 튜플</span></span><br><span class="line">book_tuple = (<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;c&quot;</span>)</span><br><span class="line"><span class="comment"># 수정 삭제가 불가능하다</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 딕셔너리</span></span><br><span class="line">book_dictionary = &#123;<span class="string">&quot;책 제목&quot;</span> : [<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>], <span class="string">&quot;출판년도&quot;</span> :[<span class="number">2011</span>, <span class="number">2002</span>]&#125;</span><br><span class="line"><span class="comment"># keys(), values(), items(), get()</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="조건문-amp-반복문"><a href="#조건문-amp-반복문" class="headerlink" title="조건문 &amp; 반복문"></a>조건문 &amp; 반복문</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="literal">True</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;코드 실행&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> <span class="literal">True</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;코드 실행&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;코드 실행&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">  <span class="built_in">print</span>(i+<span class="number">1</span>, <span class="string">&quot;안녕하세요&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<pre><code>1 안녕하세요
-2 안녕하세요
-3 안녕하세요
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">book_list = [<span class="string">&quot;프로그래밍 R&quot;</span>, <span class="string">&quot;혼자 공부하는 머신러닝&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> book <span class="keyword">in</span> book_list:</span><br><span class="line">  <span class="built_in">print</span>(book)</span><br></pre></td></tr></table></figure>
-
-<pre><code>프로그래밍 R
-혼자 공부하는 머신러닝
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">strings01 = <span class="string">&quot;Hello World&quot;</span></span><br><span class="line"><span class="keyword">for</span> char <span class="keyword">in</span> strings01:</span><br><span class="line">  <span class="built_in">print</span>(char)</span><br></pre></td></tr></table></figure>
-
-<pre><code>H
-e
-l
-l
-o
- 
-W
-o
-r
-l
-d
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num_tuple = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> num_tuple:</span><br><span class="line">  <span class="built_in">print</span>(num)</span><br></pre></td></tr></table></figure>
-
-<pre><code>1
-2
-3
-4
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num_dict = &#123;<span class="string">&quot;A&quot;</span> : <span class="number">1</span>, <span class="string">&quot;B&quot;</span> : <span class="number">2</span>&#125;</span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> num_dict:</span><br><span class="line">  <span class="comment"># print(num) # keys 값이 나옴, value값이 아니라.</span></span><br><span class="line">  <span class="built_in">print</span>(num_dict[num])</span><br></pre></td></tr></table></figure>
-
-<pre><code>1
-2
-</code></pre>
-<h2 id="반복문의-필요성"><a href="#반복문의-필요성" class="headerlink" title="반복문의 필요성"></a>반복문의 필요성</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">product_name = [<span class="string">&quot;요구르트&quot;</span>, <span class="string">&quot;우유&quot;</span>, <span class="string">&quot;과자&quot;</span>]</span><br><span class="line">prices = [<span class="number">1000</span>, <span class="number">1500</span>, <span class="number">2000</span>]</span><br><span class="line">quantities = [<span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="comment"># name = product_name[0]</span></span><br><span class="line"><span class="comment"># sales = prices[0] * quantities[0]</span></span><br><span class="line"><span class="comment"># print(name + &quot;의 매출액은&quot; + str(sales) + &quot;원이다.&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># name = product_name[1]</span></span><br><span class="line"><span class="comment"># sales = prices[1] * quantities[1]</span></span><br><span class="line"><span class="comment"># print(name + &quot;의 매출액은&quot; + str(sales) + &quot;원이다.&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 위 코드의 반복문 코드 작성 필요 절감</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(product_name)):</span><br><span class="line">  name = product_name[i]</span><br><span class="line">  sales = prices[i] * quantities[i]</span><br><span class="line">  <span class="built_in">print</span>(name + <span class="string">&quot;의 매출액은&quot;</span> + <span class="built_in">str</span>(sales) + <span class="string">&quot;원이다.&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<pre><code>요구르트의 매출액은5000원이다.
-우유의 매출액은4500원이다.
-과자의 매출액은8000원이다.
-</code></pre>
-<h2 id="while"><a href="#while" class="headerlink" title="while"></a>while</h2><ul>
-<li>조건식이 들어간 반복문</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">count = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> count &lt;= <span class="number">5</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;안녕하세요..&quot;</span>)</span><br><span class="line">  count += <span class="number">1</span></span><br><span class="line">  <span class="built_in">print</span>(count)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;5 초과 했군요..&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<pre><code>안녕하세요..
-2
-안녕하세요..
-3
-안녕하세요..
-4
-안녕하세요..
-5
-안녕하세요..
-6
-5 초과 했군요..
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">count = <span class="number">3</span></span><br><span class="line"><span class="keyword">while</span> count &gt; <span class="number">0</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;안녕하세요..&quot;</span>)</span><br><span class="line">  count -= <span class="number">1</span></span><br><span class="line">  <span class="built_in">print</span>(count)</span><br></pre></td></tr></table></figure>
-
-<pre><code>안녕하세요..
-2
-안녕하세요..
-1
-안녕하세요..
-0
-</code></pre>
-<h2 id="리스트-컴프리헨션"><a href="#리스트-컴프리헨션" class="headerlink" title="리스트 컴프리헨션"></a>리스트 컴프리헨션</h2><ul>
-<li>for-loop 반복문을 한줄로 처리</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">my_list = [[<span class="number">10</span>], [<span class="number">20</span>, <span class="number">30</span>]]</span><br><span class="line"><span class="comment"># print(my_list)</span></span><br><span class="line"></span><br><span class="line">flattened_list = []</span><br><span class="line"><span class="keyword">for</span> value_list <span class="keyword">in</span> my_list:</span><br><span class="line">  <span class="comment"># print(value_list)</span></span><br><span class="line">  <span class="keyword">for</span> value <span class="keyword">in</span> value_list:</span><br><span class="line">    <span class="comment"># print(value)</span></span><br><span class="line">    flattened_list.append(value)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(flattened_list)</span><br><span class="line"><span class="comment"># 결괏값 : [10, 20 ,30]</span></span><br></pre></td></tr></table></figure>
-
-<pre><code>[10]
-[20, 30]
-[10, 20, 30]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">my_list = [[<span class="number">10</span>], [<span class="number">20</span>, <span class="number">30</span>]]</span><br><span class="line">flattened_list = [value <span class="keyword">for</span> value_list <span class="keyword">in</span> my_list <span class="keyword">for</span> value <span class="keyword">in</span> value_list]</span><br><span class="line"><span class="built_in">print</span>(flattened_list)</span><br></pre></td></tr></table></figure>
-
-<pre><code>[10, 20, 30]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">letters = []</span><br><span class="line"><span class="keyword">for</span> char <span class="keyword">in</span> <span class="string">&quot;helloworld&quot;</span>:</span><br><span class="line">  letters.append(char)</span><br><span class="line"><span class="built_in">print</span>(letters)</span><br></pre></td></tr></table></figure>
-
-<pre><code>[&#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;o&#39;, &#39;w&#39;, &#39;o&#39;, &#39;r&#39;, &#39;l&#39;, &#39;d&#39;]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">letters2 = [char <span class="keyword">for</span> char <span class="keyword">in</span> <span class="string">&quot;helloworld&quot;</span>]</span><br><span class="line"><span class="built_in">print</span>(letters2)</span><br></pre></td></tr></table></figure>
-
-<pre><code>[&#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;o&#39;, &#39;w&#39;, &#39;o&#39;, &#39;r&#39;, &#39;l&#39;, &#39;d&#39;]
-</code></pre>
-<h2 id="사용자-정의-함수-User-Defined-Function"><a href="#사용자-정의-함수-User-Defined-Function" class="headerlink" title="사용자 정의 함수 (User-Defined Function)"></a>사용자 정의 함수 (User-Defined Function)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">함수명</span>():</span><br><span class="line">  <span class="comment"># 코드 실행</span></span><br><span class="line">  <span class="keyword">return</span> 값</span><br><span class="line"></span><br><span class="line">함수명()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>basic.py로 저장할떄, 예시</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /user/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">temp</span>(<span class="params">content, letter</span>):</span><br><span class="line">  <span class="string">&quot;&quot;&quot;content안에 있는 문자를 세는 함수입니다.</span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    content(str) : 탐색 문자열</span></span><br><span class="line"><span class="string">    letter(str) : 찾을 문자열</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Returns:</span></span><br><span class="line"><span class="string">    int</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;함수 테스트&quot;</span>)</span><br><span class="line"></span><br><span class="line">  cnt = <span class="built_in">len</span>([char <span class="keyword">for</span> char <span class="keyword">in</span> content <span class="keyword">if</span> char == letter])</span><br><span class="line">  <span class="keyword">return</span> cnt</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">  <span class="built_in">help</span>(temp)</span><br><span class="line">  docstring = temp.__doc__ <span class="comment"># docstring 문서화</span></span><br><span class="line">  <span class="built_in">print</span>(docstring)</span><br></pre></td></tr></table></figure>
-
-<pre><code>Help on function temp in module __main__:
-
-temp(content, letter)
-    content안에 있는 문자를 세는 함수입니다.
-    
-    Args:
-      content(str) : 탐색 문자열
-      letter(str) : 찾을 문자열
-    
-    Returns:
-      int
-
-content안에 있는 문자를 세는 함수입니다.
-  
-  Args:
-    content(str) : 탐색 문자열
-    letter(str) : 찾을 문자열
-
-  Returns:
-    int
-  
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">value_list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;avg:&quot;</span>, <span class="built_in">sum</span>(value_list) / <span class="built_in">len</span>(value_list))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 중간값</span></span><br><span class="line">midpoint = <span class="built_in">int</span>(<span class="built_in">len</span>(value_list) / <span class="number">2</span>)</span><br><span class="line"><span class="comment"># len(value_list) % 2 == 0:</span></span><br><span class="line"><span class="built_in">print</span>((value_list[midpoint - <span class="number">1</span>] + value_list[midpoint]) / <span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(value_list[midpoint])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mean_and_median</span>(<span class="params">value_list</span>):</span><br><span class="line">  <span class="string">&quot;&quot;&quot; 숫자 리스트 요소들의 평균과 중간값을 구하는 코드를 작성해라</span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    value_list (iterable of int / float): A list of int numbers</span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">  Return:</span></span><br><span class="line"><span class="string">    tuple(float, float)</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br><span class="line">  <span class="comment"># 평균</span></span><br><span class="line">  mean = <span class="built_in">sum</span>(value_list) / <span class="built_in">len</span>(value_list)</span><br><span class="line">  <span class="comment"># 중간값</span></span><br><span class="line">  midpoint = <span class="built_in">int</span>(<span class="built_in">len</span>(value_list) / <span class="number">2</span>)</span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">len</span>(value_list) % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">    median = (value_list[midpoint - <span class="number">1</span>] + value_list[midpoint]) / <span class="number">2</span></span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    median = value_list[midpoint]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> mean, median</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">  value_lists = [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">  avg, median = mean_and_median(value_lists)</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;avg:&quot;</span>, avg)</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;median:&quot;</span>, median)</span><br></pre></td></tr></table></figure>
-
-<pre><code>avg: 3.5
-3.5
-4
-avg: 2.5714285714285716
-median: 2
-</code></pre>
-<ul>
-<li>데코레이터, 변수명 immutable or mutable<br>context manager</li>
-</ul>
-<h2 id="함수-클로저-사용하기"><a href="#함수-클로저-사용하기" class="headerlink" title="함수 클로저 사용하기"></a>함수 클로저 사용하기</h2><ul>
-<li>global 함수 (전역 변수 변경)</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">10</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">foo</span>():</span><br><span class="line">  x = <span class="number">20</span></span><br><span class="line">  <span class="built_in">print</span>(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
-
-<pre><code>10
-20
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">10</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">foo</span>():</span><br><span class="line">  <span class="keyword">global</span> x <span class="comment"># 전역 변수를 설정하겠다</span></span><br><span class="line">  x = <span class="number">20</span></span><br><span class="line">  <span class="built_in">print</span>(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
-
-<pre><code>10
-20
-</code></pre>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a href="/2022/03/22/python_grammer02/#post-footer" class="postShorten-excerpt_link link" aria-label>
                                 Comment and share
                             </a>
                         </p>
