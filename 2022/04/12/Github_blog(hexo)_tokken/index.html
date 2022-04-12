@@ -1,0 +1,603 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Winters Blog">
+    <title>Github_blog(hexo) 연동 오류 -tokken - Winters Blog</title>
+    <meta name="author" content="Winters">
+    
+    
+        <link rel="icon" href="https://AHNDUHONG.github.io/assets/images/ADH_Favicon.ico">
+    
+    
+        
+            <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+        
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg"},"articleBody":"\n이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.\n\n\n개요\n깃허브 블로그 계정 연동 오류 fatal: Authentication failed for ~ 를 github tokken 을 생성함으로 해결 하는 방법입니다.\n\n\n\n깃허브(Github) 블로그 테마를 변경하면서 무엇을 잘못 건들였는지 git add, commit, push 도 가능하고 블로그에 글도 업데이트 되는데 깃허브 메인 화면의 30 contributions in the last year 및 내 활동기록이 기록이 되지않는다.\ngit add, commit, push 정상 작동\n  \n\n\n\n\nGithub 메인화면 내 활동 기록이 기록되지 않는 현상 발견\n  \n\n\n\n\n\n\n처음에는 커밋(commit)이라는 단어를 내가 잘못 이해하고 있나 라고 의심을 해서 커밋에 대한 구글링을 했지만 내가 알고 있는 커밋이라는 용어가 틀리지 않았고 어떻게 해야될지 감이 안잡혀 evan 강사님(https://dschloe.github.io/)에게 여쭤보았고 방법을 알려주셨다.\nwindows 검색 화면에서 웹 자격 증명을 클릭\n  \n\n\n\n\nwindows 자격 증명\n  \n\n\n\n\n일반 자격 증명에서 github 목록을 클릭하여 편집을 눌러 계정을 다시 업데이트 한다\n  \n\n\n\n\n\n\n그 후에 Pycharm(필자는 Pycharm을 통해 프로젝트를 관리 하는중)에 돌아와 다시 git add, commit, push 를 하면 fatal: Authentication failed for ~ 라는 문구가 뜬다. 이 문구는 local 계정과 github 계정의 연동이 틀려서 나오는 것이고 ID&#x2F;Password 는 21년 8월 이후로 토큰으로 대체 되었다 라는 의미입니다. 즉 계정 연동을 다시 해줘야 한다는 뜻이므로 토큰을 생성 및 연동하러 Github 페이지로 접속하겠습니다.\n  \n\n\nTokken\nhttps://wotres.tistory.com/m/entry/Github-에러-해결법-Authentication-failed-for-use-a-personal-access-token-instead 고수트님의 블로그 내용을 참고하여 계정 연동을 시작\n깃허브 접속\n\nhttps://github.com/\n\n\n우측 상단의 settings 클릭\n  \n\n\n\n\n좌측 메뉴 끝에 developer settings 클릭\n  \n\n\n\n\nPersonal access tokens 클릭\n  \n\n\n\n\nNote, expiration에 작성하고 싶은 내용, 기간 설정 후 repo 클릭 후 Generate tokken 클릭\n  \n\n\n\n\n생성된 토큰 코드 복사\n  \n\n\n\n\ngit push\ngit push를 입력하면 ID &#x2F; Password 입력하라고 하는데 사용자의 깃허브 아이디와 복사한 토큰을 패스워드에 넣어주면 된다.(패스워드는 입력을 해도 보이지 않게 되어 필자는 ctrl+v로 붙여 넣었다. ***terminal 창에서 ctrl+v 로 붙여넣기가 되지않으면 insert 키로 붙여넣으면 됨.)\n  \n\n\n\n\ngit push 를 할 때 마다 위의 사진 처럼 Username 과 Password(tokken)을 입력하라고 나오기 때문에 Tokken 은 복사하여 메모장이나 기록할 파일에 저장하길 바랍니다.\n\n\n\n\n\n","dateCreated":"2022-04-12T09:00:00+09:00","dateModified":"2022-04-12T17:36:58+09:00","datePublished":"2022-04-12T09:00:00+09:00","description":"","headline":"Github_blog(hexo) 연동 오류 -tokken","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg","logo":{"@type":"ImageObject","url":"blog_profile_image_01.jpg"}},"url":"https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/","keywords":"tokken"}</script>
+    <meta name="description" content="이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.   개요 깃허브 블로그 계정 연동 오류 fatal: Authentication failed for ~ 를 github tokken 을 생성함으로 해결 하는 방법입니다.    깃허브(Github) 블로그 테마를 변경하면서 무엇">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Github_blog(hexo) 연동 오류 -tokken">
+<meta property="og:url" content="https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/index.html">
+<meta property="og:site_name" content="Winters Blog">
+<meta property="og:description" content="이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.   개요 깃허브 블로그 계정 연동 오류 fatal: Authentication failed for ~ 를 github tokken 을 생성함으로 해결 하는 방법입니다.    깃허브(Github) 블로그 테마를 변경하면서 무엇">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/1.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/2.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/3.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/4.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/5.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/6.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/7.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/8.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/9.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/10.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/11.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/12.png">
+<meta property="article:published_time" content="2022-04-12T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-12T08:36:58.621Z">
+<meta property="article:author" content="Winters">
+<meta property="article:tag" content="tokken">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_tokken/1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://AHNDUHONG.github.io/assets/images/blog_profile_image_01.jpg">
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-nweealnwexi63lhm1agu2ku3rw8tqhtfz0od0lsqiw3kbrdmk45anokos3uj.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/" aria-label>
+            Winters Blog
+        </a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about" aria-label="Open the link: /#about">
+        
+        
+            <img class="header-picture" src="/assets/images/blog_profile_image_01.jpg" alt="Author&#39;s picture">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about" aria-label="Read more about the author">
+                    <img class="sidebar-profile-picture" src="/assets/images/blog_profile_image_01.jpg" alt="Author&#39;s picture">
+                </a>
+                <h4 class="sidebar-profile-name">Winters</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>개발자를 꿈꾸는 어른이</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/" rel="noopener" title="Home">
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" rel="noopener" title="Categories">
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" rel="noopener" title="Tags">
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" rel="noopener" title="Archives">
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/AHNDUHONG" target="_blank" rel="external nofollow noopener noreferrer" title="GitHub">
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="mailto:dksenghd123@naver.com" target="_blank" rel="external nofollow noopener noreferrer" title="Mail">
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" rel="noopener" title="Search">
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" rel="noopener" title="About">
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/atom.xml" rel="noopener" title="RSS">
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4" class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            Github_blog(hexo) 연동 오류 -tokken
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2022-04-12T09:00:00+09:00">
+	
+		    Apr 12, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/github/">github</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <ul>
+<li>이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.</li>
+</ul>
+<hr>
+<h3 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h3><ul>
+<li>깃허브 블로그 계정 연동 오류 fatal: Authentication failed for ~ 를 github tokken 을 생성함으로 해결 하는 방법입니다.</li>
+</ul>
+<hr>
+<ul>
+<li>깃허브(Github) 블로그 테마를 변경하면서 무엇을 잘못 건들였는지 git add, commit, push 도 가능하고 블로그에 글도 업데이트 되는데 깃허브 메인 화면의 <strong>30 contributions in the last year 및 내 활동기록이 기록이 되지않는다.</strong><ul>
+<li><p><strong>git add, commit, push 정상 작동</strong></p>
+<p>  <img src="/images/Github_blog(hexo)_tokken/1.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>Github 메인화면 내 활동 기록이 기록되지 않는 현상 발견</strong></p>
+<p>  <img src="/images/Github_blog(hexo)_tokken/2.png" alt="png"></p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>처음에는 커밋(commit)이라는 단어를 내가 잘못 이해하고 있나 라고 의심을 해서 커밋에 대한 구글링을 했지만 내가 알고 있는 커밋이라는 용어가 틀리지 않았고 어떻게 해야될지 감이 안잡혀 evan 강사님(<a target="_blank" rel="external nofollow noopener noreferrer" href="https://dschloe.github.io/">https://dschloe.github.io/</a>)에게 여쭤보았고 방법을 알려주셨다.<ul>
+<li><p><strong>windows 검색 화면에서 웹 자격 증명을 클릭</strong></p>
+<p>  <img src="/images/Github_blog(hexo)_tokken/3.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>windows 자격 증명</strong></p>
+<p>  <img src="/images/Github_blog(hexo)_tokken/4.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>일반 자격 증명에서 github 목록을 클릭하여 편집을 눌러 계정을 다시 업데이트 한다</strong></p>
+<p>  <img src="/images/Github_blog(hexo)_tokken/5.png" alt="png"></p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>그 후에 Pycharm(필자는 Pycharm을 통해 프로젝트를 관리 하는중)에 돌아와 다시 git add, commit, push 를 하면 fatal: Authentication failed for ~ 라는 문구가 뜬다. 이 문구는 local 계정과 github 계정의 연동이 틀려서 나오는 것이고 ID&#x2F;Password 는 21년 8월 이후로 토큰으로 대체 되었다 라는 의미입니다. 즉 계정 연동을 다시 해줘야 한다는 뜻이므로 토큰을 생성 및 연동하러 Github 페이지로 접속하겠습니다.</p>
+<p>  <img src="/images/Github_blog(hexo)_tokken/6.png" alt="png"></p>
+</li>
+</ul>
+<h2 id="Tokken"><a href="#Tokken" class="headerlink" title="Tokken"></a>Tokken</h2><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://wotres.tistory.com/m/entry/Github-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95-Authentication-failed-for-use-a-personal-access-token-instead">https://wotres.tistory.com/m/entry/Github-에러-해결법-Authentication-failed-for-use-a-personal-access-token-instead</a> 고수트님의 블로그 내용을 참고하여 계정 연동을 시작<ul>
+<li><p><strong>깃허브 접속</strong></p>
+<ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/"><strong>https://github.com/</strong></a></li>
+</ul>
+</li>
+<li><p><strong>우측 상단의 settings 클릭</strong></p>
+<p>  <img src="/images/Github_blog(hexo)_tokken/7.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>좌측 메뉴 끝에 developer settings 클릭</strong></p>
+<p>  <img src="/images/Github_blog(hexo)_tokken/8.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>Personal access tokens 클릭</strong></p>
+<p>  <img src="/images/Github_blog(hexo)_tokken/9.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>Note, expiration에 작성하고 싶은 내용, 기간 설정 후 repo 클릭 후 Generate tokken 클릭</strong></p>
+<p>  <img src="/images/Github_blog(hexo)_tokken/10.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>생성된 토큰 코드 복사</strong></p>
+<p>  <img src="/images/Github_blog(hexo)_tokken/11.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>git push</strong><ul>
+<li><p>git push를 입력하면 ID &#x2F; Password 입력하라고 하는데 사용자의 깃허브 아이디와 복사한 토큰을 패스워드에 넣어주면 된다.(패스워드는 입력을 해도 보이지 않게 되어 필자는 ctrl+v로 붙여 넣었다. ***terminal 창에서 ctrl+v 로 붙여넣기가 되지않으면 insert 키로 붙여넣으면 됨.)</p>
+<p>  <img src="/images/Github_blog(hexo)_tokken/12.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>git push 를 할 때 마다 위의 사진 처럼 Username 과 Password(tokken)을 입력하라고 나오기 때문에 Tokken 은 복사하여 메모장이나 기록할 파일에 저장하길 바랍니다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/tokken/" rel="tag">tokken</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/12/Github(hexo)_blog_settings_02/" data-tooltip="Github_blog(hexo) 프로필 설정" aria-label="PREVIOUS: Github_blog(hexo) 프로필 설정">
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/06/AI_Project_Spaceship_Titanic/" data-tooltip="AI_Project_SpaceShip_Titanic" aria-label="NEXT: AI_Project_SpaceShip_Titanic">
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2022 Winters. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/12/Github(hexo)_blog_settings_02/" data-tooltip="Github_blog(hexo) 프로필 설정" aria-label="PREVIOUS: Github_blog(hexo) 프로필 설정">
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/06/AI_Project_Spaceship_Titanic/" data-tooltip="AI_Project_SpaceShip_Titanic" aria-label="NEXT: AI_Project_SpaceShip_Titanic">
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/blog_profile_image_01.jpg" alt="Author&#39;s picture">
+        
+            <h4 id="about-card-name">Winters</h4>
+        
+            <div id="about-card-bio"><p>개발자를 꿈꾸는 어른이</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>개발자(예비)</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                대한민국/서울
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/blog_theme_image_03.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-dvu41dvy5202v52bwzsnpck9devc8hugsy17mbuqp6i4ms8q6rt7zrc4avbe.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

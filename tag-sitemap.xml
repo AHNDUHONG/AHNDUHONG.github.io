@@ -3,8 +3,15 @@
 
 
     <url>
+        <loc>https://ahnduhong.github.io/tags/tokken/</loc>
+        <lastmod>2022-04-12T08:36:58.621Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://ahnduhong.github.io/tags/blog/</loc>
-        <lastmod>2022-04-12T03:26:07.848Z</lastmod>
+        <lastmod>2022-04-12T07:30:54.773Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
