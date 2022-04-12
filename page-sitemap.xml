@@ -10,6 +10,33 @@
     
     
     <url>
+        <loc>https://ahnduhong.github.io/all-tags/</loc>
+        <lastmod>2022-04-10T12:35:30.788Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    
+    
+    <url>
+        <loc>https://ahnduhong.github.io/all-categories/</loc>
+        <lastmod>2022-04-10T12:35:26.716Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    
+    
+    <url>
+        <loc>https://ahnduhong.github.io/all-archives/</loc>
+        <lastmod>2022-04-10T12:35:21.226Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    
+    
+    <url>
         <loc>https://ahnduhong.github.io/images.html</loc>
         <lastmod>2022-03-18T05:27:02.097Z</lastmod>
         <changefreq>weekly</changefreq>
