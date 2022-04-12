@@ -198,24 +198,30 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
-                        <a class="link-unstyled" href="/2022/04/10/Github(hexo)/" aria-label=": 깃허브(헥소) 블로그 환경설정 변경(미완성)">
-                            깃허브(헥소) 블로그 환경설정 변경(미완성)
+                        <a class="link-unstyled" href="/2022/04/12/Github(hexo)_blog_settings_01/" aria-label=": Github_blog(hexo) 테마 변경 및 환경 설정">
+                            Github_blog(hexo) 테마 변경 및 환경 설정
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2022-04-10T09:00:00+09:00">
+    <time datetime="2022-04-12T09:00:00+09:00">
 	
-		    Apr 10, 2022
+		    Apr 12, 2022
     	
     </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/blog/">blog</a>
+
+
     
 </div>
 
             </div>
             
                 <div class="postShorten-content">
-                    <h1 id="Github-blog-hexo"><a href="#Github-blog-hexo" class="headerlink" title="Github_blog (hexo)"></a>Github_blog (hexo)</h1><ul>
+                    <h3 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h3><ul>
 <li><p>이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.</p>
 <hr>
 </li>
@@ -227,27 +233,55 @@
 <p>  <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/kakawait/hugo-tranquilpeak-theme">GitHub - kakawait&#x2F;hugo-tranquilpeak-theme: A gorgeous responsive theme for Hugo blog framework</a></p>
 </li>
 <li><p>위 링크를 참고하며 tranquilpeak 테마를 변경하는 중 수많은 에러들이 발생하였고 해결하며 테마 변경을 하였다. (해결 당시 글을 쓰고 있지 않아 뒤죽박죽 섞여서 과정 설명은 참고 사이트로 대체 합니다.)</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Remote origin already exists</span><br></pre></td></tr></table></figure>
 <ul>
 <li>Remote origin already exists : 기존에 연결되어 있는 레파지토리가 다시 새로운 레파지토리에 소스코드를 올리려고 하면 발생되는 에러.<ul>
 <li>참고 사이트 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://coding-factory.tistory.com/619">https://coding-factory.tistory.com/619</a></li>
 </ul>
 </li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Fatal : refusing to merge unrelated histories</span><br></pre></td></tr></table></figure>
+<ul>
 <li>Fatal : refusing to merge unrelated histories :  이 오류는 명령어 git push 또는 git pull을 진행할때 발견할 수 있는 오류, 로컬 저장소와 원격지의 저장소 기록을 비교했을 때 소스코드의 차이가 심한 저장소의 경우, 병합 오류가 날 것을 대비하여 오류 메시지를 띄우는 것 입니다.<ul>
 <li>참고 사이트 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://ndb796.tistory.com/275">https://ndb796.tistory.com/275</a></li>
 </ul>
 </li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[rejected] master → master (non-fast-forward) : gitignore</span><br></pre></td></tr></table></figure>
+<ul>
 <li>[rejected] master → master (non-fast-forward) : gitignore 파일 또는 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://readme.md/">README.md</a> 파일의 문제로 인해 발생<ul>
 <li>참고 사이트 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://somjang.tistory.com/entry/Git-rejected-master-master-non-fast-forward-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95">https://somjang.tistory.com/entry/Git-rejected-master-master-non-fast-forward-해결-방법</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>테마 변경 후 블로그 환경 설정을 위해 사이드바 메뉴 설정 및 RSS feed 등 변경 중 일부 환경 설정들의 변경이 안되어 확인을 위해 작업한 terminal 을 체크하니 특이점 발생</p>
-<ul>
-<li>tranquilpeak 환경 설정 변경 참고 사이트 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://wonderbout.tistory.com/127">https://wonderbout.tistory.com/127</a></li>
-<li>On branch master<br>  nothing to commit, working tree clean<br>  Everything up-to-date<br>  branch ‘master’ set up to track</li>
 </ul>
-<p>  <img src="/images/Github(hexo)/Github_capture_01.png" alt="png"></p>
+<h3 id="환경-설정"><a href="#환경-설정" class="headerlink" title="환경 설정"></a>환경 설정</h3><ul>
+<li>테마 변경 후 블로그 환경 설정을 위해 사이드바 메뉴 설정 및 RSS feed 등 변경<ul>
+<li><p>테마 이미지 및 프로필 이미지, favicon 수정 및 categories, tags, archives 설정 후 확인</p>
+<p>  <img src="/images/Github(hexo)_blog_settings_01/1.png" alt="png"></p>
+<ul>
+<li>email 설정은 url이 mailto라고 되어 있을텐데 mailto:사용자아이디@메일 로 변경</li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#123;project_name&#125;/themes/tranquilpeak/_config.yml</span></span><br><span class="line">mail:</span><br><span class="line">            title: global.mail</span><br><span class="line">            url: mailto:dksenghd123@naver.com</span><br><span class="line">            icon: fa fa-envelope</span><br></pre></td></tr></table></figure>
+<ul>
+<li>참고 사이트 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://wonderbout.tistory.com/127">https://wonderbout.tistory.com/127</a></li>
+</ul>
+</li>
+<li><p>테마, 프로필 이미지 및 favicon 수정은 잘되었으나 categories, tags, archives 등 아래 사진과 같이 되어 확인.</p>
+<p>  <img src="/images/Github(hexo)_blog_settings_01/2.png" alt="png"></p>
+<ul>
+<li>확인 해보니 잘못된 저장 경로({project_name}&#x2F;themes&#x2F;tranquilpeak&#x2F;source&#x2F;all-categories)에 위치하여 {project_name}&#x2F;source&#x2F;all-categories 로 변경 후 확인, 정상 작동</li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#123;project_name&#125;/themes/tranquilpeak/source/all-categories</span></span><br><span class="line"><span class="comment"># ↓↓↓↓↓↓↓↓↓↓ 저장된 위치 변경</span></span><br><span class="line"><span class="comment"># &#123;project_name&#125;/source/all-categories</span></span><br></pre></td></tr></table></figure>
+<p>  <img src="/images/Github(hexo)_blog_settings_01/3.png" alt="png"></p>
+<ul>
+<li>참고 사이트 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://allaboutmoon.tistory.com/232">https://allaboutmoon.tistory.com/232</a></li>
+<li>categories 와 tags이 비어 있어 작성한 글에 categories 및 tags 추가 후 확인, 정상 작동  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#123;project_name&#125;/source/_post/&#123;my_post.md&#125;</span></span><br><span class="line">---</span><br><span class="line">title: <span class="string">&quot;AI_Project_SpaceShip_Titanic&quot;</span></span><br><span class="line">author: <span class="string">&quot;winters&quot;</span></span><br><span class="line"><span class="built_in">date</span>: <span class="string">&#x27;2022-04-06&#x27;</span></span><br><span class="line">categories: <span class="string">&#x27;Project&#x27;</span></span><br><span class="line">tags: <span class="string">&#x27;project&#x27;</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+  <img src="/images/Github(hexo)_blog_settings_01/4.png" alt="png"></li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 
@@ -258,7 +292,7 @@
                     
                     
                         <p>
-                            <a href="/2022/04/10/Github(hexo)/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                            <a href="/2022/04/12/Github(hexo)_blog_settings_01/#post-footer" class="postShorten-excerpt_link link" aria-label>
                                 Comment and share
                             </a>
                         </p>
@@ -287,6 +321,12 @@
 		    Apr 06, 2022
     	
     </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Project/">Project</a>
+
+
     
 </div>
 
@@ -339,6 +379,12 @@
 		    Mar 31, 2022
     	
     </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
     
 </div>
 
@@ -515,6 +561,12 @@ fruits_300.npy      100%[===================&gt;]   2.86M  --.-KB/s    in 0.07s
     	
     </time>
     
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
+    
 </div>
 
             </div>
@@ -687,6 +739,12 @@ fruits_300.npy      100%[===================&gt;]   2.86M  --.-KB/s    in 0.05s
     	
     </time>
     
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
+    
 </div>
 
             </div>
@@ -807,6 +865,12 @@ fruits_300.npy      100%[===================&gt;]   2.86M  --.-KB/s    in 0.05s
 		    Mar 30, 2022
     	
     </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
     
 </div>
 
@@ -1279,6 +1343,12 @@ memory usage: 203.2 KB
     	
     </time>
     
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
+    
 </div>
 
             </div>
@@ -1467,6 +1537,12 @@ Wall time: 4.09 s
     	
     </time>
     
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
+    
 </div>
 
             </div>
@@ -1612,6 +1688,12 @@ memory usage: 7.6+ KB
 		    Mar 29, 2022
     	
     </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
     
 </div>
 
@@ -2038,6 +2120,12 @@ memory usage: 7.6+ KB
 		    Mar 28, 2022
     	
     </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
     
 </div>
 

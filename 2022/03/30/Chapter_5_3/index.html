@@ -17,7 +17,7 @@
             <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
         
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg"},"articleBody":"트리의 앙상블\nLightGBM 기억!\nGBM –&gt; XGBoost –&gt; LightBGM\n참고 1. 모델 개발 속도가 빨라졌는지?\n참고 2. 모델의 성능이 좋아졌는지?\n\n\nTabNet (2019)\n딥러닝 컨셉 이해\n\n\n\n랜덤 포레스트(Forest)\n결정 트리 나무를 500개 심기\n최종적인 결정은 투표 방식\n나무-1 : 양성\n나무-2 : 음성\n나무-3 : 양성…\n나무-500 : 양성\n\n\n\n12345678910111213import numpy as npimport pandas as pdfrom sklearn.model_selection import train_test_splitwine = pd.read_csv(&#x27;https://bit.ly/wine_csv_data&#x27;)data = wine[[&#x27;alcohol&#x27;, &#x27;sugar&#x27;, &#x27;pH&#x27;]].to_numpy()target = wine[&#x27;class&#x27;].to_numpy()train_input, test_input, train_target, test_target = train_test_split(data,                                                                       target,                                                                       test_size=0.2,                                                                       random_state=42)\n\n\np.267\ncross_validate() 교차 검증 수행\n\n\n\n123456from sklearn.model_selection import cross_validatefrom sklearn.ensemble import RandomForestClassifierrf = RandomForestClassifier(n_jobs = -1, random_state = 42) # 모든 CPU 코어를 사용scores = cross_validate(rf, train_input, train_target,                        return_train_score = True, n_jobs = -1)print(np.mean(scores[&#x27;train_score&#x27;]), np.mean(scores[&#x27;test_score&#x27;]))\n\n0.9973541965122431 0.8905151032797809\n\n12rf.fit(train_input, train_target)print(rf.feature_importances_)\n\n[0.23167441 0.50039841 0.26792718]\n\n123rf = RandomForestClassifier(oob_score = True, n_jobs = -1, random_state = 42) # oob(out of bag) 부트스트랩 샘플에 포함되지 않고 남는 샘플rf.fit(train_input, train_target)print(rf.oob_score_)\n\n0.8934000384837406\n\n그레이디언트 부스팅\n이전 트리(깊이가 얕은 결정 트리)의 오차를 보완하는 방식으로 사용\n학습률 매개변수로 속도를 조절\n장점 : 과대적합을 잘 억제시킴\n단점 : 속도가 느림\n\n123456from sklearn.ensemble import GradientBoostingClassifiergb = GradientBoostingClassifier(random_state = 42)scores = cross_validate(gb, train_input, train_target,                        return_train_score = True, n_jobs = -1) # return_train_score 훈련 점수 포함 여부print(np.mean(scores[&#x27;train_score&#x27;]), np.mean(scores[&#x27;test_score&#x27;]))\n\n0.8881086892152563 0.8720430147331015\n\n12345gb = GradientBoostingClassifier(n_estimators = 500, learning_rate = 0.2, random_state = 42)scores = cross_validate(gb, train_input, train_target,                        return_train_score = True, n_jobs = -1)print(np.mean(scores[&#x27;train_score&#x27;]), np.mean(scores[&#x27;test_score&#x27;]))\n\n0.9464595437171814 0.8780082549788999\n\n\n흐름\n\n데이터 전처리 &#x2F; 시각화\n\n\n\n기본 모형으로 전체 흐름을 설계\n\n\n\n여러 모형을 비교 대조\n\n\n\n교차검증. 하이퍼파라미터 성능 비교\n\n\n…\n\n\n\n","dateCreated":"2022-03-30T09:00:00+09:00","dateModified":"2022-03-30T19:24:49+09:00","datePublished":"2022-03-30T09:00:00+09:00","description":"","headline":"마켓과 머신러닝(Chapter_5_3)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg","logo":{"@type":"ImageObject","url":"blog_profile_image_01.jpg"}},"url":"https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg"},"articleBody":"트리의 앙상블\nLightGBM 기억!\nGBM –&gt; XGBoost –&gt; LightBGM\n참고 1. 모델 개발 속도가 빨라졌는지?\n참고 2. 모델의 성능이 좋아졌는지?\n\n\nTabNet (2019)\n딥러닝 컨셉 이해\n\n\n\n랜덤 포레스트(Forest)\n결정 트리 나무를 500개 심기\n최종적인 결정은 투표 방식\n나무-1 : 양성\n나무-2 : 음성\n나무-3 : 양성…\n나무-500 : 양성\n\n\n\n12345678910111213import numpy as npimport pandas as pdfrom sklearn.model_selection import train_test_splitwine = pd.read_csv(&#x27;https://bit.ly/wine_csv_data&#x27;)data = wine[[&#x27;alcohol&#x27;, &#x27;sugar&#x27;, &#x27;pH&#x27;]].to_numpy()target = wine[&#x27;class&#x27;].to_numpy()train_input, test_input, train_target, test_target = train_test_split(data,                                                                       target,                                                                       test_size=0.2,                                                                       random_state=42)\n\n\np.267\ncross_validate() 교차 검증 수행\n\n\n\n123456from sklearn.model_selection import cross_validatefrom sklearn.ensemble import RandomForestClassifierrf = RandomForestClassifier(n_jobs = -1, random_state = 42) # 모든 CPU 코어를 사용scores = cross_validate(rf, train_input, train_target,                        return_train_score = True, n_jobs = -1)print(np.mean(scores[&#x27;train_score&#x27;]), np.mean(scores[&#x27;test_score&#x27;]))\n\n0.9973541965122431 0.8905151032797809\n\n12rf.fit(train_input, train_target)print(rf.feature_importances_)\n\n[0.23167441 0.50039841 0.26792718]\n\n123rf = RandomForestClassifier(oob_score = True, n_jobs = -1, random_state = 42) # oob(out of bag) 부트스트랩 샘플에 포함되지 않고 남는 샘플rf.fit(train_input, train_target)print(rf.oob_score_)\n\n0.8934000384837406\n\n그레이디언트 부스팅\n이전 트리(깊이가 얕은 결정 트리)의 오차를 보완하는 방식으로 사용\n학습률 매개변수로 속도를 조절\n장점 : 과대적합을 잘 억제시킴\n단점 : 속도가 느림\n\n123456from sklearn.ensemble import GradientBoostingClassifiergb = GradientBoostingClassifier(random_state = 42)scores = cross_validate(gb, train_input, train_target,                        return_train_score = True, n_jobs = -1) # return_train_score 훈련 점수 포함 여부print(np.mean(scores[&#x27;train_score&#x27;]), np.mean(scores[&#x27;test_score&#x27;]))\n\n0.8881086892152563 0.8720430147331015\n\n12345gb = GradientBoostingClassifier(n_estimators = 500, learning_rate = 0.2, random_state = 42)scores = cross_validate(gb, train_input, train_target,                        return_train_score = True, n_jobs = -1)print(np.mean(scores[&#x27;train_score&#x27;]), np.mean(scores[&#x27;test_score&#x27;]))\n\n0.9464595437171814 0.8780082549788999\n\n\n흐름\n\n데이터 전처리 &#x2F; 시각화\n\n\n\n기본 모형으로 전체 흐름을 설계\n\n\n\n여러 모형을 비교 대조\n\n\n\n교차검증. 하이퍼파라미터 성능 비교\n\n\n…\n\n\n\n","dateCreated":"2022-03-30T09:00:00+09:00","dateModified":"2022-04-12T10:50:19+09:00","datePublished":"2022-03-30T09:00:00+09:00","description":"","headline":"마켓과 머신러닝(Chapter_5_3)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/30/Chapter_5_3/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg","logo":{"@type":"ImageObject","url":"blog_profile_image_01.jpg"}},"url":"https://ahnduhong.github.io/2022/03/30/Chapter_5_3/","keywords":"edu"}</script>
     <meta name="description" content="트리의 앙상블 LightGBM 기억! GBM –&gt; XGBoost –&gt; LightBGM 참고 1. 모델 개발 속도가 빨라졌는지? 참고 2. 모델의 성능이 좋아졌는지?   TabNet (2019) 딥러닝 컨셉 이해    랜덤 포레스트(Forest) 결정 트리 나무를 500개 심기 최종적인 결정은 투표 방식 나무-1 : 양성 나무-2 : 음성 나무-3">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="마켓과 머신러닝(Chapter_5_3)">
@@ -26,8 +26,9 @@
 <meta property="og:description" content="트리의 앙상블 LightGBM 기억! GBM –&gt; XGBoost –&gt; LightBGM 참고 1. 모델 개발 속도가 빨라졌는지? 참고 2. 모델의 성능이 좋아졌는지?   TabNet (2019) 딥러닝 컨셉 이해    랜덤 포레스트(Forest) 결정 트리 나무를 500개 심기 최종적인 결정은 투표 방식 나무-1 : 양성 나무-2 : 음성 나무-3">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-30T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-30T10:24:49.137Z">
+<meta property="article:modified_time" content="2022-04-12T01:50:19.989Z">
 <meta property="article:author" content="Winters">
+<meta property="article:tag" content="edu">
 <meta name="twitter:card" content="summary">
     
     
@@ -213,6 +214,12 @@
     	
     </time>
     
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
+    
 </div>
 
     
@@ -306,6 +313,13 @@
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/edu/" rel="tag">edu</a>
+
+            </div>
         
         
             <div class="post-actions-wrap">

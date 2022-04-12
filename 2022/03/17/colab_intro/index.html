@@ -17,7 +17,7 @@
             <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
         
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg"},"articleBody":"Colab이란?\n\nColaboratory&amp;#40;줄여서 ‘Colab’이라고 함&amp;#41;을 통해 브라우저 내에서 Python 스크립트를 작성하고 실행할 수 있습니다. \n\n구성이 필요하지 않음\nGPU 무료 액세스\n간편한 공유\n\n학생이든, 데이터 과학자든, AI 연구원이든 Colab으로 업무를 더욱 간편하게 처리할 수 있습니다. Colab 소개 영상에서 자세한 내용을 확인하거나 아래에서 시작해 보세요.\n시작하기지금 읽고 계신 문서는 정적 웹페이지가 아니라 코드를 작성하고 실행할 수 있는 대화형 환경인 Colab 메모장입니다.\n예를 들어 다음은 값을 계산하여 변수로 저장하고 결과를 출력하는 간단한 Python 스크립트가 포함된 코드 셀입니다.\n12seconds_in_a_day = 24 * 60 * 60seconds_in_a_day\n\n\n\n\n86400\n\n위 셀의 코드를 실행하려면 셀을 클릭하여 선택한 후 코드 왼쪽의 실행 버튼을 누르거나 단축키 ‘Command&#x2F;Ctrl+Enter’를 사용하세요. 셀을 클릭하면 코드 수정을 바로 시작할 수 있습니다.\n특정 셀에서 정의한 변수를 나중에 다른 셀에서 사용할 수 있습니다.\n12seconds_in_a_week = 7 * seconds_in_a_dayseconds_in_a_week\n\n\n\n\n604800\n\nColab 메모장을 사용하면 실행 코드와 서식 있는 텍스트를 이미지, HTML, LaTeX 등과 함께 하나의 문서로 통합할 수 있습니다. Colab 메모장을 만들면 Google Drive 계정에 저장됩니다. Colab 메모장을 간편하게 공유하여 동료나 친구들이 댓글을 달거나 수정하도록 할 수 있습니다. 자세히 알아보려면 Colab 개요를 참조하세요. 새 Colab 메모장을 만들려면 위의 파일 메뉴를 사용하거나 다음 링크로 이동하세요. 새 Colab 메모장 만들기\nColab 메모장은 Colab에서 호스팅하는 Jupyter 메모장입니다. Jupyter 프로젝트에 관해 자세히 알아보려면 jupyter.org를 참조하세요.\n데이터 과학Colab을 통해 인기 있는 Python 라이브러리를 최대한 활용하여 데이터를 분석하고 시각화할 수 있습니다. 아래 코드 셀에서는 Numpy를 사용하여 임의의 데이터를 생성하고 매트플롯립으로 이를 시각화합니다. 셀을 클릭하면 코드 수정을 바로 시작할 수 있습니다.\n1234567891011import numpy as npfrom matplotlib import pyplot as pltys = 200 + np.random.randn(100)x = [x for x in range(len(ys))]plt.plot(x, ys, &#x27;-&#x27;)plt.fill_between(x, ys, 195, where=(ys &gt; 195), facecolor=&#x27;g&#x27;, alpha=0.6)plt.title(&quot;Sample Visualization&quot;)plt.show()\n\nGoogle Drive 계정에서 스프레드시트를 비롯한 데이터를 Colab 메모장으로 가져오거나 GitHub 등의 여러 다른 소스에서 데이터를 가져올 수 있습니다. Colab을 데이터 과학에 활용하는 방법과 데이터 가져오기에 관해 자세히 알아보려면 데이터 사용하기 아래 링크를 참조하세요.\n머신러닝Colab을 사용하면 코드 몇 줄만으로 이미지 데이터세트를 가져오고, 이 데이터세트로 이미지 분류기를 학습시키며, 모델을 평가할 수 있습니다. Colab 메모장은 Google 클라우드 서버에서 코드를 실행하므로 사용 중인 컴퓨터의 성능과 관계없이 GPU 및 TPU를 포함한 Google 하드웨어의 성능을 활용할 수 있습니다. 브라우저만 있으면 사용 가능합니다.\nColab은 다음과 같은 분야의 머신러닝 커뮤니티에서 널리 쓰이고 있습니다.\n\nTensorFlow 시작하기\n신경망 개발 및 학습시키기\nTPU로 실험하기\nAI 연구 보급하기\n튜토리얼 만들기\n\n머신러닝 적용 사례를 보여 주는 Colab 메모장 샘플을 확인하려면 아래 머신러닝 예시를 참조하세요.\n추가 리소스Colab에서 메모장 사용하기\nColaboratory 개요\nMarkdown 가이드\n라이브러리 가져오기 및 종속 항목 설치하기\nGitHub에서 노트 저장 및 로드하기\n대화형 양식\n대화형 위젯\n Colab의 TensorFlow 2\n\n\n데이터로 작업하기\n데이터 로드: 드라이브, 스프레드시트, Google Cloud Storage \n차트: 데이터 시각화하기\nBigQuery 시작하기\n\n머신러닝 단기집중과정다음은 Google 온라인 머신러닝 과정에서 가져온 일부 메모장입니다. 전체 과정 웹사이트에서 자세한 내용을 확인하세요.\n\nPandas DataFrame 소개\n합성 데이터를 사용하는 tf.keras 선형 회귀\n\n\n가속 하드웨어 사용하기\nGPU를 사용한 TensorFlow\nTPU를 사용한 TensorFlow\n\n\n추천 예시\nNeMo Voice Swap: Nvidia의 NeMo 대화형 AI 툴킷을 사용하여 오디오 파일의 음성을 컴퓨터에서 생성된 음성으로 변환하세요.\n\n이미지 분류기 재훈련: 사전에 훈련된 이미지 분류기를 기반으로 꽃을 분류하기 위한 Keras 모델을 구축합니다.\n\n텍스트 분류: IMDB 영화 리뷰를 긍정적인 리뷰 또는 부정적인 리뷰로 분류합니다.\n\n스타일 트랜스퍼: 딥 러닝을 사용하여 이미지 간에 스타일을 전이시킵니다.\n\nMultilingual Universal Sentence Encoder Q&amp;A: 머신러닝 모델을 사용하여 SQuAD 데이터 세트의 질문에 답변합니다.\n\n동영상 보간 유형: 동영상에서 첫 프레임과 마지막 프레임 사이에 발생한 내용을 예측합니다.\n\n\n","dateCreated":"2022-03-17T09:00:00+09:00","dateModified":"2022-03-18T16:36:31+09:00","datePublished":"2022-03-17T09:00:00+09:00","description":"","headline":"코랩 인트로","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/17/colab_intro/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg","logo":{"@type":"ImageObject","url":"blog_profile_image_01.jpg"}},"url":"https://ahnduhong.github.io/2022/03/17/colab_intro/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg"},"articleBody":"Colab이란?\n\nColaboratory&amp;#40;줄여서 ‘Colab’이라고 함&amp;#41;을 통해 브라우저 내에서 Python 스크립트를 작성하고 실행할 수 있습니다. \n\n구성이 필요하지 않음\nGPU 무료 액세스\n간편한 공유\n\n학생이든, 데이터 과학자든, AI 연구원이든 Colab으로 업무를 더욱 간편하게 처리할 수 있습니다. Colab 소개 영상에서 자세한 내용을 확인하거나 아래에서 시작해 보세요.\n시작하기지금 읽고 계신 문서는 정적 웹페이지가 아니라 코드를 작성하고 실행할 수 있는 대화형 환경인 Colab 메모장입니다.\n예를 들어 다음은 값을 계산하여 변수로 저장하고 결과를 출력하는 간단한 Python 스크립트가 포함된 코드 셀입니다.\n12seconds_in_a_day = 24 * 60 * 60seconds_in_a_day\n\n\n\n\n86400\n\n위 셀의 코드를 실행하려면 셀을 클릭하여 선택한 후 코드 왼쪽의 실행 버튼을 누르거나 단축키 ‘Command&#x2F;Ctrl+Enter’를 사용하세요. 셀을 클릭하면 코드 수정을 바로 시작할 수 있습니다.\n특정 셀에서 정의한 변수를 나중에 다른 셀에서 사용할 수 있습니다.\n12seconds_in_a_week = 7 * seconds_in_a_dayseconds_in_a_week\n\n\n\n\n604800\n\nColab 메모장을 사용하면 실행 코드와 서식 있는 텍스트를 이미지, HTML, LaTeX 등과 함께 하나의 문서로 통합할 수 있습니다. Colab 메모장을 만들면 Google Drive 계정에 저장됩니다. Colab 메모장을 간편하게 공유하여 동료나 친구들이 댓글을 달거나 수정하도록 할 수 있습니다. 자세히 알아보려면 Colab 개요를 참조하세요. 새 Colab 메모장을 만들려면 위의 파일 메뉴를 사용하거나 다음 링크로 이동하세요. 새 Colab 메모장 만들기\nColab 메모장은 Colab에서 호스팅하는 Jupyter 메모장입니다. Jupyter 프로젝트에 관해 자세히 알아보려면 jupyter.org를 참조하세요.\n데이터 과학Colab을 통해 인기 있는 Python 라이브러리를 최대한 활용하여 데이터를 분석하고 시각화할 수 있습니다. 아래 코드 셀에서는 Numpy를 사용하여 임의의 데이터를 생성하고 매트플롯립으로 이를 시각화합니다. 셀을 클릭하면 코드 수정을 바로 시작할 수 있습니다.\n1234567891011import numpy as npfrom matplotlib import pyplot as pltys = 200 + np.random.randn(100)x = [x for x in range(len(ys))]plt.plot(x, ys, &#x27;-&#x27;)plt.fill_between(x, ys, 195, where=(ys &gt; 195), facecolor=&#x27;g&#x27;, alpha=0.6)plt.title(&quot;Sample Visualization&quot;)plt.show()\n\nGoogle Drive 계정에서 스프레드시트를 비롯한 데이터를 Colab 메모장으로 가져오거나 GitHub 등의 여러 다른 소스에서 데이터를 가져올 수 있습니다. Colab을 데이터 과학에 활용하는 방법과 데이터 가져오기에 관해 자세히 알아보려면 데이터 사용하기 아래 링크를 참조하세요.\n머신러닝Colab을 사용하면 코드 몇 줄만으로 이미지 데이터세트를 가져오고, 이 데이터세트로 이미지 분류기를 학습시키며, 모델을 평가할 수 있습니다. Colab 메모장은 Google 클라우드 서버에서 코드를 실행하므로 사용 중인 컴퓨터의 성능과 관계없이 GPU 및 TPU를 포함한 Google 하드웨어의 성능을 활용할 수 있습니다. 브라우저만 있으면 사용 가능합니다.\nColab은 다음과 같은 분야의 머신러닝 커뮤니티에서 널리 쓰이고 있습니다.\n\nTensorFlow 시작하기\n신경망 개발 및 학습시키기\nTPU로 실험하기\nAI 연구 보급하기\n튜토리얼 만들기\n\n머신러닝 적용 사례를 보여 주는 Colab 메모장 샘플을 확인하려면 아래 머신러닝 예시를 참조하세요.\n추가 리소스Colab에서 메모장 사용하기\nColaboratory 개요\nMarkdown 가이드\n라이브러리 가져오기 및 종속 항목 설치하기\nGitHub에서 노트 저장 및 로드하기\n대화형 양식\n대화형 위젯\n Colab의 TensorFlow 2\n\n\n데이터로 작업하기\n데이터 로드: 드라이브, 스프레드시트, Google Cloud Storage \n차트: 데이터 시각화하기\nBigQuery 시작하기\n\n머신러닝 단기집중과정다음은 Google 온라인 머신러닝 과정에서 가져온 일부 메모장입니다. 전체 과정 웹사이트에서 자세한 내용을 확인하세요.\n\nPandas DataFrame 소개\n합성 데이터를 사용하는 tf.keras 선형 회귀\n\n\n가속 하드웨어 사용하기\nGPU를 사용한 TensorFlow\nTPU를 사용한 TensorFlow\n\n\n추천 예시\nNeMo Voice Swap: Nvidia의 NeMo 대화형 AI 툴킷을 사용하여 오디오 파일의 음성을 컴퓨터에서 생성된 음성으로 변환하세요.\n\n이미지 분류기 재훈련: 사전에 훈련된 이미지 분류기를 기반으로 꽃을 분류하기 위한 Keras 모델을 구축합니다.\n\n텍스트 분류: IMDB 영화 리뷰를 긍정적인 리뷰 또는 부정적인 리뷰로 분류합니다.\n\n스타일 트랜스퍼: 딥 러닝을 사용하여 이미지 간에 스타일을 전이시킵니다.\n\nMultilingual Universal Sentence Encoder Q&amp;A: 머신러닝 모델을 사용하여 SQuAD 데이터 세트의 질문에 답변합니다.\n\n동영상 보간 유형: 동영상에서 첫 프레임과 마지막 프레임 사이에 발생한 내용을 예측합니다.\n\n\n","dateCreated":"2022-03-17T09:00:00+09:00","dateModified":"2022-04-12T10:50:19+09:00","datePublished":"2022-03-17T09:00:00+09:00","description":"","headline":"코랩 인트로","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/03/17/colab_intro/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg","logo":{"@type":"ImageObject","url":"blog_profile_image_01.jpg"}},"url":"https://ahnduhong.github.io/2022/03/17/colab_intro/","keywords":"edu"}</script>
     <meta name="description" content="Colab이란?  Colaboratory&amp;#40;줄여서 ‘Colab’이라고 함&amp;#41;을 통해 브라우저 내에서 Python 스크립트를 작성하고 실행할 수 있습니다.   구성이 필요하지 않음 GPU 무료 액세스 간편한 공유  학생이든, 데이터 과학자든, AI 연구원이든 Colab으로 업무를 더욱 간편하게 처리할 수 있습니다. Colab 소개 영">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="코랩 인트로">
@@ -28,8 +28,9 @@
 <meta property="og:image" content="https://ahnduhong.github.io/images/colab_intro/output_7_0.png">
 <meta property="og:image" content="https://ahnduhong.github.io/img/new.png">
 <meta property="article:published_time" content="2022-03-17T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-18T07:36:31.537Z">
+<meta property="article:modified_time" content="2022-04-12T01:50:19.769Z">
 <meta property="article:author" content="Winters">
+<meta property="article:tag" content="edu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://ahnduhong.github.io/images/colab_intro/output_7_0.png">
     
@@ -216,6 +217,12 @@
     	
     </time>
     
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
+    
 </div>
 
     
@@ -314,6 +321,13 @@
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/edu/" rel="tag">edu</a>
+
+            </div>
         
         
             <div class="post-actions-wrap">

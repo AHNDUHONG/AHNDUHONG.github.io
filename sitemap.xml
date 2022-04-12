@@ -4,12 +4,22 @@
 
     <sitemap>
         <loc>https://AHNDUHONG.github.io/post-sitemap.xml</loc>
-        <lastmod>2022-04-10T14:18:46.675Z</lastmod>
+        <lastmod>2022-04-12T02:23:32.915Z</lastmod>
     </sitemap>
 
     <sitemap>
         <loc>https://AHNDUHONG.github.io/page-sitemap.xml</loc>
         <lastmod>2022-04-10T12:35:30.788Z</lastmod>
+    </sitemap>
+
+    <sitemap>
+        <loc>https://AHNDUHONG.github.io/category-sitemap.xml</loc>
+        <lastmod>2022-04-12T02:23:32.915Z</lastmod>
+    </sitemap>
+
+    <sitemap>
+        <loc>https://AHNDUHONG.github.io/tag-sitemap.xml</loc>
+        <lastmod>2022-04-12T02:23:32.915Z</lastmod>
     </sitemap>
 
 </sitemapindex>
