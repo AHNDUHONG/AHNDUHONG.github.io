@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Winters Blog">
-    <title>Github_blog(hexo) 연동 오류 -global - Winters Blog</title>
+    <title>Github_blog(hexo) 연동 오류 (Contribution 업데이트 오류) - Winters Blog</title>
     <meta name="author" content="Winters">
     
     
@@ -17,29 +17,22 @@
             <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
         
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg"},"articleBody":"\n이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.\n\n\n개요\n깃허브 블로그 계정 연동 오류 fatal: Authentication failed for ~ 를 github tokken 이 아닌 —global로 해결하는 방법을 나타냄 (21년 8월 이후 변경된 토큰으로 인해 토큰을 이용 하지 않으면 불가능한 방법입니다, 아래 링크 글로 이동한 뒤 참고하여 해결하세요.)\nGithub_blog (hexo) 연동 오류 -tokken : https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken&#x2F;\n\n\n\n\n\n깃허브(Github) 블로그 테마를 변경하면서 무엇을 잘못 건들였는지 git add, commit, push 도 가능하고 블로그에 글도 업데이트 되는데 깃허브 메인 화면의 30 contributions in the last year 및 내 활동기록이 기록이 되지않는다.\n\ngit add, commit, push 정상 작동\n  \n\n\n\n\nGithub 메인화면 내 활동 기록이 기록되지 않는 현상 발견\n  \n\n\n\n\n처음에는 커밋(commit)이라는 단어를 내가 잘못 이해하고 있나 라고 의심을 해서 커밋에 대한 구글링을 했지만 내가 알고 있는 커밋이라는 용어가 틀리지 않았고 어떻게 해야될지 감이 안잡혀 evan 강사님(https://dschloe.github.io/)에게 여쭤보았고 방법을 알려주셨다.\n\nwindows 검색 화면에서 웹 자격 증명을 클릭\n  \n\n\n\n\nwindows 자격 증명\n  \n\n\n\n\n일반 자격 증명에서 github 목록을 클릭하여 편집을 눌러 계정을 다시 업데이트 한다\n  \n\n\n\n\n그 후에 Pycharm(필자는 Pycharm을 통해 프로젝트를 관리 하는중)에 돌아와 다시 git add, commit, push 를 하면 fatal: Authentication failed for ~ 라는 문구가 뜬다. 이 문구는 local 계정과 github 계정의 연동이 틀려서 나오는 것이고 ID&#x2F;Password 는 21년 8월 이후로 토큰으로 대체 되었다 라는 의미입니다. 즉 계정 연동을 다시 해줘야 한다는 뜻이므로 이번엔 tokken이 아닌 git config —global 방식으로 해결하겠습니다.\n\n\n\ngit config —global\nhttps://imitursa.tistory.com/3213 이 블로그를 참고하며 해결 방법을 작성 하겠습니다.\n관리자 권한으로 명령창을 연다.\n  \n\n\n\n\n‘git config —system —unset credential.helper’ 명령어를 입력한다.(오타 주의)\n  \n\n\n\n\n‘git config —global —unset credential.helper’  명령어를 입력한다.\n  \n\n\n\n\n다시 작업 했던 Project(필자는 Pycharm을 사용)로 돌아와 git add, commit, push 를 해주면 계정을 입력하라는 내용이 나온다.\n  \n\n\n\n\n21년 8월 이후로 토큰 방식으로 연동 방법이 변경되어 토큰을 갖고 로그인을 하라고 나옵니다.\n\n\n\n","dateCreated":"2022-04-12T09:00:00+09:00","dateModified":"2022-04-12T20:04:57+09:00","datePublished":"2022-04-12T09:00:00+09:00","description":"","headline":"Github_blog(hexo) 연동 오류 -global","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_global/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg","logo":{"@type":"ImageObject","url":"blog_profile_image_01.jpg"}},"url":"https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_global/","keywords":"global"}</script>
-    <meta name="description" content="이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.   개요 깃허브 블로그 계정 연동 오류 fatal: Authentication failed for ~ 를 github tokken 이 아닌 —global로 해결하는 방법을 나타냄 (21년 8월 이후 변경된 토큰으로 인해 토큰">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg"},"articleBody":"\n이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.\n\n\n개요\n지난 Github_blog (hexo) 연동 오류 -global, -tokken 이 두개의 글을 쓰며 드디어 된줄 알았던 깃허브 블로그 Contribution 연동 오류가 기록이 되지 않아 계정 및 설정을 확인 함으로 해결하는 방법을 나타냄.\n참고 블로그: https://develaniper-devpage.tistory.com/76\nGithub_blog (hexo) 연동 오류 -tokken : https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken&#x2F;\nGithub_blog (hexo) 연동 오류 -global 글은 Github 계정 비밀번호를 Tokken으로 대체 하였기에 현 시점 으로선 불가능한 해결 방법이기 때문에 출처를 남기지 않겠습니다.\n\n\n\n\nContribution 그래프가 채워지는 조건\n커밋할 때 사용한 이메일 주소가 ghithub계정의 이메일 주소와 같아야 한다.\nfork를 한 commit은 적용되지 않고 독립적인 repository에서 이루어진 commit이여야 한다.\n커밋은 다음으로 만들어 져야한다.(필자의 경우 main을 branch로 한다)\nrepository의 default branch(보통 master)\ngh-pages branch(github page branch)\n\n\n\n\n\ngit command 사용으로 등록된 이메일 주소 확인\n\n\n확인 해 보니 계정이 달라서 변경함.  12-&gt; git config user.email-&gt; git config --global user.email mymail@site.com\n  \n\n\n\n드디어 연동이 가능합니다..\n\n\n\n혹시나 Git Command로 확인 해도 안되셨다면 위 참고 블로그에서 소스트리(source tree)로 변경해보시길 바랍니다.\n\n","dateCreated":"2022-04-12T09:00:00+09:00","dateModified":"2022-04-12T20:12:55+09:00","datePublished":"2022-04-12T09:00:00+09:00","description":"","headline":"Github_blog(hexo) 연동 오류 (Contribution 업데이트 오류)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_contribution/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg","logo":{"@type":"ImageObject","url":"blog_profile_image_01.jpg"}},"url":"https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_contribution/","keywords":"contribution"}</script>
+    <meta name="description" content="이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.   개요 지난 Github_blog (hexo) 연동 오류 -global, -tokken 이 두개의 글을 쓰며 드디어 된줄 알았던 깃허브 블로그 Contribution 연동 오류가 기록이 되지 않아 계정 및 설정을 확인 함으">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Github_blog(hexo) 연동 오류 -global">
-<meta property="og:url" content="https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_global/index.html">
+<meta property="og:title" content="Github_blog(hexo) 연동 오류 (Contribution 업데이트 오류)">
+<meta property="og:url" content="https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_contribution/index.html">
 <meta property="og:site_name" content="Winters Blog">
-<meta property="og:description" content="이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.   개요 깃허브 블로그 계정 연동 오류 fatal: Authentication failed for ~ 를 github tokken 이 아닌 —global로 해결하는 방법을 나타냄 (21년 8월 이후 변경된 토큰으로 인해 토큰">
+<meta property="og:description" content="이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.   개요 지난 Github_blog (hexo) 연동 오류 -global, -tokken 이 두개의 글을 쓰며 드디어 된줄 알았던 깃허브 블로그 Contribution 연동 오류가 기록이 되지 않아 계정 및 설정을 확인 함으">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_global/1.png">
-<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_global/2.png">
-<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_global/3.png">
-<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_global/4.png">
-<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_global/5.png">
-<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_global/6.png">
-<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_global/7.png">
-<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_global/8.png">
-<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_global/9.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_contribution/1.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_contribution/2.png">
 <meta property="article:published_time" content="2022-04-12T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-04-12T11:04:57.862Z">
+<meta property="article:modified_time" content="2022-04-12T11:12:55.261Z">
 <meta property="article:author" content="Winters">
-<meta property="article:tag" content="global">
+<meta property="article:tag" content="contribution">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_global/1.png">
+<meta name="twitter:image" content="https://ahnduhong.github.io/images/Github_blog(hexo)_contribution/1.png">
     
     
         
@@ -213,7 +206,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            Github_blog(hexo) 연동 오류 -global
+            Github_blog(hexo) 연동 오류 (Contribution 업데이트 오류)
         </h1>
     
     
@@ -243,80 +236,38 @@
 </ul>
 <hr>
 <h3 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h3><ul>
-<li>깃허브 블로그 계정 연동 오류 fatal: Authentication failed for ~ 를 github tokken 이 아닌 —global로 해결하는 방법을 나타냄 <strong><u><span style="color:red">(21년 8월 이후 변경된 토큰으로 인해 토큰을 이용 하지 않으면 불가능한 방법입니다, 아래 링크 글로 이동한 뒤 참고하여 해결하세요.)</span></u></strong><ul>
+<li>지난 Github_blog (hexo) 연동 오류 -global, -tokken 이 두개의 글을 쓰며 드디어 된줄 알았던 깃허브 블로그 Contribution 연동 오류가 기록이 되지 않아 계정 및 설정을 확인 함으로 해결하는 방법을 나타냄.<ul>
+<li>참고 블로그: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://develaniper-devpage.tistory.com/76">https://develaniper-devpage.tistory.com/76</a></li>
 <li>Github_blog (hexo) 연동 오류 -tokken : <a href="https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/">https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken&#x2F;</a></li>
+<li>Github_blog (hexo) 연동 오류 -global 글은 Github 계정 비밀번호를 Tokken으로 대체 하였기에 현 시점 으로선 불가능한 해결 방법이기 때문에 출처를 남기지 않겠습니다.</li>
 </ul>
 </li>
 </ul>
 <hr>
-<ul>
-<li><p>깃허브(Github) 블로그 테마를 변경하면서 무엇을 잘못 건들였는지 git add, commit, push 도 가능하고 블로그에 글도 업데이트 되는데 깃허브 메인 화면의 <strong>30 contributions in the last year 및 내 활동기록이 기록이 되지않는다.</strong></p>
-<ul>
-<li><p><strong>git add, commit, push 정상 작동</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_global/1.png" alt="png"></p>
+<h3 id="Contribution-그래프가-채워지는-조건"><a href="#Contribution-그래프가-채워지는-조건" class="headerlink" title="Contribution 그래프가 채워지는 조건"></a>Contribution 그래프가 채워지는 조건</h3><ol>
+<li>커밋할 때 사용한 이메일 주소가 ghithub계정의 이메일 주소와 같아야 한다.</li>
+<li>fork를 한 commit은 적용되지 않고 독립적인 repository에서 이루어진 commit이여야 한다.</li>
+<li>커밋은 다음으로 만들어 져야한다.(필자의 경우 main을 branch로 한다)<ol>
+<li>repository의 default branch(보통 master)</li>
+<li>gh-pages branch(github page branch)</li>
+</ol>
 </li>
+</ol>
+<hr>
+<ol>
+<li>git command 사용으로 등록된 이메일 주소 확인</li>
+</ol>
+<ul>
+<li>확인 해 보니 계정이 달라서 변경함.  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-&gt; git config user.email</span><br><span class="line">-&gt; git config --global user.email mymail@site.com</span><br></pre></td></tr></table></figure>
+  <img src="/images/Github_blog(hexo)_contribution/1.png" alt="png"></li>
 </ul>
 <hr>
 <ul>
-<li><p><strong>Github 메인화면 내 활동 기록이 기록되지 않는 현상 발견</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_global/2.png" alt="png"></p>
-</li>
+<li>드디어 연동이 가능합니다..</li>
 </ul>
-<hr>
-</li>
-<li><p>처음에는 커밋(commit)이라는 단어를 내가 잘못 이해하고 있나 라고 의심을 해서 커밋에 대한 구글링을 했지만 내가 알고 있는 커밋이라는 용어가 틀리지 않았고 어떻게 해야될지 감이 안잡혀 evan 강사님(<a target="_blank" rel="external nofollow noopener noreferrer" href="https://dschloe.github.io/">https://dschloe.github.io/</a>)에게 여쭤보았고 방법을 알려주셨다.</p>
+<p><img src="/images/Github_blog(hexo)_contribution/2.png" alt="png"></p>
 <ul>
-<li><p><strong>windows 검색 화면에서 웹 자격 증명을 클릭</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_global/3.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>windows 자격 증명</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_global/4.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>일반 자격 증명에서 github 목록을 클릭하여 편집을 눌러 계정을 다시 업데이트 한다</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_global/5.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><strong>그 후에 Pycharm(필자는 Pycharm을 통해 프로젝트를 관리 하는중)에 돌아와 다시 git add, commit, push 를 하면 <span style="color:red">fatal: Authentication failed for ~</span> 라는 문구가 뜬다. 이 문구는 <span style="color:blue">local 계정과 github 계정의 연동이 틀려서 나오는 것이고 ID&#x2F;Password 는 21년 8월 이후로 토큰으로 대체 되었다 라는 의미입니다.</span> 즉 계정 연동을 다시 해줘야 한다는 뜻이므로 이번엔 tokken이 아닌 git config —global 방식으로 해결하겠습니다.</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="git-config-—global"><a href="#git-config-—global" class="headerlink" title="git config —global"></a>git config —global</h2><ul>
-<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://imitursa.tistory.com/3213">https://imitursa.tistory.com/3213</a> 이 블로그를 참고하며 해결 방법을 작성 하겠습니다.<ul>
-<li><p><strong>관리자 권한으로 명령창을 연다</strong>.</p>
-<p>  <img src="/images/Github_blog(hexo)_global/6.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>‘git config —system —unset credential.helper’ 명령어를 입력한다.(오타 주의)</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_global/7.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>‘git config —global —unset credential.helper’  명령어를 입력한다.</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_global/8.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>다시 작업 했던 Project(필자는 Pycharm을 사용)로 돌아와 git add, commit, push 를 해주면 계정을 입력하라는 내용이 나온다.</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_global/9.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><strong>21년 8월 이후로 토큰 방식으로 연동 방법이 변경되어 토큰을 갖고 로그인을 하라고 나옵니다.</strong></li>
-</ul>
-</li>
+<li>혹시나 Git Command로 확인 해도 안되셨다면 위 참고 블로그에서 소스트리(source tree)로 변경해보시길 바랍니다.</li>
 </ul>
 
             
@@ -329,7 +280,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/global/" rel="tag">global</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/contribution/" rel="tag">contribution</a>
 
             </div>
         
@@ -340,7 +291,7 @@
             <li class="post-action">
                 
                     
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/12/Github_blog(hexo)_tokken/" data-tooltip="Github_blog(hexo) 연동 오류 -tokken" aria-label="PREVIOUS: Github_blog(hexo) 연동 오류 -tokken">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/12/Github_blog(hexo)_global/" data-tooltip="Github_blog(hexo) 연동 오류 -global" aria-label="PREVIOUS: Github_blog(hexo) 연동 오류 -global">
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -349,7 +300,7 @@
             <li class="post-action">
                 
                     
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/12/Github_blog(hexo)_contribution/" data-tooltip="Github_blog(hexo) 연동 오류 (Contribution 업데이트 오류)" aria-label="NEXT: Github_blog(hexo) 연동 오류 (Contribution 업데이트 오류)">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/06/AI_Project_Spaceship_Titanic/" data-tooltip="AI_Project_SpaceShip_Titanic" aria-label="NEXT: AI_Project_SpaceShip_Titanic">
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -367,7 +318,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_global/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_contribution/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -375,7 +326,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_global/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_contribution/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -383,7 +334,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_global/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_contribution/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -426,7 +377,7 @@
             <li class="post-action">
                 
                     
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/12/Github_blog(hexo)_tokken/" data-tooltip="Github_blog(hexo) 연동 오류 -tokken" aria-label="PREVIOUS: Github_blog(hexo) 연동 오류 -tokken">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/12/Github_blog(hexo)_global/" data-tooltip="Github_blog(hexo) 연동 오류 -global" aria-label="PREVIOUS: Github_blog(hexo) 연동 오류 -global">
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -435,7 +386,7 @@
             <li class="post-action">
                 
                     
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/12/Github_blog(hexo)_contribution/" data-tooltip="Github_blog(hexo) 연동 오류 (Contribution 업데이트 오류)" aria-label="NEXT: Github_blog(hexo) 연동 오류 (Contribution 업데이트 오류)">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/06/AI_Project_Spaceship_Titanic/" data-tooltip="AI_Project_SpaceShip_Titanic" aria-label="NEXT: AI_Project_SpaceShip_Titanic">
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -453,7 +404,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_global/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_contribution/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -461,7 +412,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_global/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_contribution/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -469,7 +420,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_global/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_contribution/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -497,7 +448,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_global/" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
+                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_contribution/" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
                     </a>
                 </li>
@@ -505,7 +456,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_global/" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
+                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_contribution/" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
                     </a>
                 </li>
@@ -513,7 +464,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_global/" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
+                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_contribution/" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
                     </a>
                 </li>
