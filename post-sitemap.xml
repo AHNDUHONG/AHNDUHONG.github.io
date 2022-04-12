@@ -9,6 +9,14 @@
 
 
     <url>
+        <loc>https://AHNDUHONG.github.io/2022/04/12/Github(hexo)_blog_settings_02/</loc>
+        <lastmod>2022-04-12T03:26:07.848Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://AHNDUHONG.github.io/2022/04/06/AI_Project_Spaceship_Titanic/</loc>
         <lastmod>2022-04-12T02:32:09.644Z</lastmod>
         <changefreq>weekly</changefreq>

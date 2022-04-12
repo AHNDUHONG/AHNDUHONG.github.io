@@ -92,7 +92,7 @@
                 </a>
                 <h4 class="sidebar-profile-name">Winters</h4>
                 
-                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
+                    <h5 class="sidebar-profile-bio"><p>개발자를 꿈꾸는 어른이</p>
 </h5>
                 
             </div>
@@ -304,6 +304,80 @@
         
     </article>
     
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a class="link-unstyled" href="/2022/04/12/Github(hexo)_blog_settings_02/" aria-label=": Github_blog(hexo) 프로필 설정">
+                            Github_blog(hexo) 프로필 설정
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-04-12T09:00:00+09:00">
+	
+		    Apr 12, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/blog/">blog</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h3 id="Github-blog-hexo-bio-인물소개-job-설정"><a href="#Github-blog-hexo-bio-인물소개-job-설정" class="headerlink" title="Github blog (hexo) bio(인물소개), job 설정"></a>Github blog (hexo) bio(인물소개), job 설정</h3><ul>
+<li>이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.</li>
+<li>참고: 필자는 tranquilpeak 테마를 표준 테마로 하여 환경 설정 하는 것 이므로 tranquilpeak 테마를 설정 한 뒤 이 글을 보시길 바랍니다.<ul>
+<li>tranquilpeak 테마 : <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/kakawait/hugo-tranquilpeak-theme">https://github.com/kakawait/hugo-tranquilpeak-theme</a></li>
+<li>이전 글 : <strong><strong>Github_blog(hexo) 테마 변경 및 환경 설정</strong></strong> <a href="https://ahnduhong.github.io/2022/04/12/Github(hexo)_blog_settings_01/">https://ahnduhong.github.io/2022/04/12/Github(hexo)_blog_settings_01&#x2F;</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h3><ul>
+<li>블로그 관리를 하는 도중 side bar 메뉴에서 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://author.bio/">author.bio</a> 라고 써져 있는 것 과 프로필에 직업이 제대로 적혀 있지 않아 필자에 의도에 맞게 수정</li>
+</ul>
+<p><img src="/images/Github(hexo)_blog_settings_02/1.png" alt="png"></p>
+<ul>
+<li>bio 와 job 메뉴는 side bar 를 수정 할 수 있는 {project_name}&#x2F;themes&#x2F;tranquilpeak&#x2F;_config.yml 에서 수정하는 것이 아닌  {project_name}&#x2F;themes&#x2F;tranquilpeak&#x2F;languages&#x2F;en.yml 파일에서 수정이 가능하다. (필자의 언어 설정은 “en”이므로 “ko”를 설정한 경우 같은 경로의 ko.yml 파일을 수정하면 됨)<ul>
+<li>아래 사진은 ko.yml 파일의 코드를 나열 한 것이다.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#123;project_name&#125;/themes/tranquilpeak/languages/ko.yml</span></span><br><span class="line"><span class="comment"># 블로그의 모든 곳에 표시되는 날짜 형식</span></span><br><span class="line">date_format: <span class="string">&quot;YYYY/MM/DD&quot;</span></span><br><span class="line"></span><br><span class="line">global:</span><br><span class="line">    home: <span class="string">&quot;Home&quot;</span></span><br><span class="line">    categories: <span class="string">&quot;카테고리&quot;</span></span><br><span class="line">    category: <span class="string">&quot;카테고리&quot;</span></span><br><span class="line">    tags: <span class="string">&quot;태그&quot;</span></span><br><span class="line">    tag: <span class="string">&quot;태그&quot;</span></span><br><span class="line">    archives: <span class="string">&quot;아카이브&quot;</span></span><br><span class="line">    search: <span class="string">&quot;검색&quot;</span></span><br><span class="line">    about: <span class="string">&quot;About&quot;</span></span><br><span class="line">    author_picture: <span class="string">&quot;저자 이미지&quot;</span></span><br><span class="line">    github: <span class="string">&quot;GitHub&quot;</span></span><br><span class="line">    stack_overflow: <span class="string">&quot;Stack Overflow&quot;</span></span><br><span class="line">    twitter: <span class="string">&quot;Twitter&quot;</span></span><br><span class="line">    facebook: <span class="string">&quot;Facebook&quot;</span></span><br><span class="line">    google_plus: <span class="string">&quot;Google +&quot;</span></span><br><span class="line">    weibo: <span class="string">&quot;Weibo&quot;</span></span><br><span class="line">    qq: <span class="string">&quot;QQ&quot;</span></span><br><span class="line">    qzone: <span class="string">&quot;Qzone&quot;</span></span><br><span class="line">    renren: <span class="string">&quot;Renren&quot;</span></span><br><span class="line">    vk: <span class="string">&quot;VK&quot;</span></span><br><span class="line">    odnoklassniki: <span class="string">&quot;Odnoklassniki&quot;</span></span><br><span class="line">    linkedin: <span class="string">&quot;LinkedIn&quot;</span></span><br><span class="line">    mail: <span class="string">&quot;Mail&quot;</span></span><br><span class="line">    rss: <span class="string">&quot;RSS&quot;</span></span><br><span class="line">    share_on_facebook: <span class="string">&quot;Facebook에 공유하기&quot;</span></span><br><span class="line">    share_on_twitter: <span class="string">&quot;Twitter에 공유하기&quot;</span></span><br><span class="line">    share_on_google_plus: <span class="string">&quot;Google+에 공유하기&quot;</span></span><br><span class="line">    share_on_weibo: <span class="string">&quot;Weibo에 공유하기&quot;</span></span><br><span class="line">    share_on_qq: <span class="string">&quot;QQ에 공유하기&quot;</span></span><br><span class="line">    share_on_qzone: <span class="string">&quot;Qzone에 공유하기&quot;</span></span><br><span class="line">    share_on_renren: <span class="string">&quot;Renren에 공유하기&quot;</span></span><br><span class="line">    share_on_vk: <span class="string">&quot;VK에 공유하기&quot;</span></span><br><span class="line">    share_on_odnoklassniki: <span class="string">&quot;Odnoklassniki에 공유하기&quot;</span></span><br><span class="line">    search_category: <span class="string">&quot;카테고리 검색&quot;</span></span><br><span class="line">    search_tag: <span class="string">&quot;태그 검색&quot;</span></span><br><span class="line">    search_date: <span class="string">&quot;날짜 검색 (YYYY/MM/DD)&quot;</span></span><br><span class="line">    posts_found:</span><br><span class="line">        zero: <span class="string">&quot;포스트가 없습니다.&quot;</span></span><br><span class="line">        one: <span class="string">&quot;1 개의 포스트가 있습니다.&quot;</span></span><br><span class="line">        other: <span class="string">&quot;&#123;n&#125; 개의 포스트가 있습니다.&quot;</span></span><br><span class="line">    categories_found:</span><br><span class="line">        zero: <span class="string">&quot;카테고리가 없습니다.&quot;</span></span><br><span class="line">        one: <span class="string">&quot;1 개의 카테고리가 있습니다.&quot;</span></span><br><span class="line">        other: <span class="string">&quot;&#123;n&#125; 개의 카테고리가 있습니다.&quot;</span></span><br><span class="line">    tags_found:</span><br><span class="line">        zero: <span class="string">&quot;태그가 없습니다.&quot;</span></span><br><span class="line">        one: <span class="string">&quot;1 개의 태그가 있습니다.&quot;</span></span><br><span class="line">        other: <span class="string">&quot;&#123;n&#125; 개의 태그가 있습니다.&quot;</span></span><br><span class="line">    read_more_about_author: <span class="string">&quot;저자에 대해 더 알아보기&quot;</span></span><br><span class="line">    zoom_in_on_picture: <span class="string">&quot;사진 확대&quot;</span></span><br><span class="line">    go_to_homepage: <span class="string">&quot;홈페이지로 이동하기&quot;</span></span><br><span class="line">    open_link: <span class="string">&quot;링크 열기&quot;</span></span><br><span class="line">    open_post: <span class="string">&quot;소식 열기&quot;</span></span><br><span class="line"></span><br><span class="line">pagination:</span><br><span class="line">    page: <span class="string">&quot;page %d&quot;</span></span><br><span class="line">    of: <span class="string">&quot;of %d&quot;</span></span><br><span class="line">    newer_posts: <span class="string">&quot;최근 포스트&quot;</span></span><br><span class="line">    older_posts: <span class="string">&quot;이전 포스트&quot;</span></span><br><span class="line">    previous: <span class="string">&quot;이전&quot;</span></span><br><span class="line">    next: <span class="string">&quot;다음&quot;</span></span><br><span class="line"></span><br><span class="line">post:</span><br><span class="line">    no_title : <span class="string">&quot;제목 없음&quot;</span></span><br><span class="line">    categorized_in: <span class="string">&quot;카테고리&quot;</span></span><br><span class="line">    tagged_in: <span class="string">&quot;태그&quot;</span></span><br><span class="line">    toc: <span class="string">&quot;목차&quot;</span></span><br><span class="line">    back_to_top: <span class="string">&quot;맨 위로&quot;</span></span><br><span class="line">    read_more: <span class="string">&quot;계속 읽기&quot;</span></span><br><span class="line">    go_to_website: <span class="string">&quot;웹 사이트로 이동&quot;</span></span><br><span class="line">    comment_and_share: <span class="string">&quot;댓글 공유&quot;</span></span><br><span class="line">    comment: <span class="string">&quot;댓글을 남겨주세요&quot;</span></span><br><span class="line">    share: <span class="string">&quot;이 포스트 공유하기&quot;</span></span><br><span class="line">    gallery: <span class="string">&quot;갤러리&quot;</span></span><br><span class="line">    image:</span><br><span class="line">        one: <span class="string">&quot;이미지&quot;</span></span><br><span class="line">        other: <span class="string">&quot;%d 이미지&quot;</span></span><br><span class="line"></span><br><span class="line">author:</span><br><span class="line">    <span class="comment"># Your biography (마크다운과 HTML이 지원됩니다.)</span></span><br><span class="line">    bio: <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="comment"># Your job</span></span><br><span class="line">    job: <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>맨 아래에 위치한 author 부분이 bio 와 job 즉, 필자가 변경을 원하던 메뉴 이므로 수정 bio(인물소개), job(직업) 안에 원하는 문구 및 파일(bio)을 수정한다.</li>
+</ul>
+<p><img src="/images/Github(hexo)_blog_settings_02/1.png" alt="png"></p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/04/12/Github(hexo)_blog_settings_02/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -342,14 +416,14 @@
         
             <h4 id="about-card-name">Winters</h4>
         
-            <div id="about-card-bio"><p>author.bio</p>
+            <div id="about-card-bio"><p>개발자를 꿈꾸는 어른이</p>
 </div>
         
         
             <div id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br>
-                <p>author.job</p>
+                <p>개발자(예비)</p>
 
             </div>
         
