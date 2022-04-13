@@ -198,6 +198,105 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2022/04/13/Linux_error_E212/" aria-label=": 리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]">
+                            리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-04-13T09:00:00+09:00">
+	
+		    Apr 13, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Linux/">Linux</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <ul>
+<li>이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.</li>
+</ul>
+<hr>
+<h3 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h3><ul>
+<li>Ubuntu 프로그램 WSL2 Linux 환경에서 발생한 에러인 E212: Can’t open file for writing 를 해결하기 위한 과정을 작성한 것 입니다.(필자는 경로 설정을 잘못하여 에러가 발생한 것이지만 경로 설정이 맞는 일반적인 상황에서의 해결도 작성되어 있습니다.)</li>
+</ul>
+<hr>
+<ul>
+<li><p>22&#x2F;4&#x2F;13 강사님의 블로그를 통해 WSL2 설정을 마친 후 Linux 환경에 대한 명령어에 익숙해지기 위해 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://temp.sh/">temp.sh</a> 파일을 생성하여 적응하는 도중 작성한 기록을 저장하는 도중 E212: Can’t open file for writing 에러가 발생하였다. 이 에러는 권한 문제로 나온 것 같다.</p>
+<ul>
+<li>WSL2 설치 및 그 외 설정 사이트 : <a target="_blank" rel="external nofollow noopener noreferrer" href="https://dschloe.github.io/settings/windows_docker_install/">https://dschloe.github.io/settings/windows_docker_install&#x2F;</a></li>
+</ul>
+<p>  <img src="/images/Linux_error_E212/1.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>이럴때는  <strong>sudo vi 만드려는 파일명 으로 하던지</strong> 파일 생성후  저장 할때 <strong>:w !sudo tee % &gt; &#x2F;dev&#x2F;null</strong> 로 해결 가능하다고 한다.<ul>
+<li>참고 사이트:  <a target="_blank" rel="external nofollow noopener noreferrer" href="https://iamrealizer.tistory.com/47">https://iamrealizer.tistory.com/47</a></li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:w !sudo <span class="built_in">tee</span> % &gt; /dev/null</span><br></pre></td></tr></table></figure>
+<p>  <img src="/images/Linux_error_E212/2.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>하지만 필자는 저장 및 파일을 닫기도 불가능하다. (:q! 로 나갈수는 있었으나 저장이 불가능, root 계정을 확인했는데.. 왜 불가능할까)</p>
+</li>
+<li><p>확인해보니 경로가 잘못되어 있었다.. (혹시나 boot 같은 다른 파일을 잘못 건들면 삭제하고 다시 설치 하며 환경 설정을 재 설정 해야되는 불상사가 일어날 수 있으니 조심)</p>
+<p>  <img src="/images/Linux_error_E212/3.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>cd .. 으로 기본 값으로 돌아와서 cd root 로 경로 설정을 한 뒤에 sudo vi <a target="_blank" rel="external nofollow noopener noreferrer" href="http://temp.sh/">temp.sh</a> 로 temp.sh 파일을 생성(파일이 이미 있으면 편집으로 돌아옴)  <img src="/images/Linux_error_E212/4.png" alt="png">  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span>.. <span class="comment"># 이전 경로로 이동</span></span><br><span class="line"><span class="built_in">ls</span> <span class="comment"># 내가 위치한 경로의 파일 확인</span></span><br><span class="line"><span class="built_in">cd</span> root <span class="comment"># root 파일로 경로 이동</span></span><br><span class="line">sudo vi file.text <span class="comment"># 파일 생성 및 편집 **필자는 &#123;temp.sh&#125; 파일을 생성 하여 편집함</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>여기서 root 는 관리자 라는 의미로 파일을 수정 및 삭제 등 이 가능, 필자가 들은 바로는 회사에 들어가서 하나의 프로젝트를 맡아서 작업을 한다면 root 가 아닌 다른 계정을 받아 권한을 얻어야 된다고 함.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><a target="_blank" rel="external nofollow noopener noreferrer" href="http://temp.sh/">temp.sh</a> 파일 생성 및 저장 후 종료가 가능해졌습니다. (:wq 는 리눅스 환경에서 저장하고 나가기)</p>
+<p>  <img src="/images/Linux_error_E212/5.png" alt="png"></p>
+<ul>
+<li>리눅스 환경 vi 명령어는 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://blockdmask.tistory.com/25">https://blockdmask.tistory.com/25</a> 이 링크에 들어가셔서 확인 하시길 바랍니다.</li>
+</ul>
+</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/04/13/Linux_error_E212/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2022/04/12/Github(hexo)_blog_settings_01/" aria-label=": Github_blog(hexo) 테마 변경 및 환경 설정">
                             Github_blog(hexo) 테마 변경 및 환경 설정
                         </a>
@@ -1284,483 +1383,6 @@ fruits_300.npy      100%[===================&gt;]   2.86M  --.-KB/s    in 0.05s
         </div>
         
     </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/2022/03/30/Chapter_5_1/" aria-label=": 마켓과 머신러닝(Chapter_5_1)">
-                            마켓과 머신러닝(Chapter_5_1)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2022-03-30T09:00:00+09:00">
-	
-		    Mar 30, 2022
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Education/">Education</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h1 id="데이터-불러오기"><a href="#데이터-불러오기" class="headerlink" title="데이터 불러오기"></a>데이터 불러오기</h1><ul>
-<li>와인 데이터<ul>
-<li>alcohol(알코올 도수), sugar(당도), pH(산도)</li>
-<li>class 0 &#x3D; 레드 와인</li>
-<li>class 1 &#x3D; 화이트 와인</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">wine = pd.read_csv(<span class="string">&#x27;https://bit.ly/wine_csv_data&#x27;</span>)</span><br><span class="line">wine.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-  <div id="df-32f88054-395d-476e-b732-de1fe6fb312f">
-    <div class="colab-df-container">
-      <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style><p></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>alcohol</th>
-      <th>sugar</th>
-      <th>pH</th>
-      <th>class</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>9.4</td>
-      <td>1.9</td>
-      <td>3.51</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>9.8</td>
-      <td>2.6</td>
-      <td>3.20</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9.8</td>
-      <td>2.3</td>
-      <td>3.26</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>9.8</td>
-      <td>1.9</td>
-      <td>3.16</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>9.4</td>
-      <td>1.9</td>
-      <td>3.51</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-32f88054-395d-476e-b732-de1fe6fb312f')" title="Convert this dataframe to an interactive table." style="display:none;">
-
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
-  <style>
-    .colab-df-container {
-      display:flex;
-      flex-wrap:wrap;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-<pre><code>  &lt;script&gt;
-    const buttonEl =
-      document.querySelector(&#39;#df-32f88054-395d-476e-b732-de1fe6fb312f button.colab-df-convert&#39;);
-    buttonEl.style.display =
-      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;
-
-    async function convertToInteractive(key) &#123;
-      const element = document.querySelector(&#39;#df-32f88054-395d-476e-b732-de1fe6fb312f&#39;);
-      const dataTable =
-        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,
-                                                 [key], &#123;&#125;);
-      if (!dataTable) return;
-
-      const docLinkHtml = &#39;Like what you see? Visit the &#39; +
-        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;
-        + &#39; to learn more about interactive tables.&#39;;
-      element.innerHTML = &#39;&#39;;
-      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;
-      await google.colab.output.renderOutput(dataTable, element);
-      const docLink = document.createElement(&#39;div&#39;);
-      docLink.innerHTML = docLinkHtml;
-      element.appendChild(docLink);
-    &#125;
-  &lt;/script&gt;
-&lt;/div&gt;
-</code></pre>
-  </div>
-
-
-
-
-<ul>
-<li>info()<ul>
-<li>결측치 확인 &#x2F; 변수 타입</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wine.info()</span><br></pre></td></tr></table></figure>
-
-<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 6497 entries, 0 to 6496
-Data columns (total 4 columns):
- #   Column   Non-Null Count  Dtype  
----  ------   --------------  -----  
- 0   alcohol  6497 non-null   float64
- 1   sugar    6497 non-null   float64
- 2   pH       6497 non-null   float64
- 3   class    6497 non-null   float64
-dtypes: float64(4)
-memory usage: 203.2 KB
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wine.describe()</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-  <div id="df-b999d81a-0559-4b92-8e93-747feee74f33">
-    <div class="colab-df-container">
-      <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style><p></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>alcohol</th>
-      <th>sugar</th>
-      <th>pH</th>
-      <th>class</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>6497.000000</td>
-      <td>6497.000000</td>
-      <td>6497.000000</td>
-      <td>6497.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>10.491801</td>
-      <td>5.443235</td>
-      <td>3.218501</td>
-      <td>0.753886</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>1.192712</td>
-      <td>4.757804</td>
-      <td>0.160787</td>
-      <td>0.430779</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>8.000000</td>
-      <td>0.600000</td>
-      <td>2.720000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>9.500000</td>
-      <td>1.800000</td>
-      <td>3.110000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>10.300000</td>
-      <td>3.000000</td>
-      <td>3.210000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>11.300000</td>
-      <td>8.100000</td>
-      <td>3.320000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>14.900000</td>
-      <td>65.800000</td>
-      <td>4.010000</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-b999d81a-0559-4b92-8e93-747feee74f33')" title="Convert this dataframe to an interactive table." style="display:none;">
-
-<p>  &lt;svg xmlns&#x3D;”<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.w3.org/2000/svg&quot;">http://www.w3.org/2000/svg&quot;</a> height&#x3D;”24px”viewBox&#x3D;”0 0 24 24”<br>       width&#x3D;”24px”&gt;<br>    <path d="M0 0h24v24H0V0z" fill="none"></path><br>    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path><br>  <br>      </p></button><p></p>
-  <style>
-    .colab-df-container {
-      display:flex;
-      flex-wrap:wrap;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-<pre><code>  &lt;script&gt;
-    const buttonEl =
-      document.querySelector(&#39;#df-b999d81a-0559-4b92-8e93-747feee74f33 button.colab-df-convert&#39;);
-    buttonEl.style.display =
-      google.colab.kernel.accessAllowed ? &#39;block&#39; : &#39;none&#39;;
-
-    async function convertToInteractive(key) &#123;
-      const element = document.querySelector(&#39;#df-b999d81a-0559-4b92-8e93-747feee74f33&#39;);
-      const dataTable =
-        await google.colab.kernel.invokeFunction(&#39;convertToInteractive&#39;,
-                                                 [key], &#123;&#125;);
-      if (!dataTable) return;
-
-      const docLinkHtml = &#39;Like what you see? Visit the &#39; +
-        &#39;&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;&#39;
-        + &#39; to learn more about interactive tables.&#39;;
-      element.innerHTML = &#39;&#39;;
-      dataTable[&#39;output_type&#39;] = &#39;display_data&#39;;
-      await google.colab.output.renderOutput(dataTable, element);
-      const docLink = document.createElement(&#39;div&#39;);
-      docLink.innerHTML = docLinkHtml;
-      element.appendChild(docLink);
-    &#125;
-  &lt;/script&gt;
-&lt;/div&gt;
-</code></pre>
-  </div>
-
-
-
-
-<h1 id="표준화-작업"><a href="#표준화-작업" class="headerlink" title="표준화 작업"></a>표준화 작업</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = wine[[<span class="string">&#x27;alcohol&#x27;</span>,<span class="string">&#x27;sugar&#x27;</span>, <span class="string">&#x27;pH&#x27;</span>]].to_numpy()</span><br><span class="line">target = wine[<span class="string">&#x27;class&#x27;</span>].to_numpy()</span><br></pre></td></tr></table></figure>
-
-<h1 id="훈련데이터와-테스트데이터로-분리"><a href="#훈련데이터와-테스트데이터로-분리" class="headerlink" title="훈련데이터와 테스트데이터로 분리"></a>훈련데이터와 테스트데이터로 분리</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_input, test_input, train_target, test_target = train_test_split(</span><br><span class="line">    data, target, test_size = <span class="number">0.2</span>, random_state = <span class="number">42</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(train_input.shape, test_input.shape)</span><br></pre></td></tr></table></figure>
-
-<pre><code>(5197, 3) (1300, 3)
-</code></pre>
-<ul>
-<li>표준화 진행</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">ss = StandardScaler()</span><br><span class="line">ss.fit(train_input)</span><br><span class="line">train_scaled = ss.transform(train_input)</span><br><span class="line">test_scaled = ss.transform(test_input)</span><br></pre></td></tr></table></figure>
-
-<h1 id="모델-만들기"><a href="#모델-만들기" class="headerlink" title="모델 만들기"></a>모델 만들기</h1><h2 id="로지스틱회귀"><a href="#로지스틱회귀" class="headerlink" title="로지스틱회귀"></a>로지스틱회귀</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line">lr = LogisticRegression()</span><br><span class="line">lr.fit(train_scaled, train_target)</span><br><span class="line"><span class="built_in">print</span>(lr.score(train_scaled, train_target))</span><br><span class="line"><span class="built_in">print</span>(lr.score(test_scaled, test_target))</span><br><span class="line"><span class="built_in">print</span>(lr.coef_, lr.intercept_)</span><br></pre></td></tr></table></figure>
-
-<pre><code>0.7808350971714451
-0.7776923076923077
-[[ 0.51270274  1.6733911  -0.68767781]] [1.81777902]
-</code></pre>
-<p>로지스틱 회귀</p>
-<ul>
-<li>수식</li>
-</ul>
-<p>의사결정트리의 기본 알고리즘을 활용해서, MS, 구글 등 이런 회사들이 신규 알고리즘을 만듬</p>
-<ul>
-<li>XGBoost, LightGBM, CatBoost</li>
-<li>캐글 정형데이터</li>
-<li>LightGBM (지금 현재 실무에서 많이 쓰임)<ul>
-<li>4월 말 까지는 코드에 집중 대회 나감</li>
-<li>PPT (알고리즘 소개)</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line">dt = DecisionTreeClassifier(random_state=<span class="number">42</span>)</span><br><span class="line">dt.fit(train_scaled, train_target)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(dt.score(train_scaled, train_target)) <span class="comment"># 훈련 세트</span></span><br><span class="line"><span class="built_in">print</span>(dt.score(test_scaled, test_target)) <span class="comment"># 테스트 세트</span></span><br></pre></td></tr></table></figure>
-
-<pre><code>0.996921300750433
-0.8592307692307692
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> plot_tree</span><br><span class="line">plt.figure(figsize = (<span class="number">10</span>, <span class="number">7</span>))</span><br><span class="line">plot_tree(dt)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="/images/Chapter_5_1/output_16_0.png" alt="png"></p>
-<ul>
-<li>filled &#x3D; True<ul>
-<li>클래스 마다 색깔을 부여하고, 어떤 클래스의 비율이 높아지면 점점 진한 색으로 표시</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize = (<span class="number">10</span>, <span class="number">7</span>))</span><br><span class="line">plot_tree(dt, max_depth = <span class="number">1</span>, filled = <span class="literal">True</span>, feature_names = [<span class="string">&#x27;alcohol&#x27;</span>,<span class="string">&#x27;sugar&#x27;</span>, <span class="string">&#x27;pH&#x27;</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="/images/Chapter_5_1/output_18_0.png" alt="png"></p>
-<h1 id="가지치기"><a href="#가지치기" class="headerlink" title="가지치기"></a>가지치기</h1><ul>
-<li><p>과대적합을 방지하기 위한 것</p>
-</li>
-<li><p>max_depth</p>
-<ul>
-<li>트리의 최대 깊이</li>
-<li>default &#x3D; None</li>
-<li>완벽하게 클래스 값이 결정될 때 까지 분할 또는 데이터 개수가 min_samples_split보다 작아질 때까지 분할</li>
-<li>깊이가 깊어지면 과적합될 수 있으므로 적절히 제어 필요</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dt = DecisionTreeClassifier(max_depth = <span class="number">3</span>, random_state=<span class="number">42</span>)</span><br><span class="line">dt.fit(train_input, train_target)</span><br><span class="line"><span class="built_in">print</span>(dt.score(train_input, train_target))</span><br><span class="line"><span class="built_in">print</span>(dt.score(test_input, test_target))</span><br></pre></td></tr></table></figure>
-
-<pre><code>0.8454877814123533
-0.8415384615384616
-</code></pre>
-<ul>
-<li>지니 계수(불순도) <a target="_blank" rel="external nofollow noopener noreferrer" href="https://data-science-hi.tistory.com/59">참고 링크</a></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize = (<span class="number">20</span>, <span class="number">15</span>))</span><br><span class="line">plot_tree(dt, filled = <span class="literal">True</span>, feature_names = [<span class="string">&#x27;alcohol&#x27;</span>, <span class="string">&#x27;sugar&#x27;</span>, <span class="string">&#x27;pH&#x27;</span>])</span><br><span class="line">plt.show() <span class="comment"># 지니계수(불순도) 및 value 값 판단</span></span><br></pre></td></tr></table></figure>
-
-
-<p><img src="/images/Chapter_5_1/output_23_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> graphviz</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br><span class="line"></span><br><span class="line"><span class="comment"># DOT data</span></span><br><span class="line">dot_data = tree.export_graphviz(dt, out_file=<span class="literal">None</span>, </span><br><span class="line">                                feature_names = [<span class="string">&#x27;alcohol&#x27;</span>, <span class="string">&#x27;sugar&#x27;</span>, <span class="string">&#x27;pH&#x27;</span>],  </span><br><span class="line">                                filled=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Draw graph</span></span><br><span class="line">graph = graphviz.Source(dot_data, <span class="built_in">format</span>=<span class="string">&quot;png&quot;</span>) </span><br><span class="line">graph</span><br></pre></td></tr></table></figure>
-
-
-
-
-<p><img src="/images/Chapter_5_1/output_24_0.svg" alt="svg"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">graph.render(<span class="string">&quot;decision_tree_graphivz&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>&#39;decision_tree_graphivz.png&#39;
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> ListedColormap, to_rgb</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>, <span class="number">15</span>))</span><br><span class="line">artists = plot_tree(dt, filled = <span class="literal">True</span>, </span><br><span class="line">          feature_names = [<span class="string">&#x27;alcohol&#x27;</span>, <span class="string">&#x27;sugar&#x27;</span>, <span class="string">&#x27;pH&#x27;</span>])</span><br><span class="line"></span><br><span class="line">colors = [<span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;red&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> artist, impurity, value <span class="keyword">in</span> <span class="built_in">zip</span>(artists, dt.tree_.impurity, dt.tree_.value):</span><br><span class="line">    r, g, b = to_rgb(colors[np.argmax(value)])</span><br><span class="line">    f = impurity * <span class="number">2</span></span><br><span class="line">    artist.get_bbox_patch().set_facecolor((f + (<span class="number">1</span>-f)*r, f + (<span class="number">1</span>-f)*g, f + (<span class="number">1</span>-f)*b))</span><br><span class="line">    artist.get_bbox_patch().set_edgecolor(<span class="string">&#x27;black&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="/images/Chapter_5_1/output_26_0.png" alt="png"></p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a href="/2022/03/30/Chapter_5_1/#post-footer" class="postShorten-excerpt_link link" aria-label>
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </div></div></article>
     
     <div class="pagination-bar">
     <ul class="pagination">
