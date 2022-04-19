@@ -531,6 +531,82 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2022/04/19/Github_Fatal_01/" aria-label=": Github_blog (hexo) error fatal: The current branch main has no upstream branch.">
+                            Github_blog (hexo) error fatal: The current branch main has no upstream branch.
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-04-19T09:00:00+09:00">
+	
+		    Apr 19, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Error/">Error</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <ul>
+<li>이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.</li>
+</ul>
+<hr>
+<h1 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h1><ul>
+<li>git push를 하는 과정에서 발생한 error fatal: The current branch main has no upstream branch. 를 해결하는 과정을 설명</li>
+</ul>
+<h3 id="error-fatal-The-current-branch-main-has-no-upstream-branch"><a href="#error-fatal-The-current-branch-main-has-no-upstream-branch" class="headerlink" title="error fatal: The current branch main has no upstream branch."></a>error fatal: The current branch main has no upstream branch.</h3><ul>
+<li><p>git push를 하는 과정에서 다음과 같이 오류가 생김</p>
+<p>  <img src="/images/Github_Fatal_01/1.png" alt="png"></p>
+<ul>
+<li>이 에러는 원격 저장소 이름을 언급하지 않아서 생긴다.</li>
+</ul>
+</li>
+<li><p><u><span style="color:red"><code>git remote -v</code></span></u> 로 원격 저장소 이름을 찾은 뒤 원격 저장소를 <u><span style="color:red"><code>git push origin main</code></span></u> 로 명시해주면 된다.</p>
+<ul>
+<li><p>필자의 경우 원격 저장소가 origin 이며 branch는 main이므로 저렇게 입력했다.</p>
+</li>
+<li><p><u><span style="color:red"><code>! [rejected] main -&gt; main (non-fast-forward)</code></span></u> 에러가 나와 <u><span style="color:red"><code>git push origin +main</code></span></u> 처럼 branch에 +만 입력했더니 정상적으로 되었다.</p>
+<ul>
+<li>참고 사이트 : <a target="_blank" rel="external nofollow noopener noreferrer" href="https://somjang.tistory.com/entry/Git-rejected-master-master-non-fast-forward-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95">https://somjang.tistory.com/entry/Git-rejected-master-master-non-fast-forward-해결-방법</a></li>
+</ul>
+<p>  <img src="/images/Github_Fatal_01/2.png" alt="png"></p>
+</li>
+</ul>
+</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/04/19/Github_Fatal_01/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2022/04/13/Linux_error_E212/" aria-label=": 리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]">
                             리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]
                         </a>
