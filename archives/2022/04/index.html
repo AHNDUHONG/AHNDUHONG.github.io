@@ -431,6 +431,106 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2022/04/19/virtualenv_venv_settings/" aria-label=": 가상 환경 설정(venv) to Git Bash, VScode">
+                            가상 환경 설정(venv) to Git Bash, VScode
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-04-19T09:00:00+09:00">
+	
+		    Apr 19, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/venv/">venv</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><ul>
+<li>이 글은 Git Bash와 VScode를 이용한 폴더 생성 및 가상 환경을 설정 하여 구동(activate)하는 과정을 설명한 글 입니다.</li>
+</ul>
+<h2 id="1-Git-bash"><a href="#1-Git-bash" class="headerlink" title="(1) Git bash"></a>(1) Git bash</h2><ul>
+<li><p>git bash 프로그램을 실행하여 설정 할 경로를 잡아준다.</p>
+<ul>
+<li><p>참고: 아래는 git bash 프로그램의 간단한 명령어 이다</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ..             <span class="comment"># 상위 폴더인 이전 경로로 이동</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&#x27;&#123;폴더이름&#125;&#x27;</span>    <span class="comment"># 하위 폴더의 폴더이름으로 경로 이동</span></span><br><span class="line"><span class="built_in">ls</span>                <span class="comment"># 현재 경로의 하위 폴더 및 파일을 나타내줌</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>필자는 c드라이브로 폴더를 생성하겠다.</p>
+</li>
+</ul>
+<p>  <img src="/images/virtualenv_venv_settings/1.png" alt="png"></p>
+<hr>
+</li>
+<li><p>해당 경로에 폴더를 생성한 뒤 경로를 이동한다.</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="string">&quot;&#123;폴더이름&#125;&quot;</span> <span class="comment"># 폴더 생성</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&quot;&#123;폴더이름&#125;&quot;</span> <span class="comment"># 경로 이동</span></span><br></pre></td></tr></table></figure>
+<p>  <img src="/images/virtualenv_venv_settings/2.png" alt="png"></p>
+<hr>
+</li>
+<li><p><u><span style="color:red"><code>code .</code></span></u> 을 입력하여 VScode 프로그램을 실행 및 파일을 불러온다.</p>
+<p>  <img src="/images/virtualenv_venv_settings/3.png" alt="png"></p>
+<p>  <img src="/images/virtualenv_venv_settings/4.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h2 id="2-VScode"><a href="#2-VScode" class="headerlink" title="(2) VScode"></a>(2) VScode</h2><ul>
+<li><p>연결된 Vscode 프로그램에서 터미널(Terminal)창을 켠 뒤 bash로 설정</p>
+<p>  <img src="/images/virtualenv_venv_settings/5.png" alt="png"></p>
+<hr>
+</li>
+<li><p><u><span style="color:red"><code>virtualenv venv</code></span></u> 로 가상 환경 폴더 생성</p>
+<ul>
+<li>venv라는 폴더가 생성 되면 정상적으로 실행 된 것이다.</li>
+<li><strong><u><span style="color:red"><code>bash: virtualenv: command not found : virtualenv</code></span></u></strong> virtualenv 모듈 설치가 안되어 있어서 생기는 오류 , <u><span style="color:red"><code>pip install virtualenv</code></span></u> 로 설치 한 뒤 , <u><span style="color:red"><code>virtualenv venv</code></span></u> 한번 더 실행.</li>
+</ul>
+<p>  <img src="/images/virtualenv_venv_settings/6.png" alt="png"></p>
+<hr>
+</li>
+<li><p><u><span style="color:red"><code>source venv/Scripts/activate</code></span></u> 로 가상 환경 설정, 정상적으로 실행이 되면 경로 맨앞에 (venv)라는 문구가 나타난다.</p>
+<p>  <img src="/images/virtualenv_venv_settings/7.png" alt="png"></p>
+<ul>
+<li><p>Tip: source v를 입력후 Tap키를 눌렀을때 venv가 나오면 정상적으로 실행가능.</p>
+<hr>
+</li>
+</ul>
+</li>
+<li><p>로컬 환경으로 다시 전환 하려면 <u><span style="color:red"><code>deactivate</code></span> 를 입력하면 가능하다.</u></p>
+<p>  <img src="/images/virtualenv_venv_settings/8.png" alt="png"></p>
+</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/04/19/virtualenv_venv_settings/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2022/04/13/Linux_error_E212/" aria-label=": 리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]">
                             리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]
                         </a>

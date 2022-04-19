@@ -431,6 +431,106 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2022/04/19/virtualenv_venv_settings/" aria-label=": 가상 환경 설정(venv) to Git Bash, VScode">
+                            가상 환경 설정(venv) to Git Bash, VScode
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-04-19T09:00:00+09:00">
+	
+		    Apr 19, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/venv/">venv</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><ul>
+<li>이 글은 Git Bash와 VScode를 이용한 폴더 생성 및 가상 환경을 설정 하여 구동(activate)하는 과정을 설명한 글 입니다.</li>
+</ul>
+<h2 id="1-Git-bash"><a href="#1-Git-bash" class="headerlink" title="(1) Git bash"></a>(1) Git bash</h2><ul>
+<li><p>git bash 프로그램을 실행하여 설정 할 경로를 잡아준다.</p>
+<ul>
+<li><p>참고: 아래는 git bash 프로그램의 간단한 명령어 이다</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ..             <span class="comment"># 상위 폴더인 이전 경로로 이동</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&#x27;&#123;폴더이름&#125;&#x27;</span>    <span class="comment"># 하위 폴더의 폴더이름으로 경로 이동</span></span><br><span class="line"><span class="built_in">ls</span>                <span class="comment"># 현재 경로의 하위 폴더 및 파일을 나타내줌</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>필자는 c드라이브로 폴더를 생성하겠다.</p>
+</li>
+</ul>
+<p>  <img src="/images/virtualenv_venv_settings/1.png" alt="png"></p>
+<hr>
+</li>
+<li><p>해당 경로에 폴더를 생성한 뒤 경로를 이동한다.</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="string">&quot;&#123;폴더이름&#125;&quot;</span> <span class="comment"># 폴더 생성</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&quot;&#123;폴더이름&#125;&quot;</span> <span class="comment"># 경로 이동</span></span><br></pre></td></tr></table></figure>
+<p>  <img src="/images/virtualenv_venv_settings/2.png" alt="png"></p>
+<hr>
+</li>
+<li><p><u><span style="color:red"><code>code .</code></span></u> 을 입력하여 VScode 프로그램을 실행 및 파일을 불러온다.</p>
+<p>  <img src="/images/virtualenv_venv_settings/3.png" alt="png"></p>
+<p>  <img src="/images/virtualenv_venv_settings/4.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h2 id="2-VScode"><a href="#2-VScode" class="headerlink" title="(2) VScode"></a>(2) VScode</h2><ul>
+<li><p>연결된 Vscode 프로그램에서 터미널(Terminal)창을 켠 뒤 bash로 설정</p>
+<p>  <img src="/images/virtualenv_venv_settings/5.png" alt="png"></p>
+<hr>
+</li>
+<li><p><u><span style="color:red"><code>virtualenv venv</code></span></u> 로 가상 환경 폴더 생성</p>
+<ul>
+<li>venv라는 폴더가 생성 되면 정상적으로 실행 된 것이다.</li>
+<li><strong><u><span style="color:red"><code>bash: virtualenv: command not found : virtualenv</code></span></u></strong> virtualenv 모듈 설치가 안되어 있어서 생기는 오류 , <u><span style="color:red"><code>pip install virtualenv</code></span></u> 로 설치 한 뒤 , <u><span style="color:red"><code>virtualenv venv</code></span></u> 한번 더 실행.</li>
+</ul>
+<p>  <img src="/images/virtualenv_venv_settings/6.png" alt="png"></p>
+<hr>
+</li>
+<li><p><u><span style="color:red"><code>source venv/Scripts/activate</code></span></u> 로 가상 환경 설정, 정상적으로 실행이 되면 경로 맨앞에 (venv)라는 문구가 나타난다.</p>
+<p>  <img src="/images/virtualenv_venv_settings/7.png" alt="png"></p>
+<ul>
+<li><p>Tip: source v를 입력후 Tap키를 눌렀을때 venv가 나오면 정상적으로 실행가능.</p>
+<hr>
+</li>
+</ul>
+</li>
+<li><p>로컬 환경으로 다시 전환 하려면 <u><span style="color:red"><code>deactivate</code></span> 를 입력하면 가능하다.</u></p>
+<p>  <img src="/images/virtualenv_venv_settings/8.png" alt="png"></p>
+</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/04/19/virtualenv_venv_settings/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2022/04/13/Linux_error_E212/" aria-label=": 리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]">
                             리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]
                         </a>
@@ -1302,184 +1402,6 @@ fruits_300.npy      100%[===================&gt;]   2.86M  --.-KB/s    in 0.07s
                     
                         <p>
                             <a href="/2022/03/31/Chapter_6_1/#post-footer" class="postShorten-excerpt_link link" aria-label>
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/2022/03/31/Chapter_6_2/" aria-label=": 마켓과 머신러닝(Chapter_6_2)">
-                            마켓과 머신러닝(Chapter_6_2)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2022-03-31T09:00:00+09:00">
-	
-		    Mar 31, 2022
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Education/">Education</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h1 id="K-평균"><a href="#K-평균" class="headerlink" title="K-평균"></a>K-평균</h1><ul>
-<li><p>각각의 픽셀값(3차원 -&gt; 1차원 배열) 평균 구함</p>
-<ul>
-<li>픽셀의 평균값을 활용해서 사과, 파앤애플, 바나나의 근사한 이미지를 추출하는 것</li>
-</ul>
-</li>
-<li><p>어떻게 평균값을 구할 수 있을까?</p>
-<ul>
-<li>K-평균 알고리즘 (K-Means) 알고리즘</li>
-<li>평균값 &#x3D; Cluster Center &#x3D; Centroid</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!wget https://bit.ly/fruits_300_data -O fruits_300.npy</span><br></pre></td></tr></table></figure>
-
-<pre><code>--2022-03-31 02:16:44--  https://bit.ly/fruits_300_data
-Resolving bit.ly (bit.ly)... 67.199.248.10, 67.199.248.11
-Connecting to bit.ly (bit.ly)|67.199.248.10|:443... connected.
-HTTP request sent, awaiting response... 301 Moved Permanently
-Location: https://github.com/rickiepark/hg-mldl/raw/master/fruits_300.npy [following]
---2022-03-31 02:16:44--  https://github.com/rickiepark/hg-mldl/raw/master/fruits_300.npy
-Resolving github.com (github.com)... 192.30.255.113
-Connecting to github.com (github.com)|192.30.255.113|:443... connected.
-HTTP request sent, awaiting response... 302 Found
-Location: https://raw.githubusercontent.com/rickiepark/hg-mldl/master/fruits_300.npy [following]
---2022-03-31 02:16:44--  https://raw.githubusercontent.com/rickiepark/hg-mldl/master/fruits_300.npy
-Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.110.133, 185.199.111.133, 185.199.108.133, ...
-Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.110.133|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 3000128 (2.9M) [application/octet-stream]
-Saving to: ‘fruits_300.npy’
-
-fruits_300.npy      100%[===================&gt;]   2.86M  --.-KB/s    in 0.05s   
-
-2022-03-31 02:16:44 (62.6 MB/s) - ‘fruits_300.npy’ saved [3000128/3000128]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">fruits = np.load(<span class="string">&#x27;/content/fruits_300.npy&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(fruits.shape)</span><br><span class="line"><span class="built_in">print</span>(fruits.ndim)</span><br></pre></td></tr></table></figure>
-
-<pre><code>(300, 100, 100)
-3
-</code></pre>
-<ul>
-<li>3차원(샘플개수, 너비, 높이)</li>
-<li>2차원(샘플개수, 너비 x 높이)</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fruits_2d = fruits.reshape(-<span class="number">1</span>, <span class="number">100</span> * <span class="number">100</span>)</span><br><span class="line">fruits_2d.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(300, 10000)
-</code></pre>
-<ul>
-<li>K-평균 알고리즘 활용</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br><span class="line">km = KMeans(n_clusters = <span class="number">3</span>, random_state = <span class="number">42</span>)</span><br><span class="line">km.fit(fruits_2d)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>KMeans(n_clusters=3, random_state=42)
-</code></pre>
-<ul>
-<li>모형 학습 후, labels</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(km.labels_)</span><br></pre></td></tr></table></figure>
-
-<pre><code>[2 2 2 2 2 0 2 2 2 2 2 2 2 2 2 2 2 2 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
- 2 2 2 2 2 0 2 0 2 2 2 2 2 2 2 0 2 2 2 2 2 2 2 2 2 0 0 2 2 2 2 2 2 2 2 0 2
- 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2 2 2 2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0
- 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
- 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
- 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
- 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
- 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
- 1 1 1 1]
-</code></pre>
-<ul>
-<li>직접 샘플의 개수 확인</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(np.unique(km.labels_, return_counts = <span class="literal">True</span>))</span><br></pre></td></tr></table></figure>
-
-<pre><code>(array([0, 1, 2], dtype=int32), array([111,  98,  91]))
-</code></pre>
-<ul>
-<li>그래프를 직접 그려본다</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">draw_fruits</span>(<span class="params">arr, ratio=<span class="number">1</span></span>):</span><br><span class="line">    n = <span class="built_in">len</span>(arr)    <span class="comment"># n은 샘플 개수입니다</span></span><br><span class="line">    <span class="comment"># 한 줄에 10개씩 이미지를 그립니다. 샘플 개수를 10으로 나누어 전체 행 개수를 계산합니다. </span></span><br><span class="line">    rows = <span class="built_in">int</span>(np.ceil(n/<span class="number">10</span>))</span><br><span class="line">    <span class="comment"># 행이 1개 이면 열 개수는 샘플 개수입니다. 그렇지 않으면 10개입니다.</span></span><br><span class="line">    cols = n <span class="keyword">if</span> rows &lt; <span class="number">2</span> <span class="keyword">else</span> <span class="number">10</span></span><br><span class="line">    fig, axs = plt.subplots(rows, cols, </span><br><span class="line">                            figsize=(cols*ratio, rows*ratio), squeeze=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(rows):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(cols):</span><br><span class="line">            <span class="keyword">if</span> i*<span class="number">10</span> + j &lt; n:    <span class="comment"># n 개까지만 그립니다.</span></span><br><span class="line">                axs[i, j].imshow(arr[i*<span class="number">10</span> + j], cmap=<span class="string">&#x27;gray_r&#x27;</span>)</span><br><span class="line">            axs[i, j].axis(<span class="string">&#x27;off&#x27;</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">draw_fruits(fruits[km.labels_ == <span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="/images/Chapter_6_2/output_14_0.png" alt="png"></p>
-<h1 id="클러스터-중심"><a href="#클러스터-중심" class="headerlink" title="클러스터 중심"></a>클러스터 중심</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">draw_fruits(km.cluster_centers_.reshape(-<span class="number">1</span>, <span class="number">100</span>, <span class="number">100</span>), ratio = <span class="number">3</span>) <span class="comment"># fruits_2d 샘플의 클러스터 중심이기 때문에 이미지로 출력하려면 100 X 100 크기로 변환</span></span><br></pre></td></tr></table></figure>
-
-
-<p><img src="/images/Chapter_6_2/output_16_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(km.transform(fruits_2d[<span class="number">100</span>:<span class="number">101</span>])) <span class="comment"># transform 메서드는 훈련데이터 샘플에서 클러스터 중심까지 거리로 변환해준다.</span></span><br></pre></td></tr></table></figure>
-
-<pre><code>[[3393.8136117  8837.37750892 5267.70439881]]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(km.predict(fruits_2d[<span class="number">100</span>:<span class="number">101</span>]))</span><br></pre></td></tr></table></figure>
-
-<pre><code>[0]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">draw_fruits(fruits[<span class="number">100</span>:<span class="number">101</span>])</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="/images/Chapter_6_2/output_19_0.png" alt="png"></p>
-<h1 id="최적의-K-평균-찾기"><a href="#최적의-K-평균-찾기" class="headerlink" title="최적의 K-평균 찾기"></a>최적의 K-평균 찾기</h1><ul>
-<li>inertia <ul>
-<li>목적함수 값이 최소화될 때까지 군집의 중심위치와 각 데이터가 소속될 군집를 반복해서 찾는다. 이 값을 관성(inertia)이라고 함</li>
-<li>클러스터에 속한 샘플이 얼마나 가깝게 모여있는지를 나타내는 값</li>
-</ul>
-</li>
-<li>엘보우 방법 <ul>
-<li>클러스터의 개수가 늘어나면 클러스터 개개의 크기는 줄어들기 때문에 이너셔도 같이 줄어듬, 그렇기 때문에 클러스터 개수를 늘려가면서 이너셔의 변화를 관찰하여 최적의 클러스터 개수를 찾는다.</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">inertia = []</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">7</span>):</span><br><span class="line">  km = KMeans(n_clusters = k, random_state = <span class="number">42</span>)</span><br><span class="line">  km.fit(fruits_2d)</span><br><span class="line">  inertia.append(km.inertia_)</span><br><span class="line">plt.plot(<span class="built_in">range</span>(<span class="number">2</span>, <span class="number">7</span>), inertia)</span><br><span class="line">plt.show</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>&lt;function matplotlib.pyplot.show&gt;
-</code></pre>
-<p><img src="/images/Chapter_6_2/output_21_1.png" alt="png"></p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a href="/2022/03/31/Chapter_6_2/#post-footer" class="postShorten-excerpt_link link" aria-label>
                                 Comment and share
                             </a>
                         </p>

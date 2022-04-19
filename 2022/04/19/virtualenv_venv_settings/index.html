@@ -1,0 +1,551 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Winters Blog">
+    <title>가상 환경 설정(venv) to Git Bash, VScode - Winters Blog</title>
+    <meta name="author" content="Winters">
+    
+    
+        <link rel="icon" href="https://AHNDUHONG.github.io/assets/images/ADH_Favicon.ico">
+    
+    
+        
+            <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+        
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg"},"articleBody":"개요\n이 글은 Git Bash와 VScode를 이용한 폴더 생성 및 가상 환경을 설정 하여 구동(activate)하는 과정을 설명한 글 입니다.\n\n(1) Git bash\ngit bash 프로그램을 실행하여 설정 할 경로를 잡아준다.\n\n참고: 아래는 git bash 프로그램의 간단한 명령어 이다\n  123cd ..             # 상위 폴더인 이전 경로로 이동cd &#x27;&#123;폴더이름&#125;&#x27;    # 하위 폴더의 폴더이름으로 경로 이동ls                # 현재 경로의 하위 폴더 및 파일을 나타내줌\n\n필자는 c드라이브로 폴더를 생성하겠다.\n\n\n  \n\n\n해당 경로에 폴더를 생성한 뒤 경로를 이동한다.\n  12mkdir &quot;&#123;폴더이름&#125;&quot; # 폴더 생성cd &quot;&#123;폴더이름&#125;&quot; # 경로 이동\n  \n\n\ncode . 을 입력하여 VScode 프로그램을 실행 및 파일을 불러온다.\n  \n  \n\n\n\n(2) VScode\n연결된 Vscode 프로그램에서 터미널(Terminal)창을 켠 뒤 bash로 설정\n  \n\n\nvirtualenv venv 로 가상 환경 폴더 생성\n\nvenv라는 폴더가 생성 되면 정상적으로 실행 된 것이다.\nbash: virtualenv: command not found : virtualenv virtualenv 모듈 설치가 안되어 있어서 생기는 오류 , pip install virtualenv 로 설치 한 뒤 , virtualenv venv 한번 더 실행.\n\n  \n\n\nsource venv/Scripts/activate 로 가상 환경 설정, 정상적으로 실행이 되면 경로 맨앞에 (venv)라는 문구가 나타난다.\n  \n\nTip: source v를 입력후 Tap키를 눌렀을때 venv가 나오면 정상적으로 실행가능.\n\n\n\n\n로컬 환경으로 다시 전환 하려면 deactivate 를 입력하면 가능하다.\n  \n\n\n","dateCreated":"2022-04-19T09:00:00+09:00","dateModified":"2022-04-19T21:02:02+09:00","datePublished":"2022-04-19T09:00:00+09:00","description":"","headline":"가상 환경 설정(venv) to Git Bash, VScode","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/04/19/virtualenv_venv_settings/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg","logo":{"@type":"ImageObject","url":"blog_profile_image_01.jpg"}},"url":"https://ahnduhong.github.io/2022/04/19/virtualenv_venv_settings/","keywords":"venv"}</script>
+    <meta name="description" content="개요 이 글은 Git Bash와 VScode를 이용한 폴더 생성 및 가상 환경을 설정 하여 구동(activate)하는 과정을 설명한 글 입니다.  (1) Git bash git bash 프로그램을 실행하여 설정 할 경로를 잡아준다.  참고: 아래는 git bash 프로그램의 간단한 명령어 이다   123cd ..             # 상위 폴더인 이전">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="가상 환경 설정(venv) to Git Bash, VScode">
+<meta property="og:url" content="https://ahnduhong.github.io/2022/04/19/virtualenv_venv_settings/index.html">
+<meta property="og:site_name" content="Winters Blog">
+<meta property="og:description" content="개요 이 글은 Git Bash와 VScode를 이용한 폴더 생성 및 가상 환경을 설정 하여 구동(activate)하는 과정을 설명한 글 입니다.  (1) Git bash git bash 프로그램을 실행하여 설정 할 경로를 잡아준다.  참고: 아래는 git bash 프로그램의 간단한 명령어 이다   123cd ..             # 상위 폴더인 이전">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ahnduhong.github.io/images/virtualenv_venv_settings/1.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/virtualenv_venv_settings/2.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/virtualenv_venv_settings/3.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/virtualenv_venv_settings/4.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/virtualenv_venv_settings/5.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/virtualenv_venv_settings/6.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/virtualenv_venv_settings/7.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/virtualenv_venv_settings/8.png">
+<meta property="article:published_time" content="2022-04-19T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-19T12:02:02.448Z">
+<meta property="article:author" content="Winters">
+<meta property="article:tag" content="venv">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ahnduhong.github.io/images/virtualenv_venv_settings/1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://AHNDUHONG.github.io/assets/images/blog_profile_image_01.jpg">
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-nweealnwexi63lhm1agu2ku3rw8tqhtfz0od0lsqiw3kbrdmk45anokos3uj.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/" aria-label>
+            Winters Blog
+        </a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about" aria-label="Open the link: /#about">
+        
+        
+            <img class="header-picture" src="/assets/images/blog_profile_image_01.jpg" alt="Author&#39;s picture">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about" aria-label="Read more about the author">
+                    <img class="sidebar-profile-picture" src="/assets/images/blog_profile_image_01.jpg" alt="Author&#39;s picture">
+                </a>
+                <h4 class="sidebar-profile-name">Winters</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>개발자를 꿈꾸는 어른이</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/" rel="noopener" title="Home">
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" rel="noopener" title="Categories">
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" rel="noopener" title="Tags">
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" rel="noopener" title="Archives">
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/AHNDUHONG" target="_blank" rel="external nofollow noopener noreferrer" title="GitHub">
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="mailto:dksenghd123@naver.com" target="_blank" rel="external nofollow noopener noreferrer" title="Mail">
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" rel="noopener" title="Search">
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" rel="noopener" title="About">
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/atom.xml" rel="noopener" title="RSS">
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4" class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            가상 환경 설정(venv) to Git Bash, VScode
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2022-04-19T09:00:00+09:00">
+	
+		    Apr 19, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/venv/">venv</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><ul>
+<li>이 글은 Git Bash와 VScode를 이용한 폴더 생성 및 가상 환경을 설정 하여 구동(activate)하는 과정을 설명한 글 입니다.</li>
+</ul>
+<h2 id="1-Git-bash"><a href="#1-Git-bash" class="headerlink" title="(1) Git bash"></a>(1) Git bash</h2><ul>
+<li><p>git bash 프로그램을 실행하여 설정 할 경로를 잡아준다.</p>
+<ul>
+<li><p>참고: 아래는 git bash 프로그램의 간단한 명령어 이다</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ..             <span class="comment"># 상위 폴더인 이전 경로로 이동</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&#x27;&#123;폴더이름&#125;&#x27;</span>    <span class="comment"># 하위 폴더의 폴더이름으로 경로 이동</span></span><br><span class="line"><span class="built_in">ls</span>                <span class="comment"># 현재 경로의 하위 폴더 및 파일을 나타내줌</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>필자는 c드라이브로 폴더를 생성하겠다.</p>
+</li>
+</ul>
+<p>  <img src="/images/virtualenv_venv_settings/1.png" alt="png"></p>
+<hr>
+</li>
+<li><p>해당 경로에 폴더를 생성한 뒤 경로를 이동한다.</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="string">&quot;&#123;폴더이름&#125;&quot;</span> <span class="comment"># 폴더 생성</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&quot;&#123;폴더이름&#125;&quot;</span> <span class="comment"># 경로 이동</span></span><br></pre></td></tr></table></figure>
+<p>  <img src="/images/virtualenv_venv_settings/2.png" alt="png"></p>
+<hr>
+</li>
+<li><p><u><span style="color:red"><code>code .</code></span></u> 을 입력하여 VScode 프로그램을 실행 및 파일을 불러온다.</p>
+<p>  <img src="/images/virtualenv_venv_settings/3.png" alt="png"></p>
+<p>  <img src="/images/virtualenv_venv_settings/4.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h2 id="2-VScode"><a href="#2-VScode" class="headerlink" title="(2) VScode"></a>(2) VScode</h2><ul>
+<li><p>연결된 Vscode 프로그램에서 터미널(Terminal)창을 켠 뒤 bash로 설정</p>
+<p>  <img src="/images/virtualenv_venv_settings/5.png" alt="png"></p>
+<hr>
+</li>
+<li><p><u><span style="color:red"><code>virtualenv venv</code></span></u> 로 가상 환경 폴더 생성</p>
+<ul>
+<li>venv라는 폴더가 생성 되면 정상적으로 실행 된 것이다.</li>
+<li><strong><u><span style="color:red"><code>bash: virtualenv: command not found : virtualenv</code></span></u></strong> virtualenv 모듈 설치가 안되어 있어서 생기는 오류 , <u><span style="color:red"><code>pip install virtualenv</code></span></u> 로 설치 한 뒤 , <u><span style="color:red"><code>virtualenv venv</code></span></u> 한번 더 실행.</li>
+</ul>
+<p>  <img src="/images/virtualenv_venv_settings/6.png" alt="png"></p>
+<hr>
+</li>
+<li><p><u><span style="color:red"><code>source venv/Scripts/activate</code></span></u> 로 가상 환경 설정, 정상적으로 실행이 되면 경로 맨앞에 (venv)라는 문구가 나타난다.</p>
+<p>  <img src="/images/virtualenv_venv_settings/7.png" alt="png"></p>
+<ul>
+<li><p>Tip: source v를 입력후 Tap키를 눌렀을때 venv가 나오면 정상적으로 실행가능.</p>
+<hr>
+</li>
+</ul>
+</li>
+<li><p>로컬 환경으로 다시 전환 하려면 <u><span style="color:red"><code>deactivate</code></span> 를 입력하면 가능하다.</u></p>
+<p>  <img src="/images/virtualenv_venv_settings/8.png" alt="png"></p>
+</li>
+</ul>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/venv/" rel="tag">venv</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/19/Apache_Spark_installation/" data-tooltip="Apache Spark installation on windows 11(아파치 스파크)" aria-label="PREVIOUS: Apache Spark installation on windows 11(아파치 스파크)">
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/13/Linux_error_E212/" data-tooltip="리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]" aria-label="NEXT: 리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]">
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/19/virtualenv_venv_settings/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/19/virtualenv_venv_settings/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/19/virtualenv_venv_settings/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2022 Winters. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/19/Apache_Spark_installation/" data-tooltip="Apache Spark installation on windows 11(아파치 스파크)" aria-label="PREVIOUS: Apache Spark installation on windows 11(아파치 스파크)">
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/13/Linux_error_E212/" data-tooltip="리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]" aria-label="NEXT: 리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]">
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/19/virtualenv_venv_settings/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/19/virtualenv_venv_settings/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/19/virtualenv_venv_settings/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/19/virtualenv_venv_settings/" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/19/virtualenv_venv_settings/" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/19/virtualenv_venv_settings/" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/blog_profile_image_01.jpg" alt="Author&#39;s picture">
+        
+            <h4 id="about-card-name">Winters</h4>
+        
+            <div id="about-card-bio"><p>개발자를 꿈꾸는 어른이</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>개발자(예비)</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                대한민국/서울
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/blog_theme_image_03.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-dvu41dvy5202v52bwzsnpck9devc8hugsy17mbuqp6i4ms8q6rt7zrc4avbe.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

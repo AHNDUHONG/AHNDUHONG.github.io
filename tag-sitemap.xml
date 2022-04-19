@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>https://ahnduhong.github.io/tags/venv/</loc>
+        <lastmod>2022-04-19T12:02:02.448Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://ahnduhong.github.io/tags/Spark/</loc>
         <lastmod>2022-04-19T10:36:04.059Z</lastmod>
         <changefreq>weekly</changefreq>
