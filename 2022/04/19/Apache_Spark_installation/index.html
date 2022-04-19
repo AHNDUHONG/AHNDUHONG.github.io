@@ -1,0 +1,694 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Winters Blog">
+    <title>Apache Spark installation on windows 11(아파치 스파크) - Winters Blog</title>
+    <meta name="author" content="Winters">
+    
+    
+        <link rel="icon" href="https://AHNDUHONG.github.io/assets/images/ADH_Favicon.ico">
+    
+    
+        
+            <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+        
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg"},"articleBody":"\n이 글은 Apache Spark(아파치 스파크) 설치 및 환경 설정에 관해 설명하고 있으며 https://dschloe.github.io/python/python_edu&#x2F;00_settings&#x2F;spark_installation_windows_10&#x2F; 블로그를 참고하여 작성 한 것입니다.\n\n\n사전준비\nPython3 가 설치가 되어야 가능하기 때문에 설치가 되어있지 않다면 아나콘다(Anaconda)에 접속하여 설치 바랍니다.\n\n다운로드 전 필수 확인사항\n스파크 설치 전에는 반드시 체크해야 하는 사항이 있다. (System Compatibility)\n2022년 1월 기준은 아래와 같다.\n\nGet Spark from the downloads page of the project website. This documentation is for Spark version 3.2.0. Spark uses Hadoop’s client libraries for HDFS and YARN. Downloads are pre-packaged for a handful of popular Hadoop versions. Users can also download a “Hadoop free” binary and run Spark with any Hadoop version by augmenting Spark’s classpath. Scala and Java users can include Spark in their projects using its Maven coordinates and Python users can install Spark from PyPI.\nIf you’d like to build Spark from source, visit Building Spark.\nSpark runs on both Windows and UNIX-like systems (e.g. Linux, Mac OS), and it should run on any platform that runs a supported version of Java. This should include JVMs on x86_64 and ARM64. It’s easy to run locally on one machine — all you need is to have java installed on your system PATH, or the JAVA_HOME environment variable pointing to a Java installation.\nSpark runs on Java 8&#x2F;11, Scala 2.12, Python 3.6+ and R 3.5+. Python 3.6 support is deprecated as of Spark 3.2.0. Java 8 prior to version 8u201 support is deprecated as of Spark 3.2.0. For the Scala API, Spark 3.2.0 uses Scala 2.12. You will need to use a compatible Scala version (2.12.x).\nFor Python 3.9, Arrow optimization and pandas UDFs might not work due to the supported Python versions in Apache Arrow. Please refer to the latest Python Compatibility page. For Java 11, -Dio.netty.tryReflectionSetAccessible=true is required additionally for Apache Arrow library. This prevents java.lang.UnsupportedOperationException: sun.misc.Unsafe or java.nio.DirectByteBuffer.(long, int) not available when Apache Arrow uses Netty internally.\n자바 설치\n자바를 설치한다. 설치 파일은 아래 링크에서 각자 환경에 맞는 프로그램을 다운로드 받는다.\nJAVA: https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html\n설치 시, 오라클 로그인이 필요 할 수도 있으므로 계정이 없는 경우 생성 후 시도 바랍니다.\n\n\n\nStep 01. 설치\n다운로드 파일을 관리자로 실행한다. 계속 Next 버튼 클릭 후, 아래 파일에서 경로를 수정한다. (이 때, Program Files 공백이 있는데, 이러한 공백은 환경 설치 시 문제가 될 수 있다.)\n  \n\n\n\n\nFoder name(경로)를 아래와 같이 변경 후 OK 클릭을 하면 설치가 완료된다.\n  \n\n\n\n\n이번에는 자바 런타임 환경의 폴더도 동일하게 변경해준다. (변경 클릭 후 수정)\n\nC드라이브 경로에 jre 폴더를 생성하고 저장한다.\n\n  \n\n\n\nSpark 설치(1) Spark file 설치\n아래 링크를 통해 Spark를 설치한다.\nSpark: https://spark.apache.org/downloads.html\n\n밑줄 친 항목 버전 확인 후 3번째 줄인 spark-3.2.1-bin-hadoop3.2.tgz 클릭\n  \n\n\n\n\nHTTP 아래에 있는 페이지를 클릭하면 다운로드 받을 수 있다.\n  \n\n\n\n\n\n(2) WinRAR 프로그램 다운로드\n.tgz 파일 압축을 풀기 위해 WinRAR 을 설치한다.\nWinRAR: https://www.rarlab.com/download.htm\n\n링크에 들어가면 아래 화면이 보이는데 각 컴퓨터 환경에 맞게 설치 바랍니다.\n  \n\n\n다운로드가 완료 되면 위 과정 (1)에서 설치했던 spark-3.2.0-bin-hadoop3.2.tgz 파일 압축 풀기(Extract) 실행\n\n\n\n\n(3) spark 폴더 생성 및 파일 이동\nC드라이브 안에 spark 라는 새로운 폴더 생성 후 앞 서 압축을 풀었던 파일 spark-3.2.0-bin-hadoop3.2 폴더 내 모든 파일을 생성한 spark 폴더로 옮긴다.\n  \n\n\n\n(4) log4j.properties 파일 수정\nconf - [log4j.properties](http://log4j.properties) 파일을 연다.\n  \n\n\n해당 파일을 메모장으로 연 후(필자는 vscode로 연결), 아래에서 빨간줄을 친 log4j.rootCategory=INFO 에서 INFO → ERROR 로 변경한다.\n\n작업 실행 시, 출력하는 모든 logs 값들을 없앨 수 있다.\n  \n\n\n\n\n\nwinutils 설치\n이번에는 스파크가 윈도우 로컬 컴퓨터가 Hadoop을 착각하게 만들 프로그램이 필요하다.\n\n설치파일: https://github.com/cdarlint/winutils\n\n여기에서 최신 버전의 winutils를 다운로드 받는다.\n  \n\n\n\n\n필자는 hadoop-3.2.2 버전을 다운로드 받았다.\n\n\n\nC드라이브에서 winutils란 이름의 폴더를 생성한 후, 앞서 받은 hadoop-3.2.2 파일의 bin 폴더를 옮긴다.\n  \n\n\n이 파일이 Spark 실행 시, 오류 없이 실행될 수 있도록 CMD 프로그램에서 파일 사용 권한을 얻도록 한다.\n\nCMD 프로그램을 관리자 권한으로 실행 후 아래 코드 입력\n\n  12C:\\Windows\\system32&gt;cd c:\\winutils\\bin # 경로 변경c:\\winutils\\bin&gt; winutils.exe chmod 777 \\tmp\\hive\n\n만약, ChangeFileModeByMask error (3) 에러 발생 시, C드라이브에 tmp\\hive 폴더를 차례대로 생성을 한다.\n\n\n\n\n\n환경변수 설정\n시스템 환경 변수를 설정한다.\n시스템 환경 변수 검색 후 클릭\n  \n\n\n환경 변수 클릭\n  \n\n\n각 사용자 계정에 사용자 변수 - 새로 만들기 버튼 을 클릭\n  \n\n\nSPARK_HOME 환경 변수를 설정한다.\n  \n\n\nJAVA_HOME 환경 변수를 설정한다.\n  \n\n\nHADOOP_HOME 환경 변수를 설정한다.\n  \n\n\n이번에는 PATH 변수를 편집한다.\n  \n\n\n아래 코드를 추가한다.\n\n%SPARK_HOME%\\bin\n\n%JAVA_HOME%\\bin\n  \n\n\n\n\n\n\n\n파이썬 환경 설정\nPython 환경 설정을 추가한다.\n  \n\n\n\n스파크 테스트\nCMD 파일을 열고 c:\\spark 폴더로 경로를 설정 한 뒤 pyspark 로 실행\n  12cd c:\\spark # 경로를 c:\\spark 로 설정pyspark # 실행\n  \n\n\n해당 [README.md](http://README.md) 파일을 불러와서 아래 코드가 실행되는지 확인한다.\n  1234&gt;&gt;&gt; rd = sc.textFile(&quot;README.md&quot;)&gt;&gt;&gt; rd.count()109&gt;&gt;&gt;\n\n","dateCreated":"2022-04-19T09:00:00+09:00","dateModified":"2022-04-19T19:36:04+09:00","datePublished":"2022-04-19T09:00:00+09:00","description":"","headline":"Apache Spark installation on windows 11(아파치 스파크)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ahnduhong.github.io/2022/04/19/Apache_Spark_installation/"},"publisher":{"@type":"Organization","name":"Winters","sameAs":["https://github.com/AHNDUHONG","mailto:dksenghd123@naver.com","#search","#about"],"image":"blog_profile_image_01.jpg","logo":{"@type":"ImageObject","url":"blog_profile_image_01.jpg"}},"url":"https://ahnduhong.github.io/2022/04/19/Apache_Spark_installation/","keywords":"Spark"}</script>
+    <meta name="description" content="이 글은 Apache Spark(아파치 스파크) 설치 및 환경 설정에 관해 설명하고 있으며 https:&#x2F;&#x2F;dschloe.github.io&#x2F;python&#x2F;python_edu&#x2F;00_settings&#x2F;spark_installation_windows_10&#x2F; 블로그를 참고하여 작성 한 것입니다.   사전준비 Python3 가 설치가 되어야">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Apache Spark installation on windows 11(아파치 스파크)">
+<meta property="og:url" content="https://ahnduhong.github.io/2022/04/19/Apache_Spark_installation/index.html">
+<meta property="og:site_name" content="Winters Blog">
+<meta property="og:description" content="이 글은 Apache Spark(아파치 스파크) 설치 및 환경 설정에 관해 설명하고 있으며 https:&#x2F;&#x2F;dschloe.github.io&#x2F;python&#x2F;python_edu&#x2F;00_settings&#x2F;spark_installation_windows_10&#x2F; 블로그를 참고하여 작성 한 것입니다.   사전준비 Python3 가 설치가 되어야">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/1.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/2.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/3.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/4.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/5.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/6.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/7.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/8.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/9.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/10.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/11.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/12.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/13.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/14.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/15.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/16.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/17.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/18.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/19.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/20.png">
+<meta property="og:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/21.png">
+<meta property="article:published_time" content="2022-04-19T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-19T10:36:04.059Z">
+<meta property="article:author" content="Winters">
+<meta property="article:tag" content="Spark">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ahnduhong.github.io/images/Apache_Spark_installation/1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://AHNDUHONG.github.io/assets/images/blog_profile_image_01.jpg">
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-nweealnwexi63lhm1agu2ku3rw8tqhtfz0od0lsqiw3kbrdmk45anokos3uj.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/" aria-label>
+            Winters Blog
+        </a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about" aria-label="Open the link: /#about">
+        
+        
+            <img class="header-picture" src="/assets/images/blog_profile_image_01.jpg" alt="Author&#39;s picture">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about" aria-label="Read more about the author">
+                    <img class="sidebar-profile-picture" src="/assets/images/blog_profile_image_01.jpg" alt="Author&#39;s picture">
+                </a>
+                <h4 class="sidebar-profile-name">Winters</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>개발자를 꿈꾸는 어른이</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/" rel="noopener" title="Home">
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" rel="noopener" title="Categories">
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" rel="noopener" title="Tags">
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" rel="noopener" title="Archives">
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/AHNDUHONG" target="_blank" rel="external nofollow noopener noreferrer" title="GitHub">
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="mailto:dksenghd123@naver.com" target="_blank" rel="external nofollow noopener noreferrer" title="Mail">
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" rel="noopener" title="Search">
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" rel="noopener" title="About">
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/atom.xml" rel="noopener" title="RSS">
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4" class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            Apache Spark installation on windows 11(아파치 스파크)
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2022-04-19T09:00:00+09:00">
+	
+		    Apr 19, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Spark/">Spark</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <ul>
+<li>이 글은 <strong><strong>Apache Spark(아파치 스파크) 설치 및 환경 설정에 관해 설명하고 있으며</strong></strong> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://dschloe.github.io/python/python_edu/00_settings/spark_installation_windows_10/">https://dschloe.github.io/python/python_edu&#x2F;00_settings&#x2F;spark_installation_windows_10&#x2F;</a> 블로그를 참고하여 작성 한 것입니다.</li>
+</ul>
+<hr>
+<h1 id="사전준비"><a href="#사전준비" class="headerlink" title="사전준비"></a>사전준비</h1><ul>
+<li>Python3 가 설치가 되어야 가능하기 때문에 설치가 되어있지 않다면 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.anaconda.com/products/distribution">아나콘다(Anaconda)</a>에 접속하여 설치 바랍니다.</li>
+</ul>
+<h1 id="다운로드-전-필수-확인사항"><a href="#다운로드-전-필수-확인사항" class="headerlink" title="다운로드 전 필수 확인사항"></a>다운로드 전 필수 확인사항</h1><ul>
+<li>스파크 설치 전에는 반드시 체크해야 하는 사항이 있다. (System Compatibility)</li>
+<li>2022년 1월 기준은 아래와 같다.</li>
+</ul>
+<p>Get Spark from the <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://spark.apache.org/downloads.html">downloads page</a></strong> of the project website. This documentation is for Spark version 3.2.0. Spark uses Hadoop’s client libraries for HDFS and YARN. Downloads are pre-packaged for a handful of popular Hadoop versions. Users can also download a “Hadoop free” binary and run Spark with any Hadoop version <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://spark.apache.org/docs/latest/hadoop-provided.html">by augmenting Spark’s classpath</a></strong>. Scala and Java users can include Spark in their projects using its Maven coordinates and Python users can install Spark from PyPI.</p>
+<p>If you’d like to build Spark from source, visit <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://spark.apache.org/docs/latest/building-spark.html">Building Spark</a></strong>.</p>
+<p>Spark runs on both Windows and UNIX-like systems (e.g. Linux, Mac OS), and it should run on any platform that runs a supported version of Java. This should include JVMs on x86_64 and ARM64. It’s easy to run locally on one machine — all you need is to have <u><span style="color:red"><code>java</code></span></u> installed on your system <u><span style="color:red"><code>PATH</code></span></u>, or the <u><span style="color:red"><code>JAVA_HOME</code></span></u> environment variable pointing to a Java installation.</p>
+<p>Spark runs on Java 8&#x2F;11, Scala 2.12, Python 3.6+ and R 3.5+. Python 3.6 support is deprecated as of Spark 3.2.0. Java 8 prior to version 8u201 support is deprecated as of Spark 3.2.0. For the Scala API, Spark 3.2.0 uses Scala 2.12. You will need to use a compatible Scala version (2.12.x).</p>
+<p>For Python 3.9, Arrow optimization and pandas UDFs might not work due to the supported Python versions in Apache Arrow. Please refer to the latest <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://arrow.apache.org/docs/python/install.html#python-compatibility">Python Compatibility</a></strong> page. For Java 11, <u><span style="color:red"><code>-Dio.netty.tryReflectionSetAccessible=true</code></span></u> is required additionally for Apache Arrow library. This prevents <u><span style="color:red"><code>java.lang.UnsupportedOperationException: sun.misc.Unsafe or java.nio.DirectByteBuffer.(long, int) not available</code></span></u> when Apache Arrow uses Netty internally.</p>
+<h1 id="자바-설치"><a href="#자바-설치" class="headerlink" title="자바 설치"></a>자바 설치</h1><ul>
+<li>자바를 설치한다. 설치 파일은 아래 링크에서 각자 환경에 맞는 프로그램을 다운로드 받는다.<ul>
+<li>JAVA: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html">https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html</a></li>
+<li>설치 시, 오라클 로그인이 필요 할 수도 있으므로 계정이 없는 경우 생성 후 시도 바랍니다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Step-01-설치"><a href="#Step-01-설치" class="headerlink" title="Step 01. 설치"></a>Step 01. 설치</h2><ul>
+<li><p>다운로드 파일을 관리자로 실행한다. 계속 Next 버튼 클릭 후, 아래 파일에서 경로를 수정한다. (이 때, <u><span style="color:red"><code>Program Files</code></span></u> 공백이 있는데, 이러한 공백은 환경 설치 시 문제가 될 수 있다.)</p>
+<p>  <img src="/images/Apache_Spark_installation/1.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>Foder name(경로)를 아래와 같이 변경 후 OK 클릭을 하면 설치가 완료된다.</p>
+<p>  <img src="/images/Apache_Spark_installation/2.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>이번에는 자바 런타임 환경의 폴더도 동일하게 변경해준다. (변경 클릭 후 수정)</p>
+<ul>
+<li>C드라이브 경로에 <u><span style="color:red"><code>jre</code></span></u> 폴더를 생성하고 저장한다.</li>
+</ul>
+<p>  <img src="/images/Apache_Spark_installation/3.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h1 id="Spark-설치"><a href="#Spark-설치" class="headerlink" title="Spark 설치"></a>Spark 설치</h1><h3 id="1-Spark-file-설치"><a href="#1-Spark-file-설치" class="headerlink" title="(1) Spark file 설치"></a>(1) Spark file 설치</h3><ul>
+<li>아래 링크를 통해 Spark를 설치한다.<ul>
+<li><p>Spark: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://spark.apache.org/downloads.html">https://spark.apache.org/downloads.html</a></p>
+</li>
+<li><p>밑줄 친 항목 버전 확인 후 3번째 줄인 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.apache.org/dyn/closer.lua/spark/spark-3.2.1/spark-3.2.1-bin-hadoop3.2.tgz">spark-3.2.1-bin-hadoop3.2.tgz</a> 클릭</p>
+<p>  <img src="/images/Apache_Spark_installation/4.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>HTTP 아래에 있는 페이지를 클릭하면 다운로드 받을 수 있다.</p>
+<p>  <img src="/images/Apache_Spark_installation/5.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-WinRAR-프로그램-다운로드"><a href="#2-WinRAR-프로그램-다운로드" class="headerlink" title="(2) WinRAR 프로그램 다운로드"></a>(2) WinRAR 프로그램 다운로드</h3><ul>
+<li><u><span style="color:red"><code>.tgz</code></span></u> 파일 압축을 풀기 위해 <u><span style="color:red"><code>WinRAR</code></span></u> 을 설치한다.<ul>
+<li><p>WinRAR: <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.rarlab.com/download.htm">https://www.rarlab.com/download.htm</a></strong></p>
+</li>
+<li><p>링크에 들어가면 아래 화면이 보이는데 각 컴퓨터 환경에 맞게 설치 바랍니다.</p>
+<p>  <img src="/images/Apache_Spark_installation/6.png" alt="png"></p>
+<hr>
+</li>
+<li><p>다운로드가 완료 되면 위 과정 (1)에서 설치했던 <u><span style="color:red"><code>spark-3.2.0-bin-hadoop3.2.tgz</code></span></u> 파일 압축 풀기(Extract) 실행</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-spark-폴더-생성-및-파일-이동"><a href="#3-spark-폴더-생성-및-파일-이동" class="headerlink" title="(3) spark 폴더 생성 및 파일 이동"></a><strong>(3) spark 폴더 생성 및 파일 이동</strong></h3><ul>
+<li><p>C드라이브 안에 <u><span style="color:red"><code>spark</code></span></u> 라는 새로운 폴더 생성 후 앞 서 압축을 풀었던 파일 <u><span style="color:red"><code>spark-3.2.0-bin-hadoop3.2</code></span></u> 폴더 내 모든 파일을 생성한 <u><span style="color:red"><code>spark</code></span></u> 폴더로 옮긴다.</p>
+<p>  <img src="/images/Apache_Spark_installation/7.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h3 id="4-log4j-properties-파일-수정"><a href="#4-log4j-properties-파일-수정" class="headerlink" title="(4) log4j.properties 파일 수정"></a>(4) <a target="_blank" rel="external nofollow noopener noreferrer" href="http://log4j.properties/">log4j.properties</a> 파일 수정</h3><ul>
+<li><p><u><span style="color:red"><code>conf</code></span></u> - <u><span style="color:red"><code>[log4j.properties](http://log4j.properties)</code></span></u> 파일을 연다.</p>
+<p>  <img src="/images/Apache_Spark_installation/8.png" alt="png"></p>
+<hr>
+</li>
+<li><p>해당 파일을 메모장으로 연 후(필자는 vscode로 연결), 아래에서 빨간줄을 친 <u><span style="color:red"><code>log4j.rootCategory=INFO</code></span></u> 에서 <u><span style="color:red"><code>INFO</code></span></u> → <u><span style="color:red"><code>ERROR</code></span></u> 로 변경한다.</p>
+<ul>
+<li><p>작업 실행 시, 출력하는 모든 logs 값들을 없앨 수 있다.</p>
+<p>  <img src="/images/Apache_Spark_installation/9.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="winutils-설치"><a href="#winutils-설치" class="headerlink" title="winutils 설치"></a>winutils 설치</h1><ul>
+<li><p>이번에는 스파크가 윈도우 로컬 컴퓨터가 Hadoop을 착각하게 만들 프로그램이 필요하다.</p>
+<ul>
+<li><p>설치파일: <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/cdarlint/winutils">https://github.com/cdarlint/winutils</a></strong></p>
+<ul>
+<li><p>여기에서 최신 버전의 winutils를 다운로드 받는다.</p>
+<p>  <img src="/images/Apache_Spark_installation/10.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+</li>
+<li><p>필자는 <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/cdarlint/winutils/tree/master/hadoop-3.2.2">hadoop-3.2.2</a></strong> 버전을 다운로드 받았다.</p>
+</li>
+</ul>
+</li>
+<li><p>C드라이브에서 winutils란 이름의 폴더를 생성한 후, 앞서 받은 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/cdarlint/winutils/tree/master/hadoop-3.2.2">hadoop-3.2.2</a> 파일의 bin 폴더를 옮긴다.</p>
+<p>  <img src="/images/Apache_Spark_installation/11.png" alt="png"></p>
+<hr>
+</li>
+<li><p>이 파일이 Spark 실행 시, 오류 없이 실행될 수 있도록 CMD 프로그램에서 파일 사용 권한을 얻도록 한다.</p>
+<ul>
+<li>CMD 프로그램을 관리자 권한으로 실행 후 아래 코드 입력</li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\system32&gt;<span class="built_in">cd</span> c:\winutils\bin <span class="comment"># 경로 변경</span></span><br><span class="line">c:\winutils\bin&gt; winutils.exe <span class="built_in">chmod</span> 777 \tmp\hive</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>만약, ChangeFileModeByMask error (3) 에러 발생 시, C드라이브에 <u><span style="color:red"><code>tmp\hive</code></span></u> 폴더를 차례대로 생성을 한다.</p>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="환경변수-설정"><a href="#환경변수-설정" class="headerlink" title="환경변수 설정"></a>환경변수 설정</h1><ul>
+<li>시스템 환경 변수를 설정한다.<ul>
+<li><p>시스템 환경 변수 검색 후 클릭</p>
+<p>  <img src="/images/Apache_Spark_installation/12.png" alt="png"></p>
+<hr>
+</li>
+<li><p>환경 변수 클릭</p>
+<p>  <img src="/images/Apache_Spark_installation/13.png" alt="png"></p>
+<hr>
+</li>
+<li><p>각 사용자 계정에 <u><span style="color:red"><code>사용자 변수 - 새로 만들기 버튼</code></span></u> 을 클릭</p>
+<p>  <img src="/images/Apache_Spark_installation/14.png" alt="png"></p>
+<hr>
+</li>
+<li><p>SPARK_HOME 환경 변수를 설정한다.</p>
+<p>  <img src="/images/Apache_Spark_installation/15.png" alt="png"></p>
+<hr>
+</li>
+<li><p>JAVA_HOME 환경 변수를 설정한다.</p>
+<p>  <img src="/images/Apache_Spark_installation/16.png" alt="png"></p>
+<hr>
+</li>
+<li><p>HADOOP_HOME 환경 변수를 설정한다.</p>
+<p>  <img src="/images/Apache_Spark_installation/17.png" alt="png"></p>
+<hr>
+</li>
+<li><p>이번에는 <code>PATH</code> 변수를 편집한다.</p>
+<p>  <img src="/images/Apache_Spark_installation/18.png" alt="png"></p>
+<hr>
+</li>
+<li><p>아래 코드를 추가한다.</p>
+<ul>
+<li><p>%SPARK_HOME%\bin</p>
+</li>
+<li><p>%JAVA_HOME%\bin</p>
+<p>  <img src="/images/Apache_Spark_installation/19.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="파이썬-환경-설정"><a href="#파이썬-환경-설정" class="headerlink" title="파이썬 환경 설정"></a>파이썬 환경 설정</h1><ul>
+<li><p>Python 환경 설정을 추가한다.</p>
+<p>  <img src="/images/Apache_Spark_installation/20.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h1 id="스파크-테스트"><a href="#스파크-테스트" class="headerlink" title="스파크 테스트"></a>스파크 테스트</h1><ul>
+<li><p>CMD 파일을 열고 <u><span style="color:red"><code>c:\spark</code></span></u> 폴더로 경로를 설정 한 뒤 <u><span style="color:red"><code>pyspark</code></span></u> 로 실행</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> c:\spark <span class="comment"># 경로를 c:\spark 로 설정</span></span><br><span class="line">pyspark <span class="comment"># 실행</span></span><br></pre></td></tr></table></figure>
+<p>  <img src="/images/Apache_Spark_installation/21.png" alt="png"></p>
+<hr>
+</li>
+<li><p>해당 <u><span style="color:red"><code>[README.md](http://README.md)</code></span></u> 파일을 불러와서 아래 코드가 실행되는지 확인한다.</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; rd = sc.textFile(<span class="string">&quot;README.md&quot;</span>)</span><br><span class="line">&gt;&gt;&gt; rd.count()</span><br><span class="line">109</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/Spark/" rel="tag">Spark</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled" aria-hidden="true">
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/13/Linux_error_E212/" data-tooltip="리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]" aria-label="NEXT: 리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]">
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/19/Apache_Spark_installation/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/19/Apache_Spark_installation/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/19/Apache_Spark_installation/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2022 Winters. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled" aria-hidden="true">
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2022/04/13/Linux_error_E212/" data-tooltip="리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]" aria-label="NEXT: 리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]">
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/19/Apache_Spark_installation/" title="Share on Facebook" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/19/Apache_Spark_installation/" title="Share on Twitter" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/19/Apache_Spark_installation/" title="Share on Google+" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ahnduhong.github.io/2022/04/19/Apache_Spark_installation/" aria-label="Share on Facebook" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://ahnduhong.github.io/2022/04/19/Apache_Spark_installation/" aria-label="Share on Twitter" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://ahnduhong.github.io/2022/04/19/Apache_Spark_installation/" aria-label="Share on Google+" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/blog_profile_image_01.jpg" alt="Author&#39;s picture">
+        
+            <h4 id="about-card-name">Winters</h4>
+        
+            <div id="about-card-bio"><p>개발자를 꿈꾸는 어른이</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>개발자(예비)</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                대한민국/서울
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/blog_theme_image_03.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-dvu41dvy5202v52bwzsnpck9devc8hugsy17mbuqp6i4ms8q6rt7zrc4avbe.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

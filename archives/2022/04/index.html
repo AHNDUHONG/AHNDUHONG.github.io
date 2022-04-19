@@ -199,6 +199,238 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2022/04/19/Apache_Spark_installation/" aria-label=": Apache Spark installation on windows 11(아파치 스파크)">
+                            Apache Spark installation on windows 11(아파치 스파크)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-04-19T09:00:00+09:00">
+	
+		    Apr 19, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Spark/">Spark</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <ul>
+<li>이 글은 <strong><strong>Apache Spark(아파치 스파크) 설치 및 환경 설정에 관해 설명하고 있으며</strong></strong> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://dschloe.github.io/python/python_edu/00_settings/spark_installation_windows_10/">https://dschloe.github.io/python/python_edu&#x2F;00_settings&#x2F;spark_installation_windows_10&#x2F;</a> 블로그를 참고하여 작성 한 것입니다.</li>
+</ul>
+<hr>
+<h1 id="사전준비"><a href="#사전준비" class="headerlink" title="사전준비"></a>사전준비</h1><ul>
+<li>Python3 가 설치가 되어야 가능하기 때문에 설치가 되어있지 않다면 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.anaconda.com/products/distribution">아나콘다(Anaconda)</a>에 접속하여 설치 바랍니다.</li>
+</ul>
+<h1 id="다운로드-전-필수-확인사항"><a href="#다운로드-전-필수-확인사항" class="headerlink" title="다운로드 전 필수 확인사항"></a>다운로드 전 필수 확인사항</h1><ul>
+<li>스파크 설치 전에는 반드시 체크해야 하는 사항이 있다. (System Compatibility)</li>
+<li>2022년 1월 기준은 아래와 같다.</li>
+</ul>
+<p>Get Spark from the <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://spark.apache.org/downloads.html">downloads page</a></strong> of the project website. This documentation is for Spark version 3.2.0. Spark uses Hadoop’s client libraries for HDFS and YARN. Downloads are pre-packaged for a handful of popular Hadoop versions. Users can also download a “Hadoop free” binary and run Spark with any Hadoop version <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://spark.apache.org/docs/latest/hadoop-provided.html">by augmenting Spark’s classpath</a></strong>. Scala and Java users can include Spark in their projects using its Maven coordinates and Python users can install Spark from PyPI.</p>
+<p>If you’d like to build Spark from source, visit <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://spark.apache.org/docs/latest/building-spark.html">Building Spark</a></strong>.</p>
+<p>Spark runs on both Windows and UNIX-like systems (e.g. Linux, Mac OS), and it should run on any platform that runs a supported version of Java. This should include JVMs on x86_64 and ARM64. It’s easy to run locally on one machine — all you need is to have <u><span style="color:red"><code>java</code></span></u> installed on your system <u><span style="color:red"><code>PATH</code></span></u>, or the <u><span style="color:red"><code>JAVA_HOME</code></span></u> environment variable pointing to a Java installation.</p>
+<p>Spark runs on Java 8&#x2F;11, Scala 2.12, Python 3.6+ and R 3.5+. Python 3.6 support is deprecated as of Spark 3.2.0. Java 8 prior to version 8u201 support is deprecated as of Spark 3.2.0. For the Scala API, Spark 3.2.0 uses Scala 2.12. You will need to use a compatible Scala version (2.12.x).</p>
+<p>For Python 3.9, Arrow optimization and pandas UDFs might not work due to the supported Python versions in Apache Arrow. Please refer to the latest <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://arrow.apache.org/docs/python/install.html#python-compatibility">Python Compatibility</a></strong> page. For Java 11, <u><span style="color:red"><code>-Dio.netty.tryReflectionSetAccessible=true</code></span></u> is required additionally for Apache Arrow library. This prevents <u><span style="color:red"><code>java.lang.UnsupportedOperationException: sun.misc.Unsafe or java.nio.DirectByteBuffer.(long, int) not available</code></span></u> when Apache Arrow uses Netty internally.</p>
+<h1 id="자바-설치"><a href="#자바-설치" class="headerlink" title="자바 설치"></a>자바 설치</h1><ul>
+<li>자바를 설치한다. 설치 파일은 아래 링크에서 각자 환경에 맞는 프로그램을 다운로드 받는다.<ul>
+<li>JAVA: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html">https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html</a></li>
+<li>설치 시, 오라클 로그인이 필요 할 수도 있으므로 계정이 없는 경우 생성 후 시도 바랍니다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Step-01-설치"><a href="#Step-01-설치" class="headerlink" title="Step 01. 설치"></a>Step 01. 설치</h2><ul>
+<li><p>다운로드 파일을 관리자로 실행한다. 계속 Next 버튼 클릭 후, 아래 파일에서 경로를 수정한다. (이 때, <u><span style="color:red"><code>Program Files</code></span></u> 공백이 있는데, 이러한 공백은 환경 설치 시 문제가 될 수 있다.)</p>
+<p>  <img src="/images/Apache_Spark_installation/1.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>Foder name(경로)를 아래와 같이 변경 후 OK 클릭을 하면 설치가 완료된다.</p>
+<p>  <img src="/images/Apache_Spark_installation/2.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>이번에는 자바 런타임 환경의 폴더도 동일하게 변경해준다. (변경 클릭 후 수정)</p>
+<ul>
+<li>C드라이브 경로에 <u><span style="color:red"><code>jre</code></span></u> 폴더를 생성하고 저장한다.</li>
+</ul>
+<p>  <img src="/images/Apache_Spark_installation/3.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h1 id="Spark-설치"><a href="#Spark-설치" class="headerlink" title="Spark 설치"></a>Spark 설치</h1><h3 id="1-Spark-file-설치"><a href="#1-Spark-file-설치" class="headerlink" title="(1) Spark file 설치"></a>(1) Spark file 설치</h3><ul>
+<li>아래 링크를 통해 Spark를 설치한다.<ul>
+<li><p>Spark: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://spark.apache.org/downloads.html">https://spark.apache.org/downloads.html</a></p>
+</li>
+<li><p>밑줄 친 항목 버전 확인 후 3번째 줄인 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.apache.org/dyn/closer.lua/spark/spark-3.2.1/spark-3.2.1-bin-hadoop3.2.tgz">spark-3.2.1-bin-hadoop3.2.tgz</a> 클릭</p>
+<p>  <img src="/images/Apache_Spark_installation/4.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>HTTP 아래에 있는 페이지를 클릭하면 다운로드 받을 수 있다.</p>
+<p>  <img src="/images/Apache_Spark_installation/5.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-WinRAR-프로그램-다운로드"><a href="#2-WinRAR-프로그램-다운로드" class="headerlink" title="(2) WinRAR 프로그램 다운로드"></a>(2) WinRAR 프로그램 다운로드</h3><ul>
+<li><u><span style="color:red"><code>.tgz</code></span></u> 파일 압축을 풀기 위해 <u><span style="color:red"><code>WinRAR</code></span></u> 을 설치한다.<ul>
+<li><p>WinRAR: <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.rarlab.com/download.htm">https://www.rarlab.com/download.htm</a></strong></p>
+</li>
+<li><p>링크에 들어가면 아래 화면이 보이는데 각 컴퓨터 환경에 맞게 설치 바랍니다.</p>
+<p>  <img src="/images/Apache_Spark_installation/6.png" alt="png"></p>
+<hr>
+</li>
+<li><p>다운로드가 완료 되면 위 과정 (1)에서 설치했던 <u><span style="color:red"><code>spark-3.2.0-bin-hadoop3.2.tgz</code></span></u> 파일 압축 풀기(Extract) 실행</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-spark-폴더-생성-및-파일-이동"><a href="#3-spark-폴더-생성-및-파일-이동" class="headerlink" title="(3) spark 폴더 생성 및 파일 이동"></a><strong>(3) spark 폴더 생성 및 파일 이동</strong></h3><ul>
+<li><p>C드라이브 안에 <u><span style="color:red"><code>spark</code></span></u> 라는 새로운 폴더 생성 후 앞 서 압축을 풀었던 파일 <u><span style="color:red"><code>spark-3.2.0-bin-hadoop3.2</code></span></u> 폴더 내 모든 파일을 생성한 <u><span style="color:red"><code>spark</code></span></u> 폴더로 옮긴다.</p>
+<p>  <img src="/images/Apache_Spark_installation/7.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h3 id="4-log4j-properties-파일-수정"><a href="#4-log4j-properties-파일-수정" class="headerlink" title="(4) log4j.properties 파일 수정"></a>(4) <a target="_blank" rel="external nofollow noopener noreferrer" href="http://log4j.properties/">log4j.properties</a> 파일 수정</h3><ul>
+<li><p><u><span style="color:red"><code>conf</code></span></u> - <u><span style="color:red"><code>[log4j.properties](http://log4j.properties)</code></span></u> 파일을 연다.</p>
+<p>  <img src="/images/Apache_Spark_installation/8.png" alt="png"></p>
+<hr>
+</li>
+<li><p>해당 파일을 메모장으로 연 후(필자는 vscode로 연결), 아래에서 빨간줄을 친 <u><span style="color:red"><code>log4j.rootCategory=INFO</code></span></u> 에서 <u><span style="color:red"><code>INFO</code></span></u> → <u><span style="color:red"><code>ERROR</code></span></u> 로 변경한다.</p>
+<ul>
+<li><p>작업 실행 시, 출력하는 모든 logs 값들을 없앨 수 있다.</p>
+<p>  <img src="/images/Apache_Spark_installation/9.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="winutils-설치"><a href="#winutils-설치" class="headerlink" title="winutils 설치"></a>winutils 설치</h1><ul>
+<li><p>이번에는 스파크가 윈도우 로컬 컴퓨터가 Hadoop을 착각하게 만들 프로그램이 필요하다.</p>
+<ul>
+<li><p>설치파일: <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/cdarlint/winutils">https://github.com/cdarlint/winutils</a></strong></p>
+<ul>
+<li><p>여기에서 최신 버전의 winutils를 다운로드 받는다.</p>
+<p>  <img src="/images/Apache_Spark_installation/10.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+</li>
+<li><p>필자는 <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/cdarlint/winutils/tree/master/hadoop-3.2.2">hadoop-3.2.2</a></strong> 버전을 다운로드 받았다.</p>
+</li>
+</ul>
+</li>
+<li><p>C드라이브에서 winutils란 이름의 폴더를 생성한 후, 앞서 받은 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/cdarlint/winutils/tree/master/hadoop-3.2.2">hadoop-3.2.2</a> 파일의 bin 폴더를 옮긴다.</p>
+<p>  <img src="/images/Apache_Spark_installation/11.png" alt="png"></p>
+<hr>
+</li>
+<li><p>이 파일이 Spark 실행 시, 오류 없이 실행될 수 있도록 CMD 프로그램에서 파일 사용 권한을 얻도록 한다.</p>
+<ul>
+<li>CMD 프로그램을 관리자 권한으로 실행 후 아래 코드 입력</li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\system32&gt;<span class="built_in">cd</span> c:\winutils\bin <span class="comment"># 경로 변경</span></span><br><span class="line">c:\winutils\bin&gt; winutils.exe <span class="built_in">chmod</span> 777 \tmp\hive</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>만약, ChangeFileModeByMask error (3) 에러 발생 시, C드라이브에 <u><span style="color:red"><code>tmp\hive</code></span></u> 폴더를 차례대로 생성을 한다.</p>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="환경변수-설정"><a href="#환경변수-설정" class="headerlink" title="환경변수 설정"></a>환경변수 설정</h1><ul>
+<li>시스템 환경 변수를 설정한다.<ul>
+<li><p>시스템 환경 변수 검색 후 클릭</p>
+<p>  <img src="/images/Apache_Spark_installation/12.png" alt="png"></p>
+<hr>
+</li>
+<li><p>환경 변수 클릭</p>
+<p>  <img src="/images/Apache_Spark_installation/13.png" alt="png"></p>
+<hr>
+</li>
+<li><p>각 사용자 계정에 <u><span style="color:red"><code>사용자 변수 - 새로 만들기 버튼</code></span></u> 을 클릭</p>
+<p>  <img src="/images/Apache_Spark_installation/14.png" alt="png"></p>
+<hr>
+</li>
+<li><p>SPARK_HOME 환경 변수를 설정한다.</p>
+<p>  <img src="/images/Apache_Spark_installation/15.png" alt="png"></p>
+<hr>
+</li>
+<li><p>JAVA_HOME 환경 변수를 설정한다.</p>
+<p>  <img src="/images/Apache_Spark_installation/16.png" alt="png"></p>
+<hr>
+</li>
+<li><p>HADOOP_HOME 환경 변수를 설정한다.</p>
+<p>  <img src="/images/Apache_Spark_installation/17.png" alt="png"></p>
+<hr>
+</li>
+<li><p>이번에는 <code>PATH</code> 변수를 편집한다.</p>
+<p>  <img src="/images/Apache_Spark_installation/18.png" alt="png"></p>
+<hr>
+</li>
+<li><p>아래 코드를 추가한다.</p>
+<ul>
+<li><p>%SPARK_HOME%\bin</p>
+</li>
+<li><p>%JAVA_HOME%\bin</p>
+<p>  <img src="/images/Apache_Spark_installation/19.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="파이썬-환경-설정"><a href="#파이썬-환경-설정" class="headerlink" title="파이썬 환경 설정"></a>파이썬 환경 설정</h1><ul>
+<li><p>Python 환경 설정을 추가한다.</p>
+<p>  <img src="/images/Apache_Spark_installation/20.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h1 id="스파크-테스트"><a href="#스파크-테스트" class="headerlink" title="스파크 테스트"></a>스파크 테스트</h1><ul>
+<li><p>CMD 파일을 열고 <u><span style="color:red"><code>c:\spark</code></span></u> 폴더로 경로를 설정 한 뒤 <u><span style="color:red"><code>pyspark</code></span></u> 로 실행</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> c:\spark <span class="comment"># 경로를 c:\spark 로 설정</span></span><br><span class="line">pyspark <span class="comment"># 실행</span></span><br></pre></td></tr></table></figure>
+<p>  <img src="/images/Apache_Spark_installation/21.png" alt="png"></p>
+<hr>
+</li>
+<li><p>해당 <u><span style="color:red"><code>[README.md](http://README.md)</code></span></u> 파일을 불러와서 아래 코드가 실행되는지 확인한다.</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; rd = sc.textFile(<span class="string">&quot;README.md&quot;</span>)</span><br><span class="line">&gt;&gt;&gt; rd.count()</span><br><span class="line">109</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/04/19/Apache_Spark_installation/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2022/04/13/Linux_error_E212/" aria-label=": 리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]">
                             리눅스 파일 저장 에러 해결 [E212: Can&#39;t open file for writing]
                         </a>
