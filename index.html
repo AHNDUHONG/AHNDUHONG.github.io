@@ -333,6 +333,118 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2022/04/20/Apache_NiFi_in_Windows11/" aria-label=": Setting up Apache-NiFi in Windows 11(아파치 Nifi)">
+                            Setting up Apache-NiFi in Windows 11(아파치 Nifi)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-04-20T09:00:00+09:00">
+	
+		    Apr 20, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/nifi/">nifi</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <ul>
+<li><p>이 글은 Evan 님의 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://dschloe.github.io/settings/apache_airflow_using_wsl2/">https://dschloe.github.io/settings/apache_airflow_using_wsl2&#x2F;</a> 글을 참고하여 작성된 글 입니다.</p>
+<hr>
+</li>
+</ul>
+<h1 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h1><ul>
+<li>Windows 11 에서 NIFI를 설치 및 설정을 하는 것을 설명한다.</li>
+</ul>
+<h2 id="Step-01-Nifi-다운로드"><a href="#Step-01-Nifi-다운로드" class="headerlink" title="Step 01. Nifi 다운로드"></a>Step 01. Nifi 다운로드</h2><ul>
+<li><p>먼저 웹사이트에 접속하다.</p>
+<ul>
+<li><p>URL: <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.apache.org/dyn/closer.lua?path=/nifi/1.16.0/nifi-1.16.0-bin.zip">https://www.apache.org/dyn/closer.lua?path=/nifi/1.16.0/nifi-1.16.0-bin.zip</a></strong></p>
+<p>  <img src="/images/Apache_NiFi_in_Windows11/1.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+</li>
+<li><p>HTTP 아래에 있는 링크를 클릭하여 파일을 다운로드 받은 후 C드라이브에 압축을 풀어준다.</p>
+<p>  <img src="/images/Apache_NiFi_in_Windows11/2.png" alt="png"></p>
+</li>
+</ul>
+<h2 id="Step-02-Java-환경-설정"><a href="#Step-02-Java-환경-설정" class="headerlink" title="Step 02. Java 환경 설정"></a>Step 02. Java 환경 설정</h2><ul>
+<li>먼저 Nifi를 사용하려면 Java 설치를 해야 하는데 설치 내용은 아래 블로그를 참조한다.<ul>
+<li>참고 URL: <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://maktony.tistory.com/13">https://maktony.tistory.com/13</a></strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="Step-03-run-nifi-배치-파일-실행"><a href="#Step-03-run-nifi-배치-파일-실행" class="headerlink" title="Step 03. run-nifi 배치 파일 실행"></a>Step 03. run-nifi 배치 파일 실행</h2><ul>
+<li><p><u><span style="color:red"><code>run-nifi</code></span></u> 파일을 관리자 권한으로 실행한다. (경로 c&#x2F;nifi-1.16.0&#x2F;bin&#x2F;run-nifi.bat)</p>
+<p>  <img src="/images/Apache_NiFi_in_Windows11/3.png" alt="png"></p>
+<hr>
+</li>
+<li><p>아래와 같은 메시지가 출력이 되면 정상적으로 세팅한 것이다.</p>
+<p>  <img src="/images/Apache_NiFi_in_Windows11/4.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h2 id="Step-04-Web-UI-확인"><a href="#Step-04-Web-UI-확인" class="headerlink" title="Step 04. Web UI 확인"></a>Step 04. Web UI 확인</h2><ul>
+<li><p>Web UI를 확인해본다. (약 1분 지난 뒤)</p>
+<ul>
+<li><p>Web UI: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://127.0.0.1:8443/nifi/login">https://127.0.0.1:8443/nifi/login</a></p>
+<p>  <img src="/images/Apache_NiFi_in_Windows11/5.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+</li>
+<li><p>간혹 안 나오는 경우가 있다. 그럴 경우에는 새로운 CMD 파일을 연 후, Process ID를 서로 비교 대조해본다.</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ netstat -ano | find <span class="string">&quot;8443&quot;</span></span><br></pre></td></tr></table></figure>
+<p>  <img src="/images/Apache_NiFi_in_Windows11/6.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h2 id="Step-05-로그인-ID-찾기-및-접속"><a href="#Step-05-로그인-ID-찾기-및-접속" class="headerlink" title="Step 05. 로그인 ID 찾기 및 접속"></a>Step 05. 로그인 ID 찾기 및 접속</h2><ul>
+<li><p>우선 별도로 설정을 하지 않았다면, 자동으로 생성이 된다.</p>
+</li>
+<li><p>logs&#x2F;nifi-app 로그파일에서 메모장으로 연 후, 검색을 한다. (Ctrl + F, Username)</p>
+<p>  <img src="/images/Apache_NiFi_in_Windows11/7.png" alt="png"></p>
+<hr>
+</li>
+<li><p>로그인을 하면, 아래와 같은 화면으로 접속이 되는 것을 확인할 수 있다.</p>
+<p>  <img src="/images/Apache_NiFi_in_Windows11/8.png" alt="png"></p>
+</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/04/20/Apache_NiFi_in_Windows11/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2022/04/19/Apache_Spark_installation/" aria-label=": Apache Spark installation on windows 11(아파치 스파크)">
                             Apache Spark installation on windows 11(아파치 스파크)
                         </a>
@@ -1286,93 +1398,6 @@
                     
                         <p>
                             <a href="/2022/04/12/Github_blog(hexo)_global/#post-footer" class="postShorten-excerpt_link link" aria-label>
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/2022/04/12/Github_blog(hexo)_contribution/" aria-label=": Github_blog(hexo) 연동 오류 (Contribution 업데이트 오류)">
-                            Github_blog(hexo) 연동 오류 (Contribution 업데이트 오류)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2022-04-12T09:00:00+09:00">
-	
-		    Apr 12, 2022
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/github/">github</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <ul>
-<li>이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.</li>
-</ul>
-<hr>
-<h3 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h3><ul>
-<li>지난 Github_blog (hexo) 연동 오류 -global, -tokken 이 두개의 글을 쓰며 드디어 된줄 알았던 깃허브 블로그 Contribution 연동 오류가 기록이 되지 않아 계정 및 설정을 확인 함으로 해결하는 방법을 나타냄.<ul>
-<li>참고 블로그: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://develaniper-devpage.tistory.com/76">https://develaniper-devpage.tistory.com/76</a></li>
-<li>Github_blog (hexo) 연동 오류 -tokken : <a href="https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken/">https://ahnduhong.github.io/2022/04/12/Github_blog(hexo)_tokken&#x2F;</a></li>
-<li>Github_blog (hexo) 연동 오류 -global 글은 Github 계정 비밀번호를 Tokken으로 대체 하였기에 현 시점 으로선 불가능한 해결 방법이기 때문에 출처를 남기지 않겠습니다.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="Contribution-그래프가-채워지는-조건"><a href="#Contribution-그래프가-채워지는-조건" class="headerlink" title="Contribution 그래프가 채워지는 조건"></a>Contribution 그래프가 채워지는 조건</h3><ol>
-<li>커밋할 때 사용한 이메일 주소가 ghithub계정의 이메일 주소와 같아야 한다.</li>
-<li>fork를 한 commit은 적용되지 않고 독립적인 repository에서 이루어진 commit이여야 한다.</li>
-<li>커밋은 다음으로 만들어 져야한다.(필자의 경우 main을 branch로 한다)<ol>
-<li>repository의 default branch(보통 master)</li>
-<li>gh-pages branch(github page branch)</li>
-</ol>
-</li>
-</ol>
-<hr>
-<ol>
-<li>git command 사용으로 등록된 이메일 주소 확인</li>
-</ol>
-<ul>
-<li>확인 해 보니 계정이 달라서 변경함.  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-&gt; git config user.email</span><br><span class="line">-&gt; git config --global user.email mymail@site.com</span><br></pre></td></tr></table></figure>
-  <img src="/images/Github_blog(hexo)_contribution/1.png" alt="png"></li>
-</ul>
-<hr>
-<ul>
-<li>드디어 연동이 가능합니다..</li>
-</ul>
-<p><img src="/images/Github_blog(hexo)_contribution/2.png" alt="png"></p>
-<ul>
-<li>혹시나 Git Command로 확인 해도 안되셨다면 위 참고 블로그에서 소스트리(source tree)로 변경해보시길 바랍니다.</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a href="/2022/04/12/Github_blog(hexo)_contribution/#post-footer" class="postShorten-excerpt_link link" aria-label>
                                 Comment and share
                             </a>
                         </p>
