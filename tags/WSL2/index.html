@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Winters Blog">
-    <title>Category: nifi - Winters Blog</title>
+    <title>Tag: WSL2 - Winters Blog</title>
     <meta name="author" content="Winters">
     
     
@@ -20,7 +20,7 @@
     <script type="application/ld+json">{}</script>
     <meta property="og:type" content="blog">
 <meta property="og:title" content="Winters Blog">
-<meta property="og:url" content="https://ahnduhong.github.io/categories/nifi/index.html">
+<meta property="og:url" content="https://ahnduhong.github.io/tags/WSL2/index.html">
 <meta property="og:site_name" content="Winters Blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Winters">
@@ -199,118 +199,6 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
-                        <a class="link-unstyled" href="/2022/04/20/Apache_NiFi_in_Windows11/" aria-label=": Setting up Apache-NiFi in Windows 11(아파치 Nifi)">
-                            Setting up Apache-NiFi in Windows 11(아파치 Nifi)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2022-04-20T09:00:00+09:00">
-	
-		    Apr 20, 2022
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/nifi/">nifi</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <ul>
-<li><p>이 글은 Evan 님의 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://dschloe.github.io/settings/apache_airflow_using_wsl2/">https://dschloe.github.io/settings/apache_airflow_using_wsl2&#x2F;</a> 글을 참고하여 작성된 글 입니다.</p>
-<hr>
-</li>
-</ul>
-<h1 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h1><ul>
-<li>Windows 11 에서 NIFI를 설치 및 설정을 하는 것을 설명한다.</li>
-</ul>
-<h2 id="Step-01-Nifi-다운로드"><a href="#Step-01-Nifi-다운로드" class="headerlink" title="Step 01. Nifi 다운로드"></a>Step 01. Nifi 다운로드</h2><ul>
-<li><p>먼저 웹사이트에 접속하다.</p>
-<ul>
-<li><p>URL: <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.apache.org/dyn/closer.lua?path=/nifi/1.16.0/nifi-1.16.0-bin.zip">https://www.apache.org/dyn/closer.lua?path=/nifi/1.16.0/nifi-1.16.0-bin.zip</a></strong></p>
-<p>  <img src="/images/Apache_NiFi_in_Windows11/1.png" alt="png"></p>
-<hr>
-</li>
-</ul>
-</li>
-<li><p>HTTP 아래에 있는 링크를 클릭하여 파일을 다운로드 받은 후 C드라이브에 압축을 풀어준다.</p>
-<p>  <img src="/images/Apache_NiFi_in_Windows11/2.png" alt="png"></p>
-</li>
-</ul>
-<h2 id="Step-02-Java-환경-설정"><a href="#Step-02-Java-환경-설정" class="headerlink" title="Step 02. Java 환경 설정"></a>Step 02. Java 환경 설정</h2><ul>
-<li>먼저 Nifi를 사용하려면 Java 설치를 해야 하는데 설치 내용은 아래 블로그를 참조한다.<ul>
-<li>참고 URL: <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://maktony.tistory.com/13">https://maktony.tistory.com/13</a></strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="Step-03-run-nifi-배치-파일-실행"><a href="#Step-03-run-nifi-배치-파일-실행" class="headerlink" title="Step 03. run-nifi 배치 파일 실행"></a>Step 03. run-nifi 배치 파일 실행</h2><ul>
-<li><p><u><span style="color:red"><code>run-nifi</code></span></u> 파일을 관리자 권한으로 실행한다. (경로 c&#x2F;nifi-1.16.0&#x2F;bin&#x2F;run-nifi.bat)</p>
-<p>  <img src="/images/Apache_NiFi_in_Windows11/3.png" alt="png"></p>
-<hr>
-</li>
-<li><p>아래와 같은 메시지가 출력이 되면 정상적으로 세팅한 것이다.</p>
-<p>  <img src="/images/Apache_NiFi_in_Windows11/4.png" alt="png"></p>
-<hr>
-</li>
-</ul>
-<h2 id="Step-04-Web-UI-확인"><a href="#Step-04-Web-UI-확인" class="headerlink" title="Step 04. Web UI 확인"></a>Step 04. Web UI 확인</h2><ul>
-<li><p>Web UI를 확인해본다. (약 1분 지난 뒤)</p>
-<ul>
-<li><p>Web UI: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://127.0.0.1:8443/nifi/login">https://127.0.0.1:8443/nifi/login</a></p>
-<p>  <img src="/images/Apache_NiFi_in_Windows11/5.png" alt="png"></p>
-<hr>
-</li>
-</ul>
-</li>
-<li><p>간혹 안 나오는 경우가 있다. 그럴 경우에는 새로운 CMD 파일을 연 후, Process ID를 서로 비교 대조해본다.</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ netstat -ano | find <span class="string">&quot;8443&quot;</span></span><br></pre></td></tr></table></figure>
-<p>  <img src="/images/Apache_NiFi_in_Windows11/6.png" alt="png"></p>
-<hr>
-</li>
-</ul>
-<h2 id="Step-05-로그인-ID-찾기-및-접속"><a href="#Step-05-로그인-ID-찾기-및-접속" class="headerlink" title="Step 05. 로그인 ID 찾기 및 접속"></a>Step 05. 로그인 ID 찾기 및 접속</h2><ul>
-<li><p>우선 별도로 설정을 하지 않았다면, 자동으로 생성이 된다.</p>
-</li>
-<li><p>logs&#x2F;nifi-app 로그파일에서 메모장으로 연 후, 검색을 한다. (Ctrl + F, Username)</p>
-<p>  <img src="/images/Apache_NiFi_in_Windows11/7.png" alt="png"></p>
-<hr>
-</li>
-<li><p>로그인을 하면, 아래와 같은 화면으로 접속이 되는 것을 확인할 수 있다.</p>
-<p>  <img src="/images/Apache_NiFi_in_Windows11/8.png" alt="png"></p>
-</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a href="/2022/04/20/Apache_NiFi_in_Windows11/#post-footer" class="postShorten-excerpt_link link" aria-label>
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
                         <a class="link-unstyled" href="/2022/04/20/Apache_Nifi_WSL/" aria-label=": Apache NiFi 설치와 설정 in WSL2">
                             Apache NiFi 설치와 설정 in WSL2
                         </a>
@@ -440,7 +328,6 @@
 </div>
 
 </section>
-
 
 
                 <footer id="footer" class="main-content-wrap">

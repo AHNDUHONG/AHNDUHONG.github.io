@@ -198,6 +198,155 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2022/03/28/Chapter_3_1/" aria-label=": 마켓과 머신러닝(Chapter_3_1)">
+                            마켓과 머신러닝(Chapter_3_1)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-03-28T09:00:00+09:00">
+	
+		    Mar 28, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h1 id="데이터-준비"><a href="#데이터-준비" class="headerlink" title="데이터 준비"></a>데이터 준비</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">perch_length = np.array(</span><br><span class="line">    [<span class="number">8.4</span>, <span class="number">13.7</span>, <span class="number">15.0</span>, <span class="number">16.2</span>, <span class="number">17.4</span>, <span class="number">18.0</span>, <span class="number">18.7</span>, <span class="number">19.0</span>, <span class="number">19.6</span>, <span class="number">20.0</span>, </span><br><span class="line">     <span class="number">21.0</span>, <span class="number">21.0</span>, <span class="number">21.0</span>, <span class="number">21.3</span>, <span class="number">22.0</span>, <span class="number">22.0</span>, <span class="number">22.0</span>, <span class="number">22.0</span>, <span class="number">22.0</span>, <span class="number">22.5</span>, </span><br><span class="line">     <span class="number">22.5</span>, <span class="number">22.7</span>, <span class="number">23.0</span>, <span class="number">23.5</span>, <span class="number">24.0</span>, <span class="number">24.0</span>, <span class="number">24.6</span>, <span class="number">25.0</span>, <span class="number">25.6</span>, <span class="number">26.5</span>, </span><br><span class="line">     <span class="number">27.3</span>, <span class="number">27.5</span>, <span class="number">27.5</span>, <span class="number">27.5</span>, <span class="number">28.0</span>, <span class="number">28.7</span>, <span class="number">30.0</span>, <span class="number">32.8</span>, <span class="number">34.5</span>, <span class="number">35.0</span>, </span><br><span class="line">     <span class="number">36.5</span>, <span class="number">36.0</span>, <span class="number">37.0</span>, <span class="number">37.0</span>, <span class="number">39.0</span>, <span class="number">39.0</span>, <span class="number">39.0</span>, <span class="number">40.0</span>, <span class="number">40.0</span>, <span class="number">40.0</span>, </span><br><span class="line">     <span class="number">40.0</span>, <span class="number">42.0</span>, <span class="number">43.0</span>, <span class="number">43.0</span>, <span class="number">43.5</span>, <span class="number">44.0</span>]</span><br><span class="line">     )</span><br><span class="line">perch_weight = np.array(</span><br><span class="line">    [<span class="number">5.9</span>, <span class="number">32.0</span>, <span class="number">40.0</span>, <span class="number">51.5</span>, <span class="number">70.0</span>, <span class="number">100.0</span>, <span class="number">78.0</span>, <span class="number">80.0</span>, <span class="number">85.0</span>, <span class="number">85.0</span>, </span><br><span class="line">     <span class="number">110.0</span>, <span class="number">115.0</span>, <span class="number">125.0</span>, <span class="number">130.0</span>, <span class="number">120.0</span>, <span class="number">120.0</span>, <span class="number">130.0</span>, <span class="number">135.0</span>, <span class="number">110.0</span>, </span><br><span class="line">     <span class="number">130.0</span>, <span class="number">150.0</span>, <span class="number">145.0</span>, <span class="number">150.0</span>, <span class="number">170.0</span>, <span class="number">225.0</span>, <span class="number">145.0</span>, <span class="number">188.0</span>, <span class="number">180.0</span>, </span><br><span class="line">     <span class="number">197.0</span>, <span class="number">218.0</span>, <span class="number">300.0</span>, <span class="number">260.0</span>, <span class="number">265.0</span>, <span class="number">250.0</span>, <span class="number">250.0</span>, <span class="number">300.0</span>, <span class="number">320.0</span>, </span><br><span class="line">     <span class="number">514.0</span>, <span class="number">556.0</span>, <span class="number">840.0</span>, <span class="number">685.0</span>, <span class="number">700.0</span>, <span class="number">700.0</span>, <span class="number">690.0</span>, <span class="number">900.0</span>, <span class="number">650.0</span>, </span><br><span class="line">     <span class="number">820.0</span>, <span class="number">850.0</span>, <span class="number">900.0</span>, <span class="number">1015.0</span>, <span class="number">820.0</span>, <span class="number">1100.0</span>, <span class="number">1000.0</span>, <span class="number">1100.0</span>, </span><br><span class="line">     <span class="number">1000.0</span>, <span class="number">1000.0</span>]</span><br><span class="line">     )</span><br></pre></td></tr></table></figure>
+
+<h1 id="K-최근접-이웃-회귀-Regression"><a href="#K-최근접-이웃-회귀-Regression" class="headerlink" title="K - 최근접 이웃 회귀(Regression)"></a>K - 최근접 이웃 회귀(Regression)</h1><ul>
+<li>중요도 : 下 (이런 알고리즘이 있다 정도)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 객체 지향으로 변경</span></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">plt.scatter(perch_length, perch_weight)</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;length&quot;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;weight&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/Chapter_3_1/output_3_0.png" alt="png"></p>
+<h1 id="훈련데이터-테스트데이터셋-분리"><a href="#훈련데이터-테스트데이터셋-분리" class="headerlink" title="훈련데이터 테스트데이터셋 분리"></a>훈련데이터 테스트데이터셋 분리</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_input, test_input, train_target, test_target = train_test_split(</span><br><span class="line">    perch_length, perch_weight, random_state = <span class="number">42</span></span><br><span class="line">)</span><br><span class="line">train_input.shape, test_input.shape, train_target.shape, test_target.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>((42,), (14,), (42,), (14,))
+</code></pre>
+<ul>
+<li>reshape() 사용하여 2차원 배열로 바꿈</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">train_input = train_input.reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">test_input = test_input.reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(train_input.shape, test_input.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(42, 1) (14, 1)
+</code></pre>
+<h1 id="결정계수"><a href="#결정계수" class="headerlink" title="결정계수"></a>결정계수</h1><ul>
+<li>모델이 얼마만큼 정확한지?</li>
+<li>절대값은 아님 &#x2F; 상대적인 값</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsRegressor</span><br><span class="line"></span><br><span class="line"><span class="comment"># knr 클래스 부러오기</span></span><br><span class="line">knr = KNeighborsRegressor()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 모형 학습</span></span><br><span class="line">knr.fit(train_input, train_target)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 테스트 점수 확인</span></span><br><span class="line">knr.score(test_input, test_target)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>0.992809406101064
+</code></pre>
+<h1 id="MAE"><a href="#MAE" class="headerlink" title="MAE"></a>MAE</h1><ul>
+<li>타깃과 예측의 절댓값 오치를 평균하여 반환</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sklearn.metrics는 패키지 아래 여러 가지 측정 도구를 제공</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_absolute_error </span><br><span class="line"></span><br><span class="line"><span class="comment"># 예측 데이터 만들기</span></span><br><span class="line">test_prediction = knr.predict(test_input)</span><br><span class="line">test_prediction</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([  60. ,   79.6,  248. ,  122. ,  136. ,  847. ,  311.4,  183.4,
+        847. ,  113. , 1010. ,   60. ,  248. ,  248. ])
+</code></pre>
+<ul>
+<li>mae를 구한다</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mean_absolute_error는 타깃과 예측의 절댓값 오차를 평균하여 반환</span></span><br><span class="line">mae = mean_absolute_error(test_target, test_prediction)</span><br><span class="line"><span class="built_in">print</span>(mae)</span><br></pre></td></tr></table></figure>
+
+<pre><code>19.157142857142862
+</code></pre>
+<ul>
+<li>평균적으로 19g정도 다르다.</li>
+</ul>
+<h1 id="과대적합-vs-과소적합"><a href="#과대적합-vs-과소적합" class="headerlink" title="과대적합 vs 과소적합"></a>과대적합 vs 과소적합</h1><ul>
+<li>공통점은 머신러닝 모형이 실제 테스트 시 잘 예측을 못함</li>
+<li>과대 적합: 훈련데이터에는 예측 잘함 &#x2F; 테스트데이터에서는 예측을 잘 못함<ul>
+<li>처리하기 곤란</li>
+</ul>
+</li>
+<li>과소 적합: 훈련데이터에는 예측 못함 &#x2F; 테스트데이터에서는 예측을 잘 함 or 둘 다 예측을 잘 못함</li>
+</ul>
+<hr>
+<ul>
+<li>0.97 정도나옴</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 훈련 데이터 점수 확인</span></span><br><span class="line">knr.score(train_input, train_target)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>0.9698823289099254
+</code></pre>
+<ul>
+<li>훈련데이터로 검증 0.98</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Default 5를 3으로 변경</span></span><br><span class="line"><span class="comment"># 머신러닝 모형을 살짝 변경</span></span><br><span class="line">knr.n_neighbors = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 모델을 다시 훈련</span></span><br><span class="line">knr.fit(train_input, train_target)</span><br><span class="line"><span class="built_in">print</span>(knr.score(train_input, train_target))</span><br></pre></td></tr></table></figure>
+
+<pre><code>0.9804899950518966
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(knr.score(test_input, test_target))</span><br></pre></td></tr></table></figure>
+
+<pre><code>0.9746459963987609
+</code></pre>
+<ul>
+<li><p>MAE 구하기</p>
+</li>
+<li><p>평균적으로 35.4g 다름</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 예측 데이터 만들기</span></span><br><span class="line">test_prediction = knr.predict(test_input)</span><br><span class="line">mae = mean_absolute_error(test_target, test_prediction)</span><br><span class="line"><span class="built_in">print</span>(mae)</span><br></pre></td></tr></table></figure>
+
+<pre><code>35.42380952380951
+</code></pre>
+<h1 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h1><ul>
+<li>k 그룹을 5로 했을 때, R2 점수는 0.98, MAE는 19 였음</li>
+<li>k 그룹을 3으로 했을 때, R2 점수는 0.97, MAE는 35 였음</li>
+<li>k 그룹을 7로 했을 때, R2 점수는 0.97, MAE는 32였음</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/03/28/Chapter_3_1/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2022/03/28/Chapter_3_2/" aria-label=": 마켓과 머신러닝(Chapter_3_2)">
                             마켓과 머신러닝(Chapter_3_2)
                         </a>
