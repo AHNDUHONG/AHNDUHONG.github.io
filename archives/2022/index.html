@@ -298,6 +298,117 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2022/04/28/JupyterNotebook_connect_sql/" aria-label=": Jupyter Notebook에서 SQL 실행">
+                            Jupyter Notebook에서 SQL 실행
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-04-28T09:00:00+09:00">
+	
+		    Apr 28, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/SQL/">SQL</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <ul>
+<li>이 글은 <strong>Hanjeongin</strong> 님의 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.notion.so/Jupyter-Notebook-SQL-0973777326e2426da0797f75c09ad0bb">https://rain-grouse-1fe.notion.site/Jupyter-Notebook-SQL-0973777326e2426da0797f75c09ad0bb</a> 노션(Notion)을 참고하여 작성된 글 입니다.</li>
+</ul>
+<hr>
+<h1 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h1><ul>
+<li>작성한 SQL 파일 및 코드들을 Jupyter Notebook에서 실행 하기 위한 설정하는 과정을 설명한다.</li>
+<li>필자는 평소 Jupyter Notebook을 VSCode로 실행하여 VSCode를 통해 설명을 하는데 Jupyter Lab 또는 Jupyter Notebook을 직접 실행하여 설정해도 무방하다.</li>
+</ul>
+<hr>
+<h1 id="Step-1-라이브러리-설치"><a href="#Step-1-라이브러리-설치" class="headerlink" title="Step 1. 라이브러리 설치"></a>Step 1. 라이브러리 설치</h1><ul>
+<li>공통적으로 다음 라이브러리를 설치한다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ipython-sql</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/JupyterNotebook_connect_sql/1.png" alt="png"></p>
+<hr>
+<ul>
+<li><p>다음으로 접속하려는 DB에 맞춰서 라이브러리를 설치한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sql server</span></span><br><span class="line">pip install pyodbc</span><br><span class="line"></span><br><span class="line"><span class="comment"># PostgreSQL</span></span><br><span class="line">pip install pyscopg2</span><br><span class="line"></span><br><span class="line"><span class="comment"># MySQL</span></span><br><span class="line">pip install PyMySQL</span><br><span class="line"></span><br><span class="line"><span class="comment"># Oracle</span></span><br><span class="line">pip install cx_Oracle</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/JupyterNotebook_connect_sql/2.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<h1 id="Step-2-Jupyter-Notebook-SQL-연결"><a href="#Step-2-Jupyter-Notebook-SQL-연결" class="headerlink" title="Step 2. Jupyter Notebook SQL 연결"></a>Step 2. Jupyter Notebook SQL 연결</h1><ul>
+<li>필자는 VSCode를 사용하여 Jupyter Notebook을 사용하여 VSCode를 사용하여 작성하였다.</li>
+<li>VScode를 실행하여 아래 사진에서 밑줄 친 새 파일을 클릭하면 <u><span style="color:red"><code>Jupyter Notebook(.ipynb)</code></span></u> 형식으로 파일을 생성한다.<br><img src="/images/JupyterNotebook_connect_sql/3.png" alt="png"><hr>
+</li>
+<li>생성한 파일에 매직 명령어로 아래와 같은 코드를 입력한 뒤 실행하면 pakage 설치 안내창이 나오는데 설치한다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%load_ext sql</span><br></pre></td></tr></table></figure>
+<img src="/images/JupyterNotebook_connect_sql/4.png" alt="png"></li>
+</ul>
+<h2 id="모듈-에러-ModuleNotFoundError-No-module-named-‘sql’"><a href="#모듈-에러-ModuleNotFoundError-No-module-named-‘sql’" class="headerlink" title="모듈 에러(ModuleNotFoundError: No module named ‘sql’)"></a>모듈 에러(<strong>ModuleNotFoundError</strong>: No module named ‘sql’)</h2><ul>
+<li>이 에러는 sql이라는 이름의 모듈을 설치가 안되었을때 나오는 에러인데 라이브러리를 설치를 해줬는데도 불구하고 <u><span style="color:red"><code>ModuleNotFoundError: No module named &#39;sql&#39;</code></span></u> 라는 에러가 나온다. 그럴 땐 내가 설치를 한 라이브러리가 어느 경로에 저장되었는지 확인해야 한다. (필자는 설치를 할 때 나온 메세지를 통해 확인함.)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">sys.executable   -- 현재 파일 파이썬 경로 확인</span><br></pre></td></tr></table></figure></li>
+<li>필자는 VSCode로 생성한 파일의 파이썬 경로와 다른 경로에 설치가 되어 위와 같은 오류가 생성되었던 것이다. 그렇다고 환경 변수를 새로 설정하기에는 너무 복잡하니, 파이썬 파일을 새로 만들어 설치된 경로와 맞춰주겠다.</li>
+<li>아래 사진 우측 상단에 밑줄 친 상자 클릭을 한다.<br><img src="/images/JupyterNotebook_connect_sql/5.png" alt="png"><hr>
+</li>
+<li>아래 사진에서 필자의 컴퓨터에서 파이썬 라이브러리가 저장된 경로는 두번째 항목이기 때문에 클릭을 하면 설정이 바뀐다.<br><img src="/images/JupyterNotebook_connect_sql/6.png" alt="png"><br><img src="/images/JupyterNotebook_connect_sql/7.png" alt="png"><hr>
+</li>
+<li>Step 2 방법으로 한번 더 실행하면 아래 사진 과 같이 오류 없이 정상적으로 실행된다.<br><img src="/images/JupyterNotebook_connect_sql/8.png" alt="png"><hr>
+</li>
+</ul>
+<h1 id="DB-접속"><a href="#DB-접속" class="headerlink" title="DB 접속"></a>DB 접속</h1><ul>
+<li><p>접속하려는 DB에 맞는 코드를 입력 후 실행</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># SQL Server</span></span><br><span class="line">%sql mssql+pyodbc://user_name:password@host:port_number/db</span><br><span class="line"></span><br><span class="line"><span class="comment"># PostgreSQL</span></span><br><span class="line">%sql postgresql://user_name:password@host:port_number/db</span><br><span class="line"></span><br><span class="line"><span class="comment"># MySQL</span></span><br><span class="line">%sql mysql://user_name:password@host:port_number/db</span><br><span class="line"></span><br><span class="line"><span class="comment"># Oracle</span></span><br><span class="line">%sql oracle://user_name:password@127.0.0.1:port_number/db</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>user_name, password, port_number,db 등을 확인하려면 Oracle SQL Developer을 실행하여 해당 DB 우클릭 후 속성에 들어가면 상세히 적혀 있다.<br><img src="/images/JupyterNotebook_connect_sql/9.png" alt="png"><hr>
+<img src="/images/JupyterNotebook_connect_sql/10.png" alt="png"><hr>
+</li>
+</ul>
+</li>
+<li><p>각자 DB에 맞게 작성 하면 아래 사진과 같이 정상적으로 DB 연결이 되었다고 나온다.<br><img src="/images/JupyterNotebook_connect_sql/11.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>코드 작성이 잘되는지 테스트 해본다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sql 실행문 (%%sql)을 붙이고 실행</span></span><br><span class="line">%%sql</span><br><span class="line"></span><br><span class="line">SELECT *</span><br><span class="line">FROM employees</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/JupyterNotebook_connect_sql/12.png" alt="png"></p>
+</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/04/28/JupyterNotebook_connect_sql/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2022/04/20/Apache_Airflow/" aria-label=": Setting up Apache-Airflow in Windows using WSL2(아파치 에어플로)">
                             Setting up Apache-Airflow in Windows using WSL2(아파치 에어플로)
                         </a>
@@ -1274,80 +1385,6 @@
                     
                         <p>
                             <a href="/2022/04/12/Github(hexo)_blog_settings_01/#post-footer" class="postShorten-excerpt_link link" aria-label>
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/2022/04/12/Github(hexo)_blog_settings_02/" aria-label=": Github_blog(hexo) 프로필 설정">
-                            Github_blog(hexo) 프로필 설정
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2022-04-12T09:00:00+09:00">
-	
-		    Apr 12, 2022
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/blog/">blog</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h3 id="Github-blog-hexo-bio-인물소개-job-설정"><a href="#Github-blog-hexo-bio-인물소개-job-설정" class="headerlink" title="Github blog (hexo) bio(인물소개), job 설정"></a>Github blog (hexo) bio(인물소개), job 설정</h3><ul>
-<li>이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.</li>
-<li>참고: 필자는 tranquilpeak 테마를 표준 테마로 하여 환경 설정 하는 것 이므로 tranquilpeak 테마를 설정 한 뒤 이 글을 보시길 바랍니다.<ul>
-<li>tranquilpeak 테마 : <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/kakawait/hugo-tranquilpeak-theme">https://github.com/kakawait/hugo-tranquilpeak-theme</a></li>
-<li>이전 글 : <strong><strong>Github_blog(hexo) 테마 변경 및 환경 설정</strong></strong> <a href="https://ahnduhong.github.io/2022/04/12/Github(hexo)_blog_settings_01/">https://ahnduhong.github.io/2022/04/12/Github(hexo)_blog_settings_01&#x2F;</a></li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h3><ul>
-<li>블로그 관리를 하는 도중 side bar 메뉴에서 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://author.bio/">author.bio</a> 라고 써져 있는 것 과 프로필에 직업이 제대로 적혀 있지 않아 필자에 의도에 맞게 수정</li>
-</ul>
-<p><img src="/images/Github(hexo)_blog_settings_02/1.png" alt="png"></p>
-<ul>
-<li>bio 와 job 메뉴는 side bar 를 수정 할 수 있는 {project_name}&#x2F;themes&#x2F;tranquilpeak&#x2F;_config.yml 에서 수정하는 것이 아닌  {project_name}&#x2F;themes&#x2F;tranquilpeak&#x2F;languages&#x2F;en.yml 파일에서 수정이 가능하다. (필자의 언어 설정은 “en”이므로 “ko”를 설정한 경우 같은 경로의 ko.yml 파일을 수정하면 됨)<ul>
-<li>아래 사진은 ko.yml 파일의 코드를 나열 한 것이다.</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#123;project_name&#125;/themes/tranquilpeak/languages/ko.yml</span></span><br><span class="line"><span class="comment"># 블로그의 모든 곳에 표시되는 날짜 형식</span></span><br><span class="line">date_format: <span class="string">&quot;YYYY/MM/DD&quot;</span></span><br><span class="line"></span><br><span class="line">global:</span><br><span class="line">    home: <span class="string">&quot;Home&quot;</span></span><br><span class="line">    categories: <span class="string">&quot;카테고리&quot;</span></span><br><span class="line">    category: <span class="string">&quot;카테고리&quot;</span></span><br><span class="line">    tags: <span class="string">&quot;태그&quot;</span></span><br><span class="line">    tag: <span class="string">&quot;태그&quot;</span></span><br><span class="line">    archives: <span class="string">&quot;아카이브&quot;</span></span><br><span class="line">    search: <span class="string">&quot;검색&quot;</span></span><br><span class="line">    about: <span class="string">&quot;About&quot;</span></span><br><span class="line">    author_picture: <span class="string">&quot;저자 이미지&quot;</span></span><br><span class="line">    github: <span class="string">&quot;GitHub&quot;</span></span><br><span class="line">    stack_overflow: <span class="string">&quot;Stack Overflow&quot;</span></span><br><span class="line">    twitter: <span class="string">&quot;Twitter&quot;</span></span><br><span class="line">    facebook: <span class="string">&quot;Facebook&quot;</span></span><br><span class="line">    google_plus: <span class="string">&quot;Google +&quot;</span></span><br><span class="line">    weibo: <span class="string">&quot;Weibo&quot;</span></span><br><span class="line">    qq: <span class="string">&quot;QQ&quot;</span></span><br><span class="line">    qzone: <span class="string">&quot;Qzone&quot;</span></span><br><span class="line">    renren: <span class="string">&quot;Renren&quot;</span></span><br><span class="line">    vk: <span class="string">&quot;VK&quot;</span></span><br><span class="line">    odnoklassniki: <span class="string">&quot;Odnoklassniki&quot;</span></span><br><span class="line">    linkedin: <span class="string">&quot;LinkedIn&quot;</span></span><br><span class="line">    mail: <span class="string">&quot;Mail&quot;</span></span><br><span class="line">    rss: <span class="string">&quot;RSS&quot;</span></span><br><span class="line">    share_on_facebook: <span class="string">&quot;Facebook에 공유하기&quot;</span></span><br><span class="line">    share_on_twitter: <span class="string">&quot;Twitter에 공유하기&quot;</span></span><br><span class="line">    share_on_google_plus: <span class="string">&quot;Google+에 공유하기&quot;</span></span><br><span class="line">    share_on_weibo: <span class="string">&quot;Weibo에 공유하기&quot;</span></span><br><span class="line">    share_on_qq: <span class="string">&quot;QQ에 공유하기&quot;</span></span><br><span class="line">    share_on_qzone: <span class="string">&quot;Qzone에 공유하기&quot;</span></span><br><span class="line">    share_on_renren: <span class="string">&quot;Renren에 공유하기&quot;</span></span><br><span class="line">    share_on_vk: <span class="string">&quot;VK에 공유하기&quot;</span></span><br><span class="line">    share_on_odnoklassniki: <span class="string">&quot;Odnoklassniki에 공유하기&quot;</span></span><br><span class="line">    search_category: <span class="string">&quot;카테고리 검색&quot;</span></span><br><span class="line">    search_tag: <span class="string">&quot;태그 검색&quot;</span></span><br><span class="line">    search_date: <span class="string">&quot;날짜 검색 (YYYY/MM/DD)&quot;</span></span><br><span class="line">    posts_found:</span><br><span class="line">        zero: <span class="string">&quot;포스트가 없습니다.&quot;</span></span><br><span class="line">        one: <span class="string">&quot;1 개의 포스트가 있습니다.&quot;</span></span><br><span class="line">        other: <span class="string">&quot;&#123;n&#125; 개의 포스트가 있습니다.&quot;</span></span><br><span class="line">    categories_found:</span><br><span class="line">        zero: <span class="string">&quot;카테고리가 없습니다.&quot;</span></span><br><span class="line">        one: <span class="string">&quot;1 개의 카테고리가 있습니다.&quot;</span></span><br><span class="line">        other: <span class="string">&quot;&#123;n&#125; 개의 카테고리가 있습니다.&quot;</span></span><br><span class="line">    tags_found:</span><br><span class="line">        zero: <span class="string">&quot;태그가 없습니다.&quot;</span></span><br><span class="line">        one: <span class="string">&quot;1 개의 태그가 있습니다.&quot;</span></span><br><span class="line">        other: <span class="string">&quot;&#123;n&#125; 개의 태그가 있습니다.&quot;</span></span><br><span class="line">    read_more_about_author: <span class="string">&quot;저자에 대해 더 알아보기&quot;</span></span><br><span class="line">    zoom_in_on_picture: <span class="string">&quot;사진 확대&quot;</span></span><br><span class="line">    go_to_homepage: <span class="string">&quot;홈페이지로 이동하기&quot;</span></span><br><span class="line">    open_link: <span class="string">&quot;링크 열기&quot;</span></span><br><span class="line">    open_post: <span class="string">&quot;소식 열기&quot;</span></span><br><span class="line"></span><br><span class="line">pagination:</span><br><span class="line">    page: <span class="string">&quot;page %d&quot;</span></span><br><span class="line">    of: <span class="string">&quot;of %d&quot;</span></span><br><span class="line">    newer_posts: <span class="string">&quot;최근 포스트&quot;</span></span><br><span class="line">    older_posts: <span class="string">&quot;이전 포스트&quot;</span></span><br><span class="line">    previous: <span class="string">&quot;이전&quot;</span></span><br><span class="line">    next: <span class="string">&quot;다음&quot;</span></span><br><span class="line"></span><br><span class="line">post:</span><br><span class="line">    no_title : <span class="string">&quot;제목 없음&quot;</span></span><br><span class="line">    categorized_in: <span class="string">&quot;카테고리&quot;</span></span><br><span class="line">    tagged_in: <span class="string">&quot;태그&quot;</span></span><br><span class="line">    toc: <span class="string">&quot;목차&quot;</span></span><br><span class="line">    back_to_top: <span class="string">&quot;맨 위로&quot;</span></span><br><span class="line">    read_more: <span class="string">&quot;계속 읽기&quot;</span></span><br><span class="line">    go_to_website: <span class="string">&quot;웹 사이트로 이동&quot;</span></span><br><span class="line">    comment_and_share: <span class="string">&quot;댓글 공유&quot;</span></span><br><span class="line">    comment: <span class="string">&quot;댓글을 남겨주세요&quot;</span></span><br><span class="line">    share: <span class="string">&quot;이 포스트 공유하기&quot;</span></span><br><span class="line">    gallery: <span class="string">&quot;갤러리&quot;</span></span><br><span class="line">    image:</span><br><span class="line">        one: <span class="string">&quot;이미지&quot;</span></span><br><span class="line">        other: <span class="string">&quot;%d 이미지&quot;</span></span><br><span class="line"></span><br><span class="line">author:</span><br><span class="line">    <span class="comment"># Your biography (마크다운과 HTML이 지원됩니다.)</span></span><br><span class="line">    bio: <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="comment"># Your job</span></span><br><span class="line">    job: <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>맨 아래에 위치한 author 부분이 bio 와 job 즉, 필자가 변경을 원하던 메뉴 이므로 수정 bio(인물소개), job(직업) 안에 원하는 문구 및 파일(bio)을 수정한다.</li>
-</ul>
-<p><img src="/images/Github(hexo)_blog_settings_02/1.png" alt="png"></p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a href="/2022/04/12/Github(hexo)_blog_settings_02/#post-footer" class="postShorten-excerpt_link link" aria-label>
                                 Comment and share
                             </a>
                         </p>
