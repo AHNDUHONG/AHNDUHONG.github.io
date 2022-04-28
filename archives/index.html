@@ -199,6 +199,105 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2022/04/28/VSCode_Connect_Oracle/" aria-label=": VS Code Oracle 연동">
+                            VS Code Oracle 연동
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-04-28T09:00:00+09:00">
+	
+		    Apr 28, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Oracle/">Oracle</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <ul>
+<li>이 글은 Evan 님의 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://dschloe.github.io/sql/vscode_oracle/">https://dschloe.github.io/settings/apache_airflow_using_wsl2&#x2F;</a> 글을 참고하여 작성된 글 입니다.</li>
+</ul>
+<hr>
+<h1 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h1><ul>
+<li>VS code에서 오라클을 연동한다.</li>
+</ul>
+<h1 id="VS-Code확장-Extension"><a href="#VS-Code확장-Extension" class="headerlink" title="VS Code확장(Extension)"></a>VS Code확장(Extension)</h1><ul>
+<li>VS Code 실행 후 사이드 바(side bar)에서 확장(Extension)을 통한 Oracle Developer Tools for VS Code를 설치한다.<br><img src="/images/VSCode_Connect_Oracle/1.png" alt="png"><hr>
+</li>
+<li>설치 중간에 아래와 같은 문구가 나오면 해당 파일을 설치해야 한다.<br><img src="/images/VSCode_Connect_Oracle/2.png" alt="png"><hr>
+</li>
+</ul>
+<h1 id="필수-설치-파일"><a href="#필수-설치-파일" class="headerlink" title="필수 설치 파일"></a>필수 설치 파일</h1><ul>
+<li>위 과정을 거치면 아래와 같은 홈페이지에 링크 될 것이다. <u><span style="color:red"><code>Install .NET Runtime for Windows x64</code></span></u>를 클릭하면 다운로드가 된다.<ul>
+<li>설치 URL: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.oracle.com/database/technologies/appdev/dotnet/install-dotnetcore-windows.html">https://www.oracle.com/database/technologies/appdev/dotnet/install-dotnetcore-windows.html</a><br><img src="/images/VSCode_Connect_Oracle/3.png" alt="png"><hr>
+</li>
+</ul>
+</li>
+<li>설치한 파일을 실행하면 설치 관리자가 등장하는데 따로 환경설정 할 부분이 없어서 설치를 클릭하여 설치한다.<br><img src="/images/VSCode_Connect_Oracle/4.png" alt="png"><hr>
+</li>
+</ul>
+<h1 id="테스트"><a href="#테스트" class="headerlink" title="테스트"></a>테스트</h1><ul>
+<li><p>설치가 완료가 되면 Extension 메뉴 밑에 DB 메뉴가 활성화 되는 것을 확인 할 수 있다.<br><img src="/images/VSCode_Connect_Oracle/5.png" alt="png"></p>
+<hr>
+</li>
+<li><p>여기에서 VS Code 재 시작을 하도록 한다.</p>
+</li>
+<li><p>빨간색으로 밑줄 친 플러스 모양을 클릭하면 New Connection 버튼이 있는데 클릭하면 새로운 Connection이 생성된다.</p>
+<ul>
+<li><p>단, 여기에서 새로운 Connection은 기존에 이미 만들어진 Connection을 의미한다.</p>
+</li>
+<li><p>따라서, 기존 SQL Developer에서 생성했던 것과 동일하게 작성을 해야한다.</p>
+<p><img src="/images/VSCode_Connect_Oracle/6.png" alt="png"></p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><u><span style="color:red"><code>Database host name, Port number, Serviece name, User name, Password, Connection name</code></span></u>을 확인 후 작성한다.<br><img src="/images/VSCode_Connect_Oracle/7.png" alt="png"><hr>
+</li>
+<li>완료 되면, 아래 그림과 같이 DB가 활성화 된 것을 확인 할 수 있다.<br><img src="/images/VSCode_Connect_Oracle/8.png" alt="png"><br><img src="/images/VSCode_Connect_Oracle/9.png" alt="png"><hr>
+</li>
+<li>마우스 우클릭을 하면, 새로운 쿼리 파일을 작성할 수 있다.<br><img src="/images/VSCode_Connect_Oracle/10.png" alt="png"><hr>
+</li>
+<li>파일을 작성하면 아래와 같이 Ctrl + E를 눌러 SQL을 실행한다.<br><img src="/images/VSCode_Connect_Oracle/11.png" alt="png"><hr>
+</li>
+<li>정상적으로 실행이 되면 아래와 같은 결괏값이 나온다.<br><img src="/images/VSCode_Connect_Oracle/12.png" alt="png"></li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/04/28/VSCode_Connect_Oracle/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2022/04/20/Apache_Airflow/" aria-label=": Setting up Apache-Airflow in Windows using WSL2(아파치 에어플로)">
                             Setting up Apache-Airflow in Windows using WSL2(아파치 에어플로)
                         </a>
@@ -1259,154 +1358,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/2022/04/12/Github_blog(hexo)_tokken/" aria-label=": Github_blog(hexo) 연동 오류 -tokken">
-                            Github_blog(hexo) 연동 오류 -tokken
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2022-04-12T09:00:00+09:00">
-	
-		    Apr 12, 2022
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/github/">github</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <ul>
-<li>이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.</li>
-</ul>
-<hr>
-<h3 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h3><ul>
-<li>깃허브 블로그 계정 연동 오류 fatal: Authentication failed for ~ 를 github tokken 을 생성함으로 해결 하는 방법입니다.</li>
-</ul>
-<hr>
-<ul>
-<li>깃허브(Github) 블로그 테마를 변경하면서 무엇을 잘못 건들였는지 git add, commit, push 도 가능하고 블로그에 글도 업데이트 되는데 깃허브 메인 화면의 <strong>30 contributions in the last year 및 내 활동기록이 기록이 되지않는다.</strong><ul>
-<li><p><strong>git add, commit, push 정상 작동</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_tokken/1.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>Github 메인화면 내 활동 기록이 기록되지 않는 현상 발견</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_tokken/2.png" alt="png"></p>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li>처음에는 커밋(commit)이라는 단어를 내가 잘못 이해하고 있나 라고 의심을 해서 커밋에 대한 구글링을 했지만 내가 알고 있는 커밋이라는 용어가 틀리지 않았고 어떻게 해야될지 감이 안잡혀 evan 강사님(<a target="_blank" rel="external nofollow noopener noreferrer" href="https://dschloe.github.io/">https://dschloe.github.io/</a>)에게 여쭤보았고 방법을 알려주셨다.<ul>
-<li><p><strong>windows 검색 화면에서 웹 자격 증명을 클릭</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_tokken/3.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>windows 자격 증명</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_tokken/4.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>일반 자격 증명에서 github 목록을 클릭하여 편집을 눌러 계정을 다시 업데이트 한다</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_tokken/5.png" alt="png"></p>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>그 후에 Pycharm(필자는 Pycharm을 통해 프로젝트를 관리 하는중)에 돌아와 다시 git add, commit, push 를 하면 fatal: Authentication failed for ~ 라는 문구가 뜬다. 이 문구는 local 계정과 github 계정의 연동이 틀려서 나오는 것이고 ID&#x2F;Password 는 21년 8월 이후로 토큰으로 대체 되었다 라는 의미입니다. 즉 계정 연동을 다시 해줘야 한다는 뜻이므로 토큰을 생성 및 연동하러 Github 페이지로 접속하겠습니다.</p>
-<p>  <img src="/images/Github_blog(hexo)_tokken/6.png" alt="png"></p>
-</li>
-</ul>
-<h2 id="Tokken"><a href="#Tokken" class="headerlink" title="Tokken"></a>Tokken</h2><ul>
-<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://wotres.tistory.com/m/entry/Github-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95-Authentication-failed-for-use-a-personal-access-token-instead">https://wotres.tistory.com/m/entry/Github-에러-해결법-Authentication-failed-for-use-a-personal-access-token-instead</a> 고수트님의 블로그 내용을 참고하여 계정 연동을 시작<ul>
-<li><p><strong>깃허브 접속</strong></p>
-<ul>
-<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/"><strong>https://github.com/</strong></a></li>
-</ul>
-</li>
-<li><p><strong>우측 상단의 settings 클릭</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_tokken/7.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>좌측 메뉴 끝에 developer settings 클릭</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_tokken/8.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>Personal access tokens 클릭</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_tokken/9.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>Note, expiration에 작성하고 싶은 내용, 기간 설정 후 repo 클릭 후 Generate tokken 클릭</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_tokken/10.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>생성된 토큰 코드 복사</strong></p>
-<p>  <img src="/images/Github_blog(hexo)_tokken/11.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><strong>git push</strong><ul>
-<li><p>git push를 입력하면 ID &#x2F; Password 입력하라고 하는데 사용자의 깃허브 아이디와 복사한 토큰을 패스워드에 넣어주면 된다.(패스워드는 입력을 해도 보이지 않게 되어 필자는 ctrl+v로 붙여 넣었다. ***terminal 창에서 ctrl+v 로 붙여넣기가 되지않으면 insert 키로 붙여넣으면 됨.)</p>
-<p>  <img src="/images/Github_blog(hexo)_tokken/12.png" alt="png"></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li>git push 를 할 때 마다 위의 사진 처럼 Username 과 Password(tokken)을 입력하라고 나오기 때문에 Tokken 은 복사하여 메모장이나 기록할 파일에 저장하길 바랍니다.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a href="/2022/04/12/Github_blog(hexo)_tokken/#post-footer" class="postShorten-excerpt_link link" aria-label>
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1418,7 +1369,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 1 of 3</li>
+        <li class="pagination-number">page 1 of 4</li>
     </ul>
 </div>
 
