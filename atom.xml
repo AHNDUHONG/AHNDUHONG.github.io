@@ -6,7 +6,7 @@
   <link href="https://ahnduhong.github.io/atom.xml" rel="self"/>
   
   <link href="https://ahnduhong.github.io/"/>
-  <updated>2022-05-06T03:51:18.961Z</updated>
+  <updated>2022-05-09T14:05:10.106Z</updated>
   <id>https://ahnduhong.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>카카오톡 채널 만들기 및 챗봇 오픈 빌더(OBT) 신청</title>
+    <link href="https://ahnduhong.github.io/2022/05/09/kakaotalk_chatbot_request/"/>
+    <id>https://ahnduhong.github.io/2022/05/09/kakaotalk_chatbot_request/</id>
+    <published>2022-05-09T00:00:00.000Z</published>
+    <updated>2022-05-09T14:05:10.106Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>이 글은 <a href="https://dschloe.github.io/settings/kakaotalk_open_builder_01/">https://dschloe.github.io/settings/kakaotalk_open_builder_01&#x2F;</a> 사이트를 참고하여 작성되었습니다.</li></ul><h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><ul><li>카카오톡 채널을 만들고 챗봇 오픈 빌더(OBT)를 만드는 과정을 보여준다.</li></ul><hr><h1 id="카카오톡-채널-관리자-가입"><a href="#카카오톡-채널-관리자-가입" class="headerlink" title="카카오톡 채널 관리자 가입"></a>카카오톡 채널 관리자 가입</h1><ul><li>카카오톡 관리자 채널에서 새로운 채널을 만든다.<ul><li><p>URL : <strong><a href="https://center-pf.kakao.com/">https://center-pf.kakao.com</a></strong></p><p>  <img src="/images/kakaotalk_chatbot_request/1.png" alt="png"></p></li></ul></li></ul><hr><ul><li>프로필 사진, 채널 이름, 검색용 아이디 등  채널을 만든다.  <img src="/images/kakaotalk_chatbot_request/2.png" alt="png"><hr>  <img src="/images/kakaotalk_chatbot_request/3.png" alt="png"></li></ul><hr><h1 id="카카오톡-챗봇-오픈-빌더-OBT-신청"><a href="#카카오톡-챗봇-오픈-빌더-OBT-신청" class="headerlink" title="카카오톡 챗봇 오픈 빌더(OBT) 신청"></a>카카오톡 챗봇 오픈 빌더(OBT) 신청</h1><ul><li><p>챗봇 관리자센터 OBT를 신청해야 해당 채널 챗봇을 만들수가 있으므로 작성한 뒤 신청한다.</p></li><li><p>구글 검색창에서 카카오톡 오픈 빌더를 검색한다.</p><p>  <img src="/images/kakaotalk_chatbot_request/4.png" alt="png"></p><hr><p>  <img src="/images/kakaotalk_chatbot_request/5.png" alt="png"></p><hr></li><li><p>만들었던 카카오톡 채널 대시보드로 이동한 뒤 관리 - 상세설정 으로 들어간다.</p><p>  <img src="/images/kakaotalk_chatbot_request/6.png" alt="png"></p><hr></li><li><p>채널 URL을 복사</p><p>  <img src="/images/kakaotalk_chatbot_request/7.png" alt="png"></p></li><li><p>복사한 채널 URL을 아래 사진과 같이 붙여넣기 후 신청 사유를 작성하여 신청한다.</p><ul><li>신청사유에 자세한 사유를 입력해야 승인을 해준다고 그랬으니 참고 바랍니다.</li></ul><p>  <img src="/images/kakaotalk_chatbot_request/8.png" alt="png"></p><hr></li><li><p>아래와 같은 안내가 나오면 신청은 완료된 것이다.</p><p>  <img src="/images/kakaotalk_chatbot_request/9.png" alt="png"></p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;이 글은 &lt;a href=&quot;https://dschloe.github.io/settings/kakaotalk_open_builder_01/&quot;&gt;https://dschloe.github.io/settings/kakaotalk_open_buil</summary>
+      
+    
+    
+    
+    <category term="kakaotalk" scheme="https://ahnduhong.github.io/categories/kakaotalk/"/>
+    
+    
+    <category term="kakaotalk" scheme="https://ahnduhong.github.io/tags/kakaotalk/"/>
+    
+  </entry>
   
   <entry>
     <title>[Vs code] Microsoft Visual Studio Code unins000.exe 오류</title>

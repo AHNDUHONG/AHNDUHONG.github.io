@@ -198,6 +198,336 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2022/03/23/numpy_01/" aria-label=": 파이썬 넘파이 1">
+                            파이썬 넘파이 1
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-03-23T09:00:00+09:00">
+	
+		    Mar 23, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Education/">Education</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <ul>
+<li>파이썬 라이브러리 설치 방법 (vs R)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># R install.pakages(&quot;패키지명&quot;)</span></span><br><span class="line"><span class="comment"># 파이썬 라이브러리 설치 코드에서 실행 (x)</span></span><br><span class="line"><span class="comment"># 터미널에서 설치</span></span><br><span class="line"><span class="comment"># 방법 1. conda 설치</span></span><br><span class="line"><span class="comment"># --&gt; 아나콘다 설치 후, conda 설치 (데이터 과학)</span></span><br><span class="line"><span class="comment"># 방법 2. pip 설치 (개발 + 데이터과학 + 그외)</span></span><br><span class="line"><span class="comment"># --&gt; 아나콘다 설치 안함 / 파이썬만 설치</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># git bash 열고, pip install numpy</span></span><br><span class="line"><span class="comment"># pip install numpy</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="NumPy-라이브-불러오기"><a href="#NumPy-라이브-불러오기" class="headerlink" title="NumPy 라이브 불러오기"></a>NumPy 라이브 불러오기</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"><span class="built_in">print</span>(numpy.__version__)</span><br></pre></td></tr></table></figure>
+
+<pre><code>1.21.5
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="built_in">print</span>(np.__version__)</span><br></pre></td></tr></table></figure>
+
+<pre><code>1.21.5
+</code></pre>
+<h2 id="배열로-변환"><a href="#배열로-변환" class="headerlink" title="배열로 변환"></a>배열로 변환</h2><ul>
+<li>1부터 10까지의 리스트를 만든다.</li>
+<li>NumPy 배열로 변환해서 저장한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">temp = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line">arr = np.array(temp)</span><br><span class="line"><span class="built_in">print</span>(arr)</span><br><span class="line"><span class="built_in">print</span>(temp)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[ 1  2  3  4  5  6  7  8  9 10]
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(temp))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(arr))</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;list&#39;&gt;
+&lt;class &#39;numpy.ndarray&#39;&gt;
+</code></pre>
+<ul>
+<li>arr 배열 숫자 5 출력</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr[<span class="number">4</span>:<span class="number">8</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([5, 6, 7, 8])
+</code></pre>
+<ul>
+<li>NumPy를 사용하여 기초 통계 함수를 사용한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">np.mean(arr)</span><br><span class="line">np.<span class="built_in">sum</span>(arr)</span><br><span class="line">np.median(arr)</span><br><span class="line">np.std(arr)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>2.8722813232690143
+</code></pre>
+<h1 id="사칙연산"><a href="#사칙연산" class="headerlink" title="사칙연산"></a>사칙연산</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">math_scores = [<span class="number">90</span>, <span class="number">80</span>, <span class="number">88</span>]</span><br><span class="line">english_scores = [<span class="number">80</span>, <span class="number">70</span>, <span class="number">90</span>]</span><br><span class="line"></span><br><span class="line">total_scores = math_scores + english_scores</span><br><span class="line">total_scores</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>[90, 80, 88, 80, 70, 90]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">math_scores = [<span class="number">90</span>, <span class="number">80</span>, <span class="number">88</span>]</span><br><span class="line">english_scores = [<span class="number">80</span>, <span class="number">70</span>, <span class="number">90</span>]</span><br><span class="line"></span><br><span class="line">math_arr = np.array(math_scores)</span><br><span class="line">english_arr = np.array(english_scores)</span><br><span class="line"></span><br><span class="line">total_scores = math_arr + english_arr</span><br><span class="line">total_scores</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([170, 150, 178])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.<span class="built_in">min</span>(total_scores)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>150
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.<span class="built_in">max</span>(total_scores)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>178
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">math_scores = [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">english_scores = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">math_arr = np.array(math_scores)</span><br><span class="line">english_arr = np.array(english_scores)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 사칙연산</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;덧셈:&quot;</span>, np.add(math_arr, english_arr))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;뺄셈:&quot;</span>, np.subtract(math_arr, english_arr))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;곱셈:&quot;</span>, np.multiply(math_arr, english_arr))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;나눗셈:&quot;</span>, np.divide(math_arr, english_arr))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;거듭제곱:&quot;</span>, np.power(math_arr, english_arr))</span><br></pre></td></tr></table></figure>
+
+<pre><code>덧셈: [3 5 7]
+뺄셈: [1 1 1]
+곱셈: [ 2  6 12]
+나눗셈: [2.         1.5        1.33333333]
+거듭제곱: [ 2  9 64]
+</code></pre>
+<h2 id="배열의-생성"><a href="#배열의-생성" class="headerlink" title="배열의 생성"></a>배열의 생성</h2><ul>
+<li>0차원부터 3차원까지 생성하는 방법</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.array(<span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(temp_arr)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(temp_arr))</span><br><span class="line"><span class="built_in">print</span>(temp_arr.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>20
+&lt;class &#39;numpy.ndarray&#39;&gt;
+()
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1차원 배열</span></span><br><span class="line">temp_arr = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="built_in">print</span>(temp_arr)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(temp_arr))</span><br><span class="line"><span class="built_in">print</span>(temp_arr.shape)</span><br><span class="line"><span class="built_in">print</span>(temp_arr.ndim) <span class="comment"># 몇 차원인지 알아보는 법</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>[1 2 3]
+&lt;class &#39;numpy.ndarray&#39;&gt;
+(3,)
+1
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2차원 배열</span></span><br><span class="line">temp_arr = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"><span class="built_in">print</span>(temp_arr)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(temp_arr))</span><br><span class="line"><span class="built_in">print</span>(temp_arr.shape) <span class="comment"># 2 * 3 배열이다</span></span><br><span class="line"><span class="built_in">print</span>(temp_arr.ndim)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[1 2 3]
+ [4 5 6]]
+&lt;class &#39;numpy.ndarray&#39;&gt;
+(2, 3)
+2
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3차원 배열</span></span><br><span class="line">temp_arr = np.array([[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]], [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]]])</span><br><span class="line"><span class="built_in">print</span>(temp_arr)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(temp_arr))</span><br><span class="line"><span class="built_in">print</span>(temp_arr.shape)</span><br><span class="line"><span class="built_in">print</span>(temp_arr.ndim)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[[1 2 3]
+  [4 5 6]]
+
+ [[1 2 3]
+  [4 5 6]]]
+&lt;class &#39;numpy.ndarray&#39;&gt;
+(2, 2, 3)
+3
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], ndmin = <span class="number">2</span>) <span class="comment"># ndmin으로 인해 2차원 배열로 바뀜</span></span><br><span class="line"><span class="built_in">print</span>(temp_arr)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(temp_arr))</span><br><span class="line"><span class="built_in">print</span>(temp_arr.shape)</span><br><span class="line"><span class="built_in">print</span>(temp_arr.ndim)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[1 2 3 4]]
+&lt;class &#39;numpy.ndarray&#39;&gt;
+(1, 4)
+2
+</code></pre>
+<h2 id="소수점-정렬"><a href="#소수점-정렬" class="headerlink" title="소수점 정렬"></a>소수점 정렬</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.trunc([-<span class="number">1.23</span>, <span class="number">1.23</span>])</span><br><span class="line">temp_arr <span class="comment"># 소수점 아래 자리가 절삭됨.</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([-1.,  1.])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.fix([-<span class="number">1.23</span>, <span class="number">1.23</span>])</span><br><span class="line">temp_arr</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([-1.,  1.])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.around([-<span class="number">1.23789</span>, <span class="number">1.23789</span>], <span class="number">4</span>)</span><br><span class="line">temp_arr</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([-1.2379,  1.2379])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.<span class="built_in">round</span>([-<span class="number">1.23789</span>, <span class="number">1.23789</span>], <span class="number">4</span>)</span><br><span class="line">temp_arr</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([-1.2379,  1.2379])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.floor([-<span class="number">1.23789</span>, <span class="number">1.23789</span>]) <span class="comment"># 내림</span></span><br><span class="line">temp_arr</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([-2.,  1.])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.ceil([-<span class="number">1.23789</span>, <span class="number">1.23789</span>]) <span class="comment"># 올림</span></span><br><span class="line">temp_arr</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([-1.,  2.])
+</code></pre>
+<ul>
+<li>shape는 axis 축을 설정함</li>
+</ul>
+<h2 id="배열을-생성하는-다양한-방법들"><a href="#배열을-생성하는-다양한-방법들" class="headerlink" title="배열을 생성하는 다양한 방법들"></a>배열을 생성하는 다양한 방법들</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.arange(<span class="number">5</span>)</span><br><span class="line">temp_arr</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([0, 1, 2, 3, 4])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.arange(<span class="number">1</span>, <span class="number">11</span>, <span class="number">3</span>)</span><br><span class="line">temp_arr</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([ 1,  4,  7, 10])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">zero_arr = np.zeros((<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(zero_arr)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(zero_arr))</span><br><span class="line"><span class="built_in">print</span>(zero_arr.shape)</span><br><span class="line"><span class="built_in">print</span>(zero_arr.ndim)</span><br><span class="line"><span class="built_in">print</span>(zero_arr.dtype) <span class="comment"># float64 -&gt; 64는 bit</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>[[0. 0. 0.]
+ [0. 0. 0.]]
+&lt;class &#39;numpy.ndarray&#39;&gt;
+(2, 3)
+2
+float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.ones((<span class="number">4</span>, <span class="number">5</span>), dtype = <span class="string">&quot;int32&quot;</span>) <span class="comment"># 데이터 타입도 인위적으로 수정 가능</span></span><br><span class="line"><span class="built_in">print</span>(temp_arr)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(temp_arr))</span><br><span class="line"><span class="built_in">print</span>(temp_arr.shape)</span><br><span class="line"><span class="built_in">print</span>(temp_arr.ndim)</span><br><span class="line"><span class="built_in">print</span>(temp_arr.dtype)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[1 1 1 1 1]
+ [1 1 1 1 1]
+ [1 1 1 1 1]
+ [1 1 1 1 1]]
+&lt;class &#39;numpy.ndarray&#39;&gt;
+(4, 5)
+2
+int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.ones((<span class="number">2</span>, <span class="number">6</span>), dtype = <span class="string">&quot;int32&quot;</span>)</span><br><span class="line">temp_res_arr = temp_arr.reshape(<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>) <span class="comment"># (5, 3)을 했을때 cannot reshape array of size 12 into shape (5,3)</span></span><br><span class="line"><span class="built_in">print</span>(temp_res_arr)                   <span class="comment"># 사이즈를 12로 바꾸면 되서 4, 3 또는 3, 4 등 바꿔주면 됨.</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(temp_res_arr))</span><br><span class="line"><span class="built_in">print</span>(temp_res_arr.shape)</span><br><span class="line"><span class="built_in">print</span>(temp_res_arr.ndim)</span><br><span class="line"><span class="built_in">print</span>(temp_res_arr.dtype)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[[1 1 1]
+  [1 1 1]]
+
+ [[1 1 1]
+  [1 1 1]]]
+&lt;class &#39;numpy.ndarray&#39;&gt;
+(2, 2, 3)
+3
+int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.ones((<span class="number">12</span>, <span class="number">12</span>), dtype = <span class="string">&quot;int32&quot;</span>)</span><br><span class="line">temp_res_arr = temp_arr.reshape(<span class="number">5</span>, -<span class="number">1</span>) <span class="comment"># np.ones(12, 12) -&gt; 12*12 = 144 약수가 아니면 error</span></span><br><span class="line"><span class="built_in">print</span>(temp_res_arr) </span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(temp_res_arr))</span><br><span class="line"><span class="built_in">print</span>(temp_res_arr.shape)</span><br><span class="line"><span class="built_in">print</span>(temp_res_arr.ndim)</span><br><span class="line"><span class="built_in">print</span>(temp_res_arr.dtype)</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-60-dfc75cfbf69a&gt; in &lt;module&gt;()
+      1 temp_arr = np.ones((12, 12), dtype = &quot;int32&quot;)
+----&gt; 2 temp_res_arr = temp_arr.reshape(5, -1)
+      3 print(temp_res_arr)
+      4 print(type(temp_res_arr))
+      5 print(temp_res_arr.shape)
+
+
+ValueError: cannot reshape array of size 144 into shape (5,newaxis)
+</code></pre>
+<h2 id="numpy-조건식"><a href="#numpy-조건식" class="headerlink" title="numpy 조건식"></a>numpy 조건식</h2><ul>
+<li>np.where()</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.arange(<span class="number">10</span>)</span><br><span class="line">temp_arr</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 5보다 작은 값은 원래값으로 반환</span></span><br><span class="line"><span class="comment"># 5보다 큰 값은 원래 값 * 10</span></span><br><span class="line">np.where(temp_arr &lt; <span class="number">5</span>, temp_arr, temp_arr * <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([ 0,  1,  2,  3,  4, 50, 60, 70, 80, 90])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 0 - 100 까지의 배열을 만들고, 50보다 작은 값은 곱하기 10, 나머지는 그냥 원래 값으로 반환</span></span><br><span class="line"><span class="comment"># np.where 은 조건식이 하나만 필요할 떄 사용</span></span><br><span class="line">temp_arr = np.arange(<span class="number">101</span>)</span><br><span class="line"><span class="comment"># temp_arr</span></span><br><span class="line">np.where(temp_arr &lt; <span class="number">50</span>, temp_arr * <span class="number">10</span>, temp_arr)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([  0,  10,  20,  30,  40,  50,  60,  70,  80,  90, 100, 110, 120,
+       130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250,
+       260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380,
+       390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490,  50,  51,
+        52,  53,  54,  55,  56,  57,  58,  59,  60,  61,  62,  63,  64,
+        65,  66,  67,  68,  69,  70,  71,  72,  73,  74,  75,  76,  77,
+        78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,  89,  90,
+        91,  92,  93,  94,  95,  96,  97,  98,  99, 100])
+</code></pre>
+<ul>
+<li>np.select()</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">temp_arr = np.arange(<span class="number">10</span>)</span><br><span class="line">temp_arr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5보다 큰 값은 곱하기 2, 2보다 작은 값은 더하기 100</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">condlist = [temp_arr &gt; <span class="number">5</span>, temp_arr &lt; <span class="number">2</span>]</span><br><span class="line">choicelist = [temp_arr * <span class="number">2</span>, temp_arr + <span class="number">100</span>]</span><br><span class="line">np.select(condlist, choicelist, default = temp_arr)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([100, 101,   2,   3,   4,   5,  12,  14,  16,  18])
+</code></pre>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/03/23/numpy_01/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2022/03/22/python_grammer03/" aria-label=": 파이썬 기초 문법 3">
                             파이썬 기초 문법 3
                         </a>
