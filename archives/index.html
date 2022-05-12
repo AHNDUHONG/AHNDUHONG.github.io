@@ -199,6 +199,178 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2022/05/12/Github_with_members/" aria-label=": [Git hub] 다른사람과 프로젝트 관리하는 법">
+                            [Git hub] 다른사람과 프로젝트 관리하는 법
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2022-05-12T09:00:00+09:00">
+	
+		    May 12, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Github/">Github</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <ul>
+<li>이 글은 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://velog.io/@debut12/Github-%EC%97%AC%EB%9F%AC-%EB%AA%85%EA%B3%BC-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B3%B5%EC%9C%A0%ED%95%98%EA%B8%B0">https:&#x2F;&#x2F;velog.io&#x2F;@debut12&#x2F;Github-여러-명과-프로젝트-공유하기</a> 블로그를 참고하여 작성 된 글입니다.</li>
+</ul>
+<hr>
+<h1 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h1><ul>
+<li>Git hub의 새로운 Repository를 만들어 팀원들과 함께 관리를 할 수 있게 권한을 주는 과정을 설명한다.</li>
+</ul>
+<h1 id="Step-1-Repositoy-생성"><a href="#Step-1-Repositoy-생성" class="headerlink" title="Step 1. Repositoy 생성"></a>Step 1. Repositoy 생성</h1><ul>
+<li><p>Git hub 홈페이지 repository를 생성해준다.</p>
+<ul>
+<li>아래 체크 박스에 있는 항목들은 필요에 따라서 선택적으로 체크하면 된다.</li>
+</ul>
+<p>  <img src="/images/Github_with_members/1.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<h1 id="Step-2-폴더에-Git-연동하기"><a href="#Step-2-폴더에-Git-연동하기" class="headerlink" title="Step 2. 폴더에 Git 연동하기"></a>Step 2. 폴더에 Git 연동하기</h1><ul>
+<li><p>아래 사진의 네모 상자의 코드를 입력하면 연동이 완료된다.( 기존 git hub 새로운 repository연동과 같다)</p>
+<p>  <img src="/images/Github_with_members/2.png" alt="png"></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# Kakaotalk_chatbot_finance_&quot;</span> &gt;&gt; README.md       <span class="comment"># READ.ME 파일에 &quot; &quot; 부분이 입력이 된다.</span></span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin https://github.com/AHNDUHONG/Kakaotalk_chatbot_finance_.git</span><br><span class="line">git push -u origin main            <span class="comment"># git push &lt;remote&gt; &lt;branch&gt;로 한번 저장하여 베포한 뒤 git push만으로 베포 가능</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 이 코드는 필자가 만든 Repository에 맞게 생성된 코드들이기 때문에 각자 Repository에 맞게</span></span><br><span class="line"><span class="comment"># 수정하길 바란다.</span></span><br></pre></td></tr></table></figure>
+<hr>
+</li>
+<li><p>필자는 repository에 이미 만들어진 폴더가 있기 때문에 git push를 입력 했을때 오류가 발생했다.</p>
+<p>  <img src="/images/Github_with_members/3.png" alt="png"></p>
+<p>  <img src="/images/Github_with_members/4.png" alt="png"></p>
+</li>
+</ul>
+<hr>
+<h3 id="Git-연동-과정-중-오류-발생-및-해결"><a href="#Git-연동-과정-중-오류-발생-및-해결" class="headerlink" title="Git 연동 과정 중 오류 발생 및 해결"></a>Git 연동 과정 중 오류 발생 및 해결</h3><ul>
+<li><p>위의 오류는 내 컴퓨터 저장소의 폴더에 없는 파일이 이미 내 Github Repository에 기록 되어있기때문에 생기는 것 이므로 <u><span style="color:red"><code>git pull</code></span></u>로 파일을 가져오기로 한다.</p>
+<ul>
+<li><u><span style="color:red"><code>git remote -v</code></span></u> 로 원격 저장소 이름을 확인 한다.</li>
+</ul>
+<p>  <img src="/images/Github_with_members/5.png" alt="png"></p>
+<hr>
+<ul>
+<li><p>위 사진으로 확인한 origin 저장소를 main branch로 pull을 하기 위해 <u><span style="color:red"><code>git pull origin main</code></span></u> 작성</p>
+<p>  <img src="/images/Github_with_members/6.png" alt="png"></p>
+<hr>
+</li>
+<li><p><u><span style="color:red"><code>fatal: refusing to merge unrelated histories</code></span></u> 오류가 발생하여 <u><span style="color:red"><code>git pull origin 브런치명 --allow-unrelated-histories</code></span></u> 을 사용하여 오류 해결</p>
+<ul>
+<li><u><span style="color:red"><code>--allow-unrelated-histories</code></span></u> 이 명령 옵션은 이미 존재하는 두 프로젝트의 기록(history)을 저장하는 드문 상황에 사용된다고 한다. 즉, git에서는 서로 관련 기록이 없는 이질적인 두 프로젝트를 병합할 때 기본적으로 거부하는데, 이것을 허용해 주는 것이다.<ul>
+<li>참고 URL: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://gdtbgl93.tistory.com/63">https://gdtbgl93.tistory.com/63</a></li>
+</ul>
+</li>
+</ul>
+<p>  <img src="/images/Github_with_members/7.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+</li>
+<li><p>아래와 같이 bash 폴더가 생성되면 성공적으로 파일을 Git에 연동한 것이다.</p>
+<p>  <img src="/images/Github_with_members/8.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h1 id="Step-3-Git-Contributors-추가하기-다른-사람에게-Repository-수정-및-생성-권한-주기"><a href="#Step-3-Git-Contributors-추가하기-다른-사람에게-Repository-수정-및-생성-권한-주기" class="headerlink" title="Step 3. Git Contributors 추가하기 (다른 사람에게 Repository 수정 및 생성 권한 주기)"></a>Step 3. Git Contributors 추가하기 (다른 사람에게 Repository 수정 및 생성 권한 주기)</h1><ul>
+<li><p>Github 홈페이지로 돌아와서 각자가 만든 Repository에 접속하여 Settings &gt; Collaborators &gt; Manage access 경로로 들어가 Add people로 권한을 줄 사람을 추가한다.</p>
+<p>  <img src="/images/Github_with_members/9.png" alt="png"></p>
+<hr>
+</li>
+<li><p>Github <strong>USERNAME, FULL NAME, Email</strong> 으로 추가가 가능하다.</p>
+<p>  <img src="/images/Github_with_members/10.png" alt="png"></p>
+<hr>
+</li>
+<li><p>추가한 사람의 허용을 받으면 Pending Invite 가 사라진다.</p>
+<p>  <img src="/images/Github_with_members/11.png" alt="png"></p>
+<hr>
+</li>
+</ul>
+<h1 id="Step-4-Branch-만들기"><a href="#Step-4-Branch-만들기" class="headerlink" title="Step 4. Branch 만들기"></a>Step 4. Branch 만들기</h1><ul>
+<li><p>Branch 확인을 한다</p>
+<ul>
+<li>필자가 현재 사용하고 있는 branch는 master다.</li>
+<li>아래 사진은 모든 branch를 *로 나타내고 그 중 현재 사용중인 branch를 <u><span style="color:green"><strong>초록색</strong></span></u>으로 보여준다.</li>
+</ul>
+<p>  <img src="/images/Github_with_members/12.png" alt="png"></p>
+<hr>
+</li>
+<li><p>Branch 만들기</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch (`원하는 branch명`)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Branch 확인</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>필자는 팀원의 개개인의 이니셜로 Branch를 생성했다.</p>
+<p>  <img src="/images/Github_with_members/13.png" alt="png"></p>
+<hr>
+</li>
+<li><p>개개인의 Branch로 접속하는 코드는 아래와 같다</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;Branch명&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="Step-5-Branch-상태에서-push-pull-하기"><a href="#Step-5-Branch-상태에서-push-pull-하기" class="headerlink" title="Step 5. Branch 상태에서 push, pull 하기"></a>Step 5. Branch 상태에서 push, pull 하기</h1><ul>
+<li><strong>Push</strong><ul>
+<li><p>임의로 README에 데이터 추가 후 <u><span style="color:red"><code>add, commit, push</code></span></u> 하기</p>
+<blockquote>
+<p>이때 add, commit은 동일한 방식을 사용하고 push는 맨 처음 할 때는 아래와 같은 코드를 사용 해주어야 그 뒤부터는 간단하게 push로 사용이 가능하다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --set-upstream origin &lt;branch명&gt;</span><br></pre></td></tr></table></figure>
+
+</blockquote>
+</li>
+<li><p>branch를 만든 후 첫 push를 할 경우</p>
+<blockquote>
+<p>코드 수정</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. add</span></span><br><span class="line">			git add .</span><br><span class="line"><span class="comment"># 2. commit</span></span><br><span class="line">			git commit -m <span class="string">&quot;commit할 내용&quot;</span></span><br><span class="line"><span class="comment"># 3. push</span></span><br><span class="line">			git push --set-upstream origin &lt;Branch명&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>아래 사진과 같이 생성한 Branch로 push되었음을 확인할 수 있다.</p>
+<p>  <img src="/images/Github_with_members/14.png" alt="png"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3><ul>
+<li>git branch를 활용하여 팀 프로젝트를 진행하려면 모든 팀원이 git의 개념에 대해 정확히 알고 있어야 하므로 숙련자가 아닌 사용자가 사용하기엔 적합하지 않습니다(오류가 발생했을 시 해결하는 과정 rollback 등 복잡한 과정이 생겨 프로젝트에 대한 시간을 소모하는 것이 아닌 git에 대한 시간을 소모하는 시간이 주가 될수 있다.) 혹시나 git 개념에 대해 자세히 알고 싶으신 분은 아래의 링크를 참고하여 아래 링크부터 순차적으로 작성된 글을 보시는 것을 권합니다.<ul>
+<li><strong><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://readystory.tistory.com/145">Git이란? 무엇을 저장할까?</a></strong></strong><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://readystory.tistory.com/145?category=786243">https://readystory.tistory.com/145?category=786243</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a href="/2022/05/12/Github_with_members/#post-footer" class="postShorten-excerpt_link link" aria-label>
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2022/05/09/kakaotalk_chatbot_request/" aria-label=": 카카오톡 채널 만들기 및 챗봇 오픈 빌더(OBT) 신청">
                             카카오톡 채널 만들기 및 챗봇 오픈 빌더(OBT) 신청
                         </a>
@@ -1267,82 +1439,6 @@
                     
                         <p>
                             <a href="/2022/04/19/virtualenv_venv_settings/#post-footer" class="postShorten-excerpt_link link" aria-label>
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/2022/04/19/Github_Fatal_01/" aria-label=": Github_blog (hexo) error fatal: The current branch main has no upstream branch.">
-                            Github_blog (hexo) error fatal: The current branch main has no upstream branch.
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2022-04-19T09:00:00+09:00">
-	
-		    Apr 19, 2022
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/Error/">Error</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <ul>
-<li>이 글은 Github blog를 관리 및 운영하는데 필자가 겪은 에러, 어려움 등을 해결하는 과정을 기록할 목적으로 만들어졌습니다.</li>
-</ul>
-<hr>
-<h1 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h1><ul>
-<li>git push를 하는 과정에서 발생한 error fatal: The current branch main has no upstream branch. 를 해결하는 과정을 설명</li>
-</ul>
-<h3 id="error-fatal-The-current-branch-main-has-no-upstream-branch"><a href="#error-fatal-The-current-branch-main-has-no-upstream-branch" class="headerlink" title="error fatal: The current branch main has no upstream branch."></a>error fatal: The current branch main has no upstream branch.</h3><ul>
-<li><p>git push를 하는 과정에서 다음과 같이 오류가 생김</p>
-<p>  <img src="/images/Github_Fatal_01/1.png" alt="png"></p>
-<ul>
-<li>이 에러는 원격 저장소 이름을 언급하지 않아서 생긴다.</li>
-</ul>
-</li>
-<li><p><u><span style="color:red"><code>git remote -v</code></span></u> 로 원격 저장소 이름을 찾은 뒤 원격 저장소를 <u><span style="color:red"><code>git push origin main</code></span></u> 로 명시해주면 된다.</p>
-<ul>
-<li><p>필자의 경우 원격 저장소가 origin 이며 branch는 main이므로 저렇게 입력했다.</p>
-</li>
-<li><p><u><span style="color:red"><code>! [rejected] main -&gt; main (non-fast-forward)</code></span></u> 에러가 나와 <u><span style="color:red"><code>git push origin +main</code></span></u> 처럼 branch에 +만 입력했더니 정상적으로 되었다.</p>
-<ul>
-<li>참고 사이트 : <a target="_blank" rel="external nofollow noopener noreferrer" href="https://somjang.tistory.com/entry/Git-rejected-master-master-non-fast-forward-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95">https://somjang.tistory.com/entry/Git-rejected-master-master-non-fast-forward-해결-방법</a></li>
-</ul>
-<p>  <img src="/images/Github_Fatal_01/2.png" alt="png"></p>
-</li>
-</ul>
-</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a href="/2022/04/19/Github_Fatal_01/#post-footer" class="postShorten-excerpt_link link" aria-label>
                                 Comment and share
                             </a>
                         </p>
